@@ -1,4 +1,4 @@
-package Interfaces;
+package interfaces;
 
 import java.util.HashMap;
 import classRepresentation.*;
