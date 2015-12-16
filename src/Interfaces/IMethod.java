@@ -2,15 +2,15 @@ package interfaces;
 
 import java.util.List;
 
-import org.objectweb.asm.Type;
+import classRepresentation.Parameter;
 
 public interface IMethod {
 
-	Type getReturnType();
-	void setReturnType(Type t);
+	String getReturnType();
+	void setReturnType(String type);
 	
-	List<Type> getParameters();
-	void setParameters(List<Type> params);
+	List<Parameter> getParameters();
+	void setParameters(List<Parameter> params);
 	
 	String getName();
 	void setName(String name);

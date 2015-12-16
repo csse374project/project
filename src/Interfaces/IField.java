@@ -2,12 +2,10 @@ package interfaces;
 
 import java.util.List;
 
-import org.objectweb.asm.*;
-
 public interface IField {
 	
-	Type getType();
-	void setType(Type t);
+	String getType();
+	void setType(String type);
 	
 	String getName();
 	void setName(String name);
