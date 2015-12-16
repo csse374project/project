@@ -5,41 +5,39 @@ import java.util.HashMap;
 import interfaces.*;
 
 public class Class implements IClass {
+	
+	int visibility;
+	HashMap<String, IField> fields;
+	HashMap<String, IMethod> methods;
 
 	@Override
 	public void setVisability(int vis) {
-		// TODO Auto-generated method stub
-		
+		visibility = vis;
 	}
 
 	@Override
 	public int getVisability() {
-		// TODO Auto-generated method stub
-		return 0;
+		return visibility;
 	}
 
 	@Override
 	public void setFields(HashMap<String, IField> fields) {
-		// TODO Auto-generated method stub
-		
+		this.fields = fields;
 	}
 
 	@Override
 	public HashMap<String, IField> getFields() {
-		// TODO Auto-generated method stub
-		return null;
+		return fields;
 	}
 
 	@Override
 	public void setMethods(HashMap<String, IMethod> methods) {
-		// TODO Auto-generated method stub
-		
+		this.methods = methods;
 	}
 
 	@Override
 	public HashMap<String, IMethod> getMethods() {
-		// TODO Auto-generated method stub
-		return null;
+		return methods;
 	}
 
 }

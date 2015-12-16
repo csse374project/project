@@ -2,70 +2,64 @@ package classRepresentation;
 
 import java.util.List;
 
-import org.objectweb.asm.Type;
-
 import interfaces.*;
 
 public class Method implements IMethod {
 
+	List<Parameter> parameters;
+	String name;
+	char visibility;
+	List<String> nonAccessModifiers;
+	String returnType;
+	
 	@Override
-	public Type getReturnType() {
-		// TODO Auto-generated method stub
-		return null;
+	public String getReturnType() {
+		return returnType;
 	}
 
 	@Override
-	public void setReturnType(Type t) {
-		// TODO Auto-generated method stub
-		
+	public void setReturnType(String type) {
+		returnType = type;
 	}
 
 	@Override
-	public List<Type> getParameters() {
-		// TODO Auto-generated method stub
-		return null;
+	public List<Parameter> getParameters() {
+		return parameters;
 	}
 
 	@Override
-	public void setParameters(List<Type> params) {
-		// TODO Auto-generated method stub
-		
+	public void setParameters(List<Parameter> params) {
+		parameters = params;
 	}
 
 	@Override
 	public String getName() {
-		// TODO Auto-generated method stub
-		return null;
+		return name;
 	}
 
 	@Override
 	public void setName(String name) {
-		// TODO Auto-generated method stub
-		
+		this.name = name;
 	}
 
 	@Override
 	public char getVisibility() {
-		// TODO Auto-generated method stub
-		return 0;
+		return visibility;
 	}
 
 	@Override
 	public void setVisibility(char vis) {
-		// TODO Auto-generated method stub
-		
+		visibility = vis;
 	}
 
 	@Override
 	public List<String> getNonAccessModifiers() {
-		// TODO Auto-generated method stub
-		return null;
+		return nonAccessModifiers;
 	}
 
 	@Override
 	public void setNonAccessModifiers(List<String> mods) {
-		// TODO Auto-generated method stub
-		
+		nonAccessModifiers = mods;
 	}
 
 }

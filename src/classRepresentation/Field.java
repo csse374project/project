@@ -2,58 +2,53 @@ package classRepresentation;
 
 import java.util.List;
 
-import org.objectweb.asm.Type;
-
 import interfaces.*;
 
 public class Field implements IField {
+	
+	String type;
+	String name;
+	char visibility;
+	List<String> nonAccessModifiers;
 
 	@Override
-	public Type getType() {
-		// TODO Auto-generated method stub
-		return null;
+	public String getType() {
+		return type;
 	}
 
 	@Override
-	public void setType(Type t) {
-		// TODO Auto-generated method stub
-		
+	public void setType(String type) {
+		this.type = type;
 	}
 
 	@Override
 	public String getName() {
-		// TODO Auto-generated method stub
-		return null;
+		return name;
 	}
 
 	@Override
 	public void setName(String name) {
-		// TODO Auto-generated method stub
-		
+		this.name = name;
 	}
 
 	@Override
 	public char getVisibility() {
-		// TODO Auto-generated method stub
-		return 0;
+		return visibility;
 	}
 
 	@Override
 	public void setVisibility(char vis) {
-		// TODO Auto-generated method stub
-		
+		visibility = vis;
 	}
 
 	@Override
 	public List<String> getNonAccessModifiers() {
-		// TODO Auto-generated method stub
-		return null;
+		return nonAccessModifiers;
 	}
 
 	@Override
 	public void setNonAccessModifiers(List<String> mods) {
-		// TODO Auto-generated method stub
-		
+		nonAccessModifiers = mods;
 	}
 
 }
