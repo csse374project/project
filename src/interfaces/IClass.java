@@ -1,18 +1,23 @@
 package interfaces;
 
-import java.util.HashMap;
-import classRepresentation.*;
+import java.util.List;
 
 public interface IClass {
-
-	void setVisability(int vis);
-	int getVisability();
 	
-	void setFields(HashMap<String, IField> fields);
-	HashMap<String, IField> getFields();
+	void setName(String name);
+	String getName();
 	
-	void setMethods(HashMap<String, IMethod> methods);
-	HashMap<String, IMethod> getMethods();
+	void setSuperClass(String superName);
+	String getSuperClass();
+	
+	void setInterfaces(List<String> interfaceNames);
+	List<String> getInterfaces();
+	
+	void setFields(List<IField> fields);
+	List<IField> getFields();
+	
+	void setMethods(List<IMethod> methods);
+	List<IMethod> getMethods();
 	
 	
 }

@@ -1,43 +1,65 @@
 package classRepresentation;
 
-import java.util.HashMap;
+import java.util.List;
 
 import interfaces.*;
 
 public class Class implements IClass {
 	
-	int visibility;
-	HashMap<String, IField> fields;
-	HashMap<String, IMethod> methods;
+	String name;
+	String superClass;
+	List<String> interfaces;
+	List<IField> fields;
+	List<IMethod> methods;
 
 	@Override
-	public void setVisability(int vis) {
-		visibility = vis;
-	}
-
-	@Override
-	public int getVisability() {
-		return visibility;
-	}
-
-	@Override
-	public void setFields(HashMap<String, IField> fields) {
+	public void setFields(List<IField> fields) {
 		this.fields = fields;
 	}
 
 	@Override
-	public HashMap<String, IField> getFields() {
-		return fields;
+	public List<IField> getFields() {
+		return this.fields;
 	}
 
 	@Override
-	public void setMethods(HashMap<String, IMethod> methods) {
+	public void setMethods(List<IMethod> methods) {
 		this.methods = methods;
 	}
 
 	@Override
-	public HashMap<String, IMethod> getMethods() {
-		return methods;
+	public List<IMethod> getMethods() {
+		return this.methods;
+	}
+
+	@Override
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	@Override
+	public String getName() {
+		return this.name;
+	}
+
+	@Override
+	public void setSuperClass(String superName) {
+		this.superClass = superName;
+	}
+
+	@Override
+	public String getSuperClass() {
+		return this.superClass;
+	}
+
+	@Override
+	public void setInterfaces(List<String> interfaceNames) {
+		this.interfaces = interfaceNames;
+	}
+
+	@Override
+	public List<String> getInterfaces() {
+		return this.interfaces;
 	}
 
 }

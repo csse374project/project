@@ -13,7 +13,7 @@ public class Field implements IField {
 
 	@Override
 	public String getType() {
-		return type;
+		return this.type;
 	}
 
 	@Override
@@ -23,7 +23,7 @@ public class Field implements IField {
 
 	@Override
 	public String getName() {
-		return name;
+		return this.name;
 	}
 
 	@Override
@@ -33,22 +33,22 @@ public class Field implements IField {
 
 	@Override
 	public char getVisibility() {
-		return visibility;
+		return this.visibility;
 	}
 
 	@Override
 	public void setVisibility(char vis) {
-		visibility = vis;
+		this.visibility = vis;
 	}
 
 	@Override
 	public List<String> getNonAccessModifiers() {
-		return nonAccessModifiers;
+		return this.nonAccessModifiers;
 	}
 
 	@Override
 	public void setNonAccessModifiers(List<String> mods) {
-		nonAccessModifiers = mods;
+		this.nonAccessModifiers = mods;
 	}
 
 }
