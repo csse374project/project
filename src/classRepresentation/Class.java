@@ -62,4 +62,14 @@ public class Class implements IClass {
 		return this.interfaces;
 	}
 
+	@Override
+	public void addMethod(IMethod method) {
+		this.methods.add(method);
+	}
+
+	@Override
+	public void addField(IField field) {
+		this.fields.add(field);
+	}
+
 }

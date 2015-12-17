@@ -19,6 +19,10 @@ public interface IClass {
 	void setMethods(List<IMethod> methods);
 	List<IMethod> getMethods();
 	
+	void addMethod(IMethod method);
+	
+	void addField(IField field);
+	
 	
 }
 
