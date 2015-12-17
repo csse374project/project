@@ -5,6 +5,7 @@
 
 # Package Files #
 *.jar
+!asm-all-5.0.4.jar
 *.war
 *.ear
 
