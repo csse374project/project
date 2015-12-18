@@ -34,13 +34,75 @@ public class TestErrThang {
 		System.setOut(stdout);
 	}
 
-//	private char aChar;
-//	public boolean aBool;
-//	public SampleClassForReadingInATest() {} 
-//	private static void useless() {}
-//	public static int identity(int x) {return x;}
-//	private final String finalStringMaker(String[] strings) {return "unimplemented";}
-//	public void mutateSomething(int[] array) {}
+	@Test
+	public void testHas_mutateSomething() {
+		try {
+			DesignParser.main(new String[]{className});
+		} catch (IOException e) {
+			fail("An IO-exception was thrown.");
+		}
+		
+		String result = out.toString();
+		assertTrue(result.contains("+mutateSomething(int[]):void"));
+	}
+	@Test
+	public void testHas_finalStringMaker() {
+		try {
+			DesignParser.main(new String[]{className});
+		} catch (IOException e) {
+			fail("An IO-exception was thrown.");
+		}
+		
+		String result = out.toString();
+		assertTrue(result.contains("-finalStringMaker(String[]):String"));
+	}
+	
+	@Test
+	public void testHas_identiry() {
+		try {
+			DesignParser.main(new String[]{className});
+		} catch (IOException e) {
+			fail("An IO-exception was thrown.");
+		}
+		
+		String result = out.toString();
+		assertTrue(result.contains("<u>+identity(int):int<u/>"));
+	}
+
+	@Test
+	public void testHas_useless() {
+		try {
+			DesignParser.main(new String[]{className});
+		} catch (IOException e) {
+			fail("An IO-exception was thrown.");
+		}
+		
+		String result = out.toString();
+		assertTrue(result.contains("<u>-useless():void<u/>"));
+	}
+
+	@Test
+	public void testHas_aBool() {
+		try {
+			DesignParser.main(new String[]{className});
+		} catch (IOException e) {
+			fail("An IO-exception was thrown.");
+		}
+		
+		String result = out.toString();
+		assertTrue(result.contains("+aBool:boolean"));
+	}
+	@Test
+	public void testHas_aChar() {
+		try {
+			DesignParser.main(new String[]{className});
+		} catch (IOException e) {
+			fail("An IO-exception was thrown.");
+		}
+		
+		String result = out.toString();
+		assertTrue(result.contains("-aChar:char"));
+	}
 	@Test
 	public void testHasSOME_WORD() {
 		try {
@@ -50,9 +112,7 @@ public class TestErrThang {
 		}
 		
 		String result = out.toString();
-		String expected = "more than just hello";
 		assertTrue(result.contains("<u>-SOME_WORD:String<u/>"));
-		assertEquals(expected, result);
 	}
 	@Test
 	public void testHasSOME_CONSTANT() {
@@ -62,8 +122,6 @@ public class TestErrThang {
 			fail("An IO-exception was thrown.");
 		}
 		String result = out.toString();
-		String expected = "more than just hello";
 		assertTrue(result.contains("<u>-SOME_CONSTANT:int<u/>"));
-		assertEquals(expected, result);
 	}
 }
