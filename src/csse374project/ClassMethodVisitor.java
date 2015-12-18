@@ -53,6 +53,8 @@ public class ClassMethodVisitor extends ClassVisitor {
 		method.setReturnType(Type.getReturnType(desc).getClassName());
 		method.setVisibility(vis);
 		
+		currentClass.addMethod(method);
+		
 		System.out.println("     method "+symbol+name+" "+classNames.toString()+" "+Type.getReturnType(desc).getClassName());
 		
 		return toDecorate;

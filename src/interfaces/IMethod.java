@@ -2,8 +2,6 @@ package interfaces;
 
 import java.util.List;
 
-import classRepresentation.Parameter;
-
 public interface IMethod {
 
 	String getReturnType();
