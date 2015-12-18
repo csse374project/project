@@ -34,13 +34,13 @@ public class Classes {
 		Set<String> keys = classes.keySet();
 		
 		string.append("digraph UML {\n\n\tnode [\n\t\tshape = "
-				+ "\"record\"\n\t]\n\n\t");
+				+ "\"record\"\n\t]\n\n");
 		
 		
 		for (String key : keys) {
 			IClass cls = classes.get(key);
 			int lastFwdSlash = cls.getName().lastIndexOf('/');
-			string.append(cls.getName().substring(lastFwdSlash + 1) + " [\n\t\tlabel = \"{");
+			string.append("\t" + cls.getName().substring(lastFwdSlash + 1) + " [\n\t\tlabel = \"{");
 			if(cls.getIsInterface()) 
 				string.append("\\<\\<interface\\>\\>\\n");
 			string.append(cls.getName().substring(lastFwdSlash + 1) + "|");
@@ -52,6 +52,31 @@ public class Classes {
 			appendMethods(string, cls, lastFwdSlash);
 			
 			string.append("}\"\n\t]\n\n");
+		}
+		
+		string.append("\tedge [\n\t\tarrowhead = \"empty\"\n\t]\n\n");
+		
+		for (String key : keys) {
+			IClass cls = classes.get(key);
+			int lastFwdSlash = cls.getName().lastIndexOf('/');
+			String superCls = cls.getSuperClass();
+			int superLastFwdSlash = superCls.lastIndexOf('/');
+			if (keys.contains(superCls)) {
+				string.append("\t" + cls.getName().substring(lastFwdSlash + 1) + " -> " + superCls.substring(superLastFwdSlash + 1) + "\n\n");
+			}
+		}
+		
+		string.append("\tedge [\n\t\tstyle = \"dashed\"\n\t]\n\n");
+		
+		for (String key : keys) {
+			IClass cls = classes.get(key);
+			int lastFwdSlash = cls.getName().lastIndexOf('/');
+			for (String intface : cls.getInterfaces()) {
+				int intLastFwdSlash = intface.lastIndexOf('/');
+				if (keys.contains(intface)) {
+					string.append("\t" + cls.getName().substring(lastFwdSlash + 1) + " -> " + intface.substring(intLastFwdSlash + 1) + "\n\n");
+				}
+			}
 		}
 		
 		string.append("}");
