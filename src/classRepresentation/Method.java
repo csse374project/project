@@ -7,11 +7,11 @@ import interfaces.*;
 
 public class Method implements IMethod {
 
-	List<String> parameters;
-	String name;
-	char visibility;
-	List<String> nonAccessModifiers;
-	String returnType;
+	private List<String> parameters;
+	private String name;
+	private char visibility;
+	private List<String> nonAccessModifiers;
+	private String returnType;
 	
 	public Method(){
 		this.parameters = new ArrayList<String>();

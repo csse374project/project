@@ -6,10 +6,10 @@ import interfaces.*;
 
 public class Field implements IField {
 	
-	String type;
-	String name;
-	char visibility;
-	List<String> nonAccessModifiers;
+	private String type;
+	private String name;
+	private char visibility;
+	private List<String> nonAccessModifiers;
 
 	@Override
 	public String getType() {
