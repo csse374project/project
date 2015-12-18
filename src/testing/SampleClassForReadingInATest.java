@@ -1,7 +1,7 @@
 package testing;
 
 @SuppressWarnings("unused")
-public class SampleClassForReadingInATest {
+public class SampleClassForReadingInATest extends SampleSuperClass implements SampleInterface01, SampleInterface02 {
 
 	private static final int SOME_CONSTANT = 1;
 	public static final String SOME_WORD = "hello";
