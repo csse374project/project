@@ -24,7 +24,6 @@ public class Classes {
 	}
 	
 	public void addClass(IClass newClass){
-		System.out.println(newClass.getName());
 		if(!classes.containsKey(newClass.getName()))
 			classes.put(newClass.getName(), newClass);
 	}
