@@ -55,7 +55,7 @@ public class ClassMethodVisitor extends ClassVisitor {
 		
 		currentClass.addMethod(method);
 		
-		System.out.println("     method "+symbol+name+" "+classNames.toString()+" "+Type.getReturnType(desc).getClassName());
+		//System.out.println("     method "+symbol+name+" "+classNames.toString()+" "+Type.getReturnType(desc).getClassName());
 		
 		return toDecorate;
 	}

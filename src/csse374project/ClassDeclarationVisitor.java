@@ -28,7 +28,7 @@ public class ClassDeclarationVisitor extends ClassVisitor {
 		}
 		
 		
-		System.out.println("Class: "+ name+" extends "+superName+" implements "+Arrays.asList(interfaces));
+		//System.out.println("Class: "+ name+" extends "+superName+" implements "+Arrays.asList(interfaces));
 		super.visit(version, access, name, signature, superName, interfaces);
 	}
 }

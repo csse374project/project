@@ -41,7 +41,7 @@ public class ClassFieldVisitor extends ClassVisitor {
 		field.setVisibility(vis);
 		
 		currentClass.addField(field);
-		System.out.println("     "+type+" "+name);
+		//System.out.println("     "+type+" "+name);
 		
 		return toDecorate;
 	}
