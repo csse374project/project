@@ -23,9 +23,9 @@ import interfaces.IClass;
 import interfaces.IField;
 import interfaces.IMethod;
 
-public class UnitTestsDeclarationVisitor {
+public class UnitTestsDeclarationString {
 
-	private static String className = "SampleClassForReadingInATest";
+	private static String className = "java.lang.String";
 	private IClass currentClass;
 	
 	@Before
@@ -39,29 +39,17 @@ public class UnitTestsDeclarationVisitor {
 	
 	@Test
 	public void testName() {
-		assertEquals("SampleClassForReadingInATest", currentClass.getName());
+		assertEquals("String", currentClass.getName());
 	}
-	@Test
-	public void testFields() {
-		List<IField> fields = currentClass.getFields();
-		List<IField> expected = new ArrayList<IField>();
-		fail("unimplimented");
-	}
-	
-	@Test
-	public void testMethods() {
-		List<IMethod> methods = currentClass.getMethods();
-		List<IMethod> expected = new ArrayList<IMethod>();
-		
-		fail("unimplemented");
-	}
-	
 	@Test
 	public void testInterfaces() {
+		// Strings implement: Serializable, Comparable<String>, CharSequence
+		// TODO add Comparable<String> to the test
 		List<String> interfaces = currentClass.getInterfaces();
 		List<String> expected = new ArrayList<String>();
-		expected.add("SampleInterface01");
-		expected.add("SampleInterface02");
+		expected.add("Serializable");
+		expected.add("Comparable<String>");
+		expected.add("CharSequence");
 		assertEquals(expected.size(), interfaces.size());
 		for (int i = 0; i < expected.size(); i++) {
 			assertTrue(interfaces.contains(expected.get(i)));
@@ -70,7 +58,7 @@ public class UnitTestsDeclarationVisitor {
 	
 	@Test
 	public void testSuperClass() {
-		assertEquals("SampleSuperClass", currentClass.getSuperClass());
+		assertEquals("java.lang.Object", currentClass.getSuperClass());
 	}
 
 }
