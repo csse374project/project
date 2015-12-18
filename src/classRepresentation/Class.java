@@ -7,11 +7,12 @@ import interfaces.*;
 
 public class Class implements IClass {
 	
-	String name;
-	String superClass;
-	List<String> interfaces;
-	List<IField> fields;
-	List<IMethod> methods;
+	private String name;
+	private String superClass;
+	private List<String> interfaces;
+	private List<IField> fields;
+	private List<IMethod> methods;
+	private boolean isInterface;
 	
 	public Class(){
 		this.name = "";
@@ -19,7 +20,7 @@ public class Class implements IClass {
 		this.interfaces = new ArrayList<String>();
 		this.fields = new ArrayList<IField>();
 		this.methods = new ArrayList<IMethod>();
-		
+		this.isInterface = false;
 	}
 
 	@Override
@@ -80,6 +81,16 @@ public class Class implements IClass {
 	@Override
 	public void addField(IField field) {
 		this.fields.add(field);
+	}
+
+	@Override
+	public boolean getIsInterface() {
+		return this.isInterface;
+	}
+
+	@Override
+	public void setIsInterface(boolean isInterface) {
+		this.isInterface = isInterface;
 	}
 
 }

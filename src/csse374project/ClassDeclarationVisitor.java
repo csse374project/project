@@ -3,6 +3,7 @@ package csse374project;
 import java.util.Arrays;
 
 import org.objectweb.asm.ClassVisitor;
+import org.objectweb.asm.Opcodes;
 
 import interfaces.IClass;
 
@@ -22,6 +23,9 @@ public class ClassDeclarationVisitor extends ClassVisitor {
 		currentClass.setSuperClass(superName);
 		currentClass.setInterfaces(Arrays.asList(interfaces));
 		
+		if((access & Opcodes.ACC_INTERFACE) != 0){
+			currentClass.setIsInterface(true);
+		}
 		
 		
 		System.out.println("Class: "+ name+" extends "+superName+" implements "+Arrays.asList(interfaces));

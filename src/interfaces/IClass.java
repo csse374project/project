@@ -23,6 +23,9 @@ public interface IClass {
 	
 	void addField(IField field);
 	
+	boolean getIsInterface();
+	void setIsInterface(boolean isInterface);
+	
 	
 }
 
