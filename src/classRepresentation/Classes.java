@@ -41,6 +41,8 @@ public class Classes {
 			IClass cls = classes.get(key);
 			int lastFwdSlash = cls.getName().lastIndexOf('/');
 			string.append(cls.getName().substring(lastFwdSlash + 1) + " [\n\t\tlabel = \"{");
+			if(cls.getIsInterface()) 
+				string.append("\\<\\<interface\\>\\>\\n");
 			string.append(cls.getName().substring(lastFwdSlash + 1) + "|");
 			
 			appendFields(string, cls);
@@ -76,7 +78,7 @@ public class Classes {
 				methodReturnType = methodReturnType.substring(lastPeriod + 1);
 			}
 			string.append(method.getVisibility() + " " + methodReturnType
-					+ " " + methodName + "\\l");
+					+ " " + methodName + "()\\l");
 		}
 	}
 }
