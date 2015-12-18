@@ -1,16 +1,25 @@
 package classRepresentation;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import interfaces.*;
 
 public class Method implements IMethod {
 
-	List<Parameter> parameters;
+	List<String> parameters;
 	String name;
 	char visibility;
 	List<String> nonAccessModifiers;
 	String returnType;
+	
+	public Method(){
+		this.parameters = new ArrayList<String>();
+		this.name = "";
+		this.visibility = ' ';
+		this.nonAccessModifiers = new ArrayList<String>();
+		this.returnType = "";
+	}
 	
 	@Override
 	public String getReturnType() {
@@ -23,12 +32,12 @@ public class Method implements IMethod {
 	}
 
 	@Override
-	public List<Parameter> getParameters() {
+	public List<String> getParameters() {
 		return parameters;
 	}
 
 	@Override
-	public void setParameters(List<Parameter> params) {
+	public void setParameters(List<String> params) {
 		parameters = params;
 	}
 
@@ -61,5 +70,4 @@ public class Method implements IMethod {
 	public void setNonAccessModifiers(List<String> mods) {
 		nonAccessModifiers = mods;
 	}
-
 }

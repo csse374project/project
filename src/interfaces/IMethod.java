@@ -9,8 +9,8 @@ public interface IMethod {
 	String getReturnType();
 	void setReturnType(String type);
 	
-	List<Parameter> getParameters();
-	void setParameters(List<Parameter> params);
+	List<String> getParameters();
+	void setParameters(List<String> params);
 	
 	String getName();
 	void setName(String name);
@@ -19,7 +19,5 @@ public interface IMethod {
 	void setVisibility(char vis);
 	
 	List<String> getNonAccessModifiers();
-	void setNonAccessModifiers(List<String> mods);
-	
-	
+	void setNonAccessModifiers(List<String> mods);	
 }

@@ -1,5 +1,6 @@
 package classRepresentation;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import interfaces.*;
@@ -11,6 +12,15 @@ public class Class implements IClass {
 	List<String> interfaces;
 	List<IField> fields;
 	List<IMethod> methods;
+	
+	public Class(){
+		this.name = "";
+		this.superClass = "";
+		this.interfaces = new ArrayList<String>();
+		this.fields = new ArrayList<IField>();
+		this.methods = new ArrayList<IMethod>();
+		
+	}
 
 	@Override
 	public void setFields(List<IField> fields) {

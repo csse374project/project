@@ -25,7 +25,7 @@ public class DesignParser {
 			
 			ClassVisitor fieldVisitor = new ClassFieldVisitor(Opcodes.ASM5, declVisitor, currentClass);
 			
-			ClassVisitor methodVisitor = new ClassMethodVisitor(Opcodes.ASM5, fieldVisitor);
+			ClassVisitor methodVisitor = new ClassMethodVisitor(Opcodes.ASM5, fieldVisitor, currentClass);
 			
 			reader.accept(methodVisitor, ClassReader.EXPAND_FRAMES);
 		}
