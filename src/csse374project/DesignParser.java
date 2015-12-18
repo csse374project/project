@@ -21,14 +21,16 @@ public class DesignParser {
 			
 			ClassVisitor declVisitor = new ClassDeclarationVisitor(Opcodes.ASM5, currentClass);
 			
-			classes.addClass(currentClass);
 			
 			ClassVisitor fieldVisitor = new ClassFieldVisitor(Opcodes.ASM5, declVisitor, currentClass);
 			
 			ClassVisitor methodVisitor = new ClassMethodVisitor(Opcodes.ASM5, fieldVisitor, currentClass);
 			
 			reader.accept(methodVisitor, ClassReader.EXPAND_FRAMES);
+			classes.addClass(currentClass);
 		}
+		System.out.println("arg length:" + args.length);
+		System.out.println("Num classes:" + classes.getClasses().keySet().size());
 		
 		System.out.println(classes.toGraphViz());
 	}
