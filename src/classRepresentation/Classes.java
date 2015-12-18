@@ -43,26 +43,11 @@ public class Classes {
 			string.append(cls.getName().substring(lastFwdSlash + 1) + " [\n\t\tlabel = \"{");
 			string.append(cls.getName().substring(lastFwdSlash + 1) + "|");
 			
-			for (IField field : cls.getFields()) {
-				string.append(field.getVisibility() + " " + field.getName()
-						+ ": " + field.getType() + "\\l");
-			}
+			appendFields(string, cls);
 			
 			string.append("|");
 			
-			for (IMethod method : cls.getMethods()) {
-				String methodName = method.getName();
-				if (methodName.equals("<init>")) {
-					methodName = cls.getName().substring(lastFwdSlash + 1);
-				}
-				int lastPeriod = method.getReturnType().lastIndexOf('.');
-				String methodReturnType = method.getReturnType();
-				if (lastPeriod > -1) {
-					methodReturnType = methodReturnType.substring(lastPeriod + 1);
-				}
-				string.append(method.getVisibility() + " " + methodReturnType
-						+ " " + methodName + "\\l");
-			}
+			appendMethods(string, cls, lastFwdSlash);
 			
 			string.append("}\"\n\t]\n\n");
 		}
@@ -71,6 +56,27 @@ public class Classes {
 		
 		return string.toString();
 	}
-	
-	
+
+	private void appendFields(StringBuilder string, IClass cls) {
+		for (IField field : cls.getFields()) {
+			string.append(field.getVisibility() + " " + field.getName()
+					+ ": " + field.getType() + "\\l");
+		}
+	}
+
+	private void appendMethods(StringBuilder string, IClass cls, int lastFwdSlash) {
+		for (IMethod method : cls.getMethods()) {
+			String methodName = method.getName();
+			if (methodName.equals("<init>")) {
+				methodName = cls.getName().substring(lastFwdSlash + 1);
+			}
+			int lastPeriod = method.getReturnType().lastIndexOf('.');
+			String methodReturnType = method.getReturnType();
+			if (lastPeriod > -1) {
+				methodReturnType = methodReturnType.substring(lastPeriod + 1);
+			}
+			string.append(method.getVisibility() + " " + methodReturnType
+					+ " " + methodName + "\\l");
+		}
+	}
 }
