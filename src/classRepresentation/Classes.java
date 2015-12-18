@@ -78,7 +78,10 @@ public class Classes {
 				methodReturnType = methodReturnType.substring(lastPeriod + 1);
 			}
 			string.append(method.getVisibility() + " " + methodReturnType
-					+ " " + methodName + "()\\l");
+					+ " " + methodName + "(");
+			String params = method.getParameters().toString().substring(1, method.getParameters().toString().length()-1);
+			string.append(params+ ")\\l");
 		}
 	}
+
 }
