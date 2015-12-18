@@ -4,6 +4,7 @@ import static org.junit.Assert.*;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 import org.junit.Before;
@@ -42,12 +43,12 @@ public class UnitTestsFieldVisitor {
 	}
 
 	@Test
-	public void testCorrectNumberOfFields() {
+	public void testNumberOfFields() {
 		List<IField> fields = currentClass.getFields();
 		assertEquals(5, fields.size());
 	}
 	@Test
-	public void testCorrectFields() {
+	public void testFields() {
 		List<IField> fields = currentClass.getFields();
 		List<String> allNames = new ArrayList(5);
 		String[] expected = new String[]{"CASE_INSENSITIVE_ORDER", "value",
@@ -62,80 +63,69 @@ public class UnitTestsFieldVisitor {
 		}
 	}
 	@Test
-	public void testCorrectNonAccessModifiers() {
-		IField result =	currentClass.getFields().get(0);
-		
-		fail("unimplimented");
-	}
-	@Test
-	public void testCorrectAccessModifiersHash() {
-		String expectedName = "hash";
-		char expectedVisibility = '-';
-		List<IField> result = currentClass.getFields();
-		for (int i = 0; i < result.size(); i++) {
-			if(result.get(i).getName().equals(expectedName)){
-				assertEquals(expectedVisibility, result.get(i).getVisibility());
-				return;
+	public void testNonAccessModifiers() {
+		HashMap<String, String[]> expectedMap = getExpectedNonAccessModifiers();
+		List<IField> fields = currentClass.getFields();
+		int size = fields.size();
+		for (int i = 0; i < size; i++) {
+			String[] expectedMods = expectedMap.get(fields.get(i).getName());
+			List<String> mods = fields.get(i).getNonAccessModifiers();
+			assertEquals(String.format("the field %s has too many fields", fields.get(i)),
+					expectedMods.length, mods.size());
+			for (int j = 0; j < expectedMods.length; i++) {
+				assertTrue(String.format("field %s is missing the modifier '%s'",
+						fields.get(i).getName(), expectedMods[j]),
+						mods.contains(expectedMods[j]));
 			}
 		}
-		fail("did not find expected field \"hash\"");
 	}
 	@Test
-	public void testCorrectAccessModifiersValue() {
-		String expectedName = "value";
-		char expectedVisibility = '-';
+	public void testAccessModifiers() {
+		HashMap<String, Character> expectedMap = getExpectedAccessModifiers();
 		List<IField> result = currentClass.getFields();
-		for (int i = 0; i < result.size(); i++) {
-			if(result.get(i).getName().equals(expectedName)){
-				assertEquals(expectedVisibility, result.get(i).getVisibility());
-				return;
-			}
+		int size = result.size();
+		for (int i = 0; i < size; i++) {
+			char expected = expectedMap.get(result.get(i).getName());
+			assertEquals(expected, result.get(i).getVisibility());
 		}
-		fail("did not find expected field \"value\"");
 	}
+
 	@Test
-	public void testCorrectAccessModifiersSerialUID() {
-		String expectedName = "serialVersionUID";
-		char expectedVisibility = '-';
+	public void testType() {
+		HashMap<String, String> expectedMap = getExpectedTypes();
 		List<IField> result = currentClass.getFields();
-		for (int i = 0; i < result.size(); i++) {
-			if(result.get(i).getName().equals(expectedName)){
-				assertEquals(expectedVisibility, result.get(i).getVisibility());
-				return;
-			}
+		int size = result.size();
+		for (int i = 0; i < size; i++) {
+			String expected = expectedMap.get(result.get(i).getName());
+			assertEquals(expected, result.get(i).getType());
 		}
-		fail("did not find expected field \"serialVersionUID\"");
 	}
-	@Test
-	public void testCorrectAccessModifiersSerialPersistentFields() {
-		String expectedName = "serialPersistentFields";
-		char expectedVisibility = '-';
-		List<IField> result = currentClass.getFields();
-		for (int i = 0; i < result.size(); i++) {
-			if(result.get(i).getName().equals(expectedName)){
-				assertEquals(expectedVisibility, result.get(i).getVisibility());
-				return;
-			}
-		}
-		fail("did not find expected field \"serialPersistentFields\"");
+
+	private static HashMap<String, Character> getExpectedAccessModifiers() {
+		HashMap<String, Character> map = new HashMap<String, Character>();
+		map.put("CASE_INSENSITIVE_ORDER", '+');
+		map.put("value", '-');
+		map.put("hash", '-');
+		map.put("serialVersionUID", '-');
+		map.put("serialPersistentFields", '-');
+		return map;
 	}
-	@Test
-	public void testCorrectAccessModifiersCaseOrder() {
-		String expectedName = "CASE_INSENSITIVE_ORDER";
-		char expectedVisibility = '+';
-		List<IField> result = currentClass.getFields();
-		for (int i = 0; i < result.size(); i++) {
-			if(result.get(i).getName().equals(expectedName)){
-				assertEquals(expectedVisibility, result.get(i).getVisibility());
-				return;
-			}
-		}
-		fail("did not find expected field \"serialPersistentFields\"");
+	private static HashMap<String, String> getExpectedTypes() {
+		HashMap<String, String> map = new HashMap<String, String>();
+		map.put("CASE_INSENSITIVE_ORDER", "Comparator<String>");
+		map.put("value", "char[]");
+		map.put("hash", "int");
+		map.put("serialVersionUID", "long");
+		map.put("serialPersistentFields", "??");
+		return map;
 	}
-	@Test
-	public void testCorrectType() {
-		IField result =	currentClass.getFields().get(0);
-		String type= result.getType();
-		assertEquals("Comparator<String>", type);
+	private static HashMap<String, String[]> getExpectedNonAccessModifiers() {
+		HashMap<String, String[]> map = new HashMap<String, String[]>();
+		map.put("CASE_INSENSITIVE_ORDER", new String[]{"static"});
+		map.put("value", new String[]{});
+		map.put("hash", new String[]{});
+		map.put("serialVersionUID", new String[]{"static", "final"});
+		map.put("serialPersistentFields", new String[]{"static", "final"});
+		return map;
 	}
 }
