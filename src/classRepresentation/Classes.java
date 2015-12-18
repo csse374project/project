@@ -69,8 +69,8 @@ public class Classes {
 	private void appendMethods(StringBuilder string, IClass cls, int lastFwdSlash) {
 		for (IMethod method : cls.getMethods()) {
 			String methodName = method.getName();
-			if (methodName.equals("<init>")) {
-				methodName = cls.getName().substring(lastFwdSlash + 1);
+			if (methodName.equals("<init>") || methodName.equals("<clinit>")) {
+				continue;
 			}
 			int lastPeriod = method.getReturnType().lastIndexOf('.');
 			String methodReturnType = method.getReturnType();
