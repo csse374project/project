@@ -27,14 +27,14 @@ public class UnitTestsDeclarationVisitor {
 		System.setOut(new PrintStream(out));
 		
 		
-		ClassVisitor vis = new ClassDeclarationVisitor(Opcodes.ASM5);
-		ClassReader reader = null;
-		try {
-			reader = new ClassReader(className);
-		} catch (IOException e) {
-			fail("IOException thrown by ClassReader");
-		}
-		reader.accept(vis, ClassReader.EXPAND_FRAMES);
+//		ClassVisitor vis = new ClassDeclarationVisitor(Opcodes.ASM5);
+//		ClassReader reader = null;
+//		try {
+//			reader = new ClassReader(className);
+//		} catch (IOException e) {
+//			fail("IOException thrown by ClassReader");
+//		}
+//		reader.accept(vis, ClassReader.EXPAND_FRAMES);
 		
 		
 		String result = out.toString();
