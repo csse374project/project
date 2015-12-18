@@ -18,7 +18,7 @@ import csse374project.DesignParser;
 
 public class TestErrThang {
 
-	private static String className = "java.lang.String";
+	private static String className = "SampleClassForReadingInATest";
 	private PrintStream stdout;
 	private ByteArrayOutputStream out;
 	
