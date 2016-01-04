@@ -46,63 +46,37 @@ public class UnitTestsMethodVisitor {
 	@Test
 	public void testCorrectMethods() {
 		List<IMethod> methods = currentClass.getMethods();
-		List<IMethod> expectedList = new ArrayList<IMethod>();
-		addExpectedMethods(expectedList);
-		for (int i = 0; i < expectedList.size(); i++) {
-			IMethod expected = expectedList.get(i);
-			assertTrue(String.format("does not contain method '%s'", expected.getName()),
-					methods.contains(expected));
+		List<String> methodNames = methodListToNameList(methods);
+		List<String> expectedNames = getExpectedMethodNames();
+		int size = expectedNames.size();
+		for (int i = 0; i < size; i++) {
+			assertTrue(methodNames.contains(expectedNames.get(i)));
 		}
 	}
-	private void addExpectedMethods(List<IMethod> expected) {
-		add_codePointBefore(expected);
-		add_hashCode(expected);
-		add_copyValueOf(expected);
+	private List<String> getExpectedMethodNames() {
+		List<String> names = new ArrayList<String>();
+		names.add("charAt");
+		names.add("compareToIgnoreCase");
+		names.add("contains");
+		names.add("format");
+		names.add("getBytes");
+		names.add("indexOf");
+		names.add("intern");
+		names.add("isEmpty");
+		names.add("length");
+		names.add("toString");
+		names.add("trim");
+		names.add("toUpperCase");
+		names.add("valueOf");
+		return names;
 	}
 	
-	private void add_codePointBefore(List<IMethod> expected) {
-		IMethod method = new Method();
-		
-		method.setName("codePointBefore");
-		method.setNonAccessModifiers(new ArrayList<String>());
-		method.setReturnType("int");
-		method.setVisibility('+');
-		
-		List<String> list = new ArrayList<String>();
-		list.add("int");
-		method.setParameters(list);
-		
-		expected.add(method);
+	private List<String> methodListToNameList(List<IMethod> methods) {
+		List<String> names = new ArrayList<String>();
+		int size = methods.size();
+		for (int i = 0; i < size; i++) {
+			names.add(methods.get(i).getName());
+		}
+		return names;
 	}
-	private void add_hashCode(List<IMethod> expected) {
-		IMethod method = new Method();
-		
-		method.setName("hashCode");
-		method.setNonAccessModifiers(new ArrayList<String>());
-		method.setReturnType("int");
-		method.setVisibility('+');
-		method.setParameters(new ArrayList<String>());
-		
-		expected.add(method);
-	}
-	private void add_copyValueOf(List<IMethod> expected) {
-		IMethod method = new Method();
-		
-		method.setName("copyValueOf");
-		method.setReturnType("String");
-		method.setVisibility('+');
-		
-		List<String> nonAccessMods = new ArrayList<String>();
-		nonAccessMods.add("static");
-		method.setNonAccessModifiers(nonAccessMods);
-		
-		List<String> params = new ArrayList<String>();
-		params.add("char[]");		
-		method.setParameters(params);
-		
-		expected.add(method);
-	}
-	
-	
-	
 }
