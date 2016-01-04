@@ -56,18 +56,18 @@ public class Classes {
 		
 		string.append("\tedge [\n\t\tarrowhead = \"empty\"\n\t]\n\n");
 		
-		for (String key : keys) {
-			IClass cls = classes.get(key);
-			int lastFwdSlash = cls.getName().lastIndexOf('/');
-			String superCls = cls.getSuperClass();
-			int superLastFwdSlash = superCls.lastIndexOf('/');
-			if (keys.contains(superCls)) {
-				string.append("\t" + cls.getName().substring(lastFwdSlash + 1) + " -> " + superCls.substring(superLastFwdSlash + 1) + "\n\n");
-			}
-		}
+		appendSuperClass(string, keys);
 		
 		string.append("\tedge [\n\t\tstyle = \"dashed\"\n\t]\n\n");
 		
+		appendInterfaces(string, keys);
+		
+		string.append("}");
+		
+		return string.toString();
+	}
+
+	private void appendInterfaces(StringBuilder string, Set<String> keys) {
 		for (String key : keys) {
 			IClass cls = classes.get(key);
 			int lastFwdSlash = cls.getName().lastIndexOf('/');
@@ -78,10 +78,18 @@ public class Classes {
 				}
 			}
 		}
-		
-		string.append("}");
-		
-		return string.toString();
+	}
+
+	private void appendSuperClass(StringBuilder string, Set<String> keys) {
+		for (String key : keys) {
+			IClass cls = classes.get(key);
+			int lastFwdSlash = cls.getName().lastIndexOf('/');
+			String superCls = cls.getSuperClass();
+			int superLastFwdSlash = superCls.lastIndexOf('/');
+			if (keys.contains(superCls)) {
+				string.append("\t" + cls.getName().substring(lastFwdSlash + 1) + " -> " + superCls.substring(superLastFwdSlash + 1) + "\n\n");
+			}
+		}
 	}
 
 	private void appendFields(StringBuilder string, IClass cls) {
