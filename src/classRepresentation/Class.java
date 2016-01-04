@@ -6,15 +6,15 @@ import java.util.List;
 import interfaces.*;
 
 public class Class implements IClass {
-	
+
 	private String name;
 	private String superClass;
 	private List<String> interfaces;
 	private List<IField> fields;
 	private List<IMethod> methods;
 	private boolean isInterface;
-	
-	public Class(){
+
+	public Class() {
 		this.name = "";
 		this.superClass = "";
 		this.interfaces = new ArrayList<String>();
