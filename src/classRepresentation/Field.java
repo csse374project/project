@@ -51,4 +51,17 @@ public class Field implements IField {
 		this.nonAccessModifiers = mods;
 	}
 
+	public boolean equals(Object o) {
+		if (!(o instanceof Field))
+			return false;
+		Field f = (Field) o;
+		// Compare the important fields
+		if (this.getName().equals(f.getName()) && this.getType().equals(f.getType())
+				&& this.getVisibility() == f.getVisibility()
+				&& this.getNonAccessModifiers().equals(f.getNonAccessModifiers())) {
+			return true;
+		}
+		return false;
+	}
+
 }
