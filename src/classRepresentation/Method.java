@@ -70,4 +70,14 @@ public class Method implements IMethod {
 	public void setNonAccessModifiers(List<String> mods) {
 		nonAccessModifiers = mods;
 	}
+	
+	public boolean equals(Object o){
+		if(! (o instanceof Method)) return false;
+		Method m = (Method)o;
+		if(this.parameters.equals(m.getParameters()) && this.name.equals(m.getName()) && this.returnType.equals(m.getReturnType())
+				&& this.visibility==m.getVisibility() && this.nonAccessModifiers.equals(m.getNonAccessModifiers())){
+			return true;
+		}
+		return false;
+	}
 }
