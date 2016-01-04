@@ -18,31 +18,29 @@ public class ClassFieldVisitor extends ClassVisitor {
 		super(arg0, arg1);
 		this.currentClass = currentClass;
 	}
-	
+
 	@Override
-	public FieldVisitor visitField(int access, String name, String desc, String signature, Object value){
+	public FieldVisitor visitField(int access, String name, String desc, String signature, Object value) {
 		FieldVisitor toDecorate = super.visitField(access, name, desc, signature, value);
 		String type = Type.getType(desc).getClassName();
 
 		char vis = ' ';
-		if((access & Opcodes.ACC_PUBLIC) != 0){
+		if ((access & Opcodes.ACC_PUBLIC) != 0) {
 			vis = '+';
-		}
-		else if((access & Opcodes.ACC_PRIVATE) != 0){
+		} else if ((access & Opcodes.ACC_PRIVATE) != 0) {
 			vis = '-';
-		}
-		else if((access & Opcodes.ACC_PROTECTED) != 0){
+		} else if ((access & Opcodes.ACC_PROTECTED) != 0) {
 			vis = '#';
 		}
-		
+
 		IField field = new Field();
 		field.setName(name);
 		field.setType(type);
 		field.setVisibility(vis);
-		
+
 		currentClass.addField(field);
-		//System.out.println("     "+type+" "+name);
-		
+		// System.out.println(" "+type+" "+name);
+
 		return toDecorate;
 	}
 

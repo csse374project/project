@@ -9,12 +9,13 @@ import org.objectweb.asm.util.TraceClassVisitor;
 
 public class FirstASM {
 	public static String myField = "Hello World";
-	public static void main(String[] args) throws IOException{
+
+	public static void main(String[] args) throws IOException {
 		ClassReader reader = new ClassReader("java.lang.String");
-		
-		//prints description to console
+
+		// prints description to console
 		ClassVisitor visitor = new TraceClassVisitor(new PrintWriter(System.out));
-		
+
 		reader.accept(visitor, ClassReader.EXPAND_FRAMES);
 	}
 }

@@ -21,42 +21,41 @@ public class ClassMethodVisitor extends ClassVisitor {
 		super(arg0, arg1);
 		this.currentClass = currentClass;
 	}
-	
+
 	@Override
-	public MethodVisitor visitMethod(int access, String name, String desc, String signature, String[] exceptions){
+	public MethodVisitor visitMethod(int access, String name, String desc, String signature, String[] exceptions) {
 		MethodVisitor toDecorate = super.visitMethod(access, name, desc, signature, exceptions);
-		
+
 		Type[] argTypes = Type.getArgumentTypes(desc);
 		ArrayList<String> classNames = new ArrayList<String>();
-		for(int i=0; i<argTypes.length; i++){
+		for (int i = 0; i < argTypes.length; i++) {
 			classNames.add(argTypes[i].getClassName());
 		}
 		String symbol = "";
-		if((access & Opcodes.ACC_PUBLIC) != 0){
+		if ((access & Opcodes.ACC_PUBLIC) != 0) {
 			symbol = "+";
 		}
-		
+
 		char vis = ' ';
-		if((access & Opcodes.ACC_PUBLIC) != 0){
+		if ((access & Opcodes.ACC_PUBLIC) != 0) {
 			vis = '+';
-		}
-		else if((access & Opcodes.ACC_PRIVATE) != 0){
+		} else if ((access & Opcodes.ACC_PRIVATE) != 0) {
 			vis = '-';
-		}
-		else if((access & Opcodes.ACC_PROTECTED) != 0){
+		} else if ((access & Opcodes.ACC_PROTECTED) != 0) {
 			vis = '#';
 		}
-		
+
 		IMethod method = new Method();
 		method.setName(name);
 		method.setParameters(classNames);
 		method.setReturnType(Type.getReturnType(desc).getClassName());
 		method.setVisibility(vis);
-		
+
 		currentClass.addMethod(method);
-		
-		//System.out.println("     method "+symbol+name+" "+classNames.toString()+" "+Type.getReturnType(desc).getClassName());
-		
+
+		// System.out.println(" method "+symbol+name+" "+classNames.toString()+"
+		// "+Type.getReturnType(desc).getClassName());
+
 		return toDecorate;
 	}
 

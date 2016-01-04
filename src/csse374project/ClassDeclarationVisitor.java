@@ -15,20 +15,20 @@ public class ClassDeclarationVisitor extends ClassVisitor {
 		super(arg0);
 		this.currentClass = curClass;
 	}
-	
+
 	@Override
-	public void visit(int version, int access, String name, String signature, String superName, String[] interfaces){
-		//Add needed info to Class
+	public void visit(int version, int access, String name, String signature, String superName, String[] interfaces) {
+		// Add needed info to Class
 		currentClass.setName(name);
 		currentClass.setSuperClass(superName);
 		currentClass.setInterfaces(Arrays.asList(interfaces));
-		
-		if((access & Opcodes.ACC_INTERFACE) != 0){
+
+		if ((access & Opcodes.ACC_INTERFACE) != 0) {
 			currentClass.setIsInterface(true);
 		}
-		
-		
-		//System.out.println("Class: "+ name+" extends "+superName+" implements "+Arrays.asList(interfaces));
+
+		// System.out.println("Class: "+ name+" extends "+superName+" implements
+		// "+Arrays.asList(interfaces));
 		super.visit(version, access, name, signature, superName, interfaces);
 	}
 }

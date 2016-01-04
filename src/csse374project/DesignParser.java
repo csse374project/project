@@ -11,24 +11,24 @@ import classRepresentation.Class;
 import interfaces.IClass;
 
 public class DesignParser {
-	public static void main(String[] args) throws IOException{
+	public static void main(String[] args) throws IOException {
 		Classes classes = new Classes();
-		
-		for(String className : args){
+
+		for (String className : args) {
 			IClass currentClass = new Class();
-			
+
 			ClassReader reader = new ClassReader(className);
-			
+
 			ClassVisitor declVisitor = new ClassDeclarationVisitor(Opcodes.ASM5, currentClass);
-			
+
 			ClassVisitor fieldVisitor = new ClassFieldVisitor(Opcodes.ASM5, declVisitor, currentClass);
-			
+
 			ClassVisitor methodVisitor = new ClassMethodVisitor(Opcodes.ASM5, fieldVisitor, currentClass);
-			
+
 			reader.accept(methodVisitor, ClassReader.EXPAND_FRAMES);
 			classes.addClass(currentClass);
 		}
-		
+
 		System.out.println(classes.toGraphViz());
 	}
 }

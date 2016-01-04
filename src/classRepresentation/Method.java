@@ -12,15 +12,15 @@ public class Method implements IMethod {
 	private char visibility;
 	private List<String> nonAccessModifiers;
 	private String returnType;
-	
-	public Method(){
+
+	public Method() {
 		this.parameters = new ArrayList<String>();
 		this.name = "";
 		this.visibility = ' ';
 		this.nonAccessModifiers = new ArrayList<String>();
 		this.returnType = "";
 	}
-	
+
 	@Override
 	public String getReturnType() {
 		return returnType;

@@ -5,7 +5,7 @@ import java.util.List;
 import interfaces.*;
 
 public class Field implements IField {
-	
+
 	private String type;
 	private String name;
 	private char visibility;
