@@ -25,7 +25,7 @@ import interfaces.IMethod;
 
 public class UnitTestsDeclarationSample {
 
-	private static String className = "SampleClassForReadingInATest";
+	private static String className = "testing.SampleClassForReadingInATest";
 	private IClass currentClass;
 	
 	@Before
@@ -39,7 +39,7 @@ public class UnitTestsDeclarationSample {
 	
 	@Test
 	public void testName() {
-		assertEquals("SampleClassForReadingInATest", currentClass.getName());
+		assertEquals("testing/SampleClassForReadingInATest", currentClass.getName());
 	}
 	@Test
 	public void testFields() {
@@ -60,17 +60,21 @@ public class UnitTestsDeclarationSample {
 	public void testInterfaces() {
 		List<String> interfaces = currentClass.getInterfaces();
 		List<String> expected = new ArrayList<String>();
-		expected.add("SampleInterface01");
-		expected.add("SampleInterface02");
+		expected.add("testing/SampleInterface01");
+		expected.add("testing/SampleInterface02");
 		assertEquals(expected.size(), interfaces.size());
+		
+		List<String> interfaceNames = new ArrayList<String>();
+		for(String name : interfaces)
+			interfaceNames.add(name);
 		for (int i = 0; i < expected.size(); i++) {
-			assertTrue(interfaces.contains(expected.get(i)));
+			assertTrue(interfaceNames.contains(expected.get(i)));
 		}
 	}
 	
 	@Test
 	public void testSuperClass() {
-		assertEquals("SampleSuperClass", currentClass.getSuperClass());
+		assertEquals("testing/SampleSuperClass", currentClass.getSuperClass());
 	}
 
 }
