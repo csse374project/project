@@ -35,92 +35,53 @@ public class TestErrThang {
 	}
 
 	@Test
-	public void testHas_mutateSomething() {
-		try {
-			DesignParser.main(new String[]{className});
-		} catch (IOException e) {
-			fail("An IO-exception was thrown.");
-		}
-		
+	public void testHas_mutateSomething() throws IOException {
+		DesignParser.main(new String[]{className});
 		String result = out.toString();
 		assertTrue(result.contains("+mutateSomething(int[]):void"));
 	}
 	@Test
-	public void testHas_finalStringMaker() {
-		try {
-			DesignParser.main(new String[]{className});
-		} catch (IOException e) {
-			fail("An IO-exception was thrown.");
-		}
-		
+	public void testHas_finalStringMaker() throws IOException {
+		DesignParser.main(new String[]{className});
 		String result = out.toString();
 		assertTrue(result.contains("-finalStringMaker(String[]):String"));
 	}
 	
 	@Test
-	public void testHas_identiry() {
-		try {
-			DesignParser.main(new String[]{className});
-		} catch (IOException e) {
-			fail("An IO-exception was thrown.");
-		}
-		
+	public void testHas_identiry() throws IOException {
+		DesignParser.main(new String[]{className});
 		String result = out.toString();
 		assertTrue(result.contains("<u>+identity(int):int<u/>"));
 	}
 
 	@Test
-	public void testHas_useless() {
-		try {
-			DesignParser.main(new String[]{className});
-		} catch (IOException e) {
-			fail("An IO-exception was thrown.");
-		}
-		
+	public void testHas_useless() throws IOException  {
+		DesignParser.main(new String[]{className});
 		String result = out.toString();
 		assertTrue(result.contains("<u>-useless():void<u/>"));
 	}
 
 	@Test
-	public void testHas_aBool() {
-		try {
-			DesignParser.main(new String[]{className});
-		} catch (IOException e) {
-			fail("An IO-exception was thrown.");
-		}
-		
+	public void testHas_aBool() throws IOException  {
+		DesignParser.main(new String[]{className});
 		String result = out.toString();
 		assertTrue(result.contains("+aBool:boolean"));
 	}
 	@Test
-	public void testHas_aChar() {
-		try {
-			DesignParser.main(new String[]{className});
-		} catch (IOException e) {
-			fail("An IO-exception was thrown.");
-		}
-		
+	public void testHas_aChar() throws IOException  {
+		DesignParser.main(new String[]{className});
 		String result = out.toString();
 		assertTrue(result.contains("-aChar:char"));
 	}
 	@Test
-	public void testHasSOME_WORD() {
-		try {
-			DesignParser.main(new String[]{className});
-		} catch (IOException e) {
-			fail("An IO-exception was thrown.");
-		}
-		
+	public void testHasSOME_WORD()  throws IOException {
+		DesignParser.main(new String[]{className});
 		String result = out.toString();
 		assertTrue(result.contains("<u>-SOME_WORD:String<u/>"));
 	}
 	@Test
-	public void testHasSOME_CONSTANT() {
-		try {
-			DesignParser.main(new String[]{className});
-		} catch (IOException e) {
-			fail("An IO-exception was thrown.");
-		}
+	public void testHasSOME_CONSTANT()  throws IOException  {
+		DesignParser.main(new String[]{className});
 		String result = out.toString();
 		assertTrue(result.contains("<u>-SOME_CONSTANT:int<u/>"));
 	}
