@@ -20,6 +20,36 @@ public class Method implements IMethod {
 		this.nonAccessModifiers = new ArrayList<String>();
 		this.returnType = "";
 	}
+	
+	@Override
+	public String toString() {
+		StringBuilder str = new StringBuilder();
+		str.append(visibility);
+		str.append(" ");
+		str.append(name);
+		str.append("(");
+		if (parameters.size() > 0) {
+			str.append(parameters.get(0));
+		}
+		for (int i = 1; i < parameters.size(); i++) {
+			str.append(", ");
+			str.append(parameters.get(i));
+		}
+		str.append(") : ");
+		str.append(returnType);
+		if(nonAccessModifiers.size() == 0) {
+			str.append("\n\tno non-access-mods");
+		} else {
+			str.append("\n\t");
+			str.append(nonAccessModifiers.get(0));
+			for (int i = 1; i < nonAccessModifiers.size(); i++) {
+				str.append(", ");
+				str.append(nonAccessModifiers.get(i));
+			}
+		}
+		str.append("\n");
+		return str.toString();
+	}
 
 	@Override
 	public String getReturnType() {

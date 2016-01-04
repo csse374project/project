@@ -46,12 +46,12 @@ public class UnitTestsMethodVisitor {
 	@Test
 	public void testCorrectMethods() {
 		List<IMethod> methods = currentClass.getMethods();
-		List<IMethod> expected = new ArrayList<IMethod>();
-		addExpectedMethods(expected);
-		for (int i = 0; i < expected.size(); i++) {
-			// TODO implement a proper comparison.
-			assertTrue(String.format("does not contain method '%s'", expected.get(i).getName()),
-					methods.contains(expected.get(i)));
+		List<IMethod> expectedList = new ArrayList<IMethod>();
+		addExpectedMethods(expectedList);
+		for (int i = 0; i < expectedList.size(); i++) {
+			IMethod expected = expectedList.get(i);
+			assertTrue(String.format("does not contain method '%s'", expected.getName()),
+					methods.contains(expected));
 		}
 	}
 	private void addExpectedMethods(List<IMethod> expected) {
