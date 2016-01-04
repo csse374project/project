@@ -39,7 +39,7 @@ public class UnitTestsDeclarationString {
 	
 	@Test
 	public void testName() {
-		assertEquals("String", currentClass.getName());
+		assertEquals("java/lang/String", currentClass.getName());
 	}
 	@Test
 	public void testNumberOfInterfaces() {
