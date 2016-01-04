@@ -7,8 +7,8 @@ The tool expands upon the ASM class visitors discussed in class. The method visi
 
 #Responsibilities: 
 All members worked together to created the project's design.
-Jesse Shellabarger - Pair programmed with Nate Briggs. Primarily drove when creating the visitor pattern structure. Refactored and improved formatting.
-Nate Briggs - Pair programmed with Jesse Shellabarger. Primarily drove when parsing the data created into a form usable by GraphViz.
+Jesse Shellabarger - Pair programmed with Nate Briggs. Primarily drove when creating the visitor pattern structure. Assisted with testing once the project was functional. Refactored and improved formatting. 
+Nate Briggs - Pair programmed with Jesse Shellabarger. Primarily drove when parsing the data created into a form usable by GraphViz. 
 Thomas Bonatti - Produced automated tests that establish the correct behavior of your ASM parsing code.
 
 #Instructions:
