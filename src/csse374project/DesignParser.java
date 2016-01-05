@@ -11,9 +11,16 @@ import classRepresentation.Class;
 import interfaces.IClass;
 
 public class DesignParser {
+	
+	
+	private static String[] classesToAccept;
+	
+	
 	public static void main(String[] args) throws IOException {
 		Classes classes = new Classes();
 
+		classesToAccept = args;
+		
 		for (String className : args) {
 			IClass currentClass = new Class();
 
@@ -30,5 +37,14 @@ public class DesignParser {
 		}
 
 		System.out.println(classes.toGraphViz());
+	}
+	
+	public static boolean useClass(String className) {
+		for (int i = 0; i < classesToAccept.length; i++) {
+			if (classesToAccept[i].equals(className)) {
+				return true;
+			}
+		}
+		return false;
 	}
 }
