@@ -15,10 +15,11 @@ public class MethodCodeVisitor extends MethodVisitor {
 	
 	@Override
 	public void visitMethodInsn(int opcode, String owner, String name, String desc, boolean itf){
-		System.out.println(opcode);
-		System.out.println(owner);
-		System.out.println(name);
-		System.out.println(desc);
+		System.out.println("Opcode: " + opcode);
+		System.out.println("Owner: " + owner);
+		System.out.println("Name: " + name);
+		System.out.println("Description: " + desc);
+		System.out.println("\n");
 	}
 
 
