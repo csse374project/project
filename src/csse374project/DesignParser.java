@@ -39,7 +39,7 @@ public class DesignParser {
 		System.out.println(classes.toGraphViz());
 	}
 	
-	public static boolean useClass(String className) {
+	public static boolean classIsUsed(String className) {
 		for (int i = 0; i < classesToAccept.length; i++) {
 			if (classesToAccept[i].equals(className)) {
 				return true;

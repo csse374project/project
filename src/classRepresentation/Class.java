@@ -3,13 +3,14 @@ package classRepresentation;
 import java.util.ArrayList;
 import java.util.List;
 
+import csse374project.DesignParser;
 import interfaces.*;
 
 public class Class implements IClass {
 
 	private String name;
 	private String superClass;
-	private List<String> interfaces;
+	private List<String> interfaces, associatedClasses, usedClasses;
 	private List<IField> fields;
 	private List<IMethod> methods;
 	private boolean isInterface;
@@ -91,6 +92,35 @@ public class Class implements IClass {
 	@Override
 	public void setIsInterface(boolean isInterface) {
 		this.isInterface = isInterface;
+	}
+
+	@Override
+	public void addAssociatedClass(List<String> arg) {
+		int size = arg.size();
+		for (int i = 0; i < size; i++) {
+			if (DesignParser.classIsUsed(arg.get(i))) {
+				associatedClasses.add(arg.get(i));
+			}
+		}
+	}
+
+	@Override
+	public void addUsedClass(List<String> arg) {
+		int size = arg.size();
+		for (int i = 0; i < size; i++) {
+			if (DesignParser.classIsUsed(arg.get(i))) {
+				usedClasses.add(arg.get(i));
+			}
+		}
+	}
+	
+	@Override
+	public List<String> getAssociatedClasses() {
+		return associatedClasses;
+	}
+	@Override
+	public List<String> getUsedClasses() {
+		return usedClasses;
 	}
 
 }

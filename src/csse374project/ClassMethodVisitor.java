@@ -11,6 +11,8 @@ import classRepresentation.Method;
 import interfaces.IClass;
 import interfaces.IMethod;
 import classRepresentation.Parameter;
+
+import java.awt.List;
 import java.util.ArrayList;
 
 public class ClassMethodVisitor extends ClassVisitor {
@@ -58,5 +60,4 @@ public class ClassMethodVisitor extends ClassVisitor {
 
 		return toDecorate;
 	}
-
 }
