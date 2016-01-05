@@ -1,7 +1,5 @@
 package csse374project;
 
-import java.util.Arrays;
-
 import org.objectweb.asm.ClassVisitor;
 import org.objectweb.asm.MethodVisitor;
 import org.objectweb.asm.Opcodes;
@@ -10,9 +8,6 @@ import org.objectweb.asm.Type;
 import classRepresentation.Method;
 import interfaces.IClass;
 import interfaces.IMethod;
-import classRepresentation.Parameter;
-
-import java.awt.List;
 import java.util.ArrayList;
 
 public class ClassMethodVisitor extends ClassVisitor {
@@ -26,16 +21,14 @@ public class ClassMethodVisitor extends ClassVisitor {
 
 	@Override
 	public MethodVisitor visitMethod(int access, String name, String desc, String signature, String[] exceptions) {
+	
 		MethodVisitor toDecorate = super.visitMethod(access, name, desc, signature, exceptions);
+		MethodVisitor codeVisitor = new MethodCodeVisitor(Opcodes.ASM5, toDecorate, currentClass);
 
 		Type[] argTypes = Type.getArgumentTypes(desc);
 		ArrayList<String> classNames = new ArrayList<String>();
 		for (int i = 0; i < argTypes.length; i++) {
 			classNames.add(argTypes[i].getClassName());
-		}
-		String symbol = "";
-		if ((access & Opcodes.ACC_PUBLIC) != 0) {
-			symbol = "+";
 		}
 
 		char vis = ' ';
@@ -55,9 +48,6 @@ public class ClassMethodVisitor extends ClassVisitor {
 
 		currentClass.addMethod(method);
 
-		// System.out.println(" method "+symbol+name+" "+classNames.toString()+"
-		// "+Type.getReturnType(desc).getClassName());
-
-		return toDecorate;
+		return codeVisitor;
 	}
 }
