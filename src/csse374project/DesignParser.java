@@ -19,7 +19,7 @@ public class DesignParser {
 	public static void main(String[] args) throws IOException {
 		Classes classes = new Classes();
 
-		classesToAccept = args;
+		setClassesToAccept(args);
 		
 		for (String className : args) {
 			IClass currentClass = new Class();
@@ -37,6 +37,14 @@ public class DesignParser {
 		}
 
 		System.out.println(classes.toGraphViz());
+	}
+	
+	private static void setClassesToAccept(String[] args) {
+		classesToAccept = new String[args.length];
+		for (int i = 0; i < classesToAccept.length; i++) {
+			classesToAccept[i] = args[i].replace('.', '/');
+		}
+		
 	}
 	
 	public static boolean classIsUsed(String className) {

@@ -18,8 +18,8 @@ public interface IClass {
 	void addField(IField field);
 	boolean getIsInterface();
 	void setIsInterface(boolean isInterface);
-	void addAssociatedClass(List<String> arg);
-	void addUsedClass(List<String> arg);
+	void addAssociatedClass(String arg);
+	void addUsedClass(String arg);
 	List<String> getAssociatedClasses();
 	List<String> getUsedClasses();
 	

@@ -22,11 +22,14 @@ public class Class implements IClass {
 		this.fields = new ArrayList<IField>();
 		this.methods = new ArrayList<IMethod>();
 		this.isInterface = false;
+		this.associatedClasses = new ArrayList<String>();
+		this.usedClasses = new ArrayList<String>();
 	}
 
 	@Override
 	public void setFields(List<IField> fields) {
 		this.fields = fields;
+		Class butt = new Class();
 	}
 
 	@Override
@@ -95,22 +98,17 @@ public class Class implements IClass {
 	}
 
 	@Override
-	public void addAssociatedClass(List<String> arg) {
-		int size = arg.size();
-		for (int i = 0; i < size; i++) {
-			if (DesignParser.classIsUsed(arg.get(i))) {
-				associatedClasses.add(arg.get(i));
-			}
+	public void addAssociatedClass(String arg) {
+		if (DesignParser.classIsUsed(arg) && !associatedClasses.contains(arg)) {
+			associatedClasses.add(arg);
+			System.out.println(arg);
 		}
 	}
 
 	@Override
-	public void addUsedClass(List<String> arg) {
-		int size = arg.size();
-		for (int i = 0; i < size; i++) {
-			if (DesignParser.classIsUsed(arg.get(i))) {
-				usedClasses.add(arg.get(i));
-			}
+	public void addUsedClass(String arg) {
+		if (DesignParser.classIsUsed(arg) && !usedClasses.contains(arg)) {
+			usedClasses.add(arg);
 		}
 	}
 	
