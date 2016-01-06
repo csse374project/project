@@ -32,6 +32,7 @@ public class UnitTestsToGraphViz {
 		classNames.add("testing.SampleInterface01");
 		classNames.add("testing.SampleInterface02");
 		classNames.add("testing.SampleSuperClass");
+		classNames.add("testing.SampleClassForInitializing");
 	}
 	
 	@Before
@@ -41,7 +42,7 @@ public class UnitTestsToGraphViz {
 		classes =  new Classes();
 		Field f = DesignParser.class.getDeclaredField("classesToAccept");
 		f.setAccessible(true);
-		f.set(null, new String[]{"testing/SampleClassForReadingInATest", "testing/SampleInterface01", "testing/SampleInterface02", "testing/SampleSuperClass"});
+		f.set(null, new String[]{"testing/SampleClassForReadingInATest", "testing/SampleInterface01", "testing/SampleInterface02", "testing/SampleSuperClass", "testing/SampleClassForInitializing"});
 		for (String cls : classNames) {
 			Class currentClass = new Class();
 			ClassReader reader = new ClassReader(cls);
@@ -69,6 +70,13 @@ public class UnitTestsToGraphViz {
 		String testThis = graphViz.substring(startBreak, stopBreak);
 		assertTrue(testThis.contains("SampleClassForReadingInATest -> SampleInterface01"));
 		assertTrue(testThis.contains("SampleClassForReadingInATest -> SampleInterface02"));
+	}
+	
+	@Test
+	public void hasRightAssociationArrows() {
+		int startBreak = graphViz.indexOf("arrowhead = \"normal\" style = \"solid\"");
+		String testThis = graphViz.substring(startBreak);
+		assertTrue(testThis.contains("SampleClassForReadingInATest -> SampleClassForInitializing"));
 	}
 	
 }

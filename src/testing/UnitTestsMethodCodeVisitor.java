@@ -29,6 +29,9 @@ public class UnitTestsMethodCodeVisitor {
 	private void createList() {
 		classNames = new ArrayList<String>();
 		classNames.add("testing.SampleClassForReadingInATest");
+		classNames.add("testing.SampleInterface01");
+		classNames.add("testing.SampleInterface02");
+		classNames.add("testing.SampleSuperClass");
 		classNames.add("testing.SampleClassForInitializing");
 	}
 	
@@ -40,7 +43,7 @@ public class UnitTestsMethodCodeVisitor {
 		classes =  new Classes();
 		Field f = DesignParser.class.getDeclaredField("classesToAccept");
 		f.setAccessible(true);
-		f.set(null, new String[]{"testing/SampleClassForReadingInATest", "testing/SampleClassForInitializing"});
+		f.set(null, new String[]{"testing/SampleClassForReadingInATest", "testing/SampleInterface01", "testing/SampleInterface02", "testing/SampleSuperClass", "testing/SampleClassForInitializing"});
 		for (String cls : classNames) {
 			Class currentClass = new Class();
 			ClassReader reader = new ClassReader(cls);
