@@ -1,5 +1,7 @@
 package testing;
 
+import java.util.ArrayList;
+
 @SuppressWarnings("unused")
 public class SampleClassForReadingInATest extends SampleSuperClass implements SampleInterface01, SampleInterface02 {
 
@@ -16,5 +18,7 @@ public class SampleClassForReadingInATest extends SampleSuperClass implements Sa
 	private final String finalStringMaker(String[] strings) {return "unimplemented";}
 	public void mutateSomething(int[] array) {}
 	public void initializeClass() {new SampleClassForInitializing();}
+	public void initializeList() {ArrayList<String> what = new ArrayList<String>();}
+	public void initializeArray() {String[] what = new String[1];}
 	
 }

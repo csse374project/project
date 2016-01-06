@@ -26,5 +26,4 @@ public class MethodCodeVisitor extends MethodVisitor {
 		}
 	}
 
-
 }
