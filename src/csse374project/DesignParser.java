@@ -1,6 +1,10 @@
 package csse374project;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 import org.objectweb.asm.ClassReader;
 import org.objectweb.asm.ClassVisitor;
@@ -15,6 +19,7 @@ public class DesignParser {
 	
 	private static String[] classesToAccept;
 	
+	private static Map<Integer, List<String>> var = new HashMap<Integer, List<String>>();
 	
 	public static void main(String[] args) throws IOException {
 		Classes classes = new Classes();

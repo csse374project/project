@@ -1,14 +1,15 @@
 package csse374project;
 
 import org.objectweb.asm.ClassVisitor;
+import org.objectweb.asm.Opcodes;
 import org.objectweb.asm.FieldVisitor;
 import org.objectweb.asm.Type;
-
-import com.sun.xml.internal.ws.org.objectweb.asm.Opcodes;
 
 import classRepresentation.Field;
 import interfaces.IClass;
 import interfaces.IField;
+import jdk.internal.org.objectweb.asm.signature.SignatureReader;
+import jdk.internal.org.objectweb.asm.signature.SignatureVisitor;
 
 public class ClassFieldVisitor extends ClassVisitor {
 
@@ -40,8 +41,35 @@ public class ClassFieldVisitor extends ClassVisitor {
 
 		currentClass.addField(field);
 		// System.out.println(" "+type+" "+name);
-
+		handleSignature(signature);
 		return toDecorate;
+	}
+	
+	private void handleSignature(String signature) {
+		System.out.println("signature: " + signature);
+		if (signature == null) {
+			return;
+		}
+		SignatureVisitor sigVis = new MySigVisitor(Opcodes.ASM5);
+		SignatureReader sigReader = new SignatureReader(signature);
+		sigReader.accept(sigVis);
+		
+	}
+	
+	class MySigVisitor extends SignatureVisitor {
+
+		public MySigVisitor(int opcode) {
+			super(opcode);
+		}
+		@Override
+		public void visitClassType(String name) {
+			String currentName = currentClass.getName();
+			if (currentName.equals(name)) {
+				return;
+			}
+			System.out.println(name + " - " + currentClass.getName());
+			currentClass.addAssociatedClass(name);
+		}
 	}
 
 }
