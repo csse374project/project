@@ -43,9 +43,26 @@ public class Classes {
 
 		string.append("\tedge [\n\t\tstyle = \"dashed\"\n\t]\n\n");
 		appendInterfaces(string, keys);
+		
+		string.append("\tedge [\n\t\tarrowhead = \"normal\" style = \"solid\"\n\t]\n\n");
+		appendAssociatedClasses(string, keys);
 
 		string.append("}");
 		return string.toString();
+	}
+
+	private void appendAssociatedClasses(StringBuilder string, Set<String> keys) {
+		for(String key : keys) {
+			IClass cls = classes.get(key);
+			int lastFwdSlash = cls.getName().lastIndexOf('/');
+			for(String assocClass : cls.getAssociatedClasses()){
+				int assocLastFwdSlash = assocClass.lastIndexOf('/');
+				string.append("\t");
+				string.append(cls.getName().substring(lastFwdSlash+1));
+				string.append(" -> ");
+				string.append(assocClass.substring(assocLastFwdSlash +1));
+			}
+		}
 	}
 
 	private void appendClass(StringBuilder string, Set<String> keys) {

@@ -101,7 +101,6 @@ public class Class implements IClass {
 	public void addAssociatedClass(String arg) {
 		if (DesignParser.classIsUsed(arg) && !associatedClasses.contains(arg)) {
 			associatedClasses.add(arg);
-			System.out.println(arg);
 		}
 	}
 
