@@ -29,7 +29,6 @@ public class Class implements IClass {
 	@Override
 	public void setFields(List<IField> fields) {
 		this.fields = fields;
-		Class butt = new Class();
 	}
 
 	@Override

@@ -15,5 +15,6 @@ public class SampleClassForReadingInATest extends SampleSuperClass implements Sa
 	public static int identity(int x) {return x;}
 	private final String finalStringMaker(String[] strings) {return "unimplemented";}
 	public void mutateSomething(int[] array) {}
+	public void initializeClass() {new SampleClassForInitializing();}
 	
 }
