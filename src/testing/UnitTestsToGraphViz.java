@@ -33,6 +33,9 @@ public class UnitTestsToGraphViz {
 		classNames.add("testing.SampleInterface02");
 		classNames.add("testing.SampleSuperClass");
 		classNames.add("testing.SampleClassForInitializing");
+		classNames.add("testing.SampleClassForInitializingTwo");
+		classNames.add("testing.SampleClassForInitializingThree");
+		classNames.add("testing.SampleClassForInitializingFour");
 	}
 	
 	@Before
@@ -42,7 +45,7 @@ public class UnitTestsToGraphViz {
 		classes =  new Classes();
 		Field f = DesignParser.class.getDeclaredField("classesToAccept");
 		f.setAccessible(true);
-		f.set(null, new String[]{"testing/SampleClassForReadingInATest", "testing/SampleInterface01", "testing/SampleInterface02", "testing/SampleSuperClass", "testing/SampleClassForInitializing"});
+		f.set(null, new String[]{"testing/SampleClassForReadingInATest", "testing/SampleInterface01", "testing/SampleInterface02", "testing/SampleSuperClass", "testing/SampleClassForInitializing", "testing/SampleClassForInitializingTwo", "testing.SampleClassForInitializingThree", "testing.SampleClassForInitializingFour"});
 		for (String cls : classNames) {
 			Class currentClass = new Class();
 			ClassReader reader = new ClassReader(cls);
@@ -75,8 +78,18 @@ public class UnitTestsToGraphViz {
 	@Test
 	public void hasRightAssociationArrows() {
 		int startBreak = graphViz.indexOf("arrowhead = \"normal\" style = \"solid\"");
-		String testThis = graphViz.substring(startBreak);
+		int stopBreak = graphViz.indexOf("style = \"dashed\"");
+		String testThis = graphViz.substring(startBreak, stopBreak);
 		assertTrue(testThis.contains("SampleClassForReadingInATest -> SampleClassForInitializing"));
+		assertTrue(testThis.contains("SampleClassForReadingInATest -> SampleClassForInitializingTwo"));
+	}
+	
+	@Test
+	public void hasRightUseArrows() {
+		int startBreak = graphViz.indexOf("style = \"dashed\"");
+		String testThis = graphViz.substring(startBreak);
+		assertTrue(testThis.contains("SampleClassForReadingInATest -> SampleClassForInitializingThree"));
+		assertTrue(testThis.contains("SampleClassForReadingInATest -> SampleClassForInitializingFour"));
 	}
 	
 }

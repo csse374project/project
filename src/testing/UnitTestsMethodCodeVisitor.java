@@ -33,6 +33,9 @@ public class UnitTestsMethodCodeVisitor {
 		classNames.add("testing.SampleInterface02");
 		classNames.add("testing.SampleSuperClass");
 		classNames.add("testing.SampleClassForInitializing");
+		classNames.add("testing.SampleClassForInitializingTwo");
+		classNames.add("testing.SampleClassForInitializingThree");
+		classNames.add("testing.SampleClassForInitializingFour");
 	}
 	
 	@Before
@@ -43,7 +46,7 @@ public class UnitTestsMethodCodeVisitor {
 		classes =  new Classes();
 		Field f = DesignParser.class.getDeclaredField("classesToAccept");
 		f.setAccessible(true);
-		f.set(null, new String[]{"testing/SampleClassForReadingInATest", "testing/SampleInterface01", "testing/SampleInterface02", "testing/SampleSuperClass", "testing/SampleClassForInitializing"});
+		f.set(null, new String[]{"testing/SampleClassForReadingInATest", "testing/SampleInterface01", "testing/SampleInterface02", "testing/SampleSuperClass", "testing/SampleClassForInitializing", "testing/SampleClassForInitializingTwo", "testing.SampleClassForInitializingThree", "testing.SampleClassForInitializingFour"});
 		for (String cls : classNames) {
 			Class currentClass = new Class();
 			ClassReader reader = new ClassReader(cls);
@@ -58,7 +61,16 @@ public class UnitTestsMethodCodeVisitor {
 	@Test
 	public void hasCorrectAssociatedClasses() {
 		IClass test = classes.getClasses().get("testing/SampleClassForReadingInATest");
-		assertEquals(1, test.getAssociatedClasses().size());
+		assertEquals(2, test.getAssociatedClasses().size());
 		assertTrue(test.getAssociatedClasses().contains("testing/SampleClassForInitializing"));
+		assertTrue(test.getAssociatedClasses().contains("testing/SampleClassForInitializingTwo"));
+	}
+	
+	@Test
+	public void hasCorrectUsedClasses() {
+		IClass test = classes.getClasses().get("testing/SampleClassForReadingInATest");
+		assertEquals(2, test.getUsedClasses().size());
+		assertTrue(test.getUsedClasses().contains("testing/SampleClassForInitializingThree"));
+		assertTrue(test.getUsedClasses().contains("testing/SampleClassForInitializingFour"));
 	}
 }
