@@ -66,6 +66,7 @@ public class Classes {
 				string.append(usedClass.substring(usedLastFwdSlash +1));
 			}
 		}
+		string.append("\n\n");
 	}
 	
 	private void appendAssociatedClasses(StringBuilder string, Set<String> keys) {
@@ -80,6 +81,7 @@ public class Classes {
 				string.append(assocClass.substring(assocLastFwdSlash +1));
 			}
 		}
+		string.append("\n\n");
 	}
 
 	private void appendClass(StringBuilder string, Set<String> keys) {
