@@ -35,7 +35,7 @@ public class ClassMethodVisitor extends ClassVisitor {
 		for (int i = 0; i < argTypes.length; i++) {
 			String parameterName = argTypes[i].getClassName();
 			parameterClassNames.add(parameterName);
-			currentClass.addUsedClass(parameterName);
+			currentClass.addUsedClass(parameterName.replace('.', '/'));
 		}
 		
 		char vis = ' ';
