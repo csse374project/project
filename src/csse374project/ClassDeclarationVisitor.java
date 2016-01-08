@@ -27,8 +27,6 @@ public class ClassDeclarationVisitor extends ClassVisitor {
 			currentClass.setIsInterface(true);
 		}
 
-		// System.out.println("Class: "+ name+" extends "+superName+" implements
-		// "+Arrays.asList(interfaces));
 		super.visit(version, access, name, signature, superName, interfaces);
 	}
 }

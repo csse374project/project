@@ -61,8 +61,8 @@ public class DesignParser {
 		return false;
 	}
 	
-	private Integer testThing(){
+/*	private Integer testThing(){
 		return -1;
-	}
+	}*/
 	
 }
