@@ -28,14 +28,14 @@ public class UnitTestsMethodCodeVisitor {
 	
 	private void createList() {
 		classNames = new ArrayList<String>();
-		classNames.add("testing.SampleClassForReadingInATest");
-		classNames.add("testing.SampleInterface01");
-		classNames.add("testing.SampleInterface02");
-		classNames.add("testing.SampleSuperClass");
-		classNames.add("testing.SampleClassForInitializing");
-		classNames.add("testing.SampleClassForInitializingTwo");
-		classNames.add("testing.SampleClassForInitializingThree");
-		classNames.add("testing.SampleClassForInitializingFour");
+		classNames.add("testingData.SampleClassForReadingInATest");
+		classNames.add("testingData.SampleInterface01");
+		classNames.add("testingData.SampleInterface02");
+		classNames.add("testingData.SampleSuperClass");
+		classNames.add("testingData.SampleClassForInitializing");
+		classNames.add("testingData.SampleClassForInitializingTwo");
+		classNames.add("testingData.SampleClassForInitializingThree");
+		classNames.add("testingData.SampleClassForInitializingFour");
 	}
 	
 	@Before
@@ -46,7 +46,7 @@ public class UnitTestsMethodCodeVisitor {
 		classes =  new Classes();
 		Field f = DesignParser.class.getDeclaredField("classesToAccept");
 		f.setAccessible(true);
-		f.set(null, new String[]{"testing/SampleClassForReadingInATest", "testing/SampleInterface01", "testing/SampleInterface02", "testing/SampleSuperClass", "testing/SampleClassForInitializing", "testing/SampleClassForInitializingTwo", "testing.SampleClassForInitializingThree", "testing.SampleClassForInitializingFour"});
+		f.set(null, new String[]{"testingData/SampleClassForReadingInATest", "testingData/SampleInterface01", "testingData/SampleInterface02", "testingData/SampleSuperClass", "testingData/SampleClassForInitializing", "testingData/SampleClassForInitializingTwo", "testingData.SampleClassForInitializingThree", "testingData.SampleClassForInitializingFour"});
 		for (String cls : classNames) {
 			Class currentClass = new Class();
 			ClassReader reader = new ClassReader(cls);
@@ -60,17 +60,17 @@ public class UnitTestsMethodCodeVisitor {
 	
 	@Test
 	public void hasCorrectAssociatedClasses() {
-		IClass test = classes.getClasses().get("testing/SampleClassForReadingInATest");
+		IClass test = classes.getClasses().get("testingData/SampleClassForReadingInATest");
 		assertEquals(2, test.getAssociatedClasses().size());
-		assertTrue(test.getAssociatedClasses().contains("testing/SampleClassForInitializing"));
-		assertTrue(test.getAssociatedClasses().contains("testing/SampleClassForInitializingTwo"));
+		assertTrue(test.getAssociatedClasses().contains("testingData/SampleClassForInitializing"));
+		assertTrue(test.getAssociatedClasses().contains("testingData/SampleClassForInitializingTwo"));
 	}
 	
 	@Test
 	public void hasCorrectUsedClasses() {
-		IClass test = classes.getClasses().get("testing/SampleClassForReadingInATest");
+		IClass test = classes.getClasses().get("testingData/SampleClassForReadingInATest");
 		assertEquals(2, test.getUsedClasses().size());
-		assertTrue(test.getUsedClasses().contains("testing/SampleClassForInitializingThree"));
-		assertTrue(test.getUsedClasses().contains("testing/SampleClassForInitializingFour"));
+		assertTrue(test.getUsedClasses().contains("testingData/SampleClassForInitializingThree"));
+		assertTrue(test.getUsedClasses().contains("testingData/SampleClassForInitializingFour"));
 	}
 }

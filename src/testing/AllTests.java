@@ -8,7 +8,9 @@ import org.junit.runners.Suite;
 	UnitTestsDeclarationSample.class,
 	UnitTestsDeclarationString.class,
 	UnitTestsFieldVisitor.class,
-	UnitTestsMethodVisitor.class
+	UnitTestsMethodVisitor.class,
+	UnitTestsMethodCodeVisitor.class,
+	UnitTestsToGraphViz.class
 })
 public class AllTests {
 

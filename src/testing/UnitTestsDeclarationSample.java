@@ -23,18 +23,22 @@ import org.junit.Test;
 import csse374project.ClassDeclarationVisitor;
 import csse374project.ClassFieldVisitor;
 import csse374project.ClassMethodVisitor;
+import csse374project.DesignParser;
 import interfaces.IClass;
 import interfaces.IField;
 import interfaces.IMethod;
 
 public class UnitTestsDeclarationSample {
 
-	private static String className = "testing.SampleClassForReadingInATest";
+	private static String className = "testingData.SampleClassForReadingInATest";
 	private IClass currentClass;
 	
 	@Before
-	public void setup() throws IOException {
+	public void setup() throws IOException, NoSuchFieldException, SecurityException, IllegalArgumentException, IllegalAccessException {
 		currentClass = new Class();
+		java.lang.reflect.Field f = DesignParser.class.getDeclaredField("classesToAccept");
+		f.setAccessible(true);
+		f.set(null, new String[]{"testingData/SampleClassForReadingInATest"});
 		ClassReader reader = null;
 		reader = new ClassReader(className);
 		ClassVisitor vis = new ClassDeclarationVisitor(Opcodes.ASM5, currentClass);
@@ -45,7 +49,7 @@ public class UnitTestsDeclarationSample {
 	
 	@Test
 	public void testName() {
-		assertEquals("testing/SampleClassForReadingInATest", currentClass.getName());
+		assertEquals("testingData/SampleClassForReadingInATest", currentClass.getName());
 	}
 	@Test
 	public void testFields() {
@@ -76,10 +80,17 @@ public class UnitTestsDeclarationSample {
 		field4.setNonAccessModifiers(null); //TODO: implement method and change this test
 		field4.setVisibility('+');
 		
+		Field field5 = new Field();
+		field5.setType("testingData.SampleClassForInitializingTwo");
+		field5.setName("sample");
+		field5.setNonAccessModifiers(null); //TODO: implement method and change this test
+		field5.setVisibility('+');
+		
 		expected.add(field1);
 		expected.add(field2);
 		expected.add(field3);
 		expected.add(field4);
+		expected.add(field5);
 		
 		assertEquals(expected.size(), fields.size());
 		
@@ -92,6 +103,13 @@ public class UnitTestsDeclarationSample {
 	public void testMethods() {
 		List<IMethod> methods = currentClass.getMethods();
 		List<IMethod> expected = new ArrayList<IMethod>();
+		
+		Method initMethod = new Method();
+		initMethod.setName("<init>");
+		initMethod.setNonAccessModifiers(new ArrayList<String>());
+		initMethod.setParameters(new ArrayList<String>());
+		initMethod.setReturnType("void");
+		initMethod.setVisibility('+');
 		
 		Method method1 = new Method();
 		method1.setName("useless");
@@ -127,18 +145,57 @@ public class UnitTestsDeclarationSample {
 		method4.setReturnType("void");
 		method4.setVisibility('+');
 		
-		Method initMethod = new Method();
-		initMethod.setName("<init>");
-		initMethod.setNonAccessModifiers(new ArrayList<String>());
-		initMethod.setParameters(new ArrayList<String>());
-		initMethod.setReturnType("void");
-		initMethod.setVisibility('+');
+		Method method5 = new Method();
+		method5.setName("initializeClass");
+		method5.setNonAccessModifiers(new ArrayList<String>()); //TODO: implement method and change this test
+		ArrayList<String> params5 = new ArrayList<String>();
+		method5.setParameters(params5);
+		method5.setReturnType("void");
+		method5.setVisibility('+');
+		
+		Method method6 = new Method();
+		method6.setName("initializeList");
+		method6.setNonAccessModifiers(new ArrayList<String>()); //TODO: implement method and change this test
+		ArrayList<String> params6 = new ArrayList<String>();
+		method6.setParameters(params6);
+		method6.setReturnType("void");
+		method6.setVisibility('+');
+		
+		Method method7 = new Method();
+		method7.setName("initializeArray");
+		method7.setNonAccessModifiers(new ArrayList<String>()); //TODO: implement method and change this test
+		ArrayList<String> params7 = new ArrayList<String>();
+		method7.setParameters(params7);
+		method7.setReturnType("void");
+		method7.setVisibility('+');
+		
+		Method method8 = new Method();
+		method8.setName("whatever");
+		method8.setNonAccessModifiers(new ArrayList<String>()); //TODO: implement method and change this test
+		ArrayList<String> params8 = new ArrayList<String>();
+		method8.setParameters(params8);
+		method8.setReturnType("testingData.SampleClassForInitializingThree");
+		method8.setVisibility('+');
+		
+		Method method9 = new Method();
+		method9.setName("something");
+		method9.setNonAccessModifiers(new ArrayList<String>()); //TODO: implement method and change this test
+		ArrayList<String> params9 = new ArrayList<String>();
+		params9.add("testingData.SampleClassForInitializingFour");
+		method9.setParameters(params9);
+		method9.setReturnType("void");
+		method9.setVisibility('+');
 		
 		expected.add(initMethod);
 		expected.add(method1);
 		expected.add(method2);
 		expected.add(method3);
 		expected.add(method4);
+		expected.add(method5);
+		expected.add(method6);
+		expected.add(method7);
+		expected.add(method8);
+		expected.add(method9);
 		
 		assertEquals(expected.size(), methods.size());
 		
@@ -151,8 +208,8 @@ public class UnitTestsDeclarationSample {
 	public void testInterfaces() {
 		List<String> interfaces = currentClass.getInterfaces();
 		List<String> expected = new ArrayList<String>();
-		expected.add("testing/SampleInterface01");
-		expected.add("testing/SampleInterface02");
+		expected.add("testingData/SampleInterface01");
+		expected.add("testingData/SampleInterface02");
 		assertEquals(expected.size(), interfaces.size());
 		
 		List<String> interfaceNames = new ArrayList<String>();
@@ -165,7 +222,7 @@ public class UnitTestsDeclarationSample {
 	
 	@Test
 	public void testSuperClass() {
-		assertEquals("testing/SampleSuperClass", currentClass.getSuperClass());
+		assertEquals("testingData/SampleSuperClass", currentClass.getSuperClass());
 	}
 
 }
