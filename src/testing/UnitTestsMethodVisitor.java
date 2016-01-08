@@ -17,6 +17,7 @@ import classRepresentation.Method;
 import csse374project.ClassDeclarationVisitor;
 import csse374project.ClassFieldVisitor;
 import csse374project.ClassMethodVisitor;
+import csse374project.DesignParser;
 import interfaces.IClass;
 import interfaces.IField;
 import interfaces.IMethod;
@@ -27,9 +28,12 @@ public class UnitTestsMethodVisitor {
 	private IClass currentClass;
 	
 	@Before
-	public void setup() throws IOException {
+	public void setup() throws IOException, NoSuchFieldException, SecurityException, IllegalArgumentException, IllegalAccessException {
 		// TODO fix this.
 		currentClass = new Class();
+		java.lang.reflect.Field f = DesignParser.class.getDeclaredField("classesToAccept");
+		f.setAccessible(true);
+		f.set(null, new String[]{"java/lang/String"});
 		ClassReader reader = new ClassReader(className);
 		ClassVisitor declVisitor = new ClassDeclarationVisitor(Opcodes.ASM5, currentClass);
 		ClassVisitor fieldVisitor = new ClassFieldVisitor(Opcodes.ASM5, declVisitor, currentClass);
