@@ -21,7 +21,7 @@ public class SampleClassForReadingInATest extends SampleSuperClass implements Sa
 	public void initializeClass() {new SampleClassForInitializing();}
 	public void initializeList() {ArrayList<String> what = new ArrayList<String>();}
 	public void initializeArray() {String[] what = new String[1];}
-	public SampleClassForInitializingThree whatever() {return null;}
+	public SampleClassForInitializingThree whatever(SampleClassForInitializingThree ok) {return ok;}
 	public void something(SampleClassForInitializingFour some) {}
 	
 }

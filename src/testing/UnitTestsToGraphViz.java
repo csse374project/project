@@ -45,7 +45,7 @@ public class UnitTestsToGraphViz {
 		classes =  new Classes();
 		Field f = DesignParser.class.getDeclaredField("classesToAccept");
 		f.setAccessible(true);
-		f.set(null, new String[]{"testingData/SampleClassForReadingInATest", "testingData/SampleInterface01", "testingData/SampleInterface02", "testingData/SampleSuperClass", "testingData/SampleClassForInitializing", "testingData/SampleClassForInitializingTwo", "testingData.SampleClassForInitializingThree", "testingData.SampleClassForInitializingFour"});
+		f.set(null, new String[]{"testingData/SampleClassForReadingInATest", "testingData/SampleInterface01", "testingData/SampleInterface02", "testingData/SampleSuperClass", "testingData/SampleClassForInitializing", "testingData/SampleClassForInitializingTwo", "testingData/SampleClassForInitializingThree", "testingData/SampleClassForInitializingFour"});
 		for (String cls : classNames) {
 			Class currentClass = new Class();
 			ClassReader reader = new ClassReader(cls);

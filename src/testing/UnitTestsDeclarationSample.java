@@ -173,6 +173,7 @@ public class UnitTestsDeclarationSample {
 		method8.setName("whatever");
 		method8.setNonAccessModifiers(new ArrayList<String>()); //TODO: implement method and change this test
 		ArrayList<String> params8 = new ArrayList<String>();
+		params8.add("testingData.SampleClassForInitializingThree");
 		method8.setParameters(params8);
 		method8.setReturnType("testingData.SampleClassForInitializingThree");
 		method8.setVisibility('+');
