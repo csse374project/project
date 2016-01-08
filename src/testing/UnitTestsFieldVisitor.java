@@ -22,6 +22,7 @@ import org.junit.Test;
 
 import csse374project.ClassDeclarationVisitor;
 import csse374project.ClassFieldVisitor;
+import csse374project.DesignParser;
 import interfaces.IClass;
 import interfaces.IField;
 import interfaces.IMethod;
@@ -32,9 +33,12 @@ public class UnitTestsFieldVisitor {
 	private IClass currentClass;
 	
 	@Before
-	public void setup() throws IOException {
+	public void setup() throws IOException, NoSuchFieldException, SecurityException, IllegalArgumentException, IllegalAccessException {
 		// TODO fix this.???
 		currentClass = new Class();
+		java.lang.reflect.Field f = DesignParser.class.getDeclaredField("classesToAccept");
+		f.setAccessible(true);
+		f.set(null, new String[]{"java/lang/String"});
 		ClassReader reader = null;
 		reader = new ClassReader(className);
 		ClassVisitor decVis = new ClassDeclarationVisitor(Opcodes.ASM5, currentClass);

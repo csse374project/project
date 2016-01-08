@@ -78,15 +78,15 @@ public class UnitTestsToGraphViz {
 	@Test
 	public void hasRightAssociationArrows() {
 		int startBreak = graphViz.indexOf("arrowhead = \"normal\" style = \"solid\"");
-		//int stopBreak = graphViz.indexOf("style = \"dashed\"");
-		String testThis = graphViz.substring(startBreak/*, stopBreak*/); //TODO: uncomment once Use arrows are implemented
+		int stopBreak = graphViz.indexOf("arrowhead = \"normal\" style = \"dashed\"");
+		String testThis = graphViz.substring(startBreak, stopBreak);
 		assertTrue(testThis.contains("SampleClassForReadingInATest -> SampleClassForInitializing"));
 		assertTrue(testThis.contains("SampleClassForReadingInATest -> SampleClassForInitializingTwo"));
 	}
 	
 	@Test
 	public void hasRightUseArrows() {
-		int startBreak = graphViz.indexOf("style = \"dashed\"");
+		int startBreak = graphViz.indexOf("arrowhead = \"normal\" style = \"dashed\"");
 		String testThis = graphViz.substring(startBreak);
 		assertTrue(testThis.contains("SampleClassForReadingInATest -> SampleClassForInitializingThree"));
 		assertTrue(testThis.contains("SampleClassForReadingInATest -> SampleClassForInitializingFour"));
