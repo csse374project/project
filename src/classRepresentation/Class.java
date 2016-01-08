@@ -98,7 +98,9 @@ public class Class implements IClass {
 
 	@Override
 	public void addAssociatedClass(String arg) {
-		if (DesignParser.classIsUsed(arg) && !associatedClasses.contains(arg)) {
+		if (DesignParser.classIsUsed(arg)
+				&& !associatedClasses.contains(arg)
+				&& (!arg.equals(this.name))) {
 			associatedClasses.add(arg);
 		}
 	}

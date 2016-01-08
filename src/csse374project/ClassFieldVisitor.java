@@ -46,7 +46,6 @@ public class ClassFieldVisitor extends ClassVisitor {
 	}
 	
 	private void handleSignature(String signature) {
-		System.out.println("signature: " + signature);
 		if (signature == null) {
 			return;
 		}
@@ -63,11 +62,6 @@ public class ClassFieldVisitor extends ClassVisitor {
 		}
 		@Override
 		public void visitClassType(String name) {
-			String currentName = currentClass.getName();
-			if (currentName.equals(name)) {
-				return;
-			}
-			System.out.println(name + " - " + currentClass.getName());
 			currentClass.addAssociatedClass(name);
 		}
 	}
