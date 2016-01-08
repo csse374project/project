@@ -20,15 +20,18 @@ public class ClassMethodVisitor extends ClassVisitor {
 	}
 
 	@Override
-	public MethodVisitor visitMethod(int access, String name, String desc, String signature, String[] exceptions) {
+	public MethodVisitor visitMethod(int access, String name, String desc,
+			String signature, String[] exceptions) {
 	
 		MethodVisitor toDecorate = super.visitMethod(access, name, desc, signature, exceptions);
 		MethodVisitor codeVisitor = new MethodCodeVisitor(Opcodes.ASM5, toDecorate, currentClass);
 
 		Type[] argTypes = Type.getArgumentTypes(desc);
-		ArrayList<String> classNames = new ArrayList<String>();
+		ArrayList<String> parameterClassNames = new ArrayList<String>();
 		for (int i = 0; i < argTypes.length; i++) {
-			classNames.add(argTypes[i].getClassName());
+			String parameterName = argTypes[i].getClassName();
+			parameterClassNames.add(parameterName);
+			currentClass.addUsedClass(parameterName);
 		}
 
 		char vis = ' ';
@@ -42,12 +45,13 @@ public class ClassMethodVisitor extends ClassVisitor {
 
 		IMethod method = new Method();
 		method.setName(name);
-		method.setParameters(classNames);
+		method.setParameters(parameterClassNames);
 		method.setReturnType(Type.getReturnType(desc).getClassName());
 		method.setVisibility(vis);
 
 		currentClass.addMethod(method);
-
+		currentClass.addUsedClass(Type.getReturnType(desc).getClassName());
+		
 		return codeVisitor;
 	}
 }

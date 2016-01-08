@@ -102,12 +102,18 @@ public class Class implements IClass {
 				&& !associatedClasses.contains(arg)
 				&& (!arg.equals(this.name))) {
 			associatedClasses.add(arg);
+			if (usedClasses.contains(arg)) {
+				usedClasses.remove(arg);
+			}
 		}
 	}
 
 	@Override
 	public void addUsedClass(String arg) {
-		if (DesignParser.classIsUsed(arg) && !usedClasses.contains(arg)) {
+		if (DesignParser.classIsUsed(arg)
+				&& !usedClasses.contains(arg)
+				&& !associatedClasses.contains(arg) 
+				&& (!arg.equals(this.name))) {
 			usedClasses.add(arg);
 		}
 	}
