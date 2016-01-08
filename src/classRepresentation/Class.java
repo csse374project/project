@@ -98,9 +98,7 @@ public class Class implements IClass {
 
 	@Override
 	public void addAssociatedClass(String arg) {
-		if (DesignParser.classIsUsed(arg)
-				&& !associatedClasses.contains(arg)
-				&& (!arg.equals(this.name))) {
+		if (DesignParser.classIsUsed(arg) && !associatedClasses.contains(arg) && (!arg.equals(this.name))) {
 			associatedClasses.add(arg);
 			if (usedClasses.contains(arg)) {
 				usedClasses.remove(arg);
@@ -110,18 +108,17 @@ public class Class implements IClass {
 
 	@Override
 	public void addUsedClass(String arg) {
-		if (DesignParser.classIsUsed(arg)
-				&& !usedClasses.contains(arg)
-				&& !associatedClasses.contains(arg) 
+		if (DesignParser.classIsUsed(arg) && !usedClasses.contains(arg) && !associatedClasses.contains(arg)
 				&& (!arg.equals(this.name))) {
 			usedClasses.add(arg);
 		}
 	}
-	
+
 	@Override
 	public List<String> getAssociatedClasses() {
 		return associatedClasses;
 	}
+
 	@Override
 	public List<String> getUsedClasses() {
 		return usedClasses;

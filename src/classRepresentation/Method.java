@@ -20,7 +20,7 @@ public class Method implements IMethod {
 		this.nonAccessModifiers = new ArrayList<String>();
 		this.returnType = "";
 	}
-	
+
 	@Override
 	public String toString() {
 		StringBuilder str = new StringBuilder();
@@ -37,7 +37,7 @@ public class Method implements IMethod {
 		}
 		str.append(") : ");
 		str.append(returnType);
-		if(nonAccessModifiers.size() == 0) {
+		if (nonAccessModifiers.size() == 0) {
 			str.append("\n\tno non-access-mods");
 		} else {
 			str.append("\n\t");

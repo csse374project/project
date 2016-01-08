@@ -43,9 +43,10 @@ public class ClassFieldVisitor extends ClassVisitor {
 		handleSignature(signature);
 		return toDecorate;
 	}
-	
+
 	public void handleSignature(String signature) {
-		if (signature == null) return;
+		if (signature == null)
+			return;
 		SignatureVisitor sigVis = new SigVisitor(Opcodes.ASM5);
 		SignatureReader sigReader = new SignatureReader(signature);
 		sigReader.accept(sigVis);
@@ -53,7 +54,7 @@ public class ClassFieldVisitor extends ClassVisitor {
 	}
 
 	class SigVisitor extends SignatureVisitor {
-		
+
 		public SigVisitor(int opcode) {
 			super(opcode);
 		}

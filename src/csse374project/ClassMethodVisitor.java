@@ -23,9 +23,8 @@ public class ClassMethodVisitor extends ClassVisitor {
 	}
 
 	@Override
-	public MethodVisitor visitMethod(int access, String name, String desc,
-			String signature, String[] exceptions) {
-	
+	public MethodVisitor visitMethod(int access, String name, String desc, String signature, String[] exceptions) {
+
 		MethodVisitor toDecorate = super.visitMethod(access, name, desc, signature, exceptions);
 		MethodVisitor codeVisitor = new MethodCodeVisitor(Opcodes.ASM5, toDecorate, currentClass);
 
@@ -36,7 +35,7 @@ public class ClassMethodVisitor extends ClassVisitor {
 			parameterClassNames.add(parameterName);
 			currentClass.addUsedClass(parameterName.replace('.', '/'));
 		}
-		
+
 		char vis = ' ';
 		if ((access & Opcodes.ACC_PUBLIC) != 0) {
 			vis = '+';
@@ -53,15 +52,16 @@ public class ClassMethodVisitor extends ClassVisitor {
 		method.setVisibility(vis);
 
 		currentClass.addMethod(method);
-		
+
 		currentClass.addUsedClass(Type.getReturnType(desc).getClassName().replace('.', '/'));
 		handleSignature(signature);
-		
+
 		return codeVisitor;
 	}
-	
+
 	public void handleSignature(String signature) {
-		if (signature == null) return;
+		if (signature == null)
+			return;
 		SignatureVisitor sigVis = new SigVisitor(Opcodes.ASM5);
 		SignatureReader sigReader = new SignatureReader(signature);
 		sigReader.accept(sigVis);
@@ -69,7 +69,7 @@ public class ClassMethodVisitor extends ClassVisitor {
 	}
 
 	class SigVisitor extends SignatureVisitor {
-		
+
 		public SigVisitor(int opcode) {
 			super(opcode);
 		}

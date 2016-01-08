@@ -57,7 +57,10 @@ public class Field implements IField {
 		Field f = (Field) o;
 		// Compare the important fields
 		if (this.getName().equals(f.getName()) && this.getType().equals(f.getType())
-				&& this.getVisibility() == f.getVisibility()) { //TODO: add in non-access modifiers if ever used
+				&& this.getVisibility() == f.getVisibility()) { // TODO: add in
+																// non-access
+																// modifiers if
+																// ever used
 			return true;
 		}
 		return false;

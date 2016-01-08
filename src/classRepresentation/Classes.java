@@ -43,17 +43,17 @@ public class Classes {
 
 		string.append("\tedge [\n\t\tstyle = \"dashed\"\n\t]\n\n");
 		appendInterfaces(string, keys);
-		
+
 		string.append("\tedge [\n\t\tarrowhead = \"normal\" style = \"solid\"\n\t]\n\n");
 		appendAssociatedClasses(string, keys);
-		
+
 		string.append("\tedge [\n\t\tarrowhead = \"normal\" style = \"dashed\"\n\t]\n\n");
 		appendUsedClasses(string, keys);
 
 		string.append("}");
 		return string.toString();
 	}
-	
+
 	private void appendUsedClasses(StringBuilder string, Set<String> keys) {
 		for (String key : keys) {
 			IClass cls = classes.get(key);
@@ -61,24 +61,24 @@ public class Classes {
 			for (String usedClass : cls.getUsedClasses()) {
 				int usedLastFwdSlash = usedClass.lastIndexOf('/');
 				string.append("\t");
-				string.append(cls.getName().substring(lastFwdSlash+1));
+				string.append(cls.getName().substring(lastFwdSlash + 1));
 				string.append(" -> ");
-				string.append(usedClass.substring(usedLastFwdSlash +1));
+				string.append(usedClass.substring(usedLastFwdSlash + 1));
 				string.append("\n\n");
 			}
 		}
 	}
-	
+
 	private void appendAssociatedClasses(StringBuilder string, Set<String> keys) {
-		for(String key : keys) {
+		for (String key : keys) {
 			IClass cls = classes.get(key);
 			int lastFwdSlash = cls.getName().lastIndexOf('/');
-			for(String assocClass : cls.getAssociatedClasses()) {
+			for (String assocClass : cls.getAssociatedClasses()) {
 				int assocLastFwdSlash = assocClass.lastIndexOf('/');
 				string.append("\t");
-				string.append(cls.getName().substring(lastFwdSlash+1));
+				string.append(cls.getName().substring(lastFwdSlash + 1));
 				string.append(" -> ");
-				string.append(assocClass.substring(assocLastFwdSlash +1));
+				string.append(assocClass.substring(assocLastFwdSlash + 1));
 				string.append("\n\n");
 			}
 		}
