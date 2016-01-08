@@ -6,7 +6,6 @@ import org.objectweb.asm.Opcodes;
 import org.objectweb.asm.Type;
 
 import classRepresentation.Method;
-import csse374project.ClassFieldVisitor.SigVisitor;
 import interfaces.IClass;
 import interfaces.IMethod;
 import jdk.internal.org.objectweb.asm.signature.SignatureReader;
