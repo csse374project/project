@@ -59,7 +59,6 @@ public class Classes {
 			IClass cls = classes.get(key);
 			int lastFwdSlash = cls.getName().lastIndexOf('/');
 			for (String usedClass : cls.getUsedClasses()) {
-				System.out.println(usedClass);
 				int usedLastFwdSlash = usedClass.lastIndexOf('/');
 				string.append("\t");
 				string.append(cls.getName().substring(lastFwdSlash+1));
