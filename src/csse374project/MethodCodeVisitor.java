@@ -21,7 +21,7 @@ public class MethodCodeVisitor extends MethodVisitor {
 //		System.out.println("Description: " + desc);
 //		System.out.println("\n");
 		
-		if (name.equals("<init>")) {
+		if (name.equals("<init>") && !currentClass.getSuperClass().equals(owner)) {
 			currentClass.addAssociatedClass(owner);
 		}
 	}
