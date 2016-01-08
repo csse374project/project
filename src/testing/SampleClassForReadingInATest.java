@@ -8,7 +8,7 @@ public class SampleClassForReadingInATest extends SampleSuperClass implements Sa
 	private static final int SOME_CONSTANT = 1;
 	public static final String SOME_WORD = "hello";
 	
-	public SampleClassForInitializingTwo sample;
+	public SampleClassForInitializingTwo sample = new SampleClassForInitializingTwo();
 	private char aChar;
 	public boolean aBool;
 	
@@ -21,7 +21,7 @@ public class SampleClassForReadingInATest extends SampleSuperClass implements Sa
 	public void initializeClass() {new SampleClassForInitializing();}
 	public void initializeList() {ArrayList<String> what = new ArrayList<String>();}
 	public void initializeArray() {String[] what = new String[1];}
-	public SampleClassForInitializingThree whatever() {return new SampleClassForInitializingThree();}
+	public SampleClassForInitializingThree whatever() {return null;}
 	public void something(SampleClassForInitializingFour some) {}
 	
 }
