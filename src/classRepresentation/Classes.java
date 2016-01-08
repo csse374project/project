@@ -59,14 +59,15 @@ public class Classes {
 			IClass cls = classes.get(key);
 			int lastFwdSlash = cls.getName().lastIndexOf('/');
 			for (String usedClass : cls.getUsedClasses()) {
+				System.out.println(usedClass);
 				int usedLastFwdSlash = usedClass.lastIndexOf('/');
 				string.append("\t");
 				string.append(cls.getName().substring(lastFwdSlash+1));
 				string.append(" -> ");
 				string.append(usedClass.substring(usedLastFwdSlash +1));
+				string.append("\n\n");
 			}
 		}
-		string.append("\n\n");
 	}
 	
 	private void appendAssociatedClasses(StringBuilder string, Set<String> keys) {
@@ -79,9 +80,9 @@ public class Classes {
 				string.append(cls.getName().substring(lastFwdSlash+1));
 				string.append(" -> ");
 				string.append(assocClass.substring(assocLastFwdSlash +1));
+				string.append("\n\n");
 			}
 		}
-		string.append("\n\n");
 	}
 
 	private void appendClass(StringBuilder string, Set<String> keys) {

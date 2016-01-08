@@ -4,12 +4,12 @@ import org.objectweb.asm.ClassVisitor;
 import org.objectweb.asm.Opcodes;
 import org.objectweb.asm.FieldVisitor;
 import org.objectweb.asm.Type;
+import org.objectweb.asm.signature.SignatureVisitor;
 
 import classRepresentation.Field;
 import interfaces.IClass;
 import interfaces.IField;
-import jdk.internal.org.objectweb.asm.signature.SignatureReader;
-import jdk.internal.org.objectweb.asm.signature.SignatureVisitor;
+import org.objectweb.asm.signature.SignatureReader;
 
 public class ClassFieldVisitor extends ClassVisitor {
 
@@ -40,30 +40,27 @@ public class ClassFieldVisitor extends ClassVisitor {
 		field.setVisibility(vis);
 
 		currentClass.addField(field);
-		// System.out.println(" "+type+" "+name);
 		handleSignature(signature);
 		return toDecorate;
 	}
 	
-	private void handleSignature(String signature) {
-		if (signature == null) {
-			return;
-		}
-		SignatureVisitor sigVis = new MySigVisitor(Opcodes.ASM5);
+	public void handleSignature(String signature) {
+		if (signature == null) return;
+		SignatureVisitor sigVis = new SigVisitor(Opcodes.ASM5);
 		SignatureReader sigReader = new SignatureReader(signature);
 		sigReader.accept(sigVis);
-		
-	}
-	
-	class MySigVisitor extends SignatureVisitor {
 
-		public MySigVisitor(int opcode) {
+	}
+
+	class SigVisitor extends SignatureVisitor {
+		
+		public SigVisitor(int opcode) {
 			super(opcode);
 		}
+
 		@Override
 		public void visitClassType(String name) {
 			currentClass.addAssociatedClass(name);
 		}
 	}
-
 }

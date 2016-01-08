@@ -14,13 +14,7 @@ public class MethodCodeVisitor extends MethodVisitor {
 	}
 	
 	@Override
-	public void visitMethodInsn(int opcode, String owner, String name, String desc, boolean itf){
-//		System.out.println("Opcode: " + opcode);
-//		System.out.println("Owner: " + owner);
-//		System.out.println("Name: " + name);
-//		System.out.println("Description: " + desc);
-//		System.out.println("\n");
-		
+	public void visitMethodInsn(int opcode, String owner, String name, String desc, boolean itf){	
 		if (name.equals("<init>")) {
 			currentClass.addAssociatedClass(owner);
 		}

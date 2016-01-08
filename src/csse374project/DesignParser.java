@@ -19,7 +19,7 @@ public class DesignParser {
 	
 	private static String[] classesToAccept;
 	
-	private static Map<Integer, List<String>> var = new HashMap<Integer, List<String>>();
+	//private static Map<Integer, List<String>> var = new HashMap<Integer, List<String>>();
 	
 	public static void main(String[] args) throws IOException {
 		Classes classes = new Classes();
@@ -60,4 +60,9 @@ public class DesignParser {
 		}
 		return false;
 	}
+	
+	private Integer testThing(){
+		return -1;
+	}
+	
 }

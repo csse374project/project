@@ -6,8 +6,12 @@ import org.objectweb.asm.Opcodes;
 import org.objectweb.asm.Type;
 
 import classRepresentation.Method;
+import csse374project.ClassFieldVisitor.SigVisitor;
 import interfaces.IClass;
 import interfaces.IMethod;
+import jdk.internal.org.objectweb.asm.signature.SignatureReader;
+import jdk.internal.org.objectweb.asm.signature.SignatureVisitor;
+
 import java.util.ArrayList;
 
 public class ClassMethodVisitor extends ClassVisitor {
@@ -33,7 +37,7 @@ public class ClassMethodVisitor extends ClassVisitor {
 			parameterClassNames.add(parameterName);
 			currentClass.addUsedClass(parameterName);
 		}
-
+		
 		char vis = ' ';
 		if ((access & Opcodes.ACC_PUBLIC) != 0) {
 			vis = '+';
@@ -50,8 +54,30 @@ public class ClassMethodVisitor extends ClassVisitor {
 		method.setVisibility(vis);
 
 		currentClass.addMethod(method);
-		currentClass.addUsedClass(Type.getReturnType(desc).getClassName());
+		
+		currentClass.addUsedClass(Type.getReturnType(desc).getClassName().replace('.', '/'));
+		handleSignature(signature);
 		
 		return codeVisitor;
+	}
+	
+	public void handleSignature(String signature) {
+		if (signature == null) return;
+		SignatureVisitor sigVis = new SigVisitor(Opcodes.ASM5);
+		SignatureReader sigReader = new SignatureReader(signature);
+		sigReader.accept(sigVis);
+
+	}
+
+	class SigVisitor extends SignatureVisitor {
+		
+		public SigVisitor(int opcode) {
+			super(opcode);
+		}
+
+		@Override
+		public void visitClassType(String name) {
+			currentClass.addUsedClass(name);
+		}
 	}
 }
