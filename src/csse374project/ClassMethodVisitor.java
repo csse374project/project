@@ -26,7 +26,7 @@ public class ClassMethodVisitor extends ClassVisitor {
 	public MethodVisitor visitMethod(int access, String name, String desc, String signature, String[] exceptions) {
 
 		MethodVisitor toDecorate = super.visitMethod(access, name, desc, signature, exceptions);
-		MethodVisitor codeVisitor = new MethodCodeVisitor(Opcodes.ASM5, toDecorate, currentClass);
+		
 
 		Type[] argTypes = Type.getArgumentTypes(desc);
 		ArrayList<String> parameterClassNames = new ArrayList<String>();
@@ -53,30 +53,8 @@ public class ClassMethodVisitor extends ClassVisitor {
 
 		currentClass.addMethod(method);
 
-		currentClass.addUsedClass(Type.getReturnType(desc).getClassName().replace('.', '/'));
-		handleSignature(signature);
-
-		return codeVisitor;
+		return toDecorate;
 	}
 
-	public void handleSignature(String signature) {
-		if (signature == null)
-			return;
-		SignatureVisitor sigVis = new SigVisitor(Opcodes.ASM5);
-		SignatureReader sigReader = new SignatureReader(signature);
-		sigReader.accept(sigVis);
-
-	}
-
-	class SigVisitor extends SignatureVisitor {
-
-		public SigVisitor(int opcode) {
-			super(opcode);
-		}
-
-		@Override
-		public void visitClassType(String name) {
-			currentClass.addUsedClass(name);
-		}
-	}
+	
 }

@@ -1,13 +1,10 @@
 package csse374project;
 
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
 
 import org.objectweb.asm.ClassReader;
 import org.objectweb.asm.ClassVisitor;
+import org.objectweb.asm.MethodVisitor;
 import org.objectweb.asm.Opcodes;
 
 import classRepresentation.Classes;
@@ -17,9 +14,6 @@ import interfaces.IClass;
 public class DesignParser {
 
 	private static String[] classesToAccept;
-
-	// private static Map<Integer, List<String>> var = new HashMap<Integer,
-	// List<String>>();
 
 	public static void main(String[] args) throws IOException {
 		Classes classes = new Classes();
@@ -36,6 +30,8 @@ public class DesignParser {
 			ClassVisitor fieldVisitor = new ClassFieldVisitor(Opcodes.ASM5, declVisitor, currentClass);
 
 			ClassVisitor methodVisitor = new ClassMethodVisitor(Opcodes.ASM5, fieldVisitor, currentClass);
+			
+			ClassVisitor methodCodeVisitor = new ClassMethodCodeVisitor(Opcodes.ASM5, methodVisitor, currentClass);
 
 			reader.accept(methodVisitor, ClassReader.EXPAND_FRAMES);
 			classes.addClass(currentClass);
