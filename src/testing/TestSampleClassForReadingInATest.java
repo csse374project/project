@@ -16,7 +16,7 @@ import csse374project.ClassDeclarationVisitor;
 import csse374project.ClassFieldVisitor;
 import csse374project.ClassMethodVisitor;
 import interfaces.IClass;
-import classRepresentation.Class;
+import classRepresentation.UMLClass;
 import classRepresentation.Classes;
 
 public class TestSampleClassForReadingInATest {
@@ -38,7 +38,7 @@ public class TestSampleClassForReadingInATest {
 	public void testHas_mutateSomething() throws IOException {
 		Classes classes = new Classes();
 		
-		IClass currentClass = new Class();
+		IClass currentClass = new UMLClass();
 		ClassReader reader = new ClassReader(className);
 		ClassVisitor declVisitor = new ClassDeclarationVisitor(Opcodes.ASM5, currentClass);
 		ClassVisitor fieldVisitor = new ClassFieldVisitor(Opcodes.ASM5, declVisitor, currentClass);
@@ -55,7 +55,7 @@ public class TestSampleClassForReadingInATest {
 	public void testHas_finalStringMaker() throws IOException {
 		Classes classes = new Classes();
 		
-		IClass currentClass = new Class();
+		IClass currentClass = new UMLClass();
 		ClassReader reader = new ClassReader(className);
 		ClassVisitor declVisitor = new ClassDeclarationVisitor(Opcodes.ASM5, currentClass);
 		ClassVisitor fieldVisitor = new ClassFieldVisitor(Opcodes.ASM5, declVisitor, currentClass);
@@ -72,7 +72,7 @@ public class TestSampleClassForReadingInATest {
 	public void testHas_identity() throws IOException {
 		Classes classes = new Classes();
 		
-		IClass currentClass = new Class();
+		IClass currentClass = new UMLClass();
 		ClassReader reader = new ClassReader(className);
 		ClassVisitor declVisitor = new ClassDeclarationVisitor(Opcodes.ASM5, currentClass);
 		ClassVisitor fieldVisitor = new ClassFieldVisitor(Opcodes.ASM5, declVisitor, currentClass);
@@ -88,7 +88,7 @@ public class TestSampleClassForReadingInATest {
 	public void testHas_useless() throws IOException  {
 		Classes classes = new Classes();
 		
-		IClass currentClass = new Class();
+		IClass currentClass = new UMLClass();
 		ClassReader reader = new ClassReader(className);
 		ClassVisitor declVisitor = new ClassDeclarationVisitor(Opcodes.ASM5, currentClass);
 		ClassVisitor fieldVisitor = new ClassFieldVisitor(Opcodes.ASM5, declVisitor, currentClass);
@@ -105,7 +105,7 @@ public class TestSampleClassForReadingInATest {
 	public void testHas_aBool() throws IOException  {
 		Classes classes = new Classes();
 		
-		IClass currentClass = new Class();
+		IClass currentClass = new UMLClass();
 		ClassReader reader = new ClassReader(className);
 		ClassVisitor declVisitor = new ClassDeclarationVisitor(Opcodes.ASM5, currentClass);
 		ClassVisitor fieldVisitor = new ClassFieldVisitor(Opcodes.ASM5, declVisitor, currentClass);
@@ -121,7 +121,7 @@ public class TestSampleClassForReadingInATest {
 	public void testHas_aChar() throws IOException  {
 		Classes classes = new Classes();
 		
-		IClass currentClass = new Class();
+		IClass currentClass = new UMLClass();
 		ClassReader reader = new ClassReader(className);
 		ClassVisitor declVisitor = new ClassDeclarationVisitor(Opcodes.ASM5, currentClass);
 		ClassVisitor fieldVisitor = new ClassFieldVisitor(Opcodes.ASM5, declVisitor, currentClass);
@@ -136,7 +136,7 @@ public class TestSampleClassForReadingInATest {
 	public void testHasSOME_WORD()  throws IOException {
 		Classes classes = new Classes();
 		
-		IClass currentClass = new Class();
+		IClass currentClass = new UMLClass();
 		ClassReader reader = new ClassReader(className);
 		ClassVisitor declVisitor = new ClassDeclarationVisitor(Opcodes.ASM5, currentClass);
 		ClassVisitor fieldVisitor = new ClassFieldVisitor(Opcodes.ASM5, declVisitor, currentClass);
@@ -151,7 +151,7 @@ public class TestSampleClassForReadingInATest {
 	public void testHasSOME_CONSTANT()  throws IOException  {
 		Classes classes = new Classes();
 		
-		IClass currentClass = new Class();
+		IClass currentClass = new UMLClass();
 		ClassReader reader = new ClassReader(className);
 		ClassVisitor declVisitor = new ClassDeclarationVisitor(Opcodes.ASM5, currentClass);
 		ClassVisitor fieldVisitor = new ClassFieldVisitor(Opcodes.ASM5, declVisitor, currentClass);

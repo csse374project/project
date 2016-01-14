@@ -5,7 +5,7 @@ import java.util.List;
 
 import interfaces.*;
 
-public class Method implements IMethod {
+public class UMLMethod implements IMethod {
 
 	private List<String> parameters;
 	private String name;
@@ -13,7 +13,7 @@ public class Method implements IMethod {
 	private List<String> nonAccessModifiers;
 	private String returnType;
 
-	public Method() {
+	public UMLMethod() {
 		this.parameters = new ArrayList<String>();
 		this.name = "";
 		this.visibility = ' ';
@@ -103,9 +103,9 @@ public class Method implements IMethod {
 
 	@Override
 	public boolean equals(Object o) {
-		if (!(o instanceof Method))
+		if (!(o instanceof UMLMethod))
 			return false;
-		Method m = (Method) o;
+		UMLMethod m = (UMLMethod) o;
 		// Compare the fields
 		if (this.parameters.equals(m.getParameters()) && this.name.equals(m.getName())
 				&& this.returnType.equals(m.getReturnType()) && this.visibility == m.getVisibility()

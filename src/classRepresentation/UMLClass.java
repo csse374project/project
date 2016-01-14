@@ -6,7 +6,7 @@ import java.util.List;
 import csse374project.UMLParser;
 import interfaces.*;
 
-public class Class implements IClass {
+public class UMLClass implements IClass {
 
 	private String name;
 	private String superClass;
@@ -15,7 +15,7 @@ public class Class implements IClass {
 	private List<IMethod> methods;
 	private boolean isInterface;
 
-	public Class() {
+	public UMLClass() {
 		this.name = "";
 		this.superClass = "";
 		this.interfaces = new ArrayList<String>();

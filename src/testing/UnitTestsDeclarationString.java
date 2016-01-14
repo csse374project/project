@@ -10,7 +10,7 @@ import org.junit.Before;
 import org.junit.After;
 import org.objectweb.asm.Opcodes;
 
-import classRepresentation.Class;
+import classRepresentation.UMLClass;
 
 import org.objectweb.asm.ClassReader;
 import org.objectweb.asm.ClassVisitor;
@@ -31,7 +31,7 @@ public class UnitTestsDeclarationString {
 	
 	@Before
 	public void setup() throws IOException, NoSuchFieldException, SecurityException, IllegalArgumentException, IllegalAccessException {
-		currentClass = new Class();
+		currentClass = new UMLClass();
 		java.lang.reflect.Field f = UMLParser.class.getDeclaredField("classesToAccept");
 		f.setAccessible(true);
 		f.set(null, new String[]{"java/lang/String"});

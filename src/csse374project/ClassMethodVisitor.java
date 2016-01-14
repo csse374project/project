@@ -5,7 +5,7 @@ import org.objectweb.asm.MethodVisitor;
 import org.objectweb.asm.Opcodes;
 import org.objectweb.asm.Type;
 
-import classRepresentation.Method;
+import classRepresentation.UMLMethod;
 import interfaces.IClass;
 import interfaces.IMethod;
 
@@ -47,7 +47,7 @@ public class ClassMethodVisitor extends ClassVisitor {
 			vis = '#';
 		}
 
-		IMethod method = new Method();
+		IMethod method = new UMLMethod();
 		method.setName(name);
 		method.setParameters(parameterClassNames);
 		method.setReturnType(Type.getReturnType(desc).getClassName());

@@ -13,7 +13,7 @@ import org.objectweb.asm.ClassReader;
 import org.objectweb.asm.ClassVisitor;
 import org.objectweb.asm.Opcodes;
 
-import classRepresentation.Class;
+import classRepresentation.UMLClass;
 import classRepresentation.Classes;
 import csse374project.ClassDeclarationVisitor;
 import csse374project.ClassFieldVisitor;
@@ -48,7 +48,7 @@ public class UnitTestsToGraphViz {
 		f.setAccessible(true);
 		f.set(null, new String[]{"testingData/SampleClassForReadingInATest", "testingData/SampleInterface01", "testingData/SampleInterface02", "testingData/SampleSuperClass", "testingData/SampleClassForInitializing", "testingData/SampleClassForInitializingTwo", "testingData/SampleClassForInitializingThree", "testingData/SampleClassForInitializingFour"});
 		for (String cls : classNames) {
-			Class currentClass = new Class();
+			UMLClass currentClass = new UMLClass();
 			ClassReader reader = new ClassReader(cls);
 			ClassVisitor declVisitor = new ClassDeclarationVisitor(Opcodes.ASM5, currentClass);
 			ClassVisitor fieldVisitor = new ClassFieldVisitor(Opcodes.ASM5, declVisitor, currentClass);

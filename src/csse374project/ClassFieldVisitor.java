@@ -6,7 +6,7 @@ import org.objectweb.asm.FieldVisitor;
 import org.objectweb.asm.Type;
 import org.objectweb.asm.signature.SignatureVisitor;
 
-import classRepresentation.Field;
+import classRepresentation.UMLField;
 import interfaces.IClass;
 import interfaces.IField;
 import org.objectweb.asm.signature.SignatureReader;
@@ -34,7 +34,7 @@ public class ClassFieldVisitor extends ClassVisitor {
 			vis = '#';
 		}
 
-		IField field = new Field();
+		IField field = new UMLField();
 		field.setName(name);
 		field.setType(type);
 		field.setVisibility(vis);

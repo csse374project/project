@@ -6,14 +6,14 @@ import org.objectweb.asm.ClassReader;
 import org.objectweb.asm.ClassVisitor;
 import org.objectweb.asm.Opcodes;
 
-import classRepresentation.Class;
+import classRepresentation.UMLClass;
 import interfaces.IClass;
 
 public class SequenceParser {
 	
 	public static void main(String[] args) throws IOException {
 		for (String className : args) {
-			IClass currentClass = new Class();
+			IClass currentClass = new UMLClass();
 
 			ClassReader reader = new ClassReader(className);
 

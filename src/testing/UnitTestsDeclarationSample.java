@@ -10,9 +10,9 @@ import org.junit.Before;
 import org.junit.After;
 import org.objectweb.asm.Opcodes;
 
-import classRepresentation.Class;
-import classRepresentation.Field;
-import classRepresentation.Method;
+import classRepresentation.UMLClass;
+import classRepresentation.UMLField;
+import classRepresentation.UMLMethod;
 
 import org.objectweb.asm.ClassReader;
 import org.objectweb.asm.ClassVisitor;
@@ -35,7 +35,7 @@ public class UnitTestsDeclarationSample {
 	
 	@Before
 	public void setup() throws IOException, NoSuchFieldException, SecurityException, IllegalArgumentException, IllegalAccessException {
-		currentClass = new Class();
+		currentClass = new UMLClass();
 		java.lang.reflect.Field f = UMLParser.class.getDeclaredField("classesToAccept");
 		f.setAccessible(true);
 		f.set(null, new String[]{"testingData/SampleClassForReadingInATest"});
@@ -56,31 +56,31 @@ public class UnitTestsDeclarationSample {
 		List<IField> fields = currentClass.getFields();
 		List<IField> expected = new ArrayList<IField>();
 		
-		Field field1 = new Field();
+		UMLField field1 = new UMLField();
 		field1.setType("int");
 		field1.setName("SOME_CONSTANT");
 		field1.setNonAccessModifiers(null); //TODO: implement method and change this test
 		field1.setVisibility('-');
 		
-		Field field2 = new Field();
+		UMLField field2 = new UMLField();
 		field2.setType("java.lang.String");
 		field2.setName("SOME_WORD");
 		field2.setNonAccessModifiers(null); //TODO: implement method and change this test
 		field2.setVisibility('+');
 		
-		Field field3 = new Field();
+		UMLField field3 = new UMLField();
 		field3.setType("char");
 		field3.setName("aChar");
 		field3.setNonAccessModifiers(null); //TODO: implement method and change this test
 		field3.setVisibility('-');
 		
-		Field field4 = new Field();
+		UMLField field4 = new UMLField();
 		field4.setType("boolean");
 		field4.setName("aBool");
 		field4.setNonAccessModifiers(null); //TODO: implement method and change this test
 		field4.setVisibility('+');
 		
-		Field field5 = new Field();
+		UMLField field5 = new UMLField();
 		field5.setType("testingData.SampleClassForInitializingTwo");
 		field5.setName("sample");
 		field5.setNonAccessModifiers(null); //TODO: implement method and change this test
@@ -104,21 +104,21 @@ public class UnitTestsDeclarationSample {
 		List<IMethod> methods = currentClass.getMethods();
 		List<IMethod> expected = new ArrayList<IMethod>();
 		
-		Method initMethod = new Method();
+		UMLMethod initMethod = new UMLMethod();
 		initMethod.setName("<init>");
 		initMethod.setNonAccessModifiers(new ArrayList<String>());
 		initMethod.setParameters(new ArrayList<String>());
 		initMethod.setReturnType("void");
 		initMethod.setVisibility('+');
 		
-		Method method1 = new Method();
+		UMLMethod method1 = new UMLMethod();
 		method1.setName("useless");
 		method1.setNonAccessModifiers(new ArrayList<String>()); //TODO: implement method and change this test
 		method1.setParameters(new ArrayList<String>());
 		method1.setReturnType("void");
 		method1.setVisibility('-');
 		
-		Method method2 = new Method();
+		UMLMethod method2 = new UMLMethod();
 		method2.setName("identity");
 		method2.setNonAccessModifiers(new ArrayList<String>()); //TODO: implement method and change this test
 		ArrayList<String> params2 = new ArrayList<String>();
@@ -127,7 +127,7 @@ public class UnitTestsDeclarationSample {
 		method2.setReturnType("int");
 		method2.setVisibility('+');
 		
-		Method method3 = new Method();
+		UMLMethod method3 = new UMLMethod();
 		method3.setName("finalStringMaker");
 		method3.setNonAccessModifiers(new ArrayList<String>()); //TODO: implement method and change this test
 		ArrayList<String> params3 = new ArrayList<String>();
@@ -136,7 +136,7 @@ public class UnitTestsDeclarationSample {
 		method3.setReturnType("java.lang.String");
 		method3.setVisibility('-');
 		
-		Method method4 = new Method();
+		UMLMethod method4 = new UMLMethod();
 		method4.setName("mutateSomething");
 		method4.setNonAccessModifiers(new ArrayList<String>()); //TODO: implement method and change this test
 		ArrayList<String> params4 = new ArrayList<String>();
@@ -145,7 +145,7 @@ public class UnitTestsDeclarationSample {
 		method4.setReturnType("void");
 		method4.setVisibility('+');
 		
-		Method method5 = new Method();
+		UMLMethod method5 = new UMLMethod();
 		method5.setName("initializeClass");
 		method5.setNonAccessModifiers(new ArrayList<String>()); //TODO: implement method and change this test
 		ArrayList<String> params5 = new ArrayList<String>();
@@ -153,7 +153,7 @@ public class UnitTestsDeclarationSample {
 		method5.setReturnType("void");
 		method5.setVisibility('+');
 		
-		Method method6 = new Method();
+		UMLMethod method6 = new UMLMethod();
 		method6.setName("initializeList");
 		method6.setNonAccessModifiers(new ArrayList<String>()); //TODO: implement method and change this test
 		ArrayList<String> params6 = new ArrayList<String>();
@@ -161,7 +161,7 @@ public class UnitTestsDeclarationSample {
 		method6.setReturnType("void");
 		method6.setVisibility('+');
 		
-		Method method7 = new Method();
+		UMLMethod method7 = new UMLMethod();
 		method7.setName("initializeArray");
 		method7.setNonAccessModifiers(new ArrayList<String>()); //TODO: implement method and change this test
 		ArrayList<String> params7 = new ArrayList<String>();
@@ -169,7 +169,7 @@ public class UnitTestsDeclarationSample {
 		method7.setReturnType("void");
 		method7.setVisibility('+');
 		
-		Method method8 = new Method();
+		UMLMethod method8 = new UMLMethod();
 		method8.setName("whatever");
 		method8.setNonAccessModifiers(new ArrayList<String>()); //TODO: implement method and change this test
 		ArrayList<String> params8 = new ArrayList<String>();
@@ -178,7 +178,7 @@ public class UnitTestsDeclarationSample {
 		method8.setReturnType("testingData.SampleClassForInitializingThree");
 		method8.setVisibility('+');
 		
-		Method method9 = new Method();
+		UMLMethod method9 = new UMLMethod();
 		method9.setName("something");
 		method9.setNonAccessModifiers(new ArrayList<String>()); //TODO: implement method and change this test
 		ArrayList<String> params9 = new ArrayList<String>();

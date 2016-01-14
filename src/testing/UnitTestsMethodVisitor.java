@@ -12,8 +12,8 @@ import org.objectweb.asm.ClassReader;
 import org.objectweb.asm.ClassVisitor;
 import org.objectweb.asm.Opcodes;
 
-import classRepresentation.Class;
-import classRepresentation.Method;
+import classRepresentation.UMLClass;
+import classRepresentation.UMLMethod;
 import csse374project.ClassDeclarationVisitor;
 import csse374project.ClassFieldVisitor;
 import csse374project.ClassMethodVisitor;
@@ -30,7 +30,7 @@ public class UnitTestsMethodVisitor {
 	@Before
 	public void setup() throws IOException, NoSuchFieldException, SecurityException, IllegalArgumentException, IllegalAccessException {
 		// TODO fix this.
-		currentClass = new Class();
+		currentClass = new UMLClass();
 		java.lang.reflect.Field f = UMLParser.class.getDeclaredField("classesToAccept");
 		f.setAccessible(true);
 		f.set(null, new String[]{"java/lang/String"});

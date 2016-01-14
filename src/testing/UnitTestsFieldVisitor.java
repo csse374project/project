@@ -11,8 +11,8 @@ import org.junit.Before;
 import org.junit.After;
 import org.objectweb.asm.Opcodes;
 
-import classRepresentation.Class;
-import classRepresentation.Field;
+import classRepresentation.UMLClass;
+import classRepresentation.UMLField;
 
 import org.objectweb.asm.ClassReader;
 import org.objectweb.asm.ClassVisitor;
@@ -35,7 +35,7 @@ public class UnitTestsFieldVisitor {
 	@Before
 	public void setup() throws IOException, NoSuchFieldException, SecurityException, IllegalArgumentException, IllegalAccessException {
 		// TODO fix this.???
-		currentClass = new Class();
+		currentClass = new UMLClass();
 		java.lang.reflect.Field f = UMLParser.class.getDeclaredField("classesToAccept");
 		f.setAccessible(true);
 		f.set(null, new String[]{"java/lang/String"});

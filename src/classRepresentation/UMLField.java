@@ -4,7 +4,7 @@ import java.util.List;
 
 import interfaces.*;
 
-public class Field implements IField {
+public class UMLField implements IField {
 
 	private String type;
 	private String name;
@@ -52,9 +52,9 @@ public class Field implements IField {
 	}
 
 	public boolean equals(Object o) {
-		if (!(o instanceof Field))
+		if (!(o instanceof UMLField))
 			return false;
-		Field f = (Field) o;
+		UMLField f = (UMLField) o;
 		// Compare the important fields
 		if (this.getName().equals(f.getName()) && this.getType().equals(f.getType())
 				&& this.getVisibility() == f.getVisibility()) { // TODO: add in

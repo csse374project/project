@@ -7,7 +7,7 @@ import org.objectweb.asm.ClassVisitor;
 import org.objectweb.asm.Opcodes;
 
 import classRepresentation.Classes;
-import classRepresentation.Class;
+import classRepresentation.UMLClass;
 import interfaces.IClass;
 
 public class UMLParser {
@@ -20,7 +20,7 @@ public class UMLParser {
 		setClassesToAccept(args);
 
 		for (String className : args) {
-			IClass currentClass = new Class();
+			IClass currentClass = new UMLClass();
 
 			ClassReader reader = new ClassReader(className);
 
