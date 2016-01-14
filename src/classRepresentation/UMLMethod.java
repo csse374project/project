@@ -114,4 +114,24 @@ public class UMLMethod implements IMethod {
 		}
 		return false;
 	}
+
+	@Override
+	public String getInvoker() {
+		return null;
+	}
+
+	@Override
+	public String getOwner() {
+		return null;
+	}
+
+	@Override
+	public void setInvoker(String ownerName) {
+		// do nothing
+	}
+
+	@Override
+	public void setOwner(String recieverName) {
+		// do nothing
+	}
 }

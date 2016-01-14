@@ -8,7 +8,7 @@ import org.objectweb.asm.Opcodes;
 
 import classRepresentation.SequenceClass;
 import interfaces.IClass;
-import umlDiagram.MetodDeclarationVisitor;
+import umlDiagram.MethodDeclarationVisitor;
 import umlDiagram.ClassMethodVisitor;
 
 public class SequenceParser {
@@ -21,7 +21,7 @@ public class SequenceParser {
 
 			ClassVisitor methodVisitor = new ClassMethodVisitor(Opcodes.ASM5, currentClass);
 			
-			ClassVisitor methodCodeVisitor = new MetodDeclarationVisitor(Opcodes.ASM5, methodVisitor, currentClass);
+			ClassVisitor methodCodeVisitor = new MethodDeclarationVisitor(Opcodes.ASM5, methodVisitor, currentClass);
 
 			reader.accept(methodCodeVisitor, ClassReader.EXPAND_FRAMES);
 		}

@@ -3,11 +3,13 @@ package classRepresentation;
 import java.util.List;
 
 import interfaces.IMethod;
+	
 
 public class SequenceMethod implements IMethod {
 
-	private String name;
+	private String methodName, invokerName, ownerName;
 	private List<String> parameters;
+	private boolean isInit;
 	
 	@Override
 	public String getReturnType() {
@@ -31,12 +33,12 @@ public class SequenceMethod implements IMethod {
 
 	@Override
 	public String getName() {
-		return name;
+		return methodName;
 	}
 
 	@Override
 	public void setName(String name) {
-		this.name = name;
+		this.methodName = name;
 	}
 
 	@Override
@@ -57,6 +59,26 @@ public class SequenceMethod implements IMethod {
 	@Override
 	public void setNonAccessModifiers(List<String> mods) {
 		// do nothing
+	}
+
+	@Override
+	public String getInvoker() {
+		return invokerName;
+	}
+
+	@Override
+	public String getOwner() {
+		return ownerName;
+	}
+
+	@Override
+	public void setInvoker(String ownerName) {
+		this.invokerName = ownerName;
+	}
+
+	@Override
+	public void setOwner(String recieverName) {
+		this.ownerName = recieverName;
 	}
 
 }

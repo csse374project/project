@@ -18,4 +18,10 @@ public interface IMethod {
 	
 	List<String> getNonAccessModifiers();
 	void setNonAccessModifiers(List<String> mods);	
+	
+	String getInvoker();
+	String getOwner();
+	void setInvoker(String ownerName);
+	void setOwner(String recieverName);
+	
 }

@@ -16,7 +16,7 @@ import org.objectweb.asm.Opcodes;
 import classRepresentation.UMLClass;
 import classRepresentation.Classes;
 import interfaces.IClass;
-import umlDiagram.MetodDeclarationVisitor;
+import umlDiagram.MethodDeclarationVisitor;
 import umlDiagram.ClassDeclarationVisitor;
 import umlDiagram.ClassFieldVisitor;
 import umlDiagram.ClassMethodVisitor;
@@ -54,7 +54,7 @@ public class UnitTestsMethodCodeVisitor {
 			ClassVisitor declVisitor = new ClassDeclarationVisitor(Opcodes.ASM5, currentClass);
 			ClassVisitor fieldVisitor = new ClassFieldVisitor(Opcodes.ASM5, declVisitor, currentClass);
 			ClassVisitor methodVisitor = new ClassMethodVisitor(Opcodes.ASM5, fieldVisitor, currentClass);
-			ClassVisitor methodCodeVisitor = new MetodDeclarationVisitor(Opcodes.ASM5, methodVisitor, currentClass);
+			ClassVisitor methodCodeVisitor = new MethodDeclarationVisitor(Opcodes.ASM5, methodVisitor, currentClass);
 			reader.accept(methodCodeVisitor, ClassReader.EXPAND_FRAMES);
 			classes.addClass(currentClass);
 		}
