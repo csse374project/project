@@ -33,7 +33,7 @@ public class DesignParser {
 			
 			ClassVisitor methodCodeVisitor = new ClassMethodCodeVisitor(Opcodes.ASM5, methodVisitor, currentClass);
 
-			reader.accept(methodVisitor, ClassReader.EXPAND_FRAMES);
+			reader.accept(methodCodeVisitor, ClassReader.EXPAND_FRAMES);
 			classes.addClass(currentClass);
 		}
 

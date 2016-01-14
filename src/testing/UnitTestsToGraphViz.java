@@ -17,6 +17,7 @@ import classRepresentation.Class;
 import classRepresentation.Classes;
 import csse374project.ClassDeclarationVisitor;
 import csse374project.ClassFieldVisitor;
+import csse374project.ClassMethodCodeVisitor;
 import csse374project.ClassMethodVisitor;
 import csse374project.DesignParser;
 
@@ -52,7 +53,8 @@ public class UnitTestsToGraphViz {
 			ClassVisitor declVisitor = new ClassDeclarationVisitor(Opcodes.ASM5, currentClass);
 			ClassVisitor fieldVisitor = new ClassFieldVisitor(Opcodes.ASM5, declVisitor, currentClass);
 			ClassVisitor methodVisitor = new ClassMethodVisitor(Opcodes.ASM5, fieldVisitor, currentClass);
-			reader.accept(methodVisitor, ClassReader.EXPAND_FRAMES);
+			ClassVisitor methodCodeVisitor = new ClassMethodCodeVisitor(Opcodes.ASM5, methodVisitor, currentClass);
+			reader.accept(methodCodeVisitor, ClassReader.EXPAND_FRAMES);
 			classes.addClass(currentClass);
 		}
 		graphViz = classes.toGraphViz();
@@ -80,16 +82,16 @@ public class UnitTestsToGraphViz {
 		int startBreak = graphViz.indexOf("arrowhead = \"normal\" style = \"solid\"");
 		int stopBreak = graphViz.indexOf("arrowhead = \"normal\" style = \"dashed\"");
 		String testThis = graphViz.substring(startBreak, stopBreak);
-		assertTrue(testThis.contains("SampleClassForReadingInATest -> SampleClassForInitializing"));
-		assertTrue(testThis.contains("SampleClassForReadingInATest -> SampleClassForInitializingTwo"));
+		assertTrue(testThis.contains("SampleClassForReadingInATest -> SampleClassForInitializingTwo\n"));
 	}
 	
 	@Test
 	public void hasRightUseArrows() {
 		int startBreak = graphViz.indexOf("arrowhead = \"normal\" style = \"dashed\"");
 		String testThis = graphViz.substring(startBreak);
-		assertTrue(testThis.contains("SampleClassForReadingInATest -> SampleClassForInitializingThree"));
-		assertTrue(testThis.contains("SampleClassForReadingInATest -> SampleClassForInitializingFour"));
+		assertTrue(testThis.contains("SampleClassForReadingInATest -> SampleClassForInitializing\n"));
+		assertTrue(testThis.contains("SampleClassForReadingInATest -> SampleClassForInitializingThree\n"));
+		assertTrue(testThis.contains("SampleClassForReadingInATest -> SampleClassForInitializingFour\n"));
 	}
 	
 }

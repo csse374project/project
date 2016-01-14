@@ -40,6 +40,7 @@ public class ClassFieldVisitor extends ClassVisitor {
 		field.setVisibility(vis);
 
 		currentClass.addField(field);
+		currentClass.addAssociatedClass(type.replace('.', '/'));
 		handleSignature(signature);
 		return toDecorate;
 	}

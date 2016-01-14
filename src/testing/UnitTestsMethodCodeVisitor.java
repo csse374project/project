@@ -17,6 +17,7 @@ import classRepresentation.Class;
 import classRepresentation.Classes;
 import csse374project.ClassDeclarationVisitor;
 import csse374project.ClassFieldVisitor;
+import csse374project.ClassMethodCodeVisitor;
 import csse374project.ClassMethodVisitor;
 import csse374project.DesignParser;
 import interfaces.IClass;
@@ -53,7 +54,8 @@ public class UnitTestsMethodCodeVisitor {
 			ClassVisitor declVisitor = new ClassDeclarationVisitor(Opcodes.ASM5, currentClass);
 			ClassVisitor fieldVisitor = new ClassFieldVisitor(Opcodes.ASM5, declVisitor, currentClass);
 			ClassVisitor methodVisitor = new ClassMethodVisitor(Opcodes.ASM5, fieldVisitor, currentClass);
-			reader.accept(methodVisitor, ClassReader.EXPAND_FRAMES);
+			ClassVisitor methodCodeVisitor = new ClassMethodCodeVisitor(Opcodes.ASM5, methodVisitor, currentClass);
+			reader.accept(methodCodeVisitor, ClassReader.EXPAND_FRAMES);
 			classes.addClass(currentClass);
 		}
 	}
@@ -61,15 +63,15 @@ public class UnitTestsMethodCodeVisitor {
 	@Test
 	public void hasCorrectAssociatedClasses() {
 		IClass test = classes.getClasses().get("testingData/SampleClassForReadingInATest");
-		assertEquals(2, test.getAssociatedClasses().size());
-		assertTrue(test.getAssociatedClasses().contains("testingData/SampleClassForInitializing"));
+		assertEquals(1, test.getAssociatedClasses().size());
 		assertTrue(test.getAssociatedClasses().contains("testingData/SampleClassForInitializingTwo"));
 	}
 	
 	@Test
 	public void hasCorrectUsedClasses() {
 		IClass test = classes.getClasses().get("testingData/SampleClassForReadingInATest");
-		assertEquals(2, test.getUsedClasses().size());
+		assertEquals(3, test.getUsedClasses().size());
+		assertTrue(test.getUsedClasses().contains("testingData/SampleClassForInitializing"));
 		assertTrue(test.getUsedClasses().contains("testingData/SampleClassForInitializingThree"));
 		assertTrue(test.getUsedClasses().contains("testingData/SampleClassForInitializingFour"));
 	}
