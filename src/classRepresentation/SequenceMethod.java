@@ -1,4 +1,4 @@
-package sequenceDiagram;
+package classRepresentation;
 
 import java.util.List;
 

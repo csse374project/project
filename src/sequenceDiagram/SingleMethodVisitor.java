@@ -7,19 +7,21 @@ import org.objectweb.asm.MethodVisitor;
 import org.objectweb.asm.Opcodes;
 import org.objectweb.asm.Type;
 
+import classRepresentation.SequenceClass;
+import classRepresentation.SequenceMethod;
 import classRepresentation.UMLMethod;
 import interfaces.IClass;
 import interfaces.IMethod;
 
 public class SingleMethodVisitor extends ClassVisitor {
 
-	private String methodName;
+	private String fullMethodName;
 	private SequenceClass currentClass;
 	
 	public SingleMethodVisitor(int opCode, SequenceClass currentClass, String methodName) {
 		super(opCode);
 		this.currentClass = currentClass;
-		this.methodName = methodName;
+		this.fullMethodName = methodName;
 	}
 
 	@Override
@@ -42,9 +44,15 @@ public class SingleMethodVisitor extends ClassVisitor {
 //		} else if ((access & Opcodes.ACC_PROTECTED) != 0) {
 //			vis = '#';
 //		}
+		if(name.equals("<init>")) return toDecorate;
+		int lastDot = fullMethodName.lastIndexOf('.');
+		int lastOpenParen = fullMethodName.lastIndexOf('(');
+		String methodName = fullMethodName.substring(lastDot+1, lastOpenParen);
+
 		if (name.equals(methodName)) {
 			// TODO I'm not sure how this works or what it does, we should figure that out.
 			MethodVisitor codeVisitor = new SequenceMethodCodeVisitor(Opcodes.ASM5, toDecorate, currentClass);
+			System.out.println("visit");
 		
 			SequenceMethod method = new SequenceMethod();
 			method.setName(name);

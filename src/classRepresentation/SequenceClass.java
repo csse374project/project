@@ -1,4 +1,4 @@
-package sequenceDiagram;
+package classRepresentation;
 
 import java.util.ArrayList;
 import java.util.List;
