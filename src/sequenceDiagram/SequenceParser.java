@@ -20,6 +20,8 @@ public class SequenceParser {
 		String methodName = args[0];
 		int lastIndex = methodName.lastIndexOf(".");
 		String className = methodName.substring(0, lastIndex);
+		System.out.println("DEBUG - method name: " + methodName);
+		System.out.println("DEBUG - class name: " + className);
 		
 		IClass currentClass = new SequenceClass();
 		ClassReader reader = new ClassReader(className);
