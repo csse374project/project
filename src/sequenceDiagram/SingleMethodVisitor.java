@@ -57,6 +57,16 @@ public class SingleMethodVisitor extends ClassVisitor {
 			SequenceMethod method = new SequenceMethod();
 			method.setName(name);
 			method.setInvoker(currentClass.getName());
+			method.setReturnType(Type.getReturnType(desc).getClassName());
+			
+			Type[] argTypes = Type.getArgumentTypes(desc);
+			ArrayList<String> parameterClassNames = new ArrayList<String>();
+			for (int i = 0; i < argTypes.length; i++) {
+				String parameterName = argTypes[i].getClassName();
+				parameterClassNames.add(parameterName);
+			}
+			method.setParameters(parameterClassNames);
+			
 			System.out.println("singleMethodVisitor - signature: " + signature);
 			System.out.println("WARNING: still need to set the class this method is called from!");
 			
