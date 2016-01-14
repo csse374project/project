@@ -19,6 +19,10 @@ public class ClassMethodVisitor extends ClassVisitor {
 		super(arg0, arg1);
 		this.currentClass = currentClass;
 	}
+	public ClassMethodVisitor(int opCode, IClass currentClass) {
+		super(opCode);
+		this.currentClass = currentClass;
+	}
 
 	@Override
 	public MethodVisitor visitMethod(int access, String name, String desc, String signature, String[] exceptions) {
