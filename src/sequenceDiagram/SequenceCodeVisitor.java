@@ -1,4 +1,4 @@
-package csse374project;
+package sequenceDiagram;
 
 import interfaces.IClass;
 import jdk.internal.org.objectweb.asm.MethodVisitor;

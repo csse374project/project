@@ -1,4 +1,4 @@
-package csse374project;
+package sequenceDiagram;
 
 import java.io.IOException;
 
@@ -7,6 +7,8 @@ import org.objectweb.asm.ClassVisitor;
 import org.objectweb.asm.Opcodes;
 
 import classRepresentation.SequenceClass;
+import csse374project.ClassCodeVisitor;
+import csse374project.ClassMethodVisitor;
 import interfaces.IClass;
 
 public class SequenceParser {
