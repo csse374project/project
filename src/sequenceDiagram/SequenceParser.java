@@ -6,12 +6,15 @@ import org.objectweb.asm.ClassReader;
 import org.objectweb.asm.ClassVisitor;
 import org.objectweb.asm.Opcodes;
 
+import classRepresentation.MethodCalls;
 import classRepresentation.SequenceClass;
 import interfaces.IClass;
 import umlDiagram.MethodDeclarationVisitor;
 import umlDiagram.ClassMethodVisitor;
 
 public class SequenceParser {
+	
+	public static MethodCalls calls = new MethodCalls();
 	
 	public static void main(String[] args) throws IOException {
 		if(args.length != 1) {
@@ -23,6 +26,7 @@ public class SequenceParser {
 		String className = methodName.substring(0, lastIndex);
 		System.out.println("DEBUG - method name: " + methodName);
 		System.out.println("DEBUG - class name: " + className);
+		
 		
 		SequenceClass currentClass = new SequenceClass();
 		ClassReader reader = new ClassReader(className);

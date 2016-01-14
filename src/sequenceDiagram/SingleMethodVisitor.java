@@ -32,10 +32,11 @@ public class SingleMethodVisitor extends ClassVisitor {
 
 		if (name.equals(methodName)) {
 			// TODO I'm not sure how this works or what it does, we should figure that out.
-			MethodVisitor codeVisitor = new SequenceMethodCodeVisitor(Opcodes.ASM5, toDecorate, currentClass);
+			SequenceMethodCall method = new SequenceMethodCall();
+			SequenceParser.calls.addMethodCall(method);
+			MethodVisitor codeVisitor = new SequenceMethodCodeVisitor(Opcodes.ASM5, toDecorate, currentClass, method);
 			System.out.println("visit");
 		
-			SequenceMethodCall method = new SequenceMethodCall();
 			method.setName(name);
 			method.setInvoker(currentClass.getName());
 			method.setReturnType(Type.getReturnType(desc).getClassName());
@@ -55,6 +56,4 @@ public class SingleMethodVisitor extends ClassVisitor {
 		}
 		return toDecorate;
 	}
-	
-
 }

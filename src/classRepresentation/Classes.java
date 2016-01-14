@@ -27,14 +27,6 @@ public class Classes {
 		if (!classes.containsKey(newClass.getName()))
 			classes.put(newClass.getName(), newClass);
 	}
-	
-	public String toSDEdit(){
-		StringBuilder output = new StringBuilder();
-		Set<String> keys = classes.keySet();
-		
-		
-		return output.toString();
-	}
 
 	public String toGraphViz() {
 		StringBuilder string = new StringBuilder();
