@@ -8,8 +8,6 @@ import org.objectweb.asm.Type;
 import classRepresentation.Method;
 import interfaces.IClass;
 import interfaces.IMethod;
-import jdk.internal.org.objectweb.asm.signature.SignatureReader;
-import jdk.internal.org.objectweb.asm.signature.SignatureVisitor;
 
 import java.util.ArrayList;
 

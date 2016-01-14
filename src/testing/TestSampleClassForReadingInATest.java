@@ -2,7 +2,6 @@ package testing;
 
 import static org.junit.Assert.*;
 
-import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.PrintStream;
 
@@ -16,22 +15,18 @@ import org.objectweb.asm.Opcodes;
 import csse374project.ClassDeclarationVisitor;
 import csse374project.ClassFieldVisitor;
 import csse374project.ClassMethodVisitor;
-import csse374project.UMLParser;
 import interfaces.IClass;
 import classRepresentation.Class;
 import classRepresentation.Classes;
 
-public class TestErrThang {
+public class TestSampleClassForReadingInATest {
 
 	private static String className = "testing.SampleClassForReadingInATest";
 	private PrintStream stdout;
-	private ByteArrayOutputStream out;
 	
 	@Before
 	public void setup() {
 		stdout = System.out;
-		out = new ByteArrayOutputStream();
-		//System.setOut(new PrintStream(out));
 	}
 	
 	@After
