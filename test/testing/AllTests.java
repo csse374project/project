@@ -8,6 +8,8 @@ import org.junit.runners.Suite;
 	UnitTestsDeclarationSample.class,
 	UnitTestsDeclarationString.class,
 	UnitTestsFieldVisitor.class,
+	UnitTestsMethod.class,
+	UnitTestOneDeepMethodCalls.class,
 	UnitTestsMethodVisitor.class,
 	UnitTestsMethodCodeVisitor.class,
 	UnitTestsToGraphViz.class

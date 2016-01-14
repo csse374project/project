@@ -1,6 +1,7 @@
 package classRepresentation;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
 
@@ -16,6 +17,9 @@ public class MethodCalls {
 		this.calls.add(arg0);
 	}
 	
+	public Iterator<SequenceMethodCall> getIterator() {
+		return calls.iterator();
+	}
 	public String toSDEdit(){
 		StringBuilder output = new StringBuilder();
 			

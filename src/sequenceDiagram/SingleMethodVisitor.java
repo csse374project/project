@@ -13,31 +13,36 @@ import classRepresentation.SequenceMethodCall;
 public class SingleMethodVisitor extends ClassVisitor {
 
 	private String fullMethodName;
-	private SequenceClass currentClass;
+	private String className;
 	
-	public SingleMethodVisitor(int opCode, String methodName) {
+	public SingleMethodVisitor(int opCode, String methodName, String className) {
 		super(opCode);
+		this.className = className;
 		this.fullMethodName = methodName;
+	}
+	
+	private String getMethodName() {
+		return null;
 	}
 
 	@Override
 	public MethodVisitor visitMethod(int access, String name, String desc, String signature, String[] exceptions) {
 		MethodVisitor toDecorate = super.visitMethod(access, name, desc, signature, exceptions);
 
-		if(name.equals("<init>")) return toDecorate;
 		int lastDot = fullMethodName.lastIndexOf('.');
 		int lastOpenParen = fullMethodName.lastIndexOf('(');
 		String methodName = fullMethodName.substring(lastDot+1, lastOpenParen);
+		
 
 		if (name.equals(methodName)) {
 			// TODO I'm not sure how this works or what it does, we should figure that out.
 			SequenceMethodCall method = new SequenceMethodCall();
 			SequenceParser.calls.addMethodCall(method);
-			MethodVisitor codeVisitor = new SequenceMethodCodeVisitor(Opcodes.ASM5, toDecorate, currentClass, method);
+			MethodVisitor codeVisitor = new SequenceMethodCodeVisitor(Opcodes.ASM5, toDecorate, method);
 			System.out.println("visit");
 		
 			method.setName(name);
-			method.setInvoker(currentClass.getName());
+			method.setInvoker(className);
 			method.setReturnType(Type.getReturnType(desc).getClassName());
 			
 			Type[] argTypes = Type.getArgumentTypes(desc);
