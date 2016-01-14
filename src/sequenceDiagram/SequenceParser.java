@@ -6,7 +6,6 @@ import org.objectweb.asm.ClassReader;
 import org.objectweb.asm.ClassVisitor;
 import org.objectweb.asm.Opcodes;
 
-import classRepresentation.SequenceClass;
 import interfaces.IClass;
 import umlDiagram.MethodDeclarationVisitor;
 import umlDiagram.ClassMethodVisitor;
