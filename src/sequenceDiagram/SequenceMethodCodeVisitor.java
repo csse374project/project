@@ -2,18 +2,18 @@ package sequenceDiagram;
 
 import org.objectweb.asm.MethodVisitor;
 
-import classRepresentation.SequenceMethod;
+import classRepresentation.SequenceMethodCall;
 import interfaces.IClass;
 
 public class SequenceMethodCodeVisitor extends MethodVisitor {
 
 	private IClass currentClass;
-	private SequenceMethod currentMethod;
+	private SequenceMethodCall currentMethod;
 	
 	public SequenceMethodCodeVisitor(int arg0, MethodVisitor toDecorate, IClass currentClass) {
 		super(arg0, toDecorate);
 		this.currentClass = currentClass;
-		this.currentMethod = new SequenceMethod();
+		this.currentMethod = new SequenceMethodCall();
 	}
 	
 	//    opcode - the opcode of the type instruction to be visited. This opcode is either INVOKEVIRTUAL, INVOKESPECIAL, INVOKESTATIC or INVOKEINTERFACE.

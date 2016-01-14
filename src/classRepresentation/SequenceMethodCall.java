@@ -5,7 +5,7 @@ import java.util.List;
 import interfaces.IMethod;
 	
 
-public class SequenceMethod {
+public class SequenceMethodCall {
 
 	private String methodName, invokerName, ownerName, returnType;
 	private List<String> parameters;
