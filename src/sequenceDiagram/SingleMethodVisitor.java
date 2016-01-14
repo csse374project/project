@@ -15,9 +15,8 @@ public class SingleMethodVisitor extends ClassVisitor {
 	private String fullMethodName;
 	private SequenceClass currentClass;
 	
-	public SingleMethodVisitor(int opCode, SequenceClass currentClass, String methodName) {
+	public SingleMethodVisitor(int opCode, String methodName) {
 		super(opCode);
-		this.currentClass = currentClass;
 		this.fullMethodName = methodName;
 	}
 

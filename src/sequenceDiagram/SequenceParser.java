@@ -28,10 +28,10 @@ public class SequenceParser {
 		System.out.println("DEBUG - class name: " + className);
 		
 		
-		SequenceClass currentClass = new SequenceClass();
+//		SequenceClass currentClass = new SequenceClass();
 		ClassReader reader = new ClassReader(className);
 
-		ClassVisitor singleMethodVisitor = new SingleMethodVisitor(Opcodes.ASM5, currentClass, methodName);
+		ClassVisitor singleMethodVisitor = new SingleMethodVisitor(Opcodes.ASM5, methodName);
 
 		reader.accept(singleMethodVisitor, ClassReader.EXPAND_FRAMES);
 	}
