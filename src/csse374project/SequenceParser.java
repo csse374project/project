@@ -23,7 +23,7 @@ public class SequenceParser {
 
 			ClassVisitor methodVisitor = new ClassMethodVisitor(Opcodes.ASM5, fieldVisitor, currentClass);
 			
-			ClassVisitor methodCodeVisitor = new ClassMethodCodeVisitor(Opcodes.ASM5, methodVisitor, currentClass);
+			ClassVisitor methodCodeVisitor = new ClassCodeVisitor(Opcodes.ASM5, methodVisitor, currentClass);
 
 			reader.accept(methodVisitor, ClassReader.EXPAND_FRAMES);
 		}

@@ -3,7 +3,7 @@ package classRepresentation;
 import java.util.ArrayList;
 import java.util.List;
 
-import csse374project.DesignParser;
+import csse374project.UMLParser;
 import interfaces.*;
 
 public class Class implements IClass {
@@ -98,7 +98,7 @@ public class Class implements IClass {
 
 	@Override
 	public void addAssociatedClass(String arg) {
-		if (DesignParser.classIsUsed(arg) && !associatedClasses.contains(arg) && (!arg.equals(this.name))) {
+		if (UMLParser.classIsUsed(arg) && !associatedClasses.contains(arg) && (!arg.equals(this.name))) {
 			associatedClasses.add(arg);
 			if (usedClasses.contains(arg)) {
 				usedClasses.remove(arg);
@@ -108,7 +108,7 @@ public class Class implements IClass {
 
 	@Override
 	public void addUsedClass(String arg) {
-		if (DesignParser.classIsUsed(arg) && !usedClasses.contains(arg) && !associatedClasses.contains(arg)
+		if (UMLParser.classIsUsed(arg) && !usedClasses.contains(arg) && !associatedClasses.contains(arg)
 				&& (!arg.equals(this.name))) {
 			usedClasses.add(arg);
 		}

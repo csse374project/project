@@ -11,7 +11,7 @@ import classRepresentation.Classes;
 import classRepresentation.Class;
 import interfaces.IClass;
 
-public class DesignParser {
+public class UMLParser {
 
 	private static String[] classesToAccept;
 
@@ -31,7 +31,7 @@ public class DesignParser {
 
 			ClassVisitor methodVisitor = new ClassMethodVisitor(Opcodes.ASM5, fieldVisitor, currentClass);
 			
-			ClassVisitor methodCodeVisitor = new ClassMethodCodeVisitor(Opcodes.ASM5, methodVisitor, currentClass);
+			ClassVisitor methodCodeVisitor = new ClassCodeVisitor(Opcodes.ASM5, methodVisitor, currentClass);
 
 			reader.accept(methodCodeVisitor, ClassReader.EXPAND_FRAMES);
 			classes.addClass(currentClass);

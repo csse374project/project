@@ -9,11 +9,11 @@ import interfaces.IClass;
 import jdk.internal.org.objectweb.asm.signature.SignatureReader;
 import jdk.internal.org.objectweb.asm.signature.SignatureVisitor;
 
-public class ClassMethodCodeVisitor extends ClassVisitor {
+public class ClassCodeVisitor extends ClassVisitor {
 	
 	private IClass currentClass;
 
-	public ClassMethodCodeVisitor(int arg0, ClassVisitor arg1, IClass currentClass) {
+	public ClassCodeVisitor(int arg0, ClassVisitor arg1, IClass currentClass) {
 		super(arg0, arg1);
 		this.currentClass = currentClass;
 	}

@@ -17,9 +17,9 @@ import classRepresentation.Class;
 import classRepresentation.Classes;
 import csse374project.ClassDeclarationVisitor;
 import csse374project.ClassFieldVisitor;
-import csse374project.ClassMethodCodeVisitor;
+import csse374project.ClassCodeVisitor;
 import csse374project.ClassMethodVisitor;
-import csse374project.DesignParser;
+import csse374project.UMLParser;
 import interfaces.IClass;
 
 public class UnitTestsMethodCodeVisitor {
@@ -45,7 +45,7 @@ public class UnitTestsMethodCodeVisitor {
 		// TODO fix this.
 		createList();
 		classes =  new Classes();
-		Field f = DesignParser.class.getDeclaredField("classesToAccept");
+		Field f = UMLParser.class.getDeclaredField("classesToAccept");
 		f.setAccessible(true);
 		f.set(null, new String[]{"testingData/SampleClassForReadingInATest", "testingData/SampleInterface01", "testingData/SampleInterface02", "testingData/SampleSuperClass", "testingData/SampleClassForInitializing", "testingData/SampleClassForInitializingTwo", "testingData/SampleClassForInitializingThree", "testingData/SampleClassForInitializingFour"});
 		for (String cls : classNames) {
@@ -54,7 +54,7 @@ public class UnitTestsMethodCodeVisitor {
 			ClassVisitor declVisitor = new ClassDeclarationVisitor(Opcodes.ASM5, currentClass);
 			ClassVisitor fieldVisitor = new ClassFieldVisitor(Opcodes.ASM5, declVisitor, currentClass);
 			ClassVisitor methodVisitor = new ClassMethodVisitor(Opcodes.ASM5, fieldVisitor, currentClass);
-			ClassVisitor methodCodeVisitor = new ClassMethodCodeVisitor(Opcodes.ASM5, methodVisitor, currentClass);
+			ClassVisitor methodCodeVisitor = new ClassCodeVisitor(Opcodes.ASM5, methodVisitor, currentClass);
 			reader.accept(methodCodeVisitor, ClassReader.EXPAND_FRAMES);
 			classes.addClass(currentClass);
 		}

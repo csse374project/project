@@ -16,7 +16,7 @@ import org.objectweb.asm.Opcodes;
 import csse374project.ClassDeclarationVisitor;
 import csse374project.ClassFieldVisitor;
 import csse374project.ClassMethodVisitor;
-import csse374project.DesignParser;
+import csse374project.UMLParser;
 import interfaces.IClass;
 import classRepresentation.Class;
 import classRepresentation.Classes;

@@ -19,7 +19,7 @@ import org.junit.Test;
 
 
 import csse374project.ClassDeclarationVisitor;
-import csse374project.DesignParser;
+import csse374project.UMLParser;
 import interfaces.IClass;
 import interfaces.IField;
 import interfaces.IMethod;
@@ -32,7 +32,7 @@ public class UnitTestsDeclarationString {
 	@Before
 	public void setup() throws IOException, NoSuchFieldException, SecurityException, IllegalArgumentException, IllegalAccessException {
 		currentClass = new Class();
-		java.lang.reflect.Field f = DesignParser.class.getDeclaredField("classesToAccept");
+		java.lang.reflect.Field f = UMLParser.class.getDeclaredField("classesToAccept");
 		f.setAccessible(true);
 		f.set(null, new String[]{"java/lang/String"});
 		ClassReader reader = null;
