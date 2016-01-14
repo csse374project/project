@@ -7,9 +7,9 @@ import org.objectweb.asm.ClassVisitor;
 import org.objectweb.asm.Opcodes;
 
 import classRepresentation.SequenceClass;
-import csse374project.ClassCodeVisitor;
-import csse374project.ClassMethodVisitor;
 import interfaces.IClass;
+import umlDiagram.ClassCodeVisitor;
+import umlDiagram.ClassMethodVisitor;
 
 public class SequenceParser {
 	

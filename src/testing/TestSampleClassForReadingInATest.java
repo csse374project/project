@@ -12,10 +12,10 @@ import org.objectweb.asm.ClassReader;
 import org.objectweb.asm.ClassVisitor;
 import org.objectweb.asm.Opcodes;
 
-import csse374project.ClassDeclarationVisitor;
-import csse374project.ClassFieldVisitor;
-import csse374project.ClassMethodVisitor;
 import interfaces.IClass;
+import umlDiagram.ClassDeclarationVisitor;
+import umlDiagram.ClassFieldVisitor;
+import umlDiagram.ClassMethodVisitor;
 import classRepresentation.UMLClass;
 import classRepresentation.Classes;
 

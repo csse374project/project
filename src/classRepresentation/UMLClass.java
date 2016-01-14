@@ -3,8 +3,8 @@ package classRepresentation;
 import java.util.ArrayList;
 import java.util.List;
 
-import csse374project.UMLParser;
 import interfaces.*;
+import umlDiagram.UMLParser;
 
 public class UMLClass implements IClass {
 

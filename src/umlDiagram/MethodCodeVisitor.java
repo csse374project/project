@@ -1,4 +1,4 @@
-package csse374project;
+package umlDiagram;
 
 import org.objectweb.asm.MethodVisitor;
 

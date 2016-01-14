@@ -15,12 +15,12 @@ import org.objectweb.asm.Opcodes;
 
 import classRepresentation.UMLClass;
 import classRepresentation.Classes;
-import csse374project.ClassDeclarationVisitor;
-import csse374project.ClassFieldVisitor;
-import csse374project.ClassCodeVisitor;
-import csse374project.ClassMethodVisitor;
-import csse374project.UMLParser;
 import interfaces.IClass;
+import umlDiagram.ClassCodeVisitor;
+import umlDiagram.ClassDeclarationVisitor;
+import umlDiagram.ClassFieldVisitor;
+import umlDiagram.ClassMethodVisitor;
+import umlDiagram.UMLParser;
 
 public class UnitTestsMethodCodeVisitor {
 	

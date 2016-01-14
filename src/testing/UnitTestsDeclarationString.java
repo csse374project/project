@@ -17,12 +17,11 @@ import org.objectweb.asm.ClassVisitor;
 
 import org.junit.Test;
 
-
-import csse374project.ClassDeclarationVisitor;
-import csse374project.UMLParser;
 import interfaces.IClass;
 import interfaces.IField;
 import interfaces.IMethod;
+import umlDiagram.ClassDeclarationVisitor;
+import umlDiagram.UMLParser;
 
 public class UnitTestsDeclarationString {
 

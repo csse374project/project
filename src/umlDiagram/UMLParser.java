@@ -1,4 +1,4 @@
-package csse374project;
+package umlDiagram;
 
 import java.io.IOException;
 

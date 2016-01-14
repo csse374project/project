@@ -14,12 +14,12 @@ import org.objectweb.asm.ClassVisitor;
 import org.objectweb.asm.Opcodes;
 
 import classRepresentation.UMLClass;
+import umlDiagram.ClassCodeVisitor;
+import umlDiagram.ClassDeclarationVisitor;
+import umlDiagram.ClassFieldVisitor;
+import umlDiagram.ClassMethodVisitor;
+import umlDiagram.UMLParser;
 import classRepresentation.Classes;
-import csse374project.ClassDeclarationVisitor;
-import csse374project.ClassFieldVisitor;
-import csse374project.ClassCodeVisitor;
-import csse374project.ClassMethodVisitor;
-import csse374project.UMLParser;
 
 public class UnitTestsToGraphViz {
 
