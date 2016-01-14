@@ -23,12 +23,11 @@ public class SequenceParser {
 		System.out.println("DEBUG - method name: " + methodName);
 		System.out.println("DEBUG - class name: " + className);
 		
-		IClass currentClass = new SequenceClass();
+		SequenceClass currentClass = new SequenceClass();
 		ClassReader reader = new ClassReader(className);
 
-		ClassVisitor methodVisitor = new ClassMethodVisitor(Opcodes.ASM5, currentClass);
-		ClassVisitor methodCodeVisitor = new MethodDeclarationVisitor(Opcodes.ASM5, methodVisitor, currentClass);
+		ClassVisitor singleMethodVisitor = new SingleMethodVisitor(Opcodes.ASM5, currentClass, methodName);
 
-		reader.accept(methodCodeVisitor, ClassReader.EXPAND_FRAMES);
+		reader.accept(singleMethodVisitor, ClassReader.EXPAND_FRAMES);
 	}
 }

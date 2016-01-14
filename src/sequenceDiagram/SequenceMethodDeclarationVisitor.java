@@ -15,6 +15,12 @@ public class SequenceMethodDeclarationVisitor extends ClassVisitor {
 		this.currentClass = currentClass;
 	}
 	
+	public SequenceMethodDeclarationVisitor(int asm5, IClass currentClass) {
+		super(asm5);
+		this.currentClass = currentClass;
+		
+	}
+
 	@Override
 	public MethodVisitor visitMethod(int access, String name, String desc, String signature, String[] exceptions){
 		MethodVisitor toDecorate = super.visitMethod(access, name, desc, signature, exceptions); // ???
