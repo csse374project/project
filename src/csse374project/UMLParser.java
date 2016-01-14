@@ -30,9 +30,9 @@ public class UMLParser {
 
 			ClassVisitor methodVisitor = new ClassMethodVisitor(Opcodes.ASM5, fieldVisitor, currentClass);
 			
-			ClassVisitor methodCodeVisitor = new ClassCodeVisitor(Opcodes.ASM5, methodVisitor, currentClass);
+			ClassVisitor classCodeVisitor = new ClassCodeVisitor(Opcodes.ASM5, methodVisitor, currentClass);
 
-			reader.accept(methodCodeVisitor, ClassReader.EXPAND_FRAMES);
+			reader.accept(classCodeVisitor, ClassReader.EXPAND_FRAMES);
 			classes.addClass(currentClass);
 		}
 
