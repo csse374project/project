@@ -13,17 +13,20 @@ import umlDiagram.ClassMethodVisitor;
 public class SequenceParser {
 	
 	public static void main(String[] args) throws IOException {
-		for (String className : args) {
-			IClass currentClass = new SequenceClass();
-
-			ClassReader reader = new ClassReader(className);
-
-			ClassVisitor methodVisitor = new ClassMethodVisitor(Opcodes.ASM5, currentClass);
-			
-			ClassVisitor methodCodeVisitor = new MethodDeclarationVisitor(Opcodes.ASM5, methodVisitor, currentClass);
-
-			reader.accept(methodCodeVisitor, ClassReader.EXPAND_FRAMES);
+		if(args.length != 1) {
+			System.err.printf("incorrect argument number, expected 1 method name and recieved %d\n", args.length);
+			System.exit(1);
 		}
+		String methodName = args[0];
+		int lastIndex = methodName.lastIndexOf(".");
+		String className = methodName.substring(0, lastIndex);
+		
+		IClass currentClass = new SequenceClass();
+		ClassReader reader = new ClassReader(className);
+
+		ClassVisitor methodVisitor = new ClassMethodVisitor(Opcodes.ASM5, currentClass);
+		ClassVisitor methodCodeVisitor = new MethodDeclarationVisitor(Opcodes.ASM5, methodVisitor, currentClass);
+
+		reader.accept(methodCodeVisitor, ClassReader.EXPAND_FRAMES);
 	}
-	
 }
