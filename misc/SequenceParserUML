@@ -1,0 +1,63 @@
+digraph UML {
+
+	node [
+		shape = "record"
+	]
+
+	SequenceClass [
+		label = "{SequenceClass|- name: java.lang.String\l- superName: java.lang.String\l- interfaces: java.util.List\l- methods: java.util.List\l|+ void setName(java.lang.String)\l+ String getName()\l+ void setSuperClass(java.lang.String)\l+ String getSuperClass()\l+ void setInterfaces(java.util.List)\l+ List getInterfaces()\l+ void setFields(java.util.List)\l+ List getFields()\l+ void setMethods(java.util.List)\l+ List getMethods()\l+ void addMethod(interfaces.IMethod)\l+ void addField(interfaces.IField)\l+ boolean getIsInterface()\l+ void setIsInterface(boolean)\l+ void addAssociatedClass(java.lang.String)\l+ void addUsedClass(java.lang.String)\l+ List getAssociatedClasses()\l+ List getUsedClasses()\l}"
+	]
+
+	SingleMethodVisitor [
+		label = "{SingleMethodVisitor|- depth: int\l- depthLimit: int\l- fullMethodName: java.lang.String\l- method: classRepresentation.SequenceMethodCall\l|- String getMethodName()\l+ MethodVisitor visitMethod(int, java.lang.String, java.lang.String, java.lang.String, java.lang.String[])\l}"
+	]
+
+	SequenceMethodCodeVisitor [
+		label = "{SequenceMethodCodeVisitor|- depth: int\l- depthLimit: int\l- invoker: java.lang.String\l- currentMethod: classRepresentation.SequenceMethodCall\l|+ void visitMethodInsn(int, java.lang.String, java.lang.String, java.lang.String, boolean)\l- String getParamName(org.objectweb.asm.Type)\l}"
+	]
+
+	SequenceMethodCall [
+		label = "{SequenceMethodCall|- methodName: java.lang.String\l- invokerName: java.lang.String\l- ownerName: java.lang.String\l- returnType: java.lang.String\l- parameters: java.util.List\l- isInit: boolean\l|+ String getName()\l+ void setName(java.lang.String)\l+ String getInvoker()\l+ String getOwner()\l+ void setInvoker(java.lang.String)\l+ void setOwner(java.lang.String)\l+ String getReturnType()\l+ void setReturnType(java.lang.String)\l+ List getParameters()\l+ void setParameters(java.util.List)\l+ boolean isInit()\l+ void setInit(boolean)\l}"
+	]
+
+	SequenceParser [
+		label = "{SequenceParser|+ calls: classRepresentation.MethodCalls\l- DEFAULT_DEPTH_LIMIT: int\l- STARTING_DEPTH: int\l|+ void main(java.lang.String[])\l}"
+	]
+
+	MethodCalls [
+		label = "{MethodCalls|- calls: java.util.List\l- usedClasses: java.util.Set\l|+ void addMethodCall(classRepresentation.SequenceMethodCall)\l+ Iterator getIterator()\l+ String toSDEdit()\l- void addClasses(java.lang.StringBuilder)\l- void addMethodCalls(java.lang.StringBuilder)\l- String removeReturnDots(java.lang.String)\l- String removeParamDots(java.util.List)\l}"
+	]
+
+	edge [
+		arrowhead = "empty"
+	]
+
+	edge [
+		style = "dashed"
+	]
+
+	edge [
+		arrowhead = "normal" style = "solid"
+	]
+
+	SingleMethodVisitor -> SequenceMethodCall
+
+	SequenceMethodCodeVisitor -> SequenceMethodCall
+
+	SequenceParser -> MethodCalls
+
+	MethodCalls -> SequenceMethodCall
+
+	edge [
+		arrowhead = "normal" style = "dashed"
+	]
+
+	SingleMethodVisitor -> SequenceMethodCodeVisitor
+
+	SingleMethodVisitor -> MethodCalls
+
+	SequenceMethodCodeVisitor -> SingleMethodVisitor
+
+	SequenceParser -> SingleMethodVisitor
+
+}
