@@ -31,6 +31,10 @@ Nate Briggs - Wrote the parsing algorithm to translate our gathered data into a 
 Thomas Bonatti - Pair Programmed with Jesse Shellabarger to implement the visitor structure and the required methods. Helped to create the design and to create the testing suite.
 
 #Instructions:
+UML Generation:
 DesignParser is the class that drives the application. If running through eclipse, change the run configuration to include the desired 
 arguments. If running through the command line, include the desired arguments as usual. The tool will then analyze the given classes and 
 print out the data in a form usable by GraphViz. This output can either be given to GraphViz via the pipe operator, or by copy and pasting it into the GraphViz UI.
+
+Sequence Diagram Generation:
+SequenceParser is the class that drives the application. If running through eclipse, change the run configuration to include a fully qualified method as an argument. The second argument is optional, and determines how deep the program will examine method calls. After running, the program will output code that can be entered directly into SDEdit.
