@@ -13,22 +13,23 @@ import classRepresentation.SequenceMethodCall;
 
 public class SequenceMethodCodeVisitor extends MethodVisitor {
 
+	private int depth, depthLimit;
 	private SequenceMethodCall currentMethod;
 
-	public SequenceMethodCodeVisitor(int arg0, MethodVisitor toDecorate, SequenceMethodCall method) {
-		super(arg0, toDecorate);
+	public SequenceMethodCodeVisitor(int opCode, int depth, int depthLimit,
+			MethodVisitor toDecorate, SequenceMethodCall method) {
+		super(opCode, toDecorate);
 		this.currentMethod = method;
+		this.depth = depth;
+		this.depthLimit = depthLimit;
 	}
 
 	@Override
 	public void visitMethodInsn(int opcode, String owner, String name, String desc, boolean itf) {
-
+		
 		if (name.equals("<init>")) {
 			this.currentMethod.setInit(true);
 		}
-		System.out.println("desc: " + desc);
-		System.out.println("ownser: " + owner);
-
 		String className = owner.replace('/', '.');
 		ClassReader reader = null;
 		try {
@@ -50,8 +51,12 @@ public class SequenceMethodCodeVisitor extends MethodVisitor {
 		}
 
 		qualifiedMethodName += ")";
-
-		ClassVisitor singleMethodVisitor = new SingleMethodVisitor(Opcodes.ASM5, qualifiedMethodName, className);
+		if (depth+1 >= depthLimit) {
+			System.out.println("about to go to deep, canceling!!!");
+			return;
+		}
+		ClassVisitor singleMethodVisitor = new SingleMethodVisitor(Opcodes.ASM5, depth+1, depthLimit,
+				qualifiedMethodName, className);
 
 		reader.accept(singleMethodVisitor, ClassReader.EXPAND_FRAMES);
 	}

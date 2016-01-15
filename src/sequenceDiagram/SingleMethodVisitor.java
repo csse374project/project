@@ -12,26 +12,24 @@ import classRepresentation.SequenceMethodCall;
 
 public class SingleMethodVisitor extends ClassVisitor {
 
+	private int depth, depthLimit;
 	private String fullMethodName;
 	private String className;
 
-	public SingleMethodVisitor(int opCode, String methodName, String className) {
+	public SingleMethodVisitor(int opCode, int depth, int depthLimit, String methodName, String className) {
 		super(opCode);
 		this.className = className;
 		this.fullMethodName = methodName;
+		this.depth = depth;
+		this.depthLimit = depthLimit;
 	}
 
 	private String getMethodName() {
-		if (fullMethodName.equals("java.lang.StringBuilder.append(java.lang.String)")) {
-			System.out.print("");
-		}
-		
 		if (fullMethodName.contains("<init>")) {
 			return "<init>";
 		} 
 		int startIndex = fullMethodName.lastIndexOf('.');
 		int endIndex = fullMethodName.lastIndexOf('(');
-		System.out.println("fullmethodname: " + fullMethodName);
 		return fullMethodName.substring(startIndex + 1, endIndex);
 	}
 
@@ -46,8 +44,8 @@ public class SingleMethodVisitor extends ClassVisitor {
 			// figure that out.
 			SequenceMethodCall method = new SequenceMethodCall();
 			SequenceParser.calls.addMethodCall(method);
-			MethodVisitor codeVisitor = new SequenceMethodCodeVisitor(Opcodes.ASM5, toDecorate, method);
-			System.out.println("visit");
+			MethodVisitor codeVisitor = new SequenceMethodCodeVisitor(Opcodes.ASM5, depth, depthLimit,
+					toDecorate, method);
 
 			method.setName(name);
 			method.setInvoker(className);
@@ -60,9 +58,6 @@ public class SingleMethodVisitor extends ClassVisitor {
 				parameterClassNames.add(parameterName);
 			}
 			method.setParameters(parameterClassNames);
-
-			System.out.println("singleMethodVisitor - signature: " + signature);
-			System.out.println("WARNING: still need to set the class this method is called from!");
 
 			return codeVisitor;
 		}

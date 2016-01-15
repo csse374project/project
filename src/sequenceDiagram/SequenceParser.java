@@ -16,10 +16,16 @@ public class SequenceParser {
 	
 	public static MethodCalls calls = new MethodCalls();
 	
+	private static final int DEFAULT_DEPTH_LIMIT = 5;
+	
 	public static void main(String[] args) throws IOException {
-		if(args.length != 1) {
+		if(args.length > 2 || args.length == 0) {
 			System.err.printf("incorrect argument number, expected 1 method name and recieved %d\n", args.length);
-			System.exit(1);
+			return;
+		}
+		int depthLimit = DEFAULT_DEPTH_LIMIT;
+		if(args.length == 2) {
+			depthLimit = Integer.parseInt(args[1]);
 		}
 		String methodName = args[0];
 		int lastIndex = methodName.lastIndexOf(".");
@@ -30,7 +36,8 @@ public class SequenceParser {
 //		SequenceClass currentClass = new SequenceClass();
 		ClassReader reader = new ClassReader(className);
 
-		ClassVisitor singleMethodVisitor = new SingleMethodVisitor(Opcodes.ASM5, methodName, className);
+		ClassVisitor singleMethodVisitor = new SingleMethodVisitor(Opcodes.ASM5, 0, depthLimit,
+				methodName, className);
 
 		reader.accept(singleMethodVisitor, ClassReader.EXPAND_FRAMES);
 	}

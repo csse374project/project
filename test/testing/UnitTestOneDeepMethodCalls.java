@@ -26,8 +26,8 @@ public class UnitTestOneDeepMethodCalls {
 	@Before
 	public void setup() throws IOException {
 		ClassReader reader = new ClassReader(className);
-		ClassVisitor singleMethodVisitor = new SingleMethodVisitor(Opcodes.ASM5, methodName, className);
-		reader.accept(singleMethodVisitor, ClassReader.EXPAND_FRAMES);
+//		ClassVisitor singleMethodVisitor = new SingleMethodVisitor(Opcodes.ASM5, methodName, className);
+//		reader.accept(singleMethodVisitor, ClassReader.EXPAND_FRAMES);
 		iterator = SequenceParser.calls.getIterator();
 		toTest = iterator.next();
 	}
