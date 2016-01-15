@@ -27,7 +27,8 @@ public class UnitTestSimpleMethodCalls {
 	@Before
 	public void setup() throws IOException {
 		ClassReader reader = new ClassReader(className);
-		ClassVisitor singleMethodVisitor = new SingleMethodVisitor(Opcodes.ASM5, 0, 5, methodName, className);
+		ClassVisitor singleMethodVisitor = new SingleMethodVisitor(Opcodes.ASM5, 0, 5, className,
+				methodName, null);
 		reader.accept(singleMethodVisitor, ClassReader.EXPAND_FRAMES);
 		iterator = SequenceParser.calls.getIterator();
 	}
@@ -55,16 +56,51 @@ public class UnitTestSimpleMethodCalls {
 	@Test
 	public void firstMethodHasCorrectInvoker() {
 		SequenceMethodCall call = iterator.next();
-		assertEquals("null", call.getInvoker());
+		assertEquals(null, call.getInvoker());
 	}
 	@Test
 	public void firstMethodHasCorrectOwner() {
 		SequenceMethodCall call = iterator.next();
-		assertEquals("SampleClassMethodSequence", call.getOwner());
+		assertEquals("testingData.SampleClassMethodSequence", call.getOwner());
 	}
 	@Test
 	public void firstMethodHasCorrectReturn() {
 		SequenceMethodCall call = iterator.next();
 		assertEquals("void", call.getReturnType());
 	}
+	//
+
+	@Test
+	public void innerMethodHasCorrectName() {
+		iterator.next(); // 1
+		iterator.next(); // 2
+		iterator.next(); // 3
+		SequenceMethodCall call = iterator.next(); // 4
+		assertEquals("identity", call.getName());
+	}
+	@Test
+	public void innerMethodHasCorrectInvoker() {
+		iterator.next(); // 1
+		iterator.next(); // 2
+		iterator.next(); // 3
+		SequenceMethodCall call = iterator.next();
+		assertEquals("testingData.SampleClassMethodSequence", call.getInvoker());
+	}
+	@Test
+	public void innerMethodHasCorrectOwner() {
+		iterator.next(); // 1
+		iterator.next(); // 2
+		iterator.next(); // 3
+		SequenceMethodCall call = iterator.next();
+		assertEquals("testingData.SampleClassForReadingInATest", call.getOwner());
+	}
+	@Test
+	public void innerMethodHasCorrectReturn() {
+		iterator.next(); // 1
+		iterator.next(); // 2
+		iterator.next(); // 3
+		SequenceMethodCall call = iterator.next();
+		assertEquals("int", call.getReturnType());
+	}
+	
 }

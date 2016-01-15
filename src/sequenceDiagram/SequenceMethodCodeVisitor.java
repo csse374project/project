@@ -14,14 +14,16 @@ import classRepresentation.SequenceMethodCall;
 public class SequenceMethodCodeVisitor extends MethodVisitor {
 
 	private int depth, depthLimit;
+	private String invoker;
 	private SequenceMethodCall currentMethod;
 
 	public SequenceMethodCodeVisitor(int opCode, int depth, int depthLimit,
-			MethodVisitor toDecorate, SequenceMethodCall method) {
+			MethodVisitor toDecorate, SequenceMethodCall method, String invoker) {
 		super(opCode, toDecorate);
 		this.currentMethod = method;
 		this.depth = depth;
 		this.depthLimit = depthLimit;
+		this.invoker = invoker;
 	}
 
 	@Override
@@ -55,8 +57,11 @@ public class SequenceMethodCodeVisitor extends MethodVisitor {
 			System.out.println("about to go to deep, canceling!!!");
 			return;
 		}
+		String invokerName = invoker.replace('/', '.'); 
+//		int classNameDot = className.lastIndexOf('.');
+//		String shortClassName = className.substring(classNameDot + 1);
 		ClassVisitor singleMethodVisitor = new SingleMethodVisitor(Opcodes.ASM5, depth+1, depthLimit,
-				qualifiedMethodName, className);
+				className, qualifiedMethodName, invokerName);
 
 		reader.accept(singleMethodVisitor, ClassReader.EXPAND_FRAMES);
 	}

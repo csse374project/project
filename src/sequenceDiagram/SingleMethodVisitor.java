@@ -14,15 +14,28 @@ public class SingleMethodVisitor extends ClassVisitor {
 
 	private int depth, depthLimit;
 	private String fullMethodName;
-	private String className;
+	private SequenceMethodCall method;
 
-	public SingleMethodVisitor(int opCode, int depth, int depthLimit, String methodName, String className) {
+	public SingleMethodVisitor(int opCode, int depth, int depthLimit, String owner, String methodName,
+			String invokerName) {
 		super(opCode);
-		this.className = className;
 		this.fullMethodName = methodName;
 		this.depth = depth;
 		this.depthLimit = depthLimit;
+		this.method = new SequenceMethodCall();
+		method.setInvoker(invokerName);
+		method.setOwner(owner);
+		
 	}
+	
+//	public SingleMethodVisitor(int opCode, int depth, int depthLimit, String methodName, String className) {
+//		super(opCode);
+//		this.className = className;
+//		this.fullMethodName = methodName;
+//		this.depth = depth;
+//		this.depthLimit = depthLimit;
+//		this.method = new SequenceMethodCall();
+//	}
 
 	private String getMethodName() {
 		if (fullMethodName.contains("<init>")) {
@@ -42,13 +55,11 @@ public class SingleMethodVisitor extends ClassVisitor {
 		if (name.equals(methodName)) {
 			// TODO I'm not sure how this works or what it does, we should
 			// figure that out.
-			SequenceMethodCall method = new SequenceMethodCall();
-			SequenceParser.calls.addMethodCall(method);
 			MethodVisitor codeVisitor = new SequenceMethodCodeVisitor(Opcodes.ASM5, depth, depthLimit,
-					toDecorate, method);
+					toDecorate, method, method.getOwner());
 
+			SequenceParser.calls.addMethodCall(method);
 			method.setName(name);
-			method.setInvoker(className);
 			method.setReturnType(Type.getReturnType(desc).getClassName());
 
 			Type[] argTypes = Type.getArgumentTypes(desc);

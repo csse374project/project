@@ -36,8 +36,8 @@ public class SequenceParser {
 //		SequenceClass currentClass = new SequenceClass();
 		ClassReader reader = new ClassReader(className);
 
-		ClassVisitor singleMethodVisitor = new SingleMethodVisitor(Opcodes.ASM5, 0, depthLimit,
-				methodName, className);
+		ClassVisitor singleMethodVisitor = new SingleMethodVisitor(Opcodes.ASM5, 0, depthLimit, className,
+				methodName, null);
 
 		reader.accept(singleMethodVisitor, ClassReader.EXPAND_FRAMES);
 	}

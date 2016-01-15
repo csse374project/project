@@ -28,12 +28,12 @@ public class SequenceMethodCall {
 		return ownerName;
 	}
 
-	public void setInvoker(String ownerName) {
-		this.invokerName = ownerName;
+	public void setInvoker(String name) {
+		this.invokerName = name;
 	}
 
-	public void setOwner(String recieverName) {
-		this.ownerName = recieverName;
+	public void setOwner(String name) {
+		this.ownerName = name;
 	}
 
 	public String getReturnType() {

@@ -15,5 +15,4 @@ public class SampleClassMethodSequence {
 	public void doAnotherThing() {
 		// do nothing
 	}
-	
 }
