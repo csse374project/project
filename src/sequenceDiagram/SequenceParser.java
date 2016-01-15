@@ -17,6 +17,7 @@ public class SequenceParser {
 	public static MethodCalls calls = new MethodCalls();
 	
 	private static final int DEFAULT_DEPTH_LIMIT = 5;
+	private static final int STARTING_DEPTH = 1;
 	
 	public static void main(String[] args) throws IOException {
 		if(args.length > 2 || args.length == 0) {
@@ -30,15 +31,17 @@ public class SequenceParser {
 		String methodName = args[0];
 		int lastIndex = methodName.lastIndexOf(".");
 		String className = methodName.substring(0, lastIndex);
-		System.out.println("DEBUG - method name: " + methodName);
-		System.out.println("DEBUG - class name: " + className);
+//		System.out.println("DEBUG - method name: " + methodName);
+//		System.out.println("DEBUG - class name: " + className);
 		
 //		SequenceClass currentClass = new SequenceClass();
 		ClassReader reader = new ClassReader(className);
 
-		ClassVisitor singleMethodVisitor = new SingleMethodVisitor(Opcodes.ASM5, 0, depthLimit, className,
+		ClassVisitor singleMethodVisitor = new SingleMethodVisitor(Opcodes.ASM5, STARTING_DEPTH, depthLimit, className,
 				methodName, null);
 
 		reader.accept(singleMethodVisitor, ClassReader.EXPAND_FRAMES);
+		
+		System.out.println(calls.toSDEdit());
 	}
 }

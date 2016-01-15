@@ -29,9 +29,6 @@ public class SequenceMethodCodeVisitor extends MethodVisitor {
 	@Override
 	public void visitMethodInsn(int opcode, String owner, String name, String desc, boolean itf) {
 		
-		if (name.equals("<init>")) {
-			this.currentMethod.setInit(true);
-		}
 		String className = owner.replace('/', '.');
 		ClassReader reader = null;
 		try {
@@ -53,8 +50,7 @@ public class SequenceMethodCodeVisitor extends MethodVisitor {
 		}
 
 		qualifiedMethodName += ")";
-		if (depth+1 >= depthLimit) {
-			System.out.println("about to go to deep, canceling!!!");
+		if (depth >= depthLimit) {
 			return;
 		}
 		String invokerName = invoker.replace('/', '.'); 
@@ -62,9 +58,22 @@ public class SequenceMethodCodeVisitor extends MethodVisitor {
 //		String shortClassName = className.substring(classNameDot + 1);
 		ClassVisitor singleMethodVisitor = new SingleMethodVisitor(Opcodes.ASM5, depth+1, depthLimit,
 				className, qualifiedMethodName, invokerName);
+		
+		if (name.equals("<init>")) {
+			this.currentMethod.setInit(true);
+//			return;
+		}
 
 		reader.accept(singleMethodVisitor, ClassReader.EXPAND_FRAMES);
 	}
+	
+//	@Override
+//	public void visitTypeInsn(int opcode, String type) {
+//		super.visitTypeInsn(opcode, type);
+//		if (opcode == Opcodes.NEW) {
+//			this.currentMethod.setInit(true);
+//		}
+//	}
 	
 	private String getParamName(Type type) {
 		String fullParamPath = type.getClassName();

@@ -23,8 +23,14 @@ public class SingleMethodVisitor extends ClassVisitor {
 		this.depth = depth;
 		this.depthLimit = depthLimit;
 		this.method = new SequenceMethodCall();
-		method.setInvoker(invokerName);
-		method.setOwner(owner);
+		if (invokerName != null) {
+			int dotIndex = invokerName.lastIndexOf(".");
+			method.setInvoker(invokerName.substring(dotIndex+1));
+		} else {
+			method.setInvoker(null);
+		}
+		int dotIndex = owner.lastIndexOf(".");
+		method.setOwner(owner.substring(dotIndex+1));
 		
 	}
 	
@@ -47,14 +53,12 @@ public class SingleMethodVisitor extends ClassVisitor {
 	}
 
 	@Override
-	public MethodVisitor visitMethod(int access, String name, String desc, String signature, String[] exceptions) {
+	public MethodVisitor visitMethod(int access, String name, String desc, String signature, String[] exceptions) {		
 		MethodVisitor toDecorate = super.visitMethod(access, name, desc, signature, exceptions);
 
 		String methodName = getMethodName();
 
 		if (name.equals(methodName)) {
-			// TODO I'm not sure how this works or what it does, we should
-			// figure that out.
 			MethodVisitor codeVisitor = new SequenceMethodCodeVisitor(Opcodes.ASM5, depth, depthLimit,
 					toDecorate, method, method.getOwner());
 

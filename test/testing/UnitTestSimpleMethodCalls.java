@@ -43,6 +43,7 @@ public class UnitTestSimpleMethodCalls {
 		iterator.next(); // 1
 		iterator.next(); // 2
 		iterator.next(); // 3
+		assertTrue(iterator.hasNext());
 		iterator.next(); // 4
 		assertFalse(iterator.hasNext());
 	}
@@ -102,5 +103,7 @@ public class UnitTestSimpleMethodCalls {
 		SequenceMethodCall call = iterator.next();
 		assertEquals("int", call.getReturnType());
 	}
+	
+	
 	
 }
