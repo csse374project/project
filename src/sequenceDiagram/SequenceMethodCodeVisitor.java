@@ -42,7 +42,7 @@ public class SequenceMethodCodeVisitor extends MethodVisitor {
 		Type[] argTypes = Type.getArgumentTypes(desc);
 		// ArrayList<String> parameterClassNames = new ArrayList<String>();
 		for (int i = 0; i < argTypes.length; i++) {
-			String parameterName = argTypes[i].getClassName();
+			String parameterName = getParamName(argTypes[i]);
 			qualifiedMethodName += parameterName + ",";
 		}
 		if (argTypes.length > 0) {
@@ -54,6 +54,11 @@ public class SequenceMethodCodeVisitor extends MethodVisitor {
 		ClassVisitor singleMethodVisitor = new SingleMethodVisitor(Opcodes.ASM5, qualifiedMethodName, className);
 
 		reader.accept(singleMethodVisitor, ClassReader.EXPAND_FRAMES);
-
+	}
+	
+	private String getParamName(Type type) {
+		String fullParamPath = type.getClassName();
+		int dotIndex = fullParamPath.lastIndexOf('.');
+		return fullParamPath.substring(dotIndex+1);
 	}
 }
