@@ -58,9 +58,29 @@ public class MethodCalls {
 			}
 			else {
 				str.append(metCall.getName());
+				str.append('(');
+				str.append(removeParamDots(metCall.getParameters()));
+				str.append(')');
+				str.append(":");
+				str.append(removeReturnDots(metCall.getReturnType()));
 			}
 			str.append("\n");
 		}
+	}
+	
+	private String removeReturnDots(String ret){
+		int lastDot = ret.lastIndexOf('.');
+		return ret.substring(lastDot+1);
+	}
+	
+	private String removeParamDots(List<String> params){
+		StringBuilder newParams = new StringBuilder();
+		for(String param : params){
+			int lastDot = param.lastIndexOf('.');
+			newParams.append(param.substring(lastDot+1));
+			newParams.append(" ");
+		}
+		return newParams.toString();
 	}
 
 	
