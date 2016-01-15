@@ -9,7 +9,7 @@ import org.junit.runners.Suite;
 	UnitTestsDeclarationString.class,
 	UnitTestsFieldVisitor.class,
 	UnitTestsMethod.class,
-	UnitTestOneDeepMethodCalls.class,
+	UnitTestSimpleMethodCalls.class,
 	UnitTestsMethodVisitor.class,
 	UnitTestsMethodCodeVisitor.class,
 	UnitTestsToGraphViz.class
