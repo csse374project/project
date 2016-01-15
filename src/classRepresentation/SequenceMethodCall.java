@@ -2,9 +2,6 @@ package classRepresentation;
 
 import java.util.List;
 
-import interfaces.IMethod;
-	
-
 public class SequenceMethodCall {
 
 	private String methodName, invokerName, ownerName, returnType;
