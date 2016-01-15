@@ -28,7 +28,10 @@ public class SequenceMethodCodeVisitor extends MethodVisitor {
 
 	@Override
 	public void visitMethodInsn(int opcode, String owner, String name, String desc, boolean itf) {
-		
+
+		if (depth > depthLimit) {
+			return;
+		}
 		String className = owner.replace('/', '.');
 		ClassReader reader = null;
 		try {
@@ -50,10 +53,7 @@ public class SequenceMethodCodeVisitor extends MethodVisitor {
 		}
 
 		qualifiedMethodName += ")";
-		if (depth >= depthLimit) {
-			return;
-		}
-		String invokerName = invoker.replace('/', '.'); 
+		String invokerName = invoker.replace('/', '.');
 //		int classNameDot = className.lastIndexOf('.');
 //		String shortClassName = className.substring(classNameDot + 1);
 		ClassVisitor singleMethodVisitor = new SingleMethodVisitor(Opcodes.ASM5, depth+1, depthLimit,

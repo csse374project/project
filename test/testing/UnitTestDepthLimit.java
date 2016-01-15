@@ -38,7 +38,7 @@ public class UnitTestDepthLimit {
 				depthLimit, className, methodName, null);
 		reader.accept(singleMethodVisitor, ClassReader.EXPAND_FRAMES);
 		iterator = SequenceParser.calls.getIterator();
-		for (int i = 0; i < depthLimit-1; i++) {
+		for (int i = 0; i < depthLimit; i++) {
 			iterator.next();
 		}
 		assertTrue(iterator.hasNext());
@@ -53,7 +53,7 @@ public class UnitTestDepthLimit {
 				depthLimit, className, methodName, null);
 		reader.accept(singleMethodVisitor, ClassReader.EXPAND_FRAMES);
 		iterator = SequenceParser.calls.getIterator();
-		for (int i = 0; i < depthLimit-1; i++) {
+		for (int i = 0; i < depthLimit; i++) {
 			iterator.next();
 		}
 		assertTrue(iterator.hasNext());
@@ -68,7 +68,7 @@ public class UnitTestDepthLimit {
 				depthLimit, className, methodName, null);
 		reader.accept(singleMethodVisitor, ClassReader.EXPAND_FRAMES);
 		iterator = SequenceParser.calls.getIterator();
-		for (int i = 0; i < depthLimit-1; i++) {
+		for (int i = 0; i < depthLimit; i++) {
 			iterator.next();
 		}
 		assertTrue(iterator.hasNext());
@@ -77,13 +77,13 @@ public class UnitTestDepthLimit {
 	}
 	@Test
 	public void testConstructorDepthStopsAtCorrectLevel5() throws IOException {
-		int depthLimit = 5;
+		int depthLimit = 6;
 		ClassReader reader = new ClassReader(className);
 		ClassVisitor singleMethodVisitor = new SingleMethodVisitor(Opcodes.ASM5, STARTING_DEPTH,
 				depthLimit, className, constructorName, null);
 		reader.accept(singleMethodVisitor, ClassReader.EXPAND_FRAMES);
 		iterator = SequenceParser.calls.getIterator();
-		for (int i = 0; i < depthLimit-1; i++) {
+		for (int i = 0; i < depthLimit; i++) {
 			iterator.next();
 		}
 		assertTrue(iterator.hasNext());
