@@ -2,7 +2,6 @@ package umlDiagram;
 
 import org.objectweb.asm.ClassVisitor;
 import org.objectweb.asm.MethodVisitor;
-import org.objectweb.asm.Opcodes;
 
 import interfaces.IClass;
 import jdk.internal.org.objectweb.asm.Type;
@@ -11,8 +10,8 @@ public class SingletonMethodVisitor extends ClassVisitor {
 
 	private IClass currentClass;
 	
-	public SingletonMethodVisitor(int opCode, ClassVisitor cv, IClass currentClass) {
-		super(opCode, cv);
+	public SingletonMethodVisitor(int opCode, IClass currentClass) {
+		super(opCode);
 		this.currentClass = currentClass;
 	}
 	
