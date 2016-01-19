@@ -22,6 +22,7 @@ public interface IClass {
 	void addUsedClass(String arg);
 	List<String> getAssociatedClasses();
 	List<String> getUsedClasses();
-	
+	boolean isSingleton();
+	void setIsSingleton(boolean isSingleton);
 }
 

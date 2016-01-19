@@ -13,7 +13,7 @@ public class UMLClass implements IClass {
 	private List<String> interfaces, associatedClasses, usedClasses;
 	private List<IField> fields;
 	private List<IMethod> methods;
-	private boolean isInterface;
+	private boolean isInterface, isSingleton;
 
 	public UMLClass() {
 		this.name = "";
@@ -122,6 +122,14 @@ public class UMLClass implements IClass {
 	@Override
 	public List<String> getUsedClasses() {
 		return usedClasses;
+	}
+	@Override
+	public boolean isSingleton() {
+		return isSingleton;
+	}
+	@Override
+	public void setIsSingleton(boolean isSingleton) {
+		this.isSingleton = isSingleton;		
 	}
 
 }

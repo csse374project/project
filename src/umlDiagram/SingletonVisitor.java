@@ -2,7 +2,7 @@ package umlDiagram;
 
 import org.objectweb.asm.Opcodes;
 
-import com.sun.org.apache.bcel.internal.generic.Type;
+import org.objectweb.asm.Type;
 
 import interfaces.IClass;
 
@@ -25,7 +25,7 @@ public class SingletonVisitor extends ClassVisitor {
 		
 		if ((access & Opcodes.ACC_STATIC) != 0) {
 			Type type = Type.getType(desc);
-			if (currentClass.getName().equals(type.toString())) {
+			if (currentClass.getName().equals(type.getClassName())) {
 				
 			}
 		}
