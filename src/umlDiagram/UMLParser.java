@@ -23,15 +23,18 @@ public class UMLParser {
 			IClass currentClass = new UMLClass();
 
 			ClassReader reader = new ClassReader(className);
+			
 
 			ClassVisitor declVisitor = new ClassDeclarationVisitor(Opcodes.ASM5, currentClass);
+			
+			ClassVisitor singletonVisitor = new SingletonFieldVisitor(Opcodes.ASM5, declVisitor, currentClass);
 
-			ClassVisitor fieldVisitor = new ClassFieldVisitor(Opcodes.ASM5, declVisitor, currentClass);
+			ClassVisitor fieldVisitor = new ClassFieldVisitor(Opcodes.ASM5, singletonVisitor, currentClass);
 
 			ClassVisitor methodVisitor = new ClassMethodVisitor(Opcodes.ASM5, fieldVisitor, currentClass);
 			
 			ClassVisitor classCodeVisitor = new MethodDeclarationVisitor(Opcodes.ASM5, methodVisitor, currentClass);
-
+			
 			reader.accept(classCodeVisitor, ClassReader.EXPAND_FRAMES);
 			classes.addClass(currentClass);
 		}
