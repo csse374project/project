@@ -10,11 +10,11 @@ import org.objectweb.asm.ClassVisitor;
 import org.objectweb.asm.FieldVisitor;
 
 
-public class SingletonVisitor extends ClassVisitor {
+public class SingletonFieldVisitor extends ClassVisitor {
 
 	private IClass currentClass;
 	
-	public SingletonVisitor(int opCode, ClassVisitor toDecorate, IClass currentClass) {
+	public SingletonFieldVisitor(int opCode, ClassVisitor toDecorate, IClass currentClass) {
 		super(opCode, toDecorate);
 		this.currentClass = currentClass;
 	}
