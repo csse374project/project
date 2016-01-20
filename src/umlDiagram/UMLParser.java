@@ -24,7 +24,6 @@ public class UMLParser {
 
 			ClassReader reader = new ClassReader(className);
 			
-
 			ClassVisitor declVisitor = new ClassDeclarationVisitor(Opcodes.ASM5, currentClass);
 			
 			ClassVisitor singletonVisitor = new SingletonFieldVisitor(Opcodes.ASM5, declVisitor, currentClass);

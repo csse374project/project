@@ -34,7 +34,8 @@ public class Classes {
 		Set<String> keys = classes.keySet();
 
 		// Add the string to start the UML structure
-		string.append("digraph UML {\n\n\tnode [\n\t\tshape = " + "\"record\"\n\t]\n\n");
+		string.append("digraph UML {\n\n\tnode [\n\t\tshape = ");
+		string.append("\"record\"\n\t]\n\n");
 
 		appendClass(string, keys);
 
@@ -89,8 +90,11 @@ public class Classes {
 			IClass cls = classes.get(key);
 			int lastFwdSlash = cls.getName().lastIndexOf('/');
 			string.append("\t" + cls.getName().substring(lastFwdSlash + 1) + " [\n\t\tlabel = \"{");
-			if (cls.getIsInterface())
+			if (cls.getIsInterface()) {
 				string.append("\\<\\<interface\\>\\>\\n");
+			} else if (cls.isSingleton()) {
+				string.append("\\<\\<singleton\\>\\>\\n");
+			}
 			string.append(cls.getName().substring(lastFwdSlash + 1) + "|");
 
 			appendFields(string, cls);
