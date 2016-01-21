@@ -28,7 +28,9 @@ public class UnitTestsMethodVisitor {
 	private IClass currentClass;
 	
 	@Before
-	public void setup() throws IOException, NoSuchFieldException, SecurityException, IllegalArgumentException, IllegalAccessException {
+	public void setup()
+			throws IOException, NoSuchFieldException, SecurityException, IllegalArgumentException,
+				IllegalAccessException {
 		// TODO fix this.
 		currentClass = new UMLClass();
 		java.lang.reflect.Field f = UMLParser.class.getDeclaredField("classesToAccept");
