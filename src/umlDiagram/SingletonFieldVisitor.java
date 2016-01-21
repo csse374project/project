@@ -27,7 +27,7 @@ public class SingletonFieldVisitor extends ClassVisitor {
 
 		if ((access & Opcodes.ACC_STATIC) != 0) {
 			Type type = Type.getType(desc);
-			if (currentClass.getName().equals(type.getClassName())) {
+			if (currentClass.getName().equals(UMLParser.replaceDotsWithSlashes(type.getClassName()))) {
 				lookForGetter();
 			}
 		}

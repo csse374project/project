@@ -57,6 +57,10 @@ public class UMLParser {
 		}
 		return false;
 	}
+	
+	public static String replaceDotsWithSlashes(String string) {
+		return string.replace('.', '/');
+	}
 
 	/*
 	 * private Integer testThing(){ return -1; }

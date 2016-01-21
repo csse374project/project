@@ -10,6 +10,7 @@ import interfaces.IMethod;
 
 public class Classes {
 	private Map<String, IClass> classes;
+	private static final String DEFAULT_COLOR = "black";
 
 	public Classes() {
 		this.classes = new HashMap<String, IClass>();
@@ -103,7 +104,11 @@ public class Classes {
 
 			appendMethods(string, cls, lastFwdSlash);
 
-			string.append("}\"\n\t]\n\n");
+			string.append("}\"\n\t\t");
+			
+			appendColor(string, cls);
+			
+			string.append("\n\t]\n\n");
 		}
 	}
 
@@ -155,6 +160,16 @@ public class Classes {
 			String params = method.getParameters().toString().substring(1,
 					method.getParameters().toString().length() - 1);
 			string.append(params + ")\\l");
+		}
+	}
+	
+	private void appendColor(StringBuilder string, IClass cls) {
+		if (cls.isSingleton()) {
+			string.append("color=blue");
+		}
+		else {
+			string.append("color=");
+			string.append(DEFAULT_COLOR);
 		}
 	}
 

@@ -20,7 +20,7 @@ public class SingletonMethodVisitor extends ClassVisitor {
 	public MethodVisitor visitMethod(int access, String name, String desc, String signature, String[] exceptions) {
 		MethodVisitor toDecorate = super.visitMethod(access, name, desc, signature, exceptions);
 		Type returnType = Type.getReturnType(desc);
-		if (currentClass.getName().equals(returnType.getClassName())) {
+		if (currentClass.getName().equals(UMLParser.replaceDotsWithSlashes(returnType.getClassName()))) {
 			currentClass.setIsSingleton(true);
 		}
 		return toDecorate;
