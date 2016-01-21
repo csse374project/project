@@ -12,6 +12,7 @@ import org.junit.runners.Suite;
 	UnitTestSimpleMethodCalls.class,
 	UnitTestsMethodVisitor.class,
 	UnitTestsMethodCodeVisitor.class,
+	UnitTestSingletonVisitors.class,
 	UnitTestsToGraphViz.class
 })
 public class AllTests {
