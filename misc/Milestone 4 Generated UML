@@ -34,18 +34,8 @@ digraph UML {
 		color=black
 	]
 
-	SequenceParser [
-		label = "{SequenceParser|+ calls: classRepresentation.MethodCalls\l- DEFAULT_DEPTH_LIMIT: int\l- STARTING_DEPTH: int\l|+ void main(java.lang.String[])\l}"
-		color=black
-	]
-
 	MethodCodeVisitor [
 		label = "{MethodCodeVisitor|- currentClass: interfaces.IClass\l|+ void visitMethodInsn(int, java.lang.String, java.lang.String, java.lang.String, boolean)\l}"
-		color=black
-	]
-
-	MethodCalls [
-		label = "{MethodCalls|- calls: java.util.List\l- usedClasses: java.util.Set\l|+ void addMethodCall(classRepresentation.SequenceMethodCall)\l+ Iterator getIterator()\l+ String toSDEdit()\l- void addClasses(java.lang.StringBuilder)\l- void addMethodCalls(java.lang.StringBuilder)\l- String removeReturnDots(java.lang.String)\l- String removeParamDots(java.util.List)\l}"
 		color=black
 	]
 
@@ -54,23 +44,8 @@ digraph UML {
 		color=black
 	]
 
-	SingleMethodVisitor [
-		label = "{SingleMethodVisitor|- depth: int\l- depthLimit: int\l- fullMethodName: java.lang.String\l- method: classRepresentation.SequenceMethodCall\l|- String getMethodName()\l+ MethodVisitor visitMethod(int, java.lang.String, java.lang.String, java.lang.String, java.lang.String[])\l}"
-		color=black
-	]
-
 	ClassDeclarationVisitor [
 		label = "{ClassDeclarationVisitor|- currentClass: interfaces.IClass\l|+ void visit(int, int, java.lang.String, java.lang.String, java.lang.String, java.lang.String[])\l}"
-		color=black
-	]
-
-	SequenceMethodCall [
-		label = "{SequenceMethodCall|- methodName: java.lang.String\l- invokerName: java.lang.String\l- ownerName: java.lang.String\l- returnType: java.lang.String\l- parameters: java.util.List\l- isInit: boolean\l|+ String getName()\l+ void setName(java.lang.String)\l+ String getInvoker()\l+ String getOwner()\l+ void setInvoker(java.lang.String)\l+ void setOwner(java.lang.String)\l+ String getReturnType()\l+ void setReturnType(java.lang.String)\l+ List getParameters()\l+ void setParameters(java.util.List)\l+ boolean isInit()\l+ void setInit(boolean)\l}"
-		color=black
-	]
-
-	SequenceMethodCodeVisitor [
-		label = "{SequenceMethodCodeVisitor|- depth: int\l- depthLimit: int\l- invoker: java.lang.String\l- currentMethod: classRepresentation.SequenceMethodCall\l|+ void visitMethodInsn(int, java.lang.String, java.lang.String, java.lang.String, boolean)\l- String getParamName(org.objectweb.asm.Type)\l}"
 		color=black
 	]
 
@@ -130,17 +105,9 @@ digraph UML {
 
 	UMLClass -> IMethod
 
-	SequenceParser -> MethodCalls
-
 	MethodCodeVisitor -> IClass
 
-	MethodCalls -> SequenceMethodCall
-
-	SingleMethodVisitor -> SequenceMethodCall
-
 	ClassDeclarationVisitor -> IClass
-
-	SequenceMethodCodeVisitor -> SequenceMethodCall
 
 	ClassFieldVisitor -> IClass
 
@@ -176,17 +143,9 @@ digraph UML {
 
 	UMLClass -> UMLParser
 
-	SequenceParser -> SingleMethodVisitor
-
 	IClass -> IField
 
 	IClass -> IMethod
-
-	SingleMethodVisitor -> SequenceMethodCodeVisitor
-
-	SingleMethodVisitor -> MethodCalls
-
-	SequenceMethodCodeVisitor -> SingleMethodVisitor
 
 	ClassFieldVisitor -> UMLField
 
