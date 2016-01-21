@@ -53,5 +53,25 @@ public class UnitTestsSingletonVisitors {
 		reader.accept(vis2, ClassReader.EXPAND_FRAMES);
 		assertTrue(currentClass.isSingleton());
 	}
+	
+	@Test
+	public void testChocolateBoilerEager() throws IOException {
+		String className = "testingData.ChocolateBoilerEager";
+		ClassReader reader = new ClassReader(className);
+		ClassVisitor vis1 = new ClassDeclarationVisitor(Opcodes.ASM5, currentClass);
+		ClassVisitor vis2 = new SingletonFieldVisitor(Opcodes.ASM5, vis1, currentClass);
+		reader.accept(vis2, ClassReader.EXPAND_FRAMES);
+		assertTrue(currentClass.isSingleton());
+	}
+	
+	@Test
+	public void testChocolateBoilerLazy() throws IOException {
+		String className = "testingData.ChocolateBoilerLazy";
+		ClassReader reader = new ClassReader(className);
+		ClassVisitor vis1 = new ClassDeclarationVisitor(Opcodes.ASM5, currentClass);
+		ClassVisitor vis2 = new SingletonFieldVisitor(Opcodes.ASM5, vis1, currentClass);
+		reader.accept(vis2, ClassReader.EXPAND_FRAMES);
+		assertTrue(currentClass.isSingleton());
+	}
 
 }
