@@ -12,6 +12,9 @@ The design of the project is nearly identical. We added a MethodVisitor to analy
 Milestone 3:
 We have extended the design implemented in the previous milestones. A new parser was created to handle the sequence diagram format. We then created two new visitors to iterate over methods, using the visitor pattern, and gather the necessary information. We then parse this output into a form that is usable by SDEdit.
 
+Milestone 4:
+The design remained stable during this milestone. New visitors were added on top of existing visitors, and small modifications were made to the code that parses our constructed objects into graphViz strings.
+
 #Responsibilities: 
 Milestone 1:
 All members worked together to created the project's design.
@@ -29,6 +32,11 @@ Milestone 3:
 Jesse Shellabarger - Pair Programmed with Thomas Bonatti to implement the visitor structure and the required methods. Also worked with Thomas to create this milestone's design.
 Nate Briggs - Wrote the parsing algorithm to translate our gathered data into a form usable by SDEdit.
 Thomas Bonatti - Pair Programmed with Jesse Shellabarger to implement the visitor structure and the required methods. Helped to create the design and to create the testing suite.
+
+Milestone 4:
+Jesse Shellabarger - Pair Programmed with Thomas Bonatti to implement SingletonVisitor classes, one to detect singleton "instance" fields, the other to detect singleton "getter" methods. Also handled producing UML samples.
+Nate Briggs = Added singletons to the parsing code.
+Thomas Bonatti - Worked with Jesse (see above). Programmed several test cases. Wrote this beautiful, elegant entry in the readme.
 
 #Instructions:
 UML Generation:
