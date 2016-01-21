@@ -1,17 +1,17 @@
 package testingData;
 
-public class ChocolateBoiler {
+public class ChocolateBoilerLazy {
 	private boolean empty;
 	private boolean boiled;
-	private volatile static ChocolateBoiler uniqueInstance;
+	private volatile static ChocolateBoilerLazy uniqueInstance;
 	
-	private ChocolateBoiler(){}
+	private ChocolateBoilerLazy(){}
 	
-	public static ChocolateBoiler getInstance(){
+	public static ChocolateBoilerLazy getInstance(){
 		if (uniqueInstance == null) {
-			synchronized (ChocolateBoiler.class) {
+			synchronized (ChocolateBoilerLazy.class) {
 				if (uniqueInstance == null) {
-					uniqueInstance = new ChocolateBoiler();
+					uniqueInstance = new ChocolateBoilerLazy();
 				}
 			}
 		}
