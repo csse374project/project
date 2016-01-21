@@ -1,0 +1,205 @@
+digraph UML {
+
+	node [
+		shape = "record"
+	]
+
+	SingletonMethodVisitor [
+		label = "{SingletonMethodVisitor|- currentClass: interfaces.IClass\l|+ MethodVisitor visitMethod(int, java.lang.String, java.lang.String, java.lang.String, java.lang.String[])\l}"
+		color=black
+	]
+
+	UMLParser [
+		label = "{UMLParser|- classesToAccept: java.lang.String[]\l|+ void main(java.lang.String[])\l- void setClassesToAccept(java.lang.String[])\l+ boolean classIsUsed(java.lang.String)\l+ String replaceDotsWithSlashes(java.lang.String)\l}"
+		color=black
+	]
+
+	Classes [
+		label = "{Classes|- classes: java.util.Map\l- DEFAULT_COLOR: java.lang.String\l|+ Map getClasses()\l+ void setClasses(java.util.Map)\l+ void addClass(interfaces.IClass)\l+ String toGraphViz()\l- void appendUsedClasses(java.lang.StringBuilder, java.util.Set)\l- void appendAssociatedClasses(java.lang.StringBuilder, java.util.Set)\l- void appendClass(java.lang.StringBuilder, java.util.Set)\l- void appendInterfaces(java.lang.StringBuilder, java.util.Set)\l- void appendSuperClass(java.lang.StringBuilder, java.util.Set)\l- void appendFields(java.lang.StringBuilder, interfaces.IClass)\l- void appendMethods(java.lang.StringBuilder, interfaces.IClass, int)\l- void appendColor(java.lang.StringBuilder, interfaces.IClass)\l}"
+		color=black
+	]
+
+	UMLClass [
+		label = "{UMLClass|- name: java.lang.String\l- superClass: java.lang.String\l- interfaces: java.util.List\l- associatedClasses: java.util.List\l- usedClasses: java.util.List\l- fields: java.util.List\l- methods: java.util.List\l- isInterface: boolean\l- isSingleton: boolean\l|+ void setFields(java.util.List)\l+ List getFields()\l+ void setMethods(java.util.List)\l+ List getMethods()\l+ void setName(java.lang.String)\l+ String getName()\l+ void setSuperClass(java.lang.String)\l+ String getSuperClass()\l+ void setInterfaces(java.util.List)\l+ List getInterfaces()\l+ void addMethod(interfaces.IMethod)\l+ void addField(interfaces.IField)\l+ boolean getIsInterface()\l+ void setIsInterface(boolean)\l+ void addAssociatedClass(java.lang.String)\l+ void addUsedClass(java.lang.String)\l+ List getAssociatedClasses()\l+ List getUsedClasses()\l+ boolean isSingleton()\l+ void setIsSingleton(boolean)\l}"
+		color=black
+	]
+
+	IMethod [
+		label = "{\<\<interface\>\>\nIMethod||+ String getReturnType()\l+ void setReturnType(java.lang.String)\l+ List getParameters()\l+ void setParameters(java.util.List)\l+ String getName()\l+ void setName(java.lang.String)\l+ char getVisibility()\l+ void setVisibility(char)\l+ List getNonAccessModifiers()\l+ void setNonAccessModifiers(java.util.List)\l}"
+		color=black
+	]
+
+	UMLField [
+		label = "{UMLField|- type: java.lang.String\l- name: java.lang.String\l- visibility: char\l- nonAccessModifiers: java.util.List\l|+ String getType()\l+ void setType(java.lang.String)\l+ String getName()\l+ void setName(java.lang.String)\l+ char getVisibility()\l+ void setVisibility(char)\l+ List getNonAccessModifiers()\l+ void setNonAccessModifiers(java.util.List)\l+ boolean equals(java.lang.Object)\l}"
+		color=black
+	]
+
+	SequenceParser [
+		label = "{SequenceParser|+ calls: classRepresentation.MethodCalls\l- DEFAULT_DEPTH_LIMIT: int\l- STARTING_DEPTH: int\l|+ void main(java.lang.String[])\l}"
+		color=black
+	]
+
+	MethodCodeVisitor [
+		label = "{MethodCodeVisitor|- currentClass: interfaces.IClass\l|+ void visitMethodInsn(int, java.lang.String, java.lang.String, java.lang.String, boolean)\l}"
+		color=black
+	]
+
+	MethodCalls [
+		label = "{MethodCalls|- calls: java.util.List\l- usedClasses: java.util.Set\l|+ void addMethodCall(classRepresentation.SequenceMethodCall)\l+ Iterator getIterator()\l+ String toSDEdit()\l- void addClasses(java.lang.StringBuilder)\l- void addMethodCalls(java.lang.StringBuilder)\l- String removeReturnDots(java.lang.String)\l- String removeParamDots(java.util.List)\l}"
+		color=black
+	]
+
+	IClass [
+		label = "{\<\<interface\>\>\nIClass||+ void setName(java.lang.String)\l+ String getName()\l+ void setSuperClass(java.lang.String)\l+ String getSuperClass()\l+ void setInterfaces(java.util.List)\l+ List getInterfaces()\l+ void setFields(java.util.List)\l+ List getFields()\l+ void setMethods(java.util.List)\l+ List getMethods()\l+ void addMethod(interfaces.IMethod)\l+ void addField(interfaces.IField)\l+ boolean getIsInterface()\l+ void setIsInterface(boolean)\l+ void addAssociatedClass(java.lang.String)\l+ void addUsedClass(java.lang.String)\l+ List getAssociatedClasses()\l+ List getUsedClasses()\l+ boolean isSingleton()\l+ void setIsSingleton(boolean)\l}"
+		color=black
+	]
+
+	SingleMethodVisitor [
+		label = "{SingleMethodVisitor|- depth: int\l- depthLimit: int\l- fullMethodName: java.lang.String\l- method: classRepresentation.SequenceMethodCall\l|- String getMethodName()\l+ MethodVisitor visitMethod(int, java.lang.String, java.lang.String, java.lang.String, java.lang.String[])\l}"
+		color=black
+	]
+
+	ClassDeclarationVisitor [
+		label = "{ClassDeclarationVisitor|- currentClass: interfaces.IClass\l|+ void visit(int, int, java.lang.String, java.lang.String, java.lang.String, java.lang.String[])\l}"
+		color=black
+	]
+
+	SequenceMethodCall [
+		label = "{SequenceMethodCall|- methodName: java.lang.String\l- invokerName: java.lang.String\l- ownerName: java.lang.String\l- returnType: java.lang.String\l- parameters: java.util.List\l- isInit: boolean\l|+ String getName()\l+ void setName(java.lang.String)\l+ String getInvoker()\l+ String getOwner()\l+ void setInvoker(java.lang.String)\l+ void setOwner(java.lang.String)\l+ String getReturnType()\l+ void setReturnType(java.lang.String)\l+ List getParameters()\l+ void setParameters(java.util.List)\l+ boolean isInit()\l+ void setInit(boolean)\l}"
+		color=black
+	]
+
+	SequenceMethodCodeVisitor [
+		label = "{SequenceMethodCodeVisitor|- depth: int\l- depthLimit: int\l- invoker: java.lang.String\l- currentMethod: classRepresentation.SequenceMethodCall\l|+ void visitMethodInsn(int, java.lang.String, java.lang.String, java.lang.String, boolean)\l- String getParamName(org.objectweb.asm.Type)\l}"
+		color=black
+	]
+
+	ClassFieldVisitor [
+		label = "{ClassFieldVisitor|- currentClass: interfaces.IClass\l|+ FieldVisitor visitField(int, java.lang.String, java.lang.String, java.lang.String, java.lang.Object)\l+ void handleSignature(java.lang.String)\l  IClass access$0(umlDiagram.ClassFieldVisitor)\l}"
+		color=black
+	]
+
+	ClassMethodVisitor [
+		label = "{ClassMethodVisitor|- currentClass: interfaces.IClass\l|+ MethodVisitor visitMethod(int, java.lang.String, java.lang.String, java.lang.String, java.lang.String[])\l}"
+		color=black
+	]
+
+	MethodDeclarationVisitor [
+		label = "{MethodDeclarationVisitor|- currentClass: interfaces.IClass\l|+ MethodVisitor visitMethod(int, java.lang.String, java.lang.String, java.lang.String, java.lang.String[])\l+ void handleSignature(java.lang.String)\l  IClass access$0(umlDiagram.MethodDeclarationVisitor)\l}"
+		color=black
+	]
+
+	IField [
+		label = "{\<\<interface\>\>\nIField||+ String getType()\l+ void setType(java.lang.String)\l+ String getName()\l+ void setName(java.lang.String)\l+ char getVisibility()\l+ void setVisibility(char)\l+ List getNonAccessModifiers()\l+ void setNonAccessModifiers(java.util.List)\l}"
+		color=black
+	]
+
+	SingletonFieldVisitor [
+		label = "{SingletonFieldVisitor|- currentClass: interfaces.IClass\l|+ FieldVisitor visitField(int, java.lang.String, java.lang.String, java.lang.String, java.lang.Object)\l- void lookForGetter()\l}"
+		color=black
+	]
+
+	UMLMethod [
+		label = "{UMLMethod|- parameters: java.util.List\l- name: java.lang.String\l- visibility: char\l- nonAccessModifiers: java.util.List\l- returnType: java.lang.String\l|+ String toString()\l+ String getReturnType()\l+ void setReturnType(java.lang.String)\l+ List getParameters()\l+ void setParameters(java.util.List)\l+ String getName()\l+ void setName(java.lang.String)\l+ char getVisibility()\l+ void setVisibility(char)\l+ List getNonAccessModifiers()\l+ void setNonAccessModifiers(java.util.List)\l+ boolean equals(java.lang.Object)\l}"
+		color=black
+	]
+
+	edge [
+		arrowhead = "empty"
+	]
+
+	edge [
+		style = "dashed"
+	]
+
+	UMLClass -> IClass
+
+	UMLField -> IField
+
+	UMLMethod -> IMethod
+
+	edge [
+		arrowhead = "normal" style = "solid"
+	]
+
+	SingletonMethodVisitor -> IClass
+
+	Classes -> IClass
+
+	UMLClass -> IField
+
+	UMLClass -> IMethod
+
+	SequenceParser -> MethodCalls
+
+	MethodCodeVisitor -> IClass
+
+	MethodCalls -> SequenceMethodCall
+
+	SingleMethodVisitor -> SequenceMethodCall
+
+	ClassDeclarationVisitor -> IClass
+
+	SequenceMethodCodeVisitor -> SequenceMethodCall
+
+	ClassFieldVisitor -> IClass
+
+	ClassMethodVisitor -> IClass
+
+	MethodDeclarationVisitor -> IClass
+
+	SingletonFieldVisitor -> IClass
+
+	edge [
+		arrowhead = "normal" style = "dashed"
+	]
+
+	SingletonMethodVisitor -> UMLParser
+
+	UMLParser -> Classes
+
+	UMLParser -> UMLClass
+
+	UMLParser -> ClassDeclarationVisitor
+
+	UMLParser -> SingletonFieldVisitor
+
+	UMLParser -> ClassFieldVisitor
+
+	UMLParser -> ClassMethodVisitor
+
+	UMLParser -> MethodDeclarationVisitor
+
+	Classes -> IField
+
+	Classes -> IMethod
+
+	UMLClass -> UMLParser
+
+	SequenceParser -> SingleMethodVisitor
+
+	IClass -> IField
+
+	IClass -> IMethod
+
+	SingleMethodVisitor -> SequenceMethodCodeVisitor
+
+	SingleMethodVisitor -> MethodCalls
+
+	SequenceMethodCodeVisitor -> SingleMethodVisitor
+
+	ClassFieldVisitor -> UMLField
+
+	ClassFieldVisitor -> IField
+
+	ClassMethodVisitor -> UMLMethod
+
+	ClassMethodVisitor -> IMethod
+
+	MethodDeclarationVisitor -> MethodCodeVisitor
+
+	SingletonFieldVisitor -> UMLParser
+
+	SingletonFieldVisitor -> SingletonMethodVisitor
+
+}
