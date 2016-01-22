@@ -1,0 +1,33 @@
+digraph UML {
+
+	node [
+		shape = "record"
+	]
+
+	ChocolateBoilerLazy [
+		label = "{\<\<singleton\>\>\nChocolateBoilerLazy|- empty: boolean\l- boiled: boolean\l- uniqueInstance: testingData.ChocolateBoilerLazy\l|+ ChocolateBoilerLazy getInstance()\l+ void fill()\l+ void drain()\l+ void boil()\l+ boolean isEmpty()\l+ boolean isBoiled()\l}"
+		color=blue
+	]
+
+	ChocolateBoilerEager [
+		label = "{\<\<singleton\>\>\nChocolateBoilerEager|- empty: boolean\l- boiled: boolean\l- uniqueInstance: testingData.ChocolateBoilerEager\l|+ ChocolateBoilerEager getInstance()\l+ void fill()\l+ void drain()\l+ void boil()\l+ boolean isEmpty()\l+ boolean isBoiled()\l}"
+		color=blue
+	]
+
+	edge [
+		arrowhead = "empty"
+	]
+
+	edge [
+		style = "dashed"
+	]
+
+	edge [
+		arrowhead = "normal" style = "solid"
+	]
+
+	edge [
+		arrowhead = "normal" style = "dashed"
+	]
+
+}

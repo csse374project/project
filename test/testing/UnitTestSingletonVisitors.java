@@ -68,7 +68,7 @@ public class UnitTestSingletonVisitors {
 	public void testDesktop() throws IOException {
 		String className = "java.awt.Desktop";
 		setup(className);
-		assertFalse(currentClass.isSingleton());
+		assertTrue(currentClass.isSingleton());
 	}
 	
 	@Test
