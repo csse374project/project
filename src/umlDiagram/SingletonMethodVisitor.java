@@ -22,6 +22,7 @@ public class SingletonMethodVisitor extends ClassVisitor {
 		Type returnType = Type.getReturnType(desc);
 		if (currentClass.getName().equals(UMLParser.replaceDotsWithSlashes(returnType.getClassName()))) {
 			currentClass.setIsSingleton(true);
+			currentClass.addAssociatedClass(currentClass.getName());
 		}
 		return toDecorate;
 	}
