@@ -10,6 +10,7 @@ import org.junit.Before;
 import org.junit.After;
 import org.objectweb.asm.Opcodes;
 
+import classRepresentation.TopLevelDecorator;
 import classRepresentation.UMLClass;
 import classRepresentation.UMLField;
 import classRepresentation.UMLMethod;
@@ -31,28 +32,31 @@ public class UnitTestsDeclarationSample {
 
 	private static String className = "testingData.SampleClassForReadingInATest";
 	private IClass currentClass;
+	private TopLevelDecorator topDecorator;
 	
 	@Before
 	public void setup() throws IOException, NoSuchFieldException, SecurityException, IllegalArgumentException, IllegalAccessException {
 		currentClass = new UMLClass();
+		topDecorator = new TopLevelDecorator();
+		topDecorator.setDecorates(currentClass);
 		java.lang.reflect.Field f = UMLParser.class.getDeclaredField("classesToAccept");
 		f.setAccessible(true);
 		f.set(null, new String[]{"testingData/SampleClassForReadingInATest"});
 		ClassReader reader = null;
 		reader = new ClassReader(className);
-		ClassVisitor vis = new ClassDeclarationVisitor(Opcodes.ASM5, currentClass);
-		ClassVisitor vis2 = new ClassFieldVisitor(Opcodes.ASM5, vis, currentClass);
-		ClassVisitor vis3 = new ClassMethodVisitor(Opcodes.ASM5, vis2, currentClass);
+		ClassVisitor vis = new ClassDeclarationVisitor(Opcodes.ASM5, topDecorator);
+		ClassVisitor vis2 = new ClassFieldVisitor(Opcodes.ASM5, vis, topDecorator);
+		ClassVisitor vis3 = new ClassMethodVisitor(Opcodes.ASM5, vis2, topDecorator);
 		reader.accept(vis3, ClassReader.EXPAND_FRAMES);
 	}
 	
 	@Test
 	public void testName() {
-		assertEquals("testingData/SampleClassForReadingInATest", currentClass.getName());
+		assertEquals("testingData/SampleClassForReadingInATest", topDecorator.getName());
 	}
 	@Test
 	public void testFields() {
-		List<IField> fields = currentClass.getFields();
+		List<IField> fields = topDecorator.getFields();
 		List<IField> expected = new ArrayList<IField>();
 		
 		UMLField field1 = new UMLField();
@@ -100,7 +104,7 @@ public class UnitTestsDeclarationSample {
 	
 	@Test
 	public void testMethods() {
-		List<IMethod> methods = currentClass.getMethods();
+		List<IMethod> methods = topDecorator.getMethods();
 		List<IMethod> expected = new ArrayList<IMethod>();
 		
 		UMLMethod initMethod = new UMLMethod();
@@ -206,7 +210,7 @@ public class UnitTestsDeclarationSample {
 	
 	@Test
 	public void testInterfaces() {
-		List<String> interfaces = currentClass.getInterfaces();
+		List<String> interfaces = topDecorator.getInterfaces();
 		List<String> expected = new ArrayList<String>();
 		expected.add("testingData/SampleInterface01");
 		expected.add("testingData/SampleInterface02");
@@ -222,7 +226,7 @@ public class UnitTestsDeclarationSample {
 	
 	@Test
 	public void testSuperClass() {
-		assertEquals("testingData/SampleSuperClass", currentClass.getSuperClass());
+		assertEquals("testingData/SampleSuperClass", topDecorator.getSuperClass());
 	}
 
 }

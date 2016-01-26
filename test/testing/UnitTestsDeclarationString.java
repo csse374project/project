@@ -10,6 +10,7 @@ import org.junit.Before;
 import org.junit.After;
 import org.objectweb.asm.Opcodes;
 
+import classRepresentation.TopLevelDecorator;
 import classRepresentation.UMLClass;
 
 import org.objectweb.asm.ClassReader;
@@ -27,34 +28,37 @@ public class UnitTestsDeclarationString {
 
 	private static String className = "java.lang.String";
 	private IClass currentClass;
+	private TopLevelDecorator topDecorator;
 	
 	@Before
 	public void setup() throws IOException, NoSuchFieldException, SecurityException, IllegalArgumentException, IllegalAccessException {
 		currentClass = new UMLClass();
+		topDecorator = new TopLevelDecorator();
+		topDecorator.setDecorates(currentClass);
 		java.lang.reflect.Field f = UMLParser.class.getDeclaredField("classesToAccept");
 		f.setAccessible(true);
 		f.set(null, new String[]{"java/lang/String"});
 		ClassReader reader = null;
 		reader = new ClassReader(className);
-		ClassVisitor vis = new ClassDeclarationVisitor(Opcodes.ASM5, currentClass);
+		ClassVisitor vis = new ClassDeclarationVisitor(Opcodes.ASM5, topDecorator);
 		reader.accept(vis, ClassReader.EXPAND_FRAMES);
 	}
 	
 	@Test
 	public void testName() {
-		assertEquals("java/lang/String", currentClass.getName());
+		assertEquals("java/lang/String", topDecorator.getName());
 	}
 	@Test
 	public void testNumberOfInterfaces() {
 		// Strings implement: Serializable, Comparable<String>, CharSequence
-		List<String> interfaces = currentClass.getInterfaces();
+		List<String> interfaces = topDecorator.getInterfaces();
 		assertEquals(3, interfaces.size());
 	}
 	
 	@Test
 	public void testInterfaces() {
 		// Strings implement: Serializable, Comparable<String>, CharSequence
-		List<String> interfaces = currentClass.getInterfaces();
+		List<String> interfaces = topDecorator.getInterfaces();
 		List<String> expected = new ArrayList<String>();
 		expected.add("java/io/Serializable");
 		expected.add("java/lang/Comparable");
@@ -68,7 +72,7 @@ public class UnitTestsDeclarationString {
 	
 	@Test
 	public void testSuperClass() {
-		assertEquals("java/lang/Object", currentClass.getSuperClass());
+		assertEquals("java/lang/Object", topDecorator.getSuperClass());
 	}
 
 }

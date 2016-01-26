@@ -20,6 +20,7 @@ import umlDiagram.ClassFieldVisitor;
 import umlDiagram.ClassMethodVisitor;
 import umlDiagram.UMLParser;
 import classRepresentation.Classes;
+import classRepresentation.TopLevelDecorator;
 
 public class UnitTestsToGraphViz {
 
@@ -49,13 +50,15 @@ public class UnitTestsToGraphViz {
 		f.set(null, new String[]{"testingData/SampleClassForReadingInATest", "testingData/SampleInterface01", "testingData/SampleInterface02", "testingData/SampleSuperClass", "testingData/SampleClassForInitializing", "testingData/SampleClassForInitializingTwo", "testingData/SampleClassForInitializingThree", "testingData/SampleClassForInitializingFour"});
 		for (String cls : classNames) {
 			UMLClass currentClass = new UMLClass();
+			TopLevelDecorator topDecorator = new TopLevelDecorator();
+			topDecorator.setDecorates(currentClass);
 			ClassReader reader = new ClassReader(cls);
-			ClassVisitor declVisitor = new ClassDeclarationVisitor(Opcodes.ASM5, currentClass);
-			ClassVisitor fieldVisitor = new ClassFieldVisitor(Opcodes.ASM5, declVisitor, currentClass);
-			ClassVisitor methodVisitor = new ClassMethodVisitor(Opcodes.ASM5, fieldVisitor, currentClass);
-			ClassVisitor methodCodeVisitor = new MethodDeclarationVisitor(Opcodes.ASM5, methodVisitor, currentClass);
+			ClassVisitor declVisitor = new ClassDeclarationVisitor(Opcodes.ASM5, topDecorator);
+			ClassVisitor fieldVisitor = new ClassFieldVisitor(Opcodes.ASM5, declVisitor, topDecorator);
+			ClassVisitor methodVisitor = new ClassMethodVisitor(Opcodes.ASM5, fieldVisitor, topDecorator);
+			ClassVisitor methodCodeVisitor = new MethodDeclarationVisitor(Opcodes.ASM5, methodVisitor, topDecorator);
 			reader.accept(methodCodeVisitor, ClassReader.EXPAND_FRAMES);
-			classes.addClass(currentClass);
+			classes.addClass(topDecorator);
 		}
 		graphViz = classes.printGraphVizInput();
 	}

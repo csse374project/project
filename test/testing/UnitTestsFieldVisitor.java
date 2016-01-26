@@ -11,6 +11,7 @@ import org.junit.Before;
 import org.junit.After;
 import org.objectweb.asm.Opcodes;
 
+import classRepresentation.TopLevelDecorator;
 import classRepresentation.UMLClass;
 import classRepresentation.UMLField;
 
@@ -30,17 +31,20 @@ public class UnitTestsFieldVisitor {
 	
 	private static String className = "java.lang.String";
 	private IClass currentClass;
+	private TopLevelDecorator topDecorator;
 	
 	@Before
 	public void setup() throws IOException, NoSuchFieldException, SecurityException, IllegalArgumentException, IllegalAccessException {
 		// TODO fix this.???
 		currentClass = new UMLClass();
+		topDecorator = new TopLevelDecorator();
+		topDecorator.setDecorates(currentClass);
 		java.lang.reflect.Field f = UMLParser.class.getDeclaredField("classesToAccept");
 		f.setAccessible(true);
 		f.set(null, new String[]{"java/lang/String"});
 		ClassReader reader = null;
 		reader = new ClassReader(className);
-		ClassVisitor decVis = new ClassDeclarationVisitor(Opcodes.ASM5, currentClass);
+		ClassVisitor decVis = new ClassDeclarationVisitor(Opcodes.ASM5, topDecorator);
 		ClassVisitor fVis = new ClassFieldVisitor(Opcodes.ASM5, decVis, currentClass);
 		reader.accept(fVis, ClassReader.EXPAND_FRAMES);
 	}

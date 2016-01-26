@@ -12,6 +12,7 @@ import org.objectweb.asm.ClassReader;
 import org.objectweb.asm.ClassVisitor;
 import org.objectweb.asm.Opcodes;
 
+import classRepresentation.TopLevelDecorator;
 import classRepresentation.UMLClass;
 import classRepresentation.UMLMethod;
 import interfaces.IClass;
@@ -26,6 +27,7 @@ public class UnitTestsMethodVisitor {
 
 	private static String className = "java.lang.String";
 	private IClass currentClass;
+	private TopLevelDecorator topDecorator;
 	
 	@Before
 	public void setup()
@@ -33,13 +35,15 @@ public class UnitTestsMethodVisitor {
 				IllegalAccessException {
 		// TODO fix this.
 		currentClass = new UMLClass();
+		topDecorator = new TopLevelDecorator();
+		topDecorator.setDecorates(currentClass);
 		java.lang.reflect.Field f = UMLParser.class.getDeclaredField("classesToAccept");
 		f.setAccessible(true);
 		f.set(null, new String[]{"java/lang/String"});
 		ClassReader reader = new ClassReader(className);
-		ClassVisitor declVisitor = new ClassDeclarationVisitor(Opcodes.ASM5, currentClass);
-		ClassVisitor fieldVisitor = new ClassFieldVisitor(Opcodes.ASM5, declVisitor, currentClass);
-		ClassVisitor methodVisitor = new ClassMethodVisitor(Opcodes.ASM5, fieldVisitor, currentClass);
+		ClassVisitor declVisitor = new ClassDeclarationVisitor(Opcodes.ASM5, topDecorator);
+		ClassVisitor fieldVisitor = new ClassFieldVisitor(Opcodes.ASM5, declVisitor, topDecorator);
+		ClassVisitor methodVisitor = new ClassMethodVisitor(Opcodes.ASM5, fieldVisitor, topDecorator);
 		reader.accept(methodVisitor, ClassReader.EXPAND_FRAMES);
 	}
 
