@@ -2,8 +2,9 @@ package classRepresentation.decorators;
 
 public class DecoratorDecorator extends IClassDecorator {
 
-	public DecoratorDecorator() {
-		
+	private String component;
+	public DecoratorDecorator(String component) {
+		this.component = component;
 	}
 	
 	@Override
