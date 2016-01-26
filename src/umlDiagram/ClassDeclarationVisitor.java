@@ -5,8 +5,8 @@ import java.util.Arrays;
 import org.objectweb.asm.ClassVisitor;
 import org.objectweb.asm.Opcodes;
 
-import classRepresentation.IClassDecorator;
-import classRepresentation.InterfaceDecorator;
+import classRepresentation.decorators.IClassDecorator;
+import classRepresentation.decorators.InterfaceDecorator;
 
 public class ClassDeclarationVisitor extends ClassVisitor {
 

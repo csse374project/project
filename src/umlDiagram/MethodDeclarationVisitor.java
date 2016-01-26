@@ -5,7 +5,7 @@ import org.objectweb.asm.MethodVisitor;
 import org.objectweb.asm.Opcodes;
 import org.objectweb.asm.Type;
 
-import classRepresentation.IClassDecorator;
+import classRepresentation.decorators.IClassDecorator;
 import jdk.internal.org.objectweb.asm.signature.SignatureReader;
 import jdk.internal.org.objectweb.asm.signature.SignatureVisitor;
 

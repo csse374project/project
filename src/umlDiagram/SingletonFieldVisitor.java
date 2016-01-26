@@ -8,7 +8,7 @@ import org.objectweb.asm.FieldVisitor;
 import org.objectweb.asm.Opcodes;
 import org.objectweb.asm.Type;
 
-import classRepresentation.IClassDecorator;
+import classRepresentation.decorators.IClassDecorator;
 
 public class SingletonFieldVisitor extends ClassVisitor {
 

@@ -1,4 +1,4 @@
-package classRepresentation;
+package classRepresentation.decorators;
 
 public class TopLevelDecorator extends IClassDecorator {
 

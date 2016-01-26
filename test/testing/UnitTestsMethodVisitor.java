@@ -12,9 +12,9 @@ import org.objectweb.asm.ClassReader;
 import org.objectweb.asm.ClassVisitor;
 import org.objectweb.asm.Opcodes;
 
-import classRepresentation.TopLevelDecorator;
 import classRepresentation.UMLClass;
 import classRepresentation.UMLMethod;
+import classRepresentation.decorators.TopLevelDecorator;
 import interfaces.IClass;
 import interfaces.IField;
 import interfaces.IMethod;

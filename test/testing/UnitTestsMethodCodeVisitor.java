@@ -14,8 +14,8 @@ import org.objectweb.asm.ClassVisitor;
 import org.objectweb.asm.Opcodes;
 
 import classRepresentation.UMLClass;
+import classRepresentation.decorators.TopLevelDecorator;
 import classRepresentation.Classes;
-import classRepresentation.TopLevelDecorator;
 import interfaces.IClass;
 import umlDiagram.MethodDeclarationVisitor;
 import umlDiagram.ClassDeclarationVisitor;

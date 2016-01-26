@@ -1,6 +1,4 @@
-package umlDiagram;
-
-import classRepresentation.IClassDecorator;
+package classRepresentation.decorators;
 
 public class SingletonDecorator extends IClassDecorator {
 

@@ -10,10 +10,10 @@ import org.junit.Before;
 import org.junit.After;
 import org.objectweb.asm.Opcodes;
 
-import classRepresentation.TopLevelDecorator;
 import classRepresentation.UMLClass;
 import classRepresentation.UMLField;
 import classRepresentation.UMLMethod;
+import classRepresentation.decorators.TopLevelDecorator;
 
 import org.objectweb.asm.ClassReader;
 import org.objectweb.asm.ClassVisitor;

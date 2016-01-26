@@ -10,12 +10,12 @@ import org.objectweb.asm.ClassReader;
 import org.objectweb.asm.ClassVisitor;
 import org.objectweb.asm.Opcodes;
 
-import classRepresentation.IClassDecorator;
-import classRepresentation.TopLevelDecorator;
 import classRepresentation.UMLClass;
+import classRepresentation.decorators.IClassDecorator;
+import classRepresentation.decorators.SingletonDecorator;
+import classRepresentation.decorators.TopLevelDecorator;
 import interfaces.IClass;
 import umlDiagram.ClassDeclarationVisitor;
-import umlDiagram.SingletonDecorator;
 import umlDiagram.SingletonFieldVisitor;
 
 public class UnitTestSingletonVisitors {

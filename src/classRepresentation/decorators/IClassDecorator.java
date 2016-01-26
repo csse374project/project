@@ -1,4 +1,4 @@
-package classRepresentation;
+package classRepresentation.decorators;
 
 import java.util.List;
 
