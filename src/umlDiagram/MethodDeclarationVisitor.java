@@ -5,16 +5,16 @@ import org.objectweb.asm.MethodVisitor;
 import org.objectweb.asm.Opcodes;
 import org.objectweb.asm.Type;
 
-import interfaces.IClass;
+import classRepresentation.IClassDecorator;
 import jdk.internal.org.objectweb.asm.signature.SignatureReader;
 import jdk.internal.org.objectweb.asm.signature.SignatureVisitor;
 
 //TODO: Rename class
 public class MethodDeclarationVisitor extends ClassVisitor {
 	
-	private IClass currentClass;
+	private IClassDecorator currentClass;
 
-	public MethodDeclarationVisitor(int arg0, ClassVisitor arg1, IClass currentClass) {
+	public MethodDeclarationVisitor(int arg0, ClassVisitor arg1, IClassDecorator currentClass) {
 		super(arg0, arg1);
 		this.currentClass = currentClass;
 	}

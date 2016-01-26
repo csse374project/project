@@ -5,13 +5,14 @@ import java.util.Arrays;
 import org.objectweb.asm.ClassVisitor;
 import org.objectweb.asm.Opcodes;
 
-import interfaces.IClass;
+import classRepresentation.IClassDecorator;
+import classRepresentation.InterfaceDecorator;
 
 public class ClassDeclarationVisitor extends ClassVisitor {
 
-	private IClass currentClass;
+	private IClassDecorator currentClass;
 
-	public ClassDeclarationVisitor(int arg0, IClass curClass) {
+	public ClassDeclarationVisitor(int arg0, IClassDecorator curClass) {
 		super(arg0);
 		this.currentClass = curClass;
 	}
@@ -24,7 +25,7 @@ public class ClassDeclarationVisitor extends ClassVisitor {
 		currentClass.setInterfaces(Arrays.asList(interfaces));
 
 		if ((access & Opcodes.ACC_INTERFACE) != 0) {
-			currentClass.setIsInterface(true);
+			currentClass.decorate(new InterfaceDecorator());
 		}
 
 		super.visit(version, access, name, signature, superName, interfaces);

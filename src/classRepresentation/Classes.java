@@ -29,7 +29,7 @@ public class Classes {
 			classes.put(newClass.getName(), newClass);
 	}
 
-	public String toGraphViz() {
+	public String printGraphVizInput() {
 		StringBuilder string = new StringBuilder();
 
 		Set<String> keys = classes.keySet();
@@ -38,7 +38,7 @@ public class Classes {
 		string.append("digraph UML {\n\n\tnode [\n\t\tshape = ");
 		string.append("\"record\"\n\t]\n\n");
 
-		appendClass(string, keys);
+		appendClasses(string, keys);
 
 		string.append("\tedge [\n\t\tarrowhead = \"empty\"\n\t]\n\n");
 		appendSuperClass(string, keys);
@@ -54,6 +54,18 @@ public class Classes {
 
 		string.append("}");
 		return string.toString();
+	}
+	
+	private void appendClassHeader(StringBuilder str, IClass cls) {
+		int lastFwdSlash = cls.getName().lastIndexOf('/');
+		str.append("\t");
+		str.append(cls.getName().substring(lastFwdSlash + 1));
+		str.append(" [\n\t\tlabel = \"{");
+	}
+	private void appendClassFooter(StringBuilder str, IClass cls) {
+		str.append("color=");
+		str.append(cls.getColor());
+		str.append("\n\t]\n\n");
 	}
 
 	private void appendUsedClasses(StringBuilder string, Set<String> keys) {
@@ -86,29 +98,12 @@ public class Classes {
 		}
 	}
 
-	private void appendClass(StringBuilder string, Set<String> keys) {
+	private void appendClasses(StringBuilder string, Set<String> keys) {
 		for (String key : keys) {
 			IClass cls = classes.get(key);
-			int lastFwdSlash = cls.getName().lastIndexOf('/');
-			string.append("\t" + cls.getName().substring(lastFwdSlash + 1) + " [\n\t\tlabel = \"{");
-			if (cls.getIsInterface()) {
-				string.append("\\<\\<interface\\>\\>\\n");
-			} else if (cls.isSingleton()) {
-				string.append("\\<\\<singleton\\>\\>\\n");
-			}
-			string.append(cls.getName().substring(lastFwdSlash + 1) + "|");
-
-			appendFields(string, cls);
-
-			string.append("|");
-
-			appendMethods(string, cls, lastFwdSlash);
-
-			string.append("}\"\n\t\t");
-			
-			appendColor(string, cls);
-			
-			string.append("\n\t]\n\n");
+			appendClassHeader(string, cls);
+			cls.toGraphViz(string);
+			appendClassFooter(string, cls);
 		}
 	}
 
@@ -138,39 +133,4 @@ public class Classes {
 			}
 		}
 	}
-
-	private void appendFields(StringBuilder string, IClass cls) {
-		for (IField field : cls.getFields()) {
-			string.append(field.getVisibility() + " " + field.getName() + ": " + field.getType() + "\\l");
-		}
-	}
-
-	private void appendMethods(StringBuilder string, IClass cls, int lastFwdSlash) {
-		for (IMethod method : cls.getMethods()) {
-			String methodName = method.getName();
-			if (methodName.equals("<init>") || methodName.equals("<clinit>")) {
-				continue;
-			}
-			int lastPeriod = method.getReturnType().lastIndexOf('.');
-			String methodReturnType = method.getReturnType();
-			if (lastPeriod > -1) {
-				methodReturnType = methodReturnType.substring(lastPeriod + 1);
-			}
-			string.append(method.getVisibility() + " " + methodReturnType + " " + methodName + "(");
-			String params = method.getParameters().toString().substring(1,
-					method.getParameters().toString().length() - 1);
-			string.append(params + ")\\l");
-		}
-	}
-	
-	private void appendColor(StringBuilder string, IClass cls) {
-		if (cls.isSingleton()) {
-			string.append("color=blue");
-		}
-		else {
-			string.append("color=");
-			string.append(DEFAULT_COLOR);
-		}
-	}
-
 }

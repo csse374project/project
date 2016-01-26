@@ -1,22 +1,20 @@
 package umlDiagram;
 
-import org.objectweb.asm.Opcodes;
-
-import org.objectweb.asm.Type;
-
-import interfaces.IClass;
-
 import java.io.IOException;
 
 import org.objectweb.asm.ClassReader;
 import org.objectweb.asm.ClassVisitor;
 import org.objectweb.asm.FieldVisitor;
+import org.objectweb.asm.Opcodes;
+import org.objectweb.asm.Type;
+
+import classRepresentation.IClassDecorator;
 
 public class SingletonFieldVisitor extends ClassVisitor {
 
-	private IClass currentClass;
+	private IClassDecorator currentClass;
 
-	public SingletonFieldVisitor(int opCode, ClassVisitor toDecorate, IClass currentClass) {
+	public SingletonFieldVisitor(int opCode, ClassVisitor toDecorate, IClassDecorator currentClass) {
 		super(opCode, toDecorate);
 		this.currentClass = currentClass;
 	}

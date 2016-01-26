@@ -57,7 +57,7 @@ public class UnitTestsToGraphViz {
 			reader.accept(methodCodeVisitor, ClassReader.EXPAND_FRAMES);
 			classes.addClass(currentClass);
 		}
-		graphViz = classes.toGraphViz();
+		graphViz = classes.printGraphVizInput();
 	}
 	
 	@Test

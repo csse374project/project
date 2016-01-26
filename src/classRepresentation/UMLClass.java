@@ -8,11 +8,11 @@ import umlDiagram.UMLParser;
 
 public class UMLClass implements IClass {
 
-	private String name;
-	private String superClass;
+	private String name, superClass, color;
 	private List<String> interfaces, associatedClasses, usedClasses;
 	private List<IField> fields;
 	private List<IMethod> methods;
+	private List<String> stereotypes;
 	private boolean isInterface, isSingleton;
 
 	public UMLClass() {
@@ -24,6 +24,8 @@ public class UMLClass implements IClass {
 		this.isInterface = false;
 		this.associatedClasses = new ArrayList<String>();
 		this.usedClasses = new ArrayList<String>();
+		this.stereotypes = new ArrayList<String>();
+		this.color = "black";
 	}
 
 	@Override
@@ -87,13 +89,18 @@ public class UMLClass implements IClass {
 	}
 
 	@Override
-	public boolean getIsInterface() {
+	public boolean isInterface() {
 		return this.isInterface;
 	}
 
 	@Override
 	public void setIsInterface(boolean isInterface) {
 		this.isInterface = isInterface;
+	}
+	
+	@Override
+	public void addStereotype(String stereotype) {
+		this.stereotypes.add(stereotype);
 	}
 
 	@Override
@@ -123,13 +130,62 @@ public class UMLClass implements IClass {
 	public List<String> getUsedClasses() {
 		return usedClasses;
 	}
+
 	@Override
-	public boolean isSingleton() {
-		return isSingleton;
+	public void toGraphViz(StringBuilder str) {
+		// TODO
+		int lastFwdSlash = this.getName().lastIndexOf('/');
+		appendStereotypes(str);
+		str.append(this.getName().substring(lastFwdSlash + 1) + "|");
+
+		appendFields(str);
+
+		str.append("|");
+
+		appendMethods(str, lastFwdSlash);
+
+		str.append("}\"\n\t\t");
 	}
-	@Override
-	public void setIsSingleton(boolean isSingleton) {
-		this.isSingleton = isSingleton;		
+	private void appendStereotypes(StringBuilder str) {
+		for (String stereotype : this.stereotypes) {
+			str.append("\\<\\<");
+			str.append(stereotype);
+			str.append("\\>\\>");
+		}
+	}
+	
+	private void appendFields(StringBuilder string) {
+		for (IField field : this.getFields()) {
+			string.append(field.getVisibility() + " " + field.getName() + ": " + field.getType() + "\\l");
+		}
 	}
 
+	private void appendMethods(StringBuilder string, int lastFwdSlash) {
+		for (IMethod method : this.getMethods()) {
+			String methodName = method.getName();
+			if (methodName.equals("<init>") || methodName.equals("<clinit>")) {
+				continue;
+			}
+			int lastPeriod = method.getReturnType().lastIndexOf('.');
+			String methodReturnType = method.getReturnType();
+			if (lastPeriod > -1) {
+				methodReturnType = methodReturnType.substring(lastPeriod + 1);
+			}
+			string.append(method.getVisibility() + " " + methodReturnType + " " + methodName + "(");
+			String params = method.getParameters().toString().substring(1,
+					method.getParameters().toString().length() - 1);
+			string.append(params + ")\\l");
+		}
+	}
+	
+	@Override
+	public void setColor(String color) {
+		this.color = color;
+	}
+	
+	@Override
+	public String getColor() {
+		return this.color;
+	}
+	
 }

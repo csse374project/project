@@ -16,13 +16,15 @@ public interface IClass {
 	List<IMethod> getMethods();
 	void addMethod(IMethod method);
 	void addField(IField field);
-	boolean getIsInterface();
+	boolean isInterface();
 	void setIsInterface(boolean isInterface);
 	void addAssociatedClass(String arg);
 	void addUsedClass(String arg);
 	List<String> getAssociatedClasses();
 	List<String> getUsedClasses();
-	boolean isSingleton();
-	void setIsSingleton(boolean isSingleton);
+	void toGraphViz(StringBuilder string);
+	void addStereotype(String stereotypes);
+	void setColor(String color);
+	String getColor();
 }
 

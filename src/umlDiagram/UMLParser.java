@@ -7,6 +7,8 @@ import org.objectweb.asm.ClassVisitor;
 import org.objectweb.asm.Opcodes;
 
 import classRepresentation.Classes;
+import classRepresentation.IClassDecorator;
+import classRepresentation.TopLevelDecorator;
 import classRepresentation.UMLClass;
 import interfaces.IClass;
 
@@ -20,25 +22,27 @@ public class UMLParser {
 		setClassesToAccept(args);
 
 		for (String className : args) {
+			IClassDecorator topLevelDecorator = new TopLevelDecorator();
 			IClass currentClass = new UMLClass();
+			topLevelDecorator.setDecorates(currentClass);
 
 			ClassReader reader = new ClassReader(className);
 			
-			ClassVisitor declVisitor = new ClassDeclarationVisitor(Opcodes.ASM5, currentClass);
+			ClassVisitor declVisitor = new ClassDeclarationVisitor(Opcodes.ASM5, topLevelDecorator);
 			
-			ClassVisitor singletonVisitor = new SingletonFieldVisitor(Opcodes.ASM5, declVisitor, currentClass);
+			ClassVisitor singletonVisitor = new SingletonFieldVisitor(Opcodes.ASM5, declVisitor, topLevelDecorator);
 
-			ClassVisitor fieldVisitor = new ClassFieldVisitor(Opcodes.ASM5, singletonVisitor, currentClass);
+			ClassVisitor fieldVisitor = new ClassFieldVisitor(Opcodes.ASM5, singletonVisitor, topLevelDecorator);
 
-			ClassVisitor methodVisitor = new ClassMethodVisitor(Opcodes.ASM5, fieldVisitor, currentClass);
+			ClassVisitor methodVisitor = new ClassMethodVisitor(Opcodes.ASM5, fieldVisitor, topLevelDecorator);
 			
-			ClassVisitor classCodeVisitor = new MethodDeclarationVisitor(Opcodes.ASM5, methodVisitor, currentClass);
+			ClassVisitor classCodeVisitor = new MethodDeclarationVisitor(Opcodes.ASM5, methodVisitor, topLevelDecorator);
 			
 			reader.accept(classCodeVisitor, ClassReader.EXPAND_FRAMES);
-			classes.addClass(currentClass);
+			classes.addClass(topLevelDecorator);
 		}
 
-		System.out.println(classes.toGraphViz());
+		System.out.println(classes.printGraphVizInput());
 	}
 
 	private static void setClassesToAccept(String[] args) {
