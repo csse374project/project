@@ -3,9 +3,10 @@ package classRepresentation.decorators;
 public class InterfaceDecorator extends IClassDecorator {
 
 	@Override
-	public void toGraphViz(StringBuilder string) {
-		decorates.addStereotype("Interface");
-		decorates.toGraphViz(string);
+	public void appendGraphVizStereotype(StringBuilder string) {
+		string.append("\\<\\<Interface\\>\\>\\n");
+		decorates.appendGraphVizStereotype(string);
 	}
+
 
 }

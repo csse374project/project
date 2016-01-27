@@ -16,15 +16,24 @@ public interface IClass {
 	List<IMethod> getMethods();
 	void addMethod(IMethod method);
 	void addField(IField field);
-	boolean isInterface();
+//	boolean isInterface();
 	void setIsInterface(boolean isInterface);
 	void addAssociatedClass(String arg);
 	void addUsedClass(String arg);
 	List<String> getAssociatedClasses();
 	List<String> getUsedClasses();
 	void toGraphViz(StringBuilder string);
-	void addStereotype(String stereotypes);
-	void setColor(String color);
-	String getColor();
+//	void addStereotype(String stereotypes);
+//	void setColor(String color);
+//	String getColor();
+	
+	// declares a node and starts the label with label = \"
+	void appendGraphVizHeader(StringBuilder str);
+	void appendGraphVizStereotype(StringBuilder str);
+	void appendGraphVizClassName(StringBuilder str);
+	void appendGraphVizFields(StringBuilder str);
+	void appendGraphVizMethods(StringBuilder str);
+	void appendGraphVizColor(StringBuilder str);
+	void appendGraphVizFooter(StringBuilder str);
 }
 

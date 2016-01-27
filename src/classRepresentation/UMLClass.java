@@ -89,20 +89,10 @@ public class UMLClass implements IClass {
 	}
 
 	@Override
-	public boolean isInterface() {
-		return this.isInterface;
-	}
-
-	@Override
 	public void setIsInterface(boolean isInterface) {
 		this.isInterface = isInterface;
 	}
 	
-	@Override
-	public void addStereotype(String stereotype) {
-		this.stereotypes.add(stereotype);
-	}
-
 	@Override
 	public void addAssociatedClass(String arg) {
 		if (UMLParser.classIsUsed(arg) && !associatedClasses.contains(arg)) {
@@ -155,12 +145,40 @@ public class UMLClass implements IClass {
 	}
 	
 	private void appendFields(StringBuilder string) {
-		for (IField field : this.getFields()) {
-			string.append(field.getVisibility() + " " + field.getName() + ": " + field.getType() + "\\l");
-		}
+		
 	}
 
 	private void appendMethods(StringBuilder string, int lastFwdSlash) {
+		
+	}
+
+	@Override
+	public void appendGraphVizHeader(StringBuilder str) {
+		int lastFwdSlash = name.lastIndexOf('/');
+		str.append("\t");
+		str.append(name.substring(lastFwdSlash + 1));
+		str.append(" [\n\t\tlabel = \"{");
+	}
+
+	@Override
+	public void appendGraphVizStereotype(StringBuilder str) {
+		// do nothing
+	}
+
+	@Override
+	public void appendGraphVizClassName(StringBuilder str) {
+		str.append(name);
+	}
+
+	@Override
+	public void appendGraphVizFields(StringBuilder str) {
+		for (IField field : this.getFields()) {
+			str.append(field.getVisibility() + " " + field.getName() + ": " + field.getType() + "\\l");
+		}
+	}
+
+	@Override
+	public void appendGraphVizMethods(StringBuilder str) {
 		for (IMethod method : this.getMethods()) {
 			String methodName = method.getName();
 			if (methodName.equals("<init>") || methodName.equals("<clinit>")) {
@@ -171,21 +189,20 @@ public class UMLClass implements IClass {
 			if (lastPeriod > -1) {
 				methodReturnType = methodReturnType.substring(lastPeriod + 1);
 			}
-			string.append(method.getVisibility() + " " + methodReturnType + " " + methodName + "(");
+			str.append(method.getVisibility() + " " + methodReturnType + " " + methodName + "(");
 			String params = method.getParameters().toString().substring(1,
 					method.getParameters().toString().length() - 1);
-			string.append(params + ")\\l");
-		}
+			str.append(params + ")\\l");
+		}		
 	}
-	
+
 	@Override
-	public void setColor(String color) {
-		this.color = color;
+	public void appendGraphVizColor(StringBuilder str) {
+		// do nothing (color defaults to black)
 	}
-	
+
 	@Override
-	public String getColor() {
-		return this.color;
+	public void appendGraphVizFooter(StringBuilder str) {
+		str.append("\n\t]\n\n");
 	}
-	
 }

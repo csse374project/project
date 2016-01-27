@@ -23,11 +23,6 @@ public abstract class IClassDecorator implements IClass {
 	}
 
 	@Override
-	public void addStereotype(String stereotype) {
-		decorates.addStereotype(stereotype);
-	}
-	
-	@Override
 	public void setName(String name) {
 		decorates.setName(name);
 	}
@@ -88,11 +83,6 @@ public abstract class IClassDecorator implements IClass {
 	}
 
 	@Override
-	public boolean isInterface() {
-		return decorates.isInterface();
-	}
-
-	@Override
 	public void setIsInterface(boolean isInterface) {
 		decorates.setIsInterface(isInterface);
 	}
@@ -118,12 +108,42 @@ public abstract class IClassDecorator implements IClass {
 	}
 	
 	@Override
-	public void setColor(String color) {
-		decorates.setColor(color);
+	public void toGraphViz(StringBuilder str) {
+		throw new UnsupportedOperationException();
 	}
-	
+
 	@Override
-	public String getColor() {
-		return decorates.getColor();
+	public void appendGraphVizHeader(StringBuilder str) {
+		decorates.appendGraphVizHeader(str);
+	}
+
+	@Override
+	public void appendGraphVizStereotype(StringBuilder str) {
+		decorates.appendGraphVizStereotype(str);
+	}
+
+	@Override
+	public void appendGraphVizClassName(StringBuilder str) {
+		decorates.appendGraphVizClassName(str);
+	}
+
+	@Override
+	public void appendGraphVizFields(StringBuilder str) {
+		decorates.appendGraphVizFields(str);
+	}
+
+	@Override
+	public void appendGraphVizMethods(StringBuilder str) {
+		decorates.appendGraphVizMethods(str);
+	}
+
+	@Override
+	public void appendGraphVizColor(StringBuilder str) {
+		decorates.appendGraphVizColor(str);
+	}
+
+	@Override
+	public void appendGraphVizFooter(StringBuilder str) {
+		decorates.appendGraphVizFooter(str);
 	}
 }

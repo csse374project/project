@@ -64,7 +64,7 @@ public class Classes {
 	}
 	private void appendClassFooter(StringBuilder str, IClass cls) {
 		str.append("color=");
-		str.append(cls.getColor());
+//		str.append(cls.getColor());
 		str.append("\n\t]\n\n");
 	}
 
@@ -100,10 +100,10 @@ public class Classes {
 
 	private void appendClasses(StringBuilder string, Set<String> keys) {
 		for (String key : keys) {
-			IClass cls = classes.get(key);
-			appendClassHeader(string, cls);
-			cls.toGraphViz(string);
-			appendClassFooter(string, cls);
+			IClass current = classes.get(key);
+//			appendClassHeader(string, current);
+			current.toGraphViz(string);
+//			appendClassFooter(string, current);
 		}
 	}
 

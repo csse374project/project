@@ -13,7 +13,17 @@ public class TopLevelDecorator extends IClassDecorator {
 	}
 
 	@Override
-	public void toGraphViz(StringBuilder string) {
-		decorates.toGraphViz(string);
+	public void toGraphViz(StringBuilder str) {
+		decorates.appendGraphVizHeader(str);
+		decorates.appendGraphVizStereotype(str);
+		decorates.appendGraphVizClassName(str);
+		str.append("|");
+		decorates.appendGraphVizFields(str);
+		str.append("|");
+		decorates.appendGraphVizMethods(str);
+		str.append("|");
+		str.append("}\"\n\t\t");
+		decorates.appendGraphVizColor(str);
+		decorates.appendGraphVizFooter(str);
 	}
 }
