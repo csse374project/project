@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Map;
 
 import classRepresentation.Classes;
+import classRepresentation.decorators.ComponentDecorator;
 import classRepresentation.decorators.DecoratorDecorator;
 import classRepresentation.decorators.IClassDecorator;
 import interfaces.IClass;
@@ -37,11 +38,11 @@ public class DecoratorDetector {
 	private void applyDecorator(IClass clazz, String component) {
 		IClassDecorator decoratedClass = (IClassDecorator) clazz;
 		decoratedClass.decorate(new DecoratorDecorator(component));
-		
+		setComponentToInterface(component);
 	}
 	private void setComponentToInterface(String component) {
-		IClass compClass = classMap.get(component);
-		// TODO
+		IClassDecorator compClass = (IClassDecorator) classMap.get(component);
+		compClass.decorate(new ComponentDecorator());
 	}
 	
 }
