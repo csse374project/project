@@ -13,9 +13,8 @@ public class DecoratorDecorator extends IClassDecorator {
 	}
 	
 	@Override
-	public void toGraphViz(StringBuilder string) {
-//		decorates.setColor("green");
-//		decorates.addStereotype("Decorator");
-		decorates.toGraphViz(string);
+	public void appendGraphVizStereotype(StringBuilder string) {
+		string.append("\\<\\<Decorator\\>\\>\\n");
+		decorates.appendGraphVizStereotype(string);
 	}
 }
