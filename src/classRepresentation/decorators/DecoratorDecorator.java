@@ -17,4 +17,15 @@ public class DecoratorDecorator extends IClassDecorator {
 		string.append("\\<\\<Decorator\\>\\>\\n");
 		decorates.appendGraphVizStereotype(string);
 	}
+	
+	@Override
+	public void appendGraphVizFooter(StringBuilder string){
+		if(component != null) {
+			string.append(decorates.getName());
+			string.append(" -> ");
+			string.append(component);
+			string.append(" [label = \"\\<\\<decorates\\>\\>\"]\\n");
+		}
+		decorates.appendGraphVizClassName(string);
+	}
 }

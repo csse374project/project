@@ -10,6 +10,7 @@ import classRepresentation.Classes;
 import classRepresentation.UMLClass;
 import classRepresentation.decorators.IClassDecorator;
 import classRepresentation.decorators.TopLevelDecorator;
+import classRepresentation.designPaterns.DecoratorDetector;
 import interfaces.IClass;
 
 public class UMLParser {
@@ -41,6 +42,8 @@ public class UMLParser {
 			reader.accept(classCodeVisitor, ClassReader.EXPAND_FRAMES);
 			classes.addClass(topLevelDecorator);
 		}
+		DecoratorDetector decDet = new DecoratorDetector(classes);
+		decDet.findDecorators();
 
 		System.out.println(classes.printGraphVizInput());
 	}

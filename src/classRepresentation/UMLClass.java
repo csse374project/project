@@ -122,37 +122,6 @@ public class UMLClass implements IClass {
 	}
 
 	@Override
-	public void toGraphViz(StringBuilder str) {
-		// TODO
-		int lastFwdSlash = this.getName().lastIndexOf('/');
-		appendStereotypes(str);
-		str.append(this.getName().substring(lastFwdSlash + 1) + "|");
-
-		appendFields(str);
-
-		str.append("|");
-
-		appendMethods(str, lastFwdSlash);
-
-		str.append("}\"\n\t\t");
-	}
-	private void appendStereotypes(StringBuilder str) {
-		for (String stereotype : this.stereotypes) {
-			str.append("\\<\\<");
-			str.append(stereotype);
-			str.append("\\>\\>");
-		}
-	}
-	
-	private void appendFields(StringBuilder string) {
-		
-	}
-
-	private void appendMethods(StringBuilder string, int lastFwdSlash) {
-		
-	}
-
-	@Override
 	public void appendGraphVizHeader(StringBuilder str) {
 		int lastFwdSlash = name.lastIndexOf('/');
 		str.append("\t");
@@ -204,5 +173,10 @@ public class UMLClass implements IClass {
 	@Override
 	public void appendGraphVizFooter(StringBuilder str) {
 		str.append("\n\t]\n\n");
+	}
+
+	@Override
+	public void toGraphViz(StringBuilder string) {
+		throw new UnsupportedOperationException();
 	}
 }

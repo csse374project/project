@@ -5,12 +5,9 @@ import java.util.Map;
 import java.util.Set;
 
 import interfaces.IClass;
-import interfaces.IField;
-import interfaces.IMethod;
 
 public class Classes {
 	private Map<String, IClass> classes;
-	private static final String DEFAULT_COLOR = "black";
 
 	public Classes() {
 		this.classes = new HashMap<String, IClass>();
@@ -54,18 +51,6 @@ public class Classes {
 
 		string.append("}");
 		return string.toString();
-	}
-	
-	private void appendClassHeader(StringBuilder str, IClass cls) {
-		int lastFwdSlash = cls.getName().lastIndexOf('/');
-		str.append("\t");
-		str.append(cls.getName().substring(lastFwdSlash + 1));
-		str.append(" [\n\t\tlabel = \"{");
-	}
-	private void appendClassFooter(StringBuilder str, IClass cls) {
-		str.append("color=");
-//		str.append(cls.getColor());
-		str.append("\n\t]\n\n");
 	}
 
 	private void appendUsedClasses(StringBuilder string, Set<String> keys) {
