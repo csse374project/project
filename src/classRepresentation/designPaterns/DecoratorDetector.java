@@ -21,16 +21,22 @@ public class DecoratorDetector {
 	public void findDecorators() {
 		for(String className : classMap.keySet()) {
 			IClass currentClass = classMap.get(className);
-			checkForDecoratorPattern(currentClass);
+			checkForDecorator(currentClass, currentClass.getSuperClass());
+			checkForInterfaceClassDecorator(currentClass);
 		}
 	}
 	
-	private void checkForDecoratorPattern(IClass clazz) {
-		String superClass = clazz.getSuperClass();
+	private void checkForInterfaceClassDecorator(IClass clazz) {
+		for(String interfaceName : clazz.getInterfaces()) {
+			checkForDecorator(clazz, interfaceName);
+		}
+	}
+	
+	private void checkForDecorator(IClass clazz, String component) {
 		List<IField> fields = clazz.getFields();
 		for (int i = 0; i < fields.size(); i++) {
-			if (fields.get(i).getType().equals(superClass)) {
-				applyDecorator(clazz, superClass);
+			if (fields.get(i).getType().equals(component)) {
+				applyDecorator(clazz, component);
 				break;
 			}
 		}
