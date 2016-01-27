@@ -14,7 +14,7 @@ import interfaces.IClass;
 
 public class UMLParser {
 
-	private static String[] classesToAccept;
+	private static String[] classesToAccept = new String[0];
 
 	public static void main(String[] args) throws IOException {
 		Classes classes = new Classes();

@@ -108,23 +108,22 @@ public class UnitTestSingletonVisitors {
 	private boolean isSingleton(TopLevelDecorator clazz)
 			throws NoSuchFieldException, SecurityException, IllegalArgumentException, IllegalAccessException {
 		
-		Field f = clazz.getClass().getDeclaredField("decorates");
+		Field f = IClassDecorator.class.getDeclaredField("decorates");
 		f.setAccessible(true);
-		IClassDecorator cls = (IClassDecorator) f.get(clazz);
+		IClassDecorator cls;
+		Object current = f.get(clazz);
 		while(true) {
-			if (cls == null) {
-				return false;
-			}
-			
-			
-			if (cls instanceof SingletonDecorator) {
-				return true;
-			}
-			Object current = f.get(cls);
 			if (current instanceof UMLClass) {
 				return false;
 			}
 			cls = (IClassDecorator) current;
+			if (cls == null) {
+				return false;
+			}
+			if (cls instanceof SingletonDecorator) {
+				return true;
+			}
+			current = f.get(cls);
 		}
 	}
 

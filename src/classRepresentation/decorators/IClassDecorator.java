@@ -9,6 +9,7 @@ import interfaces.IMethod;
 public abstract class IClassDecorator implements IClass {
 
 	protected IClass decorates;
+	
 	public IClassDecorator() {
 		decorates = null;
 	}
