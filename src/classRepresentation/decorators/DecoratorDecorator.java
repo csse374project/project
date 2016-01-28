@@ -9,7 +9,7 @@ public class DecoratorDecorator extends IClassDecorator {
 	
 	@Override
 	public void appendGraphVizColor(StringBuilder str) {
-		str.append("style=filled\\nfillColor=green");
+		str.append("style=filled\n\t\tfillcolor=green");
 	}
 	
 	@Override
@@ -20,12 +20,15 @@ public class DecoratorDecorator extends IClassDecorator {
 	
 	@Override
 	public void appendGraphVizFooter(StringBuilder string){
+		decorates.appendGraphVizFooter(string);
 		if(component != null) {
-			string.append(decorates.getName());
+			string.append("\t");
+			int lastSlash = decorates.getName().lastIndexOf('/');
+			string.append(decorates.getName().substring(lastSlash + 1));
 			string.append(" -> ");
-			string.append(component);
-			string.append(" [label = \"\\<\\<decorates\\>\\>\"]\\n");
+			lastSlash = component.lastIndexOf('/');
+			string.append(component.substring(lastSlash + 1));
+			string.append(" [label = \"\\<\\<decorates\\>\\>\"]\n\n");
 		}
-		decorates.appendGraphVizClassName(string);
 	}
 }
