@@ -52,12 +52,17 @@ public class DecoratorDetector {
 	
 	private void checkForDecorator(IClass clazz, String component) {
 		List<IField> fields = clazz.getFields();
-		for (int i = 0; i < fields.size(); i++) {
-			if ((fields.get(i).getType()).replace(".", "/").equals(component)) {
-				applyDecorator(clazz, component);
-				discoveredDecorators.add(clazz.getName());
-				break;
+		IClass cls = clazz;
+		while (classMap.containsKey(cls.getSuperClass())) {
+			String curSuper = cls.getSuperClass();
+			for (int i = 0; i < fields.size(); i++) {
+				if ((fields.get(i).getType()).replace(".", "/").equals(curSuper)) {
+					applyDecorator(clazz, component);
+					discoveredDecorators.add(clazz.getName());
+					break;
+				}
 			}
+			cls = classMap.get(curSuper);
 		}
 	}
 	private void applyDecorator(IClass clazz, String component) {
