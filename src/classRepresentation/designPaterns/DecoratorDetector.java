@@ -72,7 +72,7 @@ public class DecoratorDetector {
 	}
 	private void setComponentToInterface(String component) {
 		IClassDecorator compClass = (IClassDecorator) classMap.get(component);
-		compClass.decorate(new ComponentDecorator());
+		if(!(compClass.getDecorates() instanceof ComponentDecorator)) compClass.decorate(new ComponentDecorator());
 	}
 	
 }

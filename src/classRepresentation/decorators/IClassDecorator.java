@@ -22,6 +22,10 @@ public abstract class IClassDecorator implements IClass {
 	public void setDecorates(IClass decorates) {
 		this.decorates = decorates;
 	}
+	
+	public IClass getDecorates(){
+		return this.decorates;
+	}
 
 	@Override
 	public void setName(String name) {
