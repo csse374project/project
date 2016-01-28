@@ -5,6 +5,7 @@ import org.junit.runners.Suite;
 
 @RunWith(Suite.class)
 @Suite.SuiteClasses({
+	UnitTestDecoratorDetector.class,
 	UnitTestsDeclarationSample.class,
 	UnitTestsDeclarationString.class,
 	UnitTestsFieldVisitor.class,
