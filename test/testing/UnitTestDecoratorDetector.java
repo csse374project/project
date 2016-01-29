@@ -24,7 +24,7 @@ import umlDiagram.ClassFieldVisitor;
 public class UnitTestDecoratorDetector {
 
 	private Classes classes;
-	private IClassDecorator comp, decorator, child, singleton;
+	private IClassDecorator comp, decorator, child, singleton, componentDec;
 
 	@Before
 	public void setUp() throws Exception {
@@ -38,6 +38,9 @@ public class UnitTestDecoratorDetector {
 		clazz = new UMLClass();
 		child = new TopLevelDecorator();
 		child.setDecorates(clazz);
+		clazz = new UMLClass();
+		componentDec = new TopLevelDecorator();
+		componentDec.setDecorates(clazz);
 		clazz = new UMLClass();
 		singleton = new TopLevelDecorator();
 		singleton.setDecorates(clazz);
@@ -59,6 +62,10 @@ public class UnitTestDecoratorDetector {
 		vis2 = new ClassFieldVisitor(Opcodes.ASM5, vis1, child);
 		reader.accept(vis2, ClassReader.EXPAND_FRAMES);
 		
+		reader = new ClassReader("classRepresentation.decorators.ComponentDecorator");
+		vis1 = new ClassDeclarationVisitor(Opcodes.ASM5, child);
+		vis2 = new ClassFieldVisitor(Opcodes.ASM5, vis1, child);
+		reader.accept(vis2, ClassReader.EXPAND_FRAMES);
 		classes.addClass(child);
 
 		reader = new ClassReader("testingData.SampleSingletonClass");
@@ -109,6 +116,23 @@ public class UnitTestDecoratorDetector {
 	@Test
 	public void singtonNotMarkedAsDecorator() throws Exception {
 		assertFalse(isDecorator(singleton));
+	}
+	
+	@Test
+	public void testMulitpleDecorators() throws Exception { 
+		//Testing this because we had a problem were DecoratorDecorator would be added multiple times (once for each of its children)
+		assertFalse(containsMultipleDecorators(comp));
+	}
+	
+	private boolean containsMultipleDecorators(IClassDecorator clazz){
+		int numDecorators = 0;
+		IClassDecorator tmpClass = clazz;
+		while(true){
+			if(tmpClass.getDecorates() instanceof UMLClass) break;
+			if(tmpClass.getDecorates() instanceof DecoratorDecorator) numDecorators++;
+			tmpClass = (IClassDecorator) tmpClass.getDecorates();
+		}
+		return (numDecorators == 1);
 	}
 
 	private boolean isDecorator(IClass clazz) throws Exception {

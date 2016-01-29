@@ -25,7 +25,9 @@ public class DecoratorDetector {
 		for(String className : classMap.keySet()) {
 			IClass currentClass = classMap.get(className);
 			checkForDecorator(currentClass, currentClass.getSuperClass());
-			checkForInterfaceClassDecorator(currentClass);
+			if (!(((IClassDecorator)currentClass).getDecorates() instanceof DecoratorDecorator)) {
+				checkForInterfaceClassDecorator(currentClass);
+			}
 		}
 		
 		for(String className : classMap.keySet()){
@@ -44,8 +46,18 @@ public class DecoratorDetector {
 	}
 
 	private void checkForInterfaceClassDecorator(IClass clazz) {
-		for(String interfaceName : clazz.getInterfaces()) {
-			checkForDecorator(clazz, interfaceName);
+		IClass cls = clazz;
+		while (classMap.containsKey(cls.getSuperClass())) {
+			cls = classMap.get(cls.getSuperClass());
+		}
+		for (int x = 0; x < cls.getInterfaces().size(); x++) {
+			for (IField fld : clazz.getFields()) {
+				if (fld.getType().replace('.', '/').equals(cls.getInterfaces().get(x))) {
+					applyDecorator(clazz, cls.getInterfaces().get(x));
+					discoveredDecorators.add(clazz.getName());
+					break;
+				}
+			}
 		}
 	}
 	
@@ -68,9 +80,12 @@ public class DecoratorDetector {
 	private void applyDecorator(IClass clazz, String component) {
 		IClassDecorator decoratedClass = (IClassDecorator) clazz;
 		IClassDecorator cls = decoratedClass;
-		while (cls.getSuperClass() != component) {
+		while (cls.getSuperClass() != component && !cls.getInterfaces().contains(component)) {
 			cls.decorate(new DecoratorDecorator(null));
 			cls = (IClassDecorator) classMap.get(cls.getSuperClass());
+			if (cls == null) {
+				return;
+			}
 		}
 		if (!(cls.getDecorates() instanceof DecoratorDecorator))
 			cls.decorate(new DecoratorDecorator(component));
