@@ -4,7 +4,7 @@ public class AdaptionTargetDecorator extends IClassDecorator {
 	
 	@Override
 	public void appendGraphVizColor(StringBuilder str) {
-		str.append("style=filled\\nfillColor=red");
+		str.append("style=filled\n\t\tfillcolor=red\n");
 	}
 	
 	@Override

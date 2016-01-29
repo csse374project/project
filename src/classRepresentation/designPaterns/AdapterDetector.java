@@ -2,12 +2,13 @@ package classRepresentation.designPaterns;
 
 import java.util.Map;
 
-import org.objectweb.asm.ClassVisitor;
-import org.objectweb.asm.Opcodes;
-
 import classRepresentation.Classes;
+import classRepresentation.UMLClass;
+import classRepresentation.decorators.AdapteeDecorator;
+import classRepresentation.decorators.AdapterDecorator;
+import classRepresentation.decorators.AdaptionTargetDecorator;
+import classRepresentation.decorators.IClassDecorator;
 import interfaces.IClass;
-import interfaces.IField;
 
 public class AdapterDetector {
 	
@@ -21,20 +22,32 @@ public class AdapterDetector {
 	
 	public void findAdapters() {
 		for (String className : classMap.keySet()) {
-			IClass clazz = classMap.get(className);
-			checkIfClassIsAdapter(clazz);
+			IClassDecorator clazz = (IClassDecorator) classMap.get(className);
+			AdapterDecorator adapter = getAdapter(clazz);
+			if(adapter != null) {
+				addAdaptee(adapter);
+				addTarget(adapter);
+			}
 		}
 	}
-	
-	private void checkIfClassIsAdapter(IClass clazz) {
-		if (clazz.getSuperClass().equals(OBJECT) && (clazz.getInterfaces().size() == 0)) {
-			return;
-		}
+	private void addAdaptee(AdapterDecorator adapter) {
+		String adaptee = adapter.getAdaptee();
+		IClassDecorator clazz = (IClassDecorator) classMap.get(adaptee);
+		clazz.decorate(new AdapteeDecorator());
+	}
+	private void addTarget(AdapterDecorator adapter) {
+		String target = adapter.getTarget();
+		IClassDecorator clazz = (IClassDecorator) classMap.get(target);
+		clazz.decorate(new AdaptionTargetDecorator());
 	}
 	
-	private void checkIfFieldIsAdapted(IClass clazz, IField field) {
-		MutableBoolean bool = new MutableBoolean();
-//		ClassVisitor visitor = new AdapterClassVisitor(Opcodes.ASM5, clazz, field);
-//		ClassReader reader = new ClassReader(clazz.getName());
+	private AdapterDecorator getAdapter(IClass clazz) {
+		if (clazz instanceof UMLClass) {
+			return null;
+		} else if (clazz instanceof AdapterDecorator) {
+			return (AdapterDecorator) clazz;
+		}
+		IClassDecorator decorator = (IClassDecorator) clazz;
+		return getAdapter(decorator.getDecorates());
 	}
 }

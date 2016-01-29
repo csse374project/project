@@ -10,6 +10,7 @@ import org.objectweb.asm.Type;
 
 import classRepresentation.decorators.AdapterDecorator;
 import classRepresentation.decorators.IClassDecorator;
+import sun.security.action.GetIntegerAction;
 
 public class AdapterClassVisitor extends ClassVisitor {
 
@@ -19,23 +20,31 @@ public class AdapterClassVisitor extends ClassVisitor {
 		super(opCode);
 		currentClass = clazz;
 	}
+	public AdapterClassVisitor(int opCode, ClassVisitor toDecorate, IClassDecorator clazz) {
+		super(opCode, toDecorate);
+		currentClass = clazz;
+	}
 
 	@Override
 	public FieldVisitor visitField(int access, String name, String desc, String signature, Object value) {
 		FieldVisitor toDecorate = super.visitField(access, name, desc, signature, value);
+		if (currentClass.getInterfaces().size() != 1) {
+			return toDecorate;
+		}
 		try {
 			String type = Type.getType(desc).getClassName();
-			ClassReader reader = new ClassReader(name);
+			ClassReader reader = new ClassReader(currentClass.getName());
 			MutableBoolean bool = new MutableBoolean();
 			bool.value = true;
 			ClassVisitor visitor = new AdapterFieldVisitor(Opcodes.ASM5, name, type, bool);
 			reader.accept(visitor, ClassReader.EXPAND_FRAMES);
 			if (bool.value) {
-				 currentClass.decorate(new AdapterDecorator(type));
+				String interfaze = currentClass.getInterfaces().get(0);
+				currentClass.decorate(new AdapterDecorator(type, interfaze));
 			}
 		} catch (IOException e) {
 			e.printStackTrace();
-			System.err.printf("FAILED TO FIND CLASS '%s' INSIDE 'visitField' INSIDE CLASS 'AdapterClassVisirot'\n",
+			System.err.printf("FAILED TO FIND CLASS '%s' INSIDE 'visitField' INSIDE CLASS 'AdapterClassVisitor'\n",
 					name);
 		}
 		return toDecorate;

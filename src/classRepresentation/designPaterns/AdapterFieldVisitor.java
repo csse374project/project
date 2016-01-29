@@ -13,6 +13,7 @@ public class AdapterFieldVisitor extends ClassVisitor {
 		super(opcode);
 		fieldType = type;
 		this.fieldName = field;
+		this.bool = bool;
 	}
 
 	@Override
