@@ -1,5 +1,4 @@
 #Project
-
 This tool analyzes java code and generates a UML diagram. It detects and draws all classes complete with their fields and methods. It also draws arrows for inheritance from other classes, implementation of interfaces, other used classes, and other associated classes. The Singleton and Decorator design patterns are also detected and notated.  
 
 #Design: 
@@ -23,20 +22,31 @@ Our decorator detection is implemented by searching over our representation of t
 #Responsibilities: 
 Milestone 1:
 All members worked together to created the project's design.
+
 Jesse Shellabarger - Pair programmed with Nate Briggs. Primarily drove when creating the visitor pattern structure. Assisted with testing once the project was functional. Refactored and improved formatting. 
+
 Nate Briggs - Pair programmed with Jesse Shellabarger. Primarily drove when parsing the data created into a form usable by GraphViz. 
+
 Thomas Bonatti - Produced automated tests that establish the correct behavior of your ASM parsing code.
+
 
 Milestone 2:
 All members discussed changes to design together before any changes were made.
+
 Jesse Shellabarger - Pair programmed with Thomas Bonatti to add functionality for use and association arrows.
+
 Nate Briggs - Created tests to ensure functionality of added features. This includes unit tests as well as acceptance tests.
+
 Thomas Bonatti - Pair programmed with Jesse Shellabarger to add functionality for use and association arrows.
+
 
 Milestone 3:
 Jesse Shellabarger - Pair Programmed with Thomas Bonatti to implement the visitor structure and the required methods. Also worked with Thomas to create this milestone's design.
+
 Nate Briggs - Wrote the parsing algorithm to translate our gathered data into a form usable by SDEdit.
+
 Thomas Bonatti - Pair Programmed with Jesse Shellabarger to implement the visitor structure and the required methods. Helped to create the design and to create the testing suite.
+
 
 Milestone 4:
 Jesse Shellabarger - Pair Programmed with Thomas Bonatti to implement SingletonVisitor classes, one to detect singleton "instance" fields, the other to detect singleton "getter" methods. Also handled producing UML samples.
@@ -45,7 +55,7 @@ Thomas Bonatti - Worked with Jesse (see above). Programmed several test cases. W
 
 Milestone 5:
 Jesse Shellabarger - Reworked Milestone 4 design, with Thomas, to make the system more extendible. Designed and wrote decorator detection. Wrote documentation.
-Nate Briggs - Greatly assisted Jesse in writing decorator detection. Assisted Thomas with Adaptor detection. Debugged GraphViz output.
+Nate Briggs - Greatly assisted Jesse in writing decorator detection. Assisted Thomas with Adaptor detection. Debugged GraphViz output. Created new project UML.
 Thomas Bonatti - Reworked Milestone 4 design, with Jesse, to make the system more extendible. Assisted Jesse in designing decorator detection. Wrote Adaptor detection.
 
 
