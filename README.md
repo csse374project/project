@@ -18,7 +18,7 @@ The design remained stable during this milestone. New visitors were added on top
 Milestone 5:
 Design was overhauled during this milestone. Our object representations of the classes now store their information using decorations. Information about the class's methods and fields are stored in the base UML class. Any further patterns detected are represented with decorators. These decorators are responsible for printing their necessary output to GraphViz 
 
-Our decorator detection is implemented by searching over our representation of the classes and adding additional decorators where necessary.
+Our decorator detection is implemented by searching over our representation of the classes and adding additional decorators where necessary. The adaptor detection is done by creating a new visitor to ensure that the store instance of the adaptee is used in each method. Once this is done, a decorator is added to the appropriate class representation. An additional class was then created to check the class representations, after parsing the java classes, and modify the appropriate modifiers to add the stereotypes.
 
 #Responsibilities: 
 Milestone 1:
@@ -40,13 +40,13 @@ Thomas Bonatti - Pair Programmed with Jesse Shellabarger to implement the visito
 
 Milestone 4:
 Jesse Shellabarger - Pair Programmed with Thomas Bonatti to implement SingletonVisitor classes, one to detect singleton "instance" fields, the other to detect singleton "getter" methods. Also handled producing UML samples.
-Nate Briggs = Added singletons to the parsing code.
+Nate Briggs - Added singletons to the parsing code.
 Thomas Bonatti - Worked with Jesse (see above). Programmed several test cases. Wrote this beautiful, elegant entry in the readme.
 
 Milestone 5:
 Jesse Shellabarger - Reworked Milestone 4 design, with Thomas, to make the system more extendible. Designed and wrote decorator detection. Wrote documentation.
-Nate Briggs - Assisted Jesse in writing decorator detection. Debugged GraphViz output.
-Thomas Bonatti - Reworked Milestone 4 design, with Jesse, to make the system more extendible. Assisted Jesse in designing decorator detection.
+Nate Briggs - Greatly assisted Jesse in writing decorator detection. Assisted Thomas with Adaptor detection. Debugged GraphViz output.
+Thomas Bonatti - Reworked Milestone 4 design, with Jesse, to make the system more extendible. Assisted Jesse in designing decorator detection. Wrote Adaptor detection.
 
 
 #Instructions:
