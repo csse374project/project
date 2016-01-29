@@ -12,48 +12,52 @@ import classRepresentation.decorators.IClassDecorator;
 import interfaces.IClass;
 
 public class AdapterDetector {
-	
+
 	private static String OBJECT = "java.lang.Object";
 
 	private Map<String, IClass> classMap;
-	
+
 	public AdapterDetector(Classes classes) {
 		classMap = classes.getClasses();
 	}
-	
+
 	public void findAdapters() {
 		for (String className : classMap.keySet()) {
 			IClassDecorator clazz = (IClassDecorator) classMap.get(className);
 			AdapterDecorator adapter = getAdapter(clazz);
-			if(adapter != null) {
+			if (adapter != null) {
 				addAdaptee(adapter);
 				addTarget(adapter);
 			}
 		}
 	}
+
 	private void addAdaptee(AdapterDecorator adapter) {
 		String adaptee = adapter.getAdaptee();
 		IClassDecorator clazz = (IClassDecorator) classMap.get(adaptee);
 		removeUsesArrow(adapter, adaptee);
-		clazz.decorate(new AdapteeDecorator());
+		if (clazz != null)
+			clazz.decorate(new AdapteeDecorator());
 	}
+
 	private void removeUsesArrow(IClass adapter, String adaptee) {
 		List<String> list = adapter.getUsedClasses();
 		list.remove(adaptee);
-//		for (String currentClass : list) {
-//			if (currentClass.equals(adaptee)) {
-//				list.remove(currentClass);
-//				return;
-//			}
-//		}
+		// for (String currentClass : list) {
+		// if (currentClass.equals(adaptee)) {
+		// list.remove(currentClass);
+		// return;
+		// }
+		// }
 	}
-	
+
 	private void addTarget(AdapterDecorator adapter) {
 		String target = adapter.getTarget();
 		IClassDecorator clazz = (IClassDecorator) classMap.get(target);
-		clazz.decorate(new AdaptionTargetDecorator());
+		if (clazz != null)
+			clazz.decorate(new AdaptionTargetDecorator());
 	}
-	
+
 	private AdapterDecorator getAdapter(IClass clazz) {
 		if (clazz instanceof UMLClass) {
 			return null;

@@ -30,25 +30,27 @@ public class UMLParser {
 			topLevelDecorator.setDecorates(currentClass);
 
 			ClassReader reader = new ClassReader(className);
-			
+
 			ClassVisitor declVisitor = new ClassDeclarationVisitor(Opcodes.ASM5, topLevelDecorator);
-			
+
 			ClassVisitor singletonVisitor = new SingletonFieldVisitor(Opcodes.ASM5, declVisitor, topLevelDecorator);
 
 			ClassVisitor fieldVisitor = new ClassFieldVisitor(Opcodes.ASM5, singletonVisitor, topLevelDecorator);
 
 			ClassVisitor methodVisitor = new ClassMethodVisitor(Opcodes.ASM5, fieldVisitor, topLevelDecorator);
-			
-			ClassVisitor classCodeVisitor = new MethodDeclarationVisitor(Opcodes.ASM5, methodVisitor, topLevelDecorator);
-			
+
+			ClassVisitor classCodeVisitor = new MethodDeclarationVisitor(Opcodes.ASM5, methodVisitor,
+					topLevelDecorator);
+
 			ClassVisitor adapterVisitor = new AdapterClassVisitor(Opcodes.ASM5, classCodeVisitor, topLevelDecorator);
-			
+
 			reader.accept(adapterVisitor, ClassReader.EXPAND_FRAMES);
 			classes.addClass(topLevelDecorator);
 		}
 		DecoratorDetector decDet = new DecoratorDetector(classes);
 		decDet.findDecorators();
-		AdapterDetector adapterizer = new AdapterDetector(classes); 
+
+		AdapterDetector adapterizer = new AdapterDetector(classes);
 		adapterizer.findAdapters();
 
 		System.out.println(classes.printGraphVizInput());
@@ -59,7 +61,6 @@ public class UMLParser {
 		for (int i = 0; i < classesToAccept.length; i++) {
 			classesToAccept[i] = args[i].replace('.', '/');
 		}
-
 	}
 
 	public static boolean classIsUsed(String className) {
@@ -70,13 +71,8 @@ public class UMLParser {
 		}
 		return false;
 	}
-	
+
 	public static String replaceDotsWithSlashes(String string) {
 		return string.replace('.', '/');
 	}
-
-	/*
-	 * private Integer testThing(){ return -1; }
-	 */
-
 }

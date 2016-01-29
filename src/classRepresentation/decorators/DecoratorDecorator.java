@@ -6,26 +6,26 @@ public class DecoratorDecorator extends IClassDecorator {
 
 	private String component;
 	private IClass decorator;
-	
+
 	public DecoratorDecorator(String component) {
 		this.component = component;
 	}
-	
+
 	@Override
 	public void appendGraphVizColor(StringBuilder str) {
 		str.append("style=filled\n\t\tfillcolor=green");
 	}
-	
+
 	@Override
 	public void appendGraphVizStereotype(StringBuilder string) {
 		string.append("\\<\\<Decorator\\>\\>\\n");
 		decorates.appendGraphVizStereotype(string);
 	}
-	
+
 	@Override
-	public void appendGraphVizFooter(StringBuilder string){
+	public void appendGraphVizFooter(StringBuilder string) {
 		decorates.appendGraphVizFooter(string);
-		if(component != null) {
+		if (component != null) {
 			string.append("\t");
 			int lastSlash = decorates.getName().lastIndexOf('/');
 			string.append(decorates.getName().substring(lastSlash + 1));
