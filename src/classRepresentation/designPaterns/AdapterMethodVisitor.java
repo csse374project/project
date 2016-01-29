@@ -34,8 +34,6 @@ public class AdapterMethodVisitor extends MethodVisitor {
 	
 	@Override
 	public void visitFieldInsn(int opcode, String owner, String name, String desc) {
-		System.out.printf("Opcode: %d,\nowner: %s,\nname: %s,\ndesc: %s\n",
-				opcode, owner, name, desc);
 		if (name.equals(fieldName) && ((opcode & Opcodes.GETFIELD) != 0)) {
 			fieldFound = true;
 		}

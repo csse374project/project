@@ -33,7 +33,6 @@ public class AdapterClassVisitor extends ClassVisitor {
 		}
 		try {
 			String type = Type.getType(desc).getClassName();
-			System.out.println(type);
 			ClassReader reader = new ClassReader(currentClass.getName());
 			MutableBoolean bool = new MutableBoolean();
 			bool.value = true;
