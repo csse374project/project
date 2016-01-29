@@ -20,6 +20,10 @@ public class AdapterClassVisitor extends ClassVisitor {
 		super(opCode);
 		currentClass = clazz;
 	}
+	public AdapterClassVisitor(int opCode, ClassVisitor toDecorate, IClassDecorator clazz) {
+		super(opCode, toDecorate);
+		currentClass = clazz;
+	}
 
 	@Override
 	public FieldVisitor visitField(int access, String name, String desc, String signature, Object value) {
@@ -29,7 +33,8 @@ public class AdapterClassVisitor extends ClassVisitor {
 		}
 		try {
 			String type = Type.getType(desc).getClassName();
-			ClassReader reader = new ClassReader(name);
+			System.out.println(type);
+			ClassReader reader = new ClassReader(currentClass.getName());
 			MutableBoolean bool = new MutableBoolean();
 			bool.value = true;
 			ClassVisitor visitor = new AdapterFieldVisitor(Opcodes.ASM5, name, type, bool);
@@ -40,7 +45,7 @@ public class AdapterClassVisitor extends ClassVisitor {
 			}
 		} catch (IOException e) {
 			e.printStackTrace();
-			System.err.printf("FAILED TO FIND CLASS '%s' INSIDE 'visitField' INSIDE CLASS 'AdapterClassVisirot'\n",
+			System.err.printf("FAILED TO FIND CLASS '%s' INSIDE 'visitField' INSIDE CLASS 'AdapterClassVisitor'\n",
 					name);
 		}
 		return toDecorate;

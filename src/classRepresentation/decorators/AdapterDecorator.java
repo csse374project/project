@@ -10,11 +10,11 @@ public class AdapterDecorator extends IClassDecorator {
 	}
 	
 	public String getAdaptee() {
-		return adaptee;
+		return adaptee.replace('.', '/');
 	}
 	
 	public String getTarget() {
-		return target;
+		return target.replace('.', '/');
 	}
 	
 	@Override
