@@ -1,5 +1,6 @@
 package classRepresentation.designPaterns;
 
+import java.util.List;
 import java.util.Map;
 
 import classRepresentation.Classes;
@@ -33,8 +34,20 @@ public class AdapterDetector {
 	private void addAdaptee(AdapterDecorator adapter) {
 		String adaptee = adapter.getAdaptee();
 		IClassDecorator clazz = (IClassDecorator) classMap.get(adaptee);
+		removeUsesArrow(adapter, adaptee);
 		clazz.decorate(new AdapteeDecorator());
 	}
+	private void removeUsesArrow(IClass adapter, String adaptee) {
+		List<String> list = adapter.getUsedClasses();
+		list.remove(adaptee);
+//		for (String currentClass : list) {
+//			if (currentClass.equals(adaptee)) {
+//				list.remove(currentClass);
+//				return;
+//			}
+//		}
+	}
+	
 	private void addTarget(AdapterDecorator adapter) {
 		String target = adapter.getTarget();
 		IClassDecorator clazz = (IClassDecorator) classMap.get(target);
