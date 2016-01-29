@@ -19,13 +19,27 @@ public class AdapterDecorator extends IClassDecorator {
 	
 	@Override
 	public void appendGraphVizColor(StringBuilder str) {
-		str.append("style=filled\\nfillcolor=red");
+		str.append("style=filled\n\t\tfillcolor=red\n");
 	}
 	
 	@Override
 	public void appendGraphVizStereotype(StringBuilder string) {
 		string.append("\\<\\<Adapter\\>\\>\\n");
 		decorates.appendGraphVizStereotype(string);
+	}
+	@Override
+	public void appendGraphVizFooter(StringBuilder string) {
+		decorates.appendGraphVizFooter(string);
+		int lastSlash = adaptee.lastIndexOf('.');
+		String adapteeNode = adaptee.substring(lastSlash+1);
+		lastSlash = decorates.getName().lastIndexOf('/');
+		String adapterNode = decorates.getName().substring(lastSlash+1);
+		
+		string.append("\t");
+		string.append(adapterNode);
+		string.append(" -> ");
+		string.append(adapteeNode);
+		string.append(" [label = \"\\<\\<adapts\\>\\>\"]\n\n");
 	}
 	
 }
