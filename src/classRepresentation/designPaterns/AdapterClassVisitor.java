@@ -10,6 +10,7 @@ import org.objectweb.asm.Type;
 
 import classRepresentation.decorators.AdapterDecorator;
 import classRepresentation.decorators.IClassDecorator;
+import sun.security.action.GetIntegerAction;
 
 public class AdapterClassVisitor extends ClassVisitor {
 
@@ -23,6 +24,9 @@ public class AdapterClassVisitor extends ClassVisitor {
 	@Override
 	public FieldVisitor visitField(int access, String name, String desc, String signature, Object value) {
 		FieldVisitor toDecorate = super.visitField(access, name, desc, signature, value);
+		if (currentClass.getInterfaces().size() != 1) {
+			return toDecorate;
+		}
 		try {
 			String type = Type.getType(desc).getClassName();
 			ClassReader reader = new ClassReader(name);
@@ -31,7 +35,8 @@ public class AdapterClassVisitor extends ClassVisitor {
 			ClassVisitor visitor = new AdapterFieldVisitor(Opcodes.ASM5, name, type, bool);
 			reader.accept(visitor, ClassReader.EXPAND_FRAMES);
 			if (bool.value) {
-				 currentClass.decorate(new AdapterDecorator(type));
+				String interfaze = currentClass.getInterfaces().get(0);
+				currentClass.decorate(new AdapterDecorator(type, interfaze));
 			}
 		} catch (IOException e) {
 			e.printStackTrace();

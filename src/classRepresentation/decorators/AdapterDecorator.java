@@ -2,14 +2,19 @@ package classRepresentation.decorators;
 
 public class AdapterDecorator extends IClassDecorator {
 
-	private String adaptee;
+	private String adaptee, target;
 	
-	public AdapterDecorator(String adaptee) {
+	public AdapterDecorator(String adaptee, String target) {
 		this.adaptee = adaptee;
+		this.target = target;
 	}
 	
 	public String getAdaptee() {
 		return adaptee;
+	}
+	
+	public String getTarget() {
+		return target;
 	}
 	
 	@Override
