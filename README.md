@@ -44,9 +44,9 @@ Nate Briggs = Added singletons to the parsing code.
 Thomas Bonatti - Worked with Jesse (see above). Programmed several test cases. Wrote this beautiful, elegant entry in the readme.
 
 Milestone 5:
-Jesse Shellabarger - Reworked Milestone 4, with Thomas, design to make the system more extendible. Designed and wrote decorator detection. Wrote documentation.
+Jesse Shellabarger - Reworked Milestone 4 design, with Thomas, design to make the system more extendible. Designed and wrote decorator detection. Wrote documentation.
 Nate Briggs - Assisted Jesse in writing decorator detection. Debugged GraphViz output.
-Thomas Bonatti - Reworked Milestone 4, with Jesse, design to make the system more extendible. Assisted Jesse in designing decorator detection.
+Thomas Bonatti - Reworked Milestone 4 design, with Jesse, design to make the system more extendible. Assisted Jesse in designing decorator detection.
 
 
 #Instructions:
