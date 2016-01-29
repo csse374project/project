@@ -10,6 +10,7 @@ public class AdapterMethodVisitor extends MethodVisitor {
 
 	private String fieldName, fieldType;
 	private MutableBoolean bool;
+	private boolean fieldFound;
 	
 	public AdapterMethodVisitor(int opCode, MethodVisitor toDecorate,
 			String field, String type, MutableBoolean bool) {
@@ -17,6 +18,18 @@ public class AdapterMethodVisitor extends MethodVisitor {
 		fieldName = field;
 		fieldType = type;
 		this.bool = bool;
+	}
+	
+	@Override
+	public void visitCode() {
+		super.visitCode();
+		fieldFound = false;
+	}
+	
+	@Override
+	public void visitEnd() {
+		super.visitEnd();
+		bool.value = bool.value && fieldFound;
 	}
 	
 	@Override
