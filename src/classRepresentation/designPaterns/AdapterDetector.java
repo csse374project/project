@@ -2,6 +2,9 @@ package classRepresentation.designPaterns;
 
 import java.util.Map;
 
+import org.objectweb.asm.ClassVisitor;
+import org.objectweb.asm.Opcodes;
+
 import classRepresentation.Classes;
 import interfaces.IClass;
 import interfaces.IField;
@@ -29,7 +32,9 @@ public class AdapterDetector {
 		}
 	}
 	
-	private void checkIfFieldIsAdapted(IField field) {
-		
+	private void checkIfFieldIsAdapted(IClass clazz, IField field) {
+		MutableBoolean bool = new MutableBoolean();
+//		ClassVisitor visitor = new AdapterClassVisitor(Opcodes.ASM5, clazz, field);
+//		ClassReader reader = new ClassReader(clazz.getName());
 	}
 }

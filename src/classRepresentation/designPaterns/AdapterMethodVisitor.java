@@ -3,18 +3,20 @@ package classRepresentation.designPaterns;
 import org.objectweb.asm.MethodVisitor;
 import org.objectweb.asm.Opcodes;
 
-import classRepresentation.decorators.TopLevelDecorator;
+import interfaces.IClass;
 import interfaces.IField;
 
 public class AdapterMethodVisitor extends MethodVisitor {
 
-	TopLevelDecorator currentClass;
-	IField currentField;
+	private String fieldName, fieldType;
+	private MutableBoolean bool;
 	
-	public AdapterMethodVisitor(int opCode, MethodVisitor toDecorate, TopLevelDecorator clazz, IField field) {
+	public AdapterMethodVisitor(int opCode, MethodVisitor toDecorate,
+			String field, String type, MutableBoolean bool) {
 		super(opCode, toDecorate);
-		currentClass = clazz;
-		currentField = field;
+		fieldName = field;
+		fieldType = type;
+		this.bool = bool;
 	}
 	
 	@Override
@@ -22,9 +24,8 @@ public class AdapterMethodVisitor extends MethodVisitor {
 		System.out.printf("Opcode: %d,\nowner: %s,\nname: %s,\ndesc: %s\n",
 				opcode, owner, name, desc);
 		if ((opcode & Opcodes.GETFIELD) != 0) {
-			
+			// TODO
 		}
-		
 	}
 	
 	
