@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Map;
 
 import classRepresentation.Classes;
+import classRepresentation.UMLClass;
 import classRepresentation.decorators.ComponentDecorator;
 import classRepresentation.decorators.DecoratorDecorator;
 import classRepresentation.decorators.IClassDecorator;
@@ -24,8 +25,8 @@ public class DecoratorDetector {
 	public void findDecorators() {
 		for (String className : classMap.keySet()) {
 			IClass currentClass = classMap.get(className);
-			checkForDecorator(currentClass, currentClass.getSuperClass());
-			if (!(((IClassDecorator) currentClass).getDecorates() instanceof DecoratorDecorator)) {
+			if (!isDecorator(currentClass)) {
+				checkForDecorator(currentClass, currentClass.getSuperClass());
 				checkForInterfaceClassDecorator(currentClass);
 			}
 		}
@@ -70,7 +71,8 @@ public class DecoratorDetector {
 			String curSuper = cls.getSuperClass();
 			for (int i = 0; i < fields.size(); i++) {
 				if ((fields.get(i).getType()).replace(".", "/").equals(curSuper)) {
-					applyDecorator(clazz, curSuper);
+					if (!isDecorator(clazz))
+						applyDecorator(clazz, curSuper);
 					discoveredDecorators.add(clazz.getName());
 					break;
 				}
@@ -83,13 +85,13 @@ public class DecoratorDetector {
 		IClassDecorator decoratedClass = (IClassDecorator) clazz;
 		IClassDecorator cls = decoratedClass;
 		while (cls.getSuperClass() != component && !cls.getInterfaces().contains(component)) {
-			cls.decorate(new DecoratorDecorator(null));
+			if(!isDecorator(cls))cls.decorate(new DecoratorDecorator(null));
 			cls = (IClassDecorator) classMap.get(cls.getSuperClass());
 			if (cls == null) {
 				return;
 			}
 		}
-		if (!(cls.getDecorates() instanceof DecoratorDecorator))
+		if (!!isDecorator(cls))
 			cls.decorate(new DecoratorDecorator(component));
 		if (component != null)
 			setComponentToInterface(component);
@@ -99,6 +101,24 @@ public class DecoratorDetector {
 		IClassDecorator compClass = (IClassDecorator) classMap.get(component);
 		if (!(compClass.getDecorates() instanceof ComponentDecorator))
 			compClass.decorate(new ComponentDecorator());
+	}
+
+	private boolean isDecorator(IClass clazz) {
+		IClassDecorator cls = (IClassDecorator) clazz;
+		Object current = cls.getDecorates();
+		while (true) {
+			if (current instanceof UMLClass) {
+				return false;
+			}
+			cls = (IClassDecorator) current;
+			if (cls == null) {
+				return false;
+			}
+			if (cls instanceof DecoratorDecorator) {
+				return true;
+			}
+			current = cls.getDecorates();
+		}
 	}
 
 }
