@@ -37,7 +37,6 @@ public class DecoratorDetector {
 	private void checkChildDecorators(IClass clazz){
 		List<String> interfaces = clazz.getInterfaces();
 		String superClass = clazz.getSuperClass();
-		//System.out.println("SuperClass: " + superClass);
 		if(discoveredDecorators.contains(superClass)) applyDecorator(clazz, null);
 		for(String interfaze : interfaces){
 			if(discoveredDecorators.contains(interfaze)) applyDecorator(clazz, null);
@@ -57,7 +56,7 @@ public class DecoratorDetector {
 			String curSuper = cls.getSuperClass();
 			for (int i = 0; i < fields.size(); i++) {
 				if ((fields.get(i).getType()).replace(".", "/").equals(curSuper)) {
-					applyDecorator(clazz, component);
+					applyDecorator(clazz, curSuper);
 					discoveredDecorators.add(clazz.getName());
 					break;
 				}
@@ -65,14 +64,23 @@ public class DecoratorDetector {
 			cls = classMap.get(curSuper);
 		}
 	}
+	
 	private void applyDecorator(IClass clazz, String component) {
 		IClassDecorator decoratedClass = (IClassDecorator) clazz;
-		decoratedClass.decorate(new DecoratorDecorator(component));
+		IClassDecorator cls = decoratedClass;
+		while (cls.getSuperClass() != component) {
+			cls.decorate(new DecoratorDecorator(null));
+			cls = (IClassDecorator) classMap.get(cls.getSuperClass());
+		}
+		if (!(cls.getDecorates() instanceof DecoratorDecorator))
+			cls.decorate(new DecoratorDecorator(component));
 		if(component != null) setComponentToInterface(component);
 	}
+	
 	private void setComponentToInterface(String component) {
 		IClassDecorator compClass = (IClassDecorator) classMap.get(component);
-		if(!(compClass.getDecorates() instanceof ComponentDecorator)) compClass.decorate(new ComponentDecorator());
+		if(!(compClass.getDecorates() instanceof ComponentDecorator)) 
+			compClass.decorate(new ComponentDecorator());
 	}
 	
 }
