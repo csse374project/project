@@ -43,12 +43,6 @@ public class AdapterDetector {
 	private void removeUsesArrow(IClass adapter, String adaptee) {
 		List<String> list = adapter.getUsedClasses();
 		list.remove(adaptee);
-		// for (String currentClass : list) {
-		// if (currentClass.equals(adaptee)) {
-		// list.remove(currentClass);
-		// return;
-		// }
-		// }
 	}
 
 	private void addTarget(AdapterDecorator adapter) {

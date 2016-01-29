@@ -1,5 +1,7 @@
 package classRepresentation.decorators;
 
+import umlDiagram.UMLParser;
+
 public class AdapterDecorator extends IClassDecorator {
 
 	private String adaptee, target;
@@ -34,12 +36,27 @@ public class AdapterDecorator extends IClassDecorator {
 		String adapteeNode = adaptee.substring(lastSlash+1);
 		lastSlash = decorates.getName().lastIndexOf('/');
 		String adapterNode = decorates.getName().substring(lastSlash+1);
+		lastSlash = getTarget().lastIndexOf('/');
+		String targetNode = getTarget().substring(lastSlash+1);
 		
 		string.append("\t");
 		string.append(adapterNode);
 		string.append(" -> ");
 		string.append(adapteeNode);
 		string.append(" [label = \"\\<\\<adapts\\>\\>\"]\n\n");
+		
+		if(!UMLParser.classIsUsed(getTarget())){
+		
+			string.append("\tedge [");
+			string.append("\n");
+			string.append("\t\tarrowhead = \"empty\" style = \"dashed\"");
+			string.append("\n\t]\n");
+			
+			string.append("\t");
+			string.append(adapterNode);
+			string.append(" -> ");
+			string.append(targetNode);
+		}
 	}
 	
 }
