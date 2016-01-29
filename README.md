@@ -1,6 +1,6 @@
 #Project
 
-This tool analyzes java code and generates a UML diagram.
+This tool analyzes java code and generates a UML diagram. It detects and draws all classes complete with their fields and methods. It also draws arrows for inheritance from other classes, implementation of interfaces, other used classes, and other associated classes. The Singleton and Decorator design patterns are also detected and notated.  
 
 #Design: 
 Milestone 1:
@@ -14,6 +14,11 @@ We have extended the design implemented in the previous milestones. A new parser
 
 Milestone 4:
 The design remained stable during this milestone. New visitors were added on top of existing visitors, and small modifications were made to the code that parses our constructed objects into graphViz strings.
+
+Milestone 5:
+Design was overhauled during this milestone. Our object representations of the classes now store their information using decorations. Information about the class's methods and fields are stored in the base UML class. Any further patterns detected are represented with decorators. These decorators are responsible for printing their necessary output to GraphViz 
+
+Our decorator detection is implemented by searching over our representation of the classes and adding additional decorators where necessary.
 
 #Responsibilities: 
 Milestone 1:
@@ -38,6 +43,12 @@ Jesse Shellabarger - Pair Programmed with Thomas Bonatti to implement SingletonV
 Nate Briggs = Added singletons to the parsing code.
 Thomas Bonatti - Worked with Jesse (see above). Programmed several test cases. Wrote this beautiful, elegant entry in the readme.
 
+Milestone 5:
+Jesse Shellabarger - Reworked Milestone 4, with Thomas, design to make the system more extendible. Designed and wrote decorator detection. Wrote documentation.
+Nate Briggs - Assisted Jesse in writing decorator detection. Debugged GraphViz output.
+Thomas Bonatti - Reworked Milestone 4, with Jesse, design to make the system more extendible. Assisted Jesse in designing decorator detection.
+
+
 #Instructions:
 UML Generation:
 DesignParser is the class that drives the application. If running through eclipse, change the run configuration to include the desired 
@@ -46,3 +57,5 @@ print out the data in a form usable by GraphViz. This output can either be given
 
 Sequence Diagram Generation:
 SequenceParser is the class that drives the application. If running through eclipse, change the run configuration to include a fully qualified method as an argument. The second argument is optional, and determines how deep the program will examine method calls. After running, the program will output code that can be entered directly into SDEdit.
+
+The system can be further extended by creating new classes to examine the class representation objects. Additional decorators can be added via the decorator pattern, if more information is needed.
