@@ -19,7 +19,7 @@ public class AdapterDecorator extends IClassDecorator {
 	
 	@Override
 	public void appendGraphVizColor(StringBuilder str) {
-		str.append("style=filled\\nfillColor=red");
+		str.append("style=filled\\nfillcolor=red");
 	}
 	
 	@Override
