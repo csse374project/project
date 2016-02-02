@@ -1,9 +1,11 @@
 package classRepresentation.decorators;
 
+import interfaces.IClass;
+
 public class TopLevelDecorator extends IClassDecorator {
 
-	public TopLevelDecorator() {
-		// do nothing
+	public TopLevelDecorator(IClass clazz) {
+		this.decorates = clazz;
 	}
 	
 	@Override

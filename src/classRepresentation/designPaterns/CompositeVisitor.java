@@ -10,18 +10,18 @@ import org.objectweb.asm.Type;
 import org.objectweb.asm.signature.SignatureReader;
 import org.objectweb.asm.signature.SignatureVisitor;
 
+import classRepresentation.decorators.CompositeDecorator;
 import classRepresentation.decorators.IClassDecorator;
 
 public class CompositeVisitor extends ClassVisitor {
 	
-	private static List<String> collections;
+	private final static List<String> collections = new ArrayList<String>();;
 
 	private IClassDecorator currentClass;
 	public CompositeVisitor(int opCode, ClassVisitor toDecorate, IClassDecorator currentClass) {
 		super(opCode, toDecorate);
 		this.currentClass = currentClass;
-		
-		collections = new ArrayList<String>();
+	
 		collections.add("List");
 		collections.add("[]");
 		collections.add("Map");
@@ -41,13 +41,10 @@ public class CompositeVisitor extends ClassVisitor {
 		
 		String type = Type.getType(desc).getClassName();
 		int lastDot = type.lastIndexOf('.');
-		type = type.substring(lastDot);
-		System.out.println(type);
+		type = type.substring(lastDot+1);
 		if(collections.contains(type)){
-			System.out.println("Types!");
+			handleSignature(signature);
 		}
-		
-		handleSignature(signature);
 		
 		return toDecorate;
 	}
@@ -69,7 +66,8 @@ public class CompositeVisitor extends ClassVisitor {
 
 		@Override
 		public void visitClassType(String name) {
-			currentClass.addAssociatedClass(name);
+			if(currentClass.getInterfaces().contains(name)) currentClass.decorate(new CompositeDecorator());
+			if(name.equals(currentClass.getSuperClass())); currentClass.decorate(new CompositeDecorator());
 		}
 	}
 	

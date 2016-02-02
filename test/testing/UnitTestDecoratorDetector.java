@@ -30,20 +30,15 @@ public class UnitTestDecoratorDetector {
 	public void setUp() throws Exception {
 		classes = new Classes();
 		IClass clazz = new UMLClass();
-		comp = new TopLevelDecorator();
-		comp.setDecorates(clazz);
+		comp = new TopLevelDecorator(clazz);
 		clazz = new UMLClass();
-		decorator = new TopLevelDecorator();
-		decorator.setDecorates(clazz);
+		decorator = new TopLevelDecorator(clazz);
 		clazz = new UMLClass();
-		child = new TopLevelDecorator();
-		child.setDecorates(clazz);
+		child = new TopLevelDecorator(clazz);
 		clazz = new UMLClass();
-		componentDec = new TopLevelDecorator();
-		componentDec.setDecorates(clazz);
+		componentDec = new TopLevelDecorator(clazz);
 		clazz = new UMLClass();
-		singleton = new TopLevelDecorator();
-		singleton.setDecorates(clazz);
+		singleton = new TopLevelDecorator(clazz);
 
 		ClassReader reader = new ClassReader("interfaces.IClass");
 		ClassVisitor vis1 = new ClassDeclarationVisitor(Opcodes.ASM5, comp);

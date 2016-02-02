@@ -27,9 +27,8 @@ public class UMLParser {
 		setClassesToAccept(args);
 
 		for (String className : args) {
-			IClassDecorator topLevelDecorator = new TopLevelDecorator();
 			IClass currentClass = new UMLClass();
-			topLevelDecorator.setDecorates(currentClass);
+			IClassDecorator topLevelDecorator = new TopLevelDecorator(currentClass);
 
 			ClassReader reader = new ClassReader(className);
 

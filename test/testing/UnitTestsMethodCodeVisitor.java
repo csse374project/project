@@ -51,8 +51,7 @@ public class UnitTestsMethodCodeVisitor {
 		f.set(null, new String[]{"testingData/SampleClassForReadingInATest", "testingData/SampleInterface01", "testingData/SampleInterface02", "testingData/SampleSuperClass", "testingData/SampleClassForInitializing", "testingData/SampleClassForInitializingTwo", "testingData/SampleClassForInitializingThree", "testingData/SampleClassForInitializingFour"});
 		for (String cls : classNames) {
 			UMLClass currentClass = new UMLClass();
-			TopLevelDecorator topDecorator = new TopLevelDecorator();
-			topDecorator.setDecorates(currentClass);
+			TopLevelDecorator topDecorator = new TopLevelDecorator(currentClass);
 			ClassReader reader = new ClassReader(cls);
 			ClassVisitor declVisitor = new ClassDeclarationVisitor(Opcodes.ASM5, topDecorator);
 			ClassVisitor fieldVisitor = new ClassFieldVisitor(Opcodes.ASM5, declVisitor, topDecorator);

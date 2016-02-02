@@ -35,8 +35,7 @@ public class UnitTestsMethodVisitor {
 				IllegalAccessException {
 		// TODO fix this.
 		currentClass = new UMLClass();
-		topDecorator = new TopLevelDecorator();
-		topDecorator.setDecorates(currentClass);
+		topDecorator = new TopLevelDecorator(currentClass);
 		java.lang.reflect.Field f = UMLParser.class.getDeclaredField("classesToAccept");
 		f.setAccessible(true);
 		f.set(null, new String[]{"java/lang/String"});

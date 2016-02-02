@@ -37,8 +37,7 @@ public class UnitTestsDeclarationSample {
 	@Before
 	public void setup() throws IOException, NoSuchFieldException, SecurityException, IllegalArgumentException, IllegalAccessException {
 		currentClass = new UMLClass();
-		topDecorator = new TopLevelDecorator();
-		topDecorator.setDecorates(currentClass);
+		topDecorator = new TopLevelDecorator(currentClass);
 		java.lang.reflect.Field f = UMLParser.class.getDeclaredField("classesToAccept");
 		f.setAccessible(true);
 		f.set(null, new String[]{"testingData/SampleClassForReadingInATest"});

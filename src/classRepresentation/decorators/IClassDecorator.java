@@ -19,7 +19,7 @@ public abstract class IClassDecorator implements IClass {
 		//do nothing
 	}
 	
-	public void setDecorates(IClass decorates) {
+	protected void setDecorates(IClass decorates) {
 		this.decorates = decorates;
 	}
 	

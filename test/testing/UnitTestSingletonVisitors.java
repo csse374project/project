@@ -26,8 +26,7 @@ public class UnitTestSingletonVisitors {
 	
 	public void setup(String className) throws IOException {
 		currentClass = new UMLClass();
-		topDecorator = new TopLevelDecorator();
-		topDecorator.setDecorates(currentClass);
+		topDecorator = new TopLevelDecorator(currentClass);
 		ClassReader reader = new ClassReader(className);
 		ClassVisitor vis1 = new ClassDeclarationVisitor(Opcodes.ASM5, topDecorator);
 		ClassVisitor vis2 = new SingletonFieldVisitor(Opcodes.ASM5, vis1, topDecorator);
