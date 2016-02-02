@@ -13,6 +13,7 @@ import classRepresentation.decorators.TopLevelDecorator;
 import classRepresentation.designPaterns.AdapterClassVisitor;
 import classRepresentation.designPaterns.AdapterDetector;
 import classRepresentation.designPaterns.CompositeDetector;
+import classRepresentation.designPaterns.CompositeVisitor;
 import classRepresentation.designPaterns.DecoratorDetector;
 import interfaces.IClass;
 
@@ -44,8 +45,10 @@ public class UMLParser {
 					topLevelDecorator);
 
 			ClassVisitor adapterVisitor = new AdapterClassVisitor(Opcodes.ASM5, classCodeVisitor, topLevelDecorator);
+			
+			ClassVisitor compositeVisitor = new CompositeVisitor(Opcodes.ASM5, adapterVisitor, topLevelDecorator);
 
-			reader.accept(adapterVisitor, ClassReader.EXPAND_FRAMES);
+			reader.accept(compositeVisitor, ClassReader.EXPAND_FRAMES);
 			classes.addClass(topLevelDecorator);
 		}
 		DecoratorDetector decDet = new DecoratorDetector(classes);
@@ -56,7 +59,6 @@ public class UMLParser {
 		
 		CompositeDetector composite = new CompositeDetector(classes);
 		composite.findComposites();
-		
 
 		System.out.println(classes.printGraphVizInput());
 	}
