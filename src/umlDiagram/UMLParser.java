@@ -12,6 +12,7 @@ import classRepresentation.decorators.IClassDecorator;
 import classRepresentation.decorators.TopLevelDecorator;
 import classRepresentation.designPaterns.AdapterClassVisitor;
 import classRepresentation.designPaterns.AdapterDetector;
+import classRepresentation.designPaterns.CompositeDetector;
 import classRepresentation.designPaterns.DecoratorDetector;
 import interfaces.IClass;
 
@@ -52,6 +53,10 @@ public class UMLParser {
 
 		AdapterDetector adapterizer = new AdapterDetector(classes);
 		adapterizer.findAdapters();
+		
+		CompositeDetector composite = new CompositeDetector(classes);
+		composite.findComposites();
+		
 
 		System.out.println(classes.printGraphVizInput());
 	}
