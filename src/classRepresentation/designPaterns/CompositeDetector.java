@@ -52,7 +52,7 @@ public class CompositeDetector {
 			IClass componentClass = classMap.get(componentName);
 			if(componentClass != null){ //Class might not be in scope of what we're parsing
 				IClassDecorator castedComponent = (IClassDecorator)componentClass;
-				if(!(isComponent(castedComponent))){
+				if(!(isComponent(castedComponent))){ //Make sure it wasnt already found
 					castedComponent.decorate(new CompositeComponentDecorator());
 					detectedComponents.add(castedComponent.getName());
 				}
@@ -96,6 +96,12 @@ public class CompositeDetector {
 		}
 	}
 	
+	/**
+	 * Iterates down the decorator chain to find the composite decorator associated with
+	 * 
+	 * @param clazz
+	 * @return CompositeDecorator of the given class
+	 */
 	private CompositeDecorator findComposite(IClass clazz) {
 		IClassDecorator cls = (IClassDecorator) clazz;
 		Object current = cls.getDecorates();

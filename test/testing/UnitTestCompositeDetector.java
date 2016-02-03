@@ -43,7 +43,7 @@ public class UnitTestCompositeDetector {
 		setupHelper(classes, component, "testingData.CompositeLeafSample");
 		
 		CompositeDetector composite = new CompositeDetector(classes);
-		composite.findComposites();
+		composite.findCompositePattern();
 	}
 	
 	private static void setupHelper(Classes classes, IClassDecorator top, String className) throws IOException {
