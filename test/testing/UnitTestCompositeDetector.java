@@ -1,6 +1,7 @@
 package testing;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
 
 import java.io.IOException;
 
@@ -12,7 +13,9 @@ import org.objectweb.asm.Opcodes;
 
 import classRepresentation.Classes;
 import classRepresentation.UMLClass;
+import classRepresentation.decorators.CompositeComponentDecorator;
 import classRepresentation.decorators.CompositeDecorator;
+import classRepresentation.decorators.CompositeLeafDecorator;
 import classRepresentation.decorators.IClassDecorator;
 import classRepresentation.decorators.TopLevelDecorator;
 import classRepresentation.designPaterns.CompositeDetector;
@@ -71,10 +74,38 @@ public class UnitTestCompositeDetector {
 		}
 	}
 	private boolean isComponent(IClass clazz) {
-		throw new UnsupportedOperationException();
+		IClassDecorator cls = (IClassDecorator) clazz;
+		Object current = cls.getDecorates();
+		while (true) {
+			if (current instanceof UMLClass) {
+				return false;
+			}
+			cls = (IClassDecorator) current;
+			if (cls == null) {
+				return false;
+			}
+			if (cls instanceof CompositeComponentDecorator) {
+				return true;
+			}
+			current = cls.getDecorates();
+		}
 	}
 	private boolean isLeaf(IClass clazz) {
-		throw new UnsupportedOperationException();
+		IClassDecorator cls = (IClassDecorator) clazz;
+		Object current = cls.getDecorates();
+		while (true) {
+			if (current instanceof UMLClass) {
+				return false;
+			}
+			cls = (IClassDecorator) current;
+			if (cls == null) {
+				return false;
+			}
+			if (cls instanceof CompositeLeafDecorator) {
+				return true;
+			}
+			current = cls.getDecorates();
+		}
 	}
 	
 	@Test
