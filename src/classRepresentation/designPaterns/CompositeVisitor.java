@@ -48,6 +48,9 @@ public class CompositeVisitor extends ClassVisitor {
 		if(collections.contains(type)){
 			if(!(isComposite(currentClass))) handleSignature(signature);
 		}
+		else if(type.contains("[]")){
+			if(!(isComposite(currentClass))) handleSignature(signature);
+		}
 		
 		return toDecorate;
 	}

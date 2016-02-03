@@ -57,7 +57,7 @@ public class UMLParser {
 		adapterizer.findAdapters();
 		
 		CompositeDetector composite = new CompositeDetector(classes);
-		composite.findComposites();
+		composite.findCompositePattern();
 
 		System.out.println(classes.printGraphVizInput());
 	}
