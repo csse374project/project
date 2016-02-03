@@ -1,7 +1,9 @@
-package testingData;
+package testingData.compositePattern;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import testingData.SampleInterface01;
 
 public class CompositeSample implements SampleInterface01 {
 	

@@ -34,6 +34,10 @@ public class UnitTestSimpleCompositeDetector {
 	private IClassDecorator leafAbstractClass;
 	private IClassDecorator componentAbstractClass;
 	
+	private IClassDecorator arrayCompositeSample;
+	private IClassDecorator arrayLeaf;
+	private IClassDecorator arrayComponent;
+	
 	@Before
 	public void setup() throws IOException {
 		Classes classes = new Classes();
@@ -44,16 +48,22 @@ public class UnitTestSimpleCompositeDetector {
 		compositeSampleAbstract = new TopLevelDecorator(new UMLClass());
 		leafAbstractClass = new TopLevelDecorator(new UMLClass());
 		componentAbstractClass = new TopLevelDecorator(new UMLClass());
+		arrayCompositeSample = new TopLevelDecorator(new UMLClass());
+		arrayLeaf = new TopLevelDecorator(new UMLClass());
+		arrayComponent = new TopLevelDecorator(new UMLClass());
 		
-		setupHelper(classes, compositeSampleInterface, "testingData.CompositeSample");
+		setupHelper(classes, compositeSampleInterface, "testingData.compositePattern.CompositeSample");
 		setupHelper(classes, leafInterface, "testingData.SampleInterface01");
-		setupHelper(classes, componentInterface, "testingData.CompositeLeafSample");
-		setupHelper(classes, compositeSampleAbstract, "testingData.AbstractCompositeSample");
-		setupHelper(classes, leafAbstractClass, "testingData.AbstractCompositeComponent");
-		setupHelper(classes, componentAbstractClass, "testingData.AbstractCompositeLeaf");
+		setupHelper(classes, componentInterface, "testingData.compositePattern.CompositeLeafSample");
+		setupHelper(classes, compositeSampleAbstract, "testingData.compositePattern.AbstractCompositeSample");
+		setupHelper(classes, leafAbstractClass, "testingData.compositePattern.AbstractCompositeComponent");
+		setupHelper(classes, componentAbstractClass, "testingData.compositePattern.AbstractCompositeLeaf");
+		setupHelper(classes, arrayCompositeSample, "testingData.compositePattern.CompositeWithArray");
+		setupHelper(classes, arrayLeaf, "testingData.compositePattern.CompositeLeafWithArray");
+		setupHelper(classes, arrayComponent, "testingData.compositePattern.CompositeComponentWithArray");
 		
 		CompositeDetector composite = new CompositeDetector(classes);
-		composite.findComposites();
+		composite.findCompositePattern();
 	}
 	
 	private static void setupHelper(Classes classes, IClassDecorator top, String className) throws IOException {
@@ -119,7 +129,7 @@ public class UnitTestSimpleCompositeDetector {
 	}
 	
 	@Test
-	public void compositeDecoratorHasCorrectComponent() throws Exception {
+	public void interfaceCompositeDecoratorHasCorrectComponent() throws Exception {
 		IClassDecorator current = compositeSampleInterface;
 		while(true) {
 			if (current instanceof CompositeDecorator) {
@@ -139,99 +149,186 @@ public class UnitTestSimpleCompositeDetector {
 	}
 	
 	@Test
-	public void compositeSampleHasCompositeDecoratorInterface() {
+	public void interfaceCompositeSampleHasCompositeDecorator() {
 		assertTrue(isComposite(compositeSampleInterface));
 	}
 
 	@Test
-	public void componentHasNoCompositeDecoratorInterface() {
+	public void interfaceComponentHasNoCompositeDecoratorInterface() {
 		assertFalse(isComposite(componentInterface));
 	}
 	
 	@Test
-	public void leafHasNoCompositeDecoratorInterface() {
+	public void interfaceCeafHasNoCompositeDecoratorInterface() {
 		assertFalse(isComposite(leafInterface));
 	}
 	
 	
 	@Test
-	public void compositeSampleHasNoLeafDecoratorInterface() {
+	public void interfaceCompositeSampleHasNoLeafDecoratorInterface() {
 		assertFalse(isLeaf(compositeSampleInterface));
 	}
 
 	@Test
-	public void componentHasNoLeafDecoratorInterface() {
+	public void interfaceComponentHasNoLeafDecoratorInterface() {
 		assertFalse(isLeaf(componentInterface));
 	}
 	
 	@Test
-	public void leafHasLeafDecoratorInterface() {
+	public void interfaceCeafHasLeafDecoratorInterface() {
 		assertTrue(isLeaf(leafInterface));
 	}
 	
 	
 	@Test
-	public void compositeSampleHasNoComponentDecoratorInterface() {
+	public void interfaceCompositeSampleHasNoComponentDecoratorInterface() {
 		assertFalse(isComponent(compositeSampleInterface));
 	}
 
 	@Test
-	public void componentHasComponentDecoratorInterface() {
+	public void interfaceComponentHasComponentDecoratorInterface() {
 		assertTrue(isComponent(componentInterface));
 	}
 	
 	@Test
-	public void leafHasNoComponentDecoratorInterface() {
+	public void interfaceCeafHasNoComponentDecoratorInterface() {
 		assertFalse(isComponent(leafInterface));
 	}
 	
 
 	@Test
-	public void compositeSampleHasCompositeDecoratorAbstractClass() {
+	public void abstractCompositeDecoratorHasCorrectComponent() throws Exception {
+		IClassDecorator current = compositeSampleAbstract;
+		while(true) {
+			if (current instanceof CompositeDecorator) {
+				break;
+			}
+			IClass next = current.getDecorates();
+			if (! (next instanceof IClassDecorator)) {
+				throw new Exception("did not detect composite decorator");
+			}
+			current = (IClassDecorator) next;
+		}
+		CompositeDecorator decorator = (CompositeDecorator) current;
+		Field f = CompositeDecorator.class.getDeclaredField("component");
+		f.setAccessible(true);
+		String comp = (String) f.get(decorator);
+		assertEquals("testingData/compositePattern/AbstractCompositeComponent", comp);
+	}
+	
+	@Test
+	public void abstractCompositeSampleHasCompositeDecoratorAbstractClass() {
 		assertTrue(isComposite(compositeSampleAbstract));
 	}
 
 	@Test
-	public void componentHasNoCompositeDecoratorAbstractClass() {
+	public void abstractComponentHasNoCompositeDecoratorAbstractClass() {
 		assertFalse(isComposite(componentAbstractClass));
 	}
 	
 	@Test
-	public void leafHasNoCompositeDecoratorAbstractClass() {
+	public void abstractLeafHasNoCompositeDecoratorAbstractClass() {
 		assertFalse(isComposite(leafAbstractClass));
 	}
 	
 	
 	@Test
-	public void compositeSampleHasNoLeafDecoratorAbstractClass() {
+	public void abstractCompositeSampleHasNoLeafDecoratorAbstractClass() {
 		assertFalse(isLeaf(compositeSampleAbstract));
 	}
 
 	@Test
-	public void componentHasNoLeafDecoratorAbstractClass() {
+	public void abstractComponentHasNoLeafDecoratorAbstractClass() {
 		assertFalse(isLeaf(componentAbstractClass));
 	}
 	
 	@Test
-	public void leafHasLeafDecoratorAbstractClass() {
+	public void abstractLeafHasLeafDecoratorAbstractClass() {
 		assertTrue(isLeaf(leafAbstractClass));
 	}
 	
 	
 	@Test
-	public void compositeSampleHasNoComponentDecoratorAbstractClass() {
+	public void abstractCompositeSampleHasNoComponentDecoratorAbstractClass() {
 		assertFalse(isComponent(compositeSampleAbstract));
 	}
 
 	@Test
-	public void componentHasComponentDecoratorAbstractClass() {
+	public void abstractComponentHasComponentDecoratorAbstractClass() {
 		assertTrue(isComponent(componentAbstractClass));
 	}
 	
 	@Test
-	public void leafHasNoComponentDecoratorAbstractClass() {
+	public void abstractLeafHasNoComponentDecorator() {
 		assertFalse(isComponent(leafAbstractClass));
 	}
+
+	@Test
+	public void arrayCompositeDecoratorHasCorrectComponent() throws Exception {
+		IClassDecorator current = compositeSampleAbstract;
+		while(true) {
+			if (current instanceof CompositeDecorator) {
+				break;
+			}
+			IClass next = current.getDecorates();
+			if (! (next instanceof IClassDecorator)) {
+				throw new Exception("did not detect composite decorator");
+			}
+			current = (IClassDecorator) next;
+		}
+		CompositeDecorator decorator = (CompositeDecorator) current;
+		Field f = CompositeDecorator.class.getDeclaredField("component");
+		f.setAccessible(true);
+		String comp = (String) f.get(decorator);
+		assertEquals("testingData/compositePattern/CompositeComponenetWithArray", comp);
+	}
 	
+
+	@Test
+	public void arrayCompositeSampleHasCompositeDecorator() {
+		assertTrue(isComposite(arrayCompositeSample));
+	}
+
+	@Test
+	public void arrayComponentHasNoCompositeDecoratorInterface() {
+		assertFalse(isComposite(arrayComponent));
+	}
+	
+	@Test
+	public void arrayCeafHasNoCompositeDecoratorInterface() {
+		assertFalse(isComposite(arrayLeaf));
+	}
+	
+	
+	@Test
+	public void arrayCompositeSampleHasNoLeafDecoratorInterface() {
+		assertFalse(isLeaf(arrayCompositeSample));
+	}
+
+	@Test
+	public void arrayComponentHasNoLeafDecoratorInterface() {
+		assertFalse(isLeaf(arrayComponent));
+	}
+	
+	@Test
+	public void arrayCeafHasLeafDecoratorInterface() {
+		assertTrue(isLeaf(arrayLeaf));
+	}
+	
+	
+	@Test
+	public void arrayCompositeSampleHasNoComponentDecoratorInterface() {
+		assertFalse(isComponent(arrayCompositeSample));
+	}
+
+	@Test
+	public void arrayComponentHasComponentDecoratorInterface() {
+		assertTrue(isComponent(arrayComponent));
+	}
+	
+	@Test
+	public void arrayCeafHasNoComponentDecoratorInterface() {
+		assertFalse(isComponent(arrayLeaf));
+	}
 	
 }

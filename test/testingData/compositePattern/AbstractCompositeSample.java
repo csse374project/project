@@ -1,4 +1,4 @@
-package testingData;
+package testingData.compositePattern;
 
 import java.util.ArrayList;
 import java.util.List;

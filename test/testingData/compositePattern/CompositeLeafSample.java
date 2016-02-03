@@ -1,20 +1,17 @@
-package testingData;
+package testingData.compositePattern;
 
-public class AbstractCompositeLeaf extends AbstractCompositeComponent {
+import testingData.SampleInterface01;
+
+public class CompositeLeafSample implements SampleInterface01 {
 	
 	private boolean hatesYouAndWantsYouTooDie = true;
 	public boolean actsFriendlyTowardYou = true;
 	
-	public AbstractCompositeLeaf() {
+	public CompositeLeafSample() {
 		// do nothing
 	}
 	
 	public boolean isPassiveAgressive() {
 		return hatesYouAndWantsYouTooDie && actsFriendlyTowardYou;
-	}
-
-	@Override
-	public void doSomething() {
-		// do nothing
 	}
 }

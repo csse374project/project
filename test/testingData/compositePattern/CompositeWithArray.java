@@ -1,4 +1,4 @@
-package testingData;
+package testingData.compositePattern;
 
 public class CompositeWithArray extends CompositeComponentWithArray {
 	
