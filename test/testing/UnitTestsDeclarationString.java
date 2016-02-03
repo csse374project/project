@@ -7,7 +7,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.junit.Before;
-import org.junit.After;
 import org.objectweb.asm.Opcodes;
 
 import classRepresentation.UMLClass;
@@ -19,8 +18,6 @@ import org.objectweb.asm.ClassVisitor;
 import org.junit.Test;
 
 import interfaces.IClass;
-import interfaces.IField;
-import interfaces.IMethod;
 import umlDiagram.ClassDeclarationVisitor;
 import umlDiagram.UMLParser;
 

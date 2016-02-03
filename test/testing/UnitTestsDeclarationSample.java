@@ -7,7 +7,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.junit.Before;
-import org.junit.After;
 import org.objectweb.asm.Opcodes;
 
 import classRepresentation.UMLClass;

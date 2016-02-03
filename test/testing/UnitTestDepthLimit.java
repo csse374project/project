@@ -6,7 +6,6 @@ import java.io.IOException;
 import java.util.Iterator;
 
 import org.junit.After;
-import org.junit.Before;
 import org.junit.Test;
 import org.objectweb.asm.ClassReader;
 import org.objectweb.asm.ClassVisitor;

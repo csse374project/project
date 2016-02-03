@@ -13,10 +13,8 @@ import org.objectweb.asm.ClassVisitor;
 import org.objectweb.asm.Opcodes;
 
 import classRepresentation.UMLClass;
-import classRepresentation.UMLMethod;
 import classRepresentation.decorators.TopLevelDecorator;
 import interfaces.IClass;
-import interfaces.IField;
 import interfaces.IMethod;
 import umlDiagram.ClassDeclarationVisitor;
 import umlDiagram.ClassFieldVisitor;

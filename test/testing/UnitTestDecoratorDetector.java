@@ -24,7 +24,7 @@ import umlDiagram.ClassFieldVisitor;
 public class UnitTestDecoratorDetector {
 
 	private Classes classes;
-	private IClassDecorator comp, decorator, child, singleton, componentDec;
+	private IClassDecorator comp, decorator, child, singleton;
 
 	@Before
 	public void setUp() throws Exception {
@@ -35,8 +35,6 @@ public class UnitTestDecoratorDetector {
 		decorator = new TopLevelDecorator(clazz);
 		clazz = new UMLClass();
 		child = new TopLevelDecorator(clazz);
-		clazz = new UMLClass();
-		componentDec = new TopLevelDecorator(clazz);
 		clazz = new UMLClass();
 		singleton = new TopLevelDecorator(clazz);
 
