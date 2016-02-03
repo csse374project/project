@@ -1,10 +1,9 @@
 package classRepresentation.decorators;
 
-public class CompositeDecorator extends IClassDecorator {
-
+public class CompositeLeafDecorator extends IClassDecorator {
 	@Override
 	public void appendGraphVizStereotype(StringBuilder str) {
-		str.append("\\<\\<Composite\\>\\>\\n");
+		str.append("\\<\\<Leaf\\>\\>\\n");
 		decorates.appendGraphVizStereotype(str);
 	}
 	
