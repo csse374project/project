@@ -33,6 +33,9 @@ public class CompositeDetector {
 
 		// Then, we must decorate their Components
 		decorateComponents();
+		
+		//Then we find children of the components, which are not composites, and decorate them as leaves
+		decorateFirstLevelLeaves();
 	}
 
 	private void findComposites() {
@@ -46,18 +49,22 @@ public class CompositeDetector {
 		for (String composite : detectedComposites) {
 			IClass compositeClass = classMap.get(composite);
 			IClassDecorator castedComposite = (IClassDecorator) compositeClass;
-			CompositeDecorator compositeDecorator = findComposite(compositeClass);
+			CompositeDecorator compositeDecorator = findComposite(castedComposite);
 			
 			String componentName = compositeDecorator.getComponent();
 			IClass componentClass = classMap.get(componentName);
 			if(componentClass != null){ //Class might not be in scope of what we're parsing
 				IClassDecorator castedComponent = (IClassDecorator)componentClass;
-				if(!(isComponent(castedComponent))){ //Make sure it wasnt already found
+				if(!(isComponent(castedComponent))){ //Make sure it wasn't already found
 					castedComponent.decorate(new CompositeComponentDecorator());
 					detectedComponents.add(castedComponent.getName());
 				}
 			}
 		}
+	}
+	
+	private void decorateFirstLevelLeaves(){
+		
 	}
 
 	private boolean isComposite(IClass clazz) {
