@@ -1,9 +1,9 @@
 package testing;
 
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.*;
 
 import java.io.IOException;
+import java.lang.reflect.Field;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -109,6 +109,26 @@ public class UnitTestCompositeDetector {
 	}
 	
 	@Test
+	public void compositeDecoratorHasCorrectComponent() throws Exception {
+		IClassDecorator current = compositeSample;
+		while(true) {
+			if (current instanceof CompositeDecorator) {
+				break;
+			}
+			IClass next = current.getDecorates();
+			if (! (next instanceof IClassDecorator)) {
+				throw new Exception("did not detect composite decorator");
+			}
+			current = (IClassDecorator) next;
+		}
+		CompositeDecorator decorator = (CompositeDecorator) current;
+		Field f = CompositeDecorator.class.getDeclaredField("component");
+		f.setAccessible(true);
+		String comp = (String) f.get(decorator);
+		assertEquals("testingData/SampleInterface01", comp);
+	}
+	
+	@Test
 	public void compositeSampleHasCompositeDecorator() {
 		assertTrue(isComposite(compositeSample));
 	}
@@ -122,6 +142,7 @@ public class UnitTestCompositeDetector {
 	public void leafHasNoCompositeDecorator() {
 		assertFalse(isComposite(leaf));
 	}
+	
 	
 	@Test
 	public void compositeSampleHasNoLeafDecorator() {
@@ -137,6 +158,7 @@ public class UnitTestCompositeDetector {
 	public void leafHasLeafDecorator() {
 		assertTrue(isLeaf(leaf));
 	}
+	
 	
 	@Test
 	public void compositeSampleHasNoComponentDecorator() {
