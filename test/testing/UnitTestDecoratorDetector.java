@@ -12,7 +12,7 @@ import org.objectweb.asm.Opcodes;
 
 import classRepresentation.Classes;
 import classRepresentation.UMLClass;
-import classRepresentation.decorators.ComponentDecorator;
+import classRepresentation.decorators.AdaptorComponentDecorator;
 import classRepresentation.decorators.DecoratorDecorator;
 import classRepresentation.decorators.IClassDecorator;
 import classRepresentation.decorators.TopLevelDecorator;
@@ -161,7 +161,7 @@ public class UnitTestDecoratorDetector {
 			if (cls == null) {
 				return false;
 			}
-			if (cls instanceof ComponentDecorator) {
+			if (cls instanceof AdaptorComponentDecorator) {
 				return true;
 			}
 			current = f.get(cls);

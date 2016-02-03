@@ -6,7 +6,7 @@ import java.util.Map;
 
 import classRepresentation.Classes;
 import classRepresentation.UMLClass;
-import classRepresentation.decorators.ComponentDecorator;
+import classRepresentation.decorators.AdaptorComponentDecorator;
 import classRepresentation.decorators.DecoratorDecorator;
 import classRepresentation.decorators.IClassDecorator;
 import interfaces.IClass;
@@ -99,8 +99,8 @@ public class DecoratorDetector {
 
 	private void setComponentToInterface(String component) {
 		IClassDecorator compClass = (IClassDecorator) classMap.get(component);
-		if (!(compClass.getDecorates() instanceof ComponentDecorator))
-			compClass.decorate(new ComponentDecorator());
+		if (!(compClass.getDecorates() instanceof AdaptorComponentDecorator))
+			compClass.decorate(new AdaptorComponentDecorator());
 	}
 
 	private boolean isDecorator(IClass clazz) {
