@@ -1,6 +1,6 @@
 package classRepresentation.decorators;
 
-public class AdaptorComponentDecorator extends IClassDecorator {
+public class DecoratorComponentDecorator extends IClassDecorator {
 	
 	@Override
 	public void appendGraphVizColor(StringBuilder str) {
