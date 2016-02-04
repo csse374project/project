@@ -37,6 +37,8 @@ public class CompositeDetector {
 		
 		//Then we find children of the components, which are not composites, and decorate them as leaves
 		decorateFirstLevelLeaves();
+		
+		findLeafChildren();
 	}
 
 	private void findComposites() {
@@ -61,6 +63,20 @@ public class CompositeDetector {
 					detectedComponents.add(castedComponent.getName());
 				}
 			}
+		}
+	}
+
+	private void findLeafChildren() {
+		boolean foundLeaf = false;
+		for (IClass cls : classMap.values()) {
+			if (detectedLeaves.contains(cls.getSuperClass()) && !isLeaf(cls) && !isComposite(cls)) {
+				IClassDecorator decoratedClass = (IClassDecorator)cls;
+				decoratedClass.decorate(new CompositeLeafDecorator());
+				foundLeaf = true;
+			}
+		}
+		if (foundLeaf) {
+			findLeafChildren();
 		}
 	}
 	
