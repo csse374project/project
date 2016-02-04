@@ -55,7 +55,7 @@ public class UnitTestDecoratorDetector {
 		vis2 = new ClassFieldVisitor(Opcodes.ASM5, vis1, child);
 		reader.accept(vis2, ClassReader.EXPAND_FRAMES);
 		
-		reader = new ClassReader("classRepresentation.decorators.AdaptorComponentDecorator");
+		reader = new ClassReader("classRepresentation.decorators.DecoratorComponentDecorator");
 		vis1 = new ClassDeclarationVisitor(Opcodes.ASM5, child);
 		vis2 = new ClassFieldVisitor(Opcodes.ASM5, vis1, child);
 		reader.accept(vis2, ClassReader.EXPAND_FRAMES);
