@@ -39,6 +39,8 @@ public class CompositeDetector {
 		decorateFirstLevelLeaves();
 		
 		findLeafChildren();
+		
+		findCompositeChildren();
 	}
 
 	private void findComposites() {
@@ -77,6 +79,20 @@ public class CompositeDetector {
 		}
 		if (foundLeaf) {
 			findLeafChildren();
+		}
+	}
+
+	private void findCompositeChildren() {
+		boolean foundComposite = false;
+		for (IClass cls : classMap.values()) {
+			if (detectedComposites.contains(cls.getSuperClass()) && !isLeaf(cls) && !isComposite(cls)) {
+				IClassDecorator decoratedClass = (IClassDecorator)cls;
+				decoratedClass.decorate(new CompositeDecorator(null));
+				foundComposite = true;
+			}
+		}
+		if (foundComposite) {
+			findCompositeChildren();
 		}
 	}
 	

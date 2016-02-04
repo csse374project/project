@@ -14,6 +14,7 @@ import org.objectweb.asm.signature.SignatureReader;
 public class ClassFieldVisitor extends ClassVisitor {
 
 	private IClass currentClass;
+	private IField field;
 
 	public ClassFieldVisitor(int arg0, ClassVisitor arg1, IClass currentClass) {
 		super(arg0, arg1);
@@ -38,6 +39,7 @@ public class ClassFieldVisitor extends ClassVisitor {
 		field.setName(name);
 		field.setType(type);
 		field.setVisibility(vis);
+		this.field = field;
 
 		currentClass.addField(field);
 		currentClass.addAssociatedClass(type.replace('.', '/'));
@@ -63,6 +65,7 @@ public class ClassFieldVisitor extends ClassVisitor {
 		@Override
 		public void visitClassType(String name) {
 			currentClass.addAssociatedClass(name);
+			field.addInteriorType(name);
 		}
 	}
 }
