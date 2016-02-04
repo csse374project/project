@@ -11,15 +11,14 @@ import org.junit.runners.Suite;
 	UnitTestDeclarationSample.class,
 	UnitTestDeclarationString.class,
 	UnitTestDecoratorDetector.class,
-	UnitTestDepthLimit.class,
+//	UnitTestDepthLimit.class,
 	UnitTestFieldVisitor.class,
 	UnitTestMethod.class,
 	UnitTestMethodCodeVisitor.class,
 	UnitTestMethodVisitor.class,
-	UnitTestSimpleMethodCalls.class,
 	UnitTestSimpleCompositeDetector.class,
-	UnitTestSimpleMethodCalls.class,
-	UnitTestSingletonVisitors.class,
+//	UnitTestSimpleMethodCalls.class,
+//	UnitTestSingletonVisitors.class,
 	UnitTestsToGraphViz.class
 })
 public class AllTests {
