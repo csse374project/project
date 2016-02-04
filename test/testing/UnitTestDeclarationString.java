@@ -21,7 +21,7 @@ import interfaces.IClass;
 import umlDiagram.ClassDeclarationVisitor;
 import umlDiagram.UMLParser;
 
-public class UnitTestsDeclarationString {
+public class UnitTestDeclarationString {
 
 	private static String className = "java.lang.String";
 	private IClass currentClass;

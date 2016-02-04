@@ -27,7 +27,7 @@ import umlDiagram.ClassFieldVisitor;
 import umlDiagram.ClassMethodVisitor;
 import umlDiagram.UMLParser;
 
-public class UnitTestsDeclarationSample {
+public class UnitTestDeclarationSample {
 
 	private static String className = "testingData.SampleClassForReadingInATest";
 	private IClass currentClass;

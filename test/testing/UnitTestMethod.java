@@ -6,7 +6,7 @@ import org.junit.Test;
 
 import classRepresentation.UMLMethod;
 
-public class UnitTestsMethod {
+public class UnitTestMethod {
 
 	@Test
 	public void nullMethodEqualsSelf() {

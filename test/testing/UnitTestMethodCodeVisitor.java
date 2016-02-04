@@ -23,7 +23,7 @@ import umlDiagram.ClassFieldVisitor;
 import umlDiagram.ClassMethodVisitor;
 import umlDiagram.UMLParser;
 
-public class UnitTestsMethodCodeVisitor {
+public class UnitTestMethodCodeVisitor {
 	
 	private static List<String> classNames;
 	private Classes classes;

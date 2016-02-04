@@ -21,7 +21,7 @@ import umlDiagram.ClassFieldVisitor;
 import umlDiagram.ClassMethodVisitor;
 import umlDiagram.UMLParser;
 
-public class UnitTestsMethodVisitor {
+public class UnitTestMethodVisitor {
 
 	private static String className = "java.lang.String";
 	private IClass currentClass;
