@@ -15,7 +15,7 @@ public class CompositeLeafSample implements SampleInterface01 {
 		return hatesYouAndWantsYouTooDie && actsFriendlyTowardYou;
 	}
 	
-	public boolean hatesThomas(){
+	public boolean doesntTalkToYou(){
 		return true;
 	}
 }
