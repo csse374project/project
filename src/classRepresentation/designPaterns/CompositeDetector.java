@@ -69,12 +69,14 @@ public class CompositeDetector {
 			if (detectedComponents.contains(cls.getSuperClass()) && !isComposite(cls) && !isLeaf(cls)) {
 				IClassDecorator decoratedClass = (IClassDecorator)cls;
 				decoratedClass.decorate(new CompositeLeafDecorator());
+				detectedLeaves.add(cls.getName());
 			}
 			
 			for (String interfaze : cls.getInterfaces()){
 				if (detectedComponents.contains(interfaze) && !isComposite(cls) && !isLeaf(cls)) {
 					IClassDecorator decoratedClass = (IClassDecorator)cls;
 					decoratedClass.decorate(new CompositeLeafDecorator());
+					detectedLeaves.add(cls.getName());
 				}
 			}
 		}
