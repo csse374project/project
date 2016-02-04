@@ -38,9 +38,9 @@ public class UnitTestCompositeDetector {
 		leaf = new TopLevelDecorator(new UMLClass());
 		component = new TopLevelDecorator(new UMLClass());
 		
-		setupHelper(classes, compositeSample, "testingData.CompositeSample");
+		setupHelper(classes, compositeSample, "testingData.compositePattern.CompositeSample");
 		setupHelper(classes, leaf, "testingData.SampleInterface01");
-		setupHelper(classes, component, "testingData.CompositeLeafSample");
+		setupHelper(classes, component, "testingData.compositePattern.CompositeLeafSample");
 		
 		CompositeDetector composite = new CompositeDetector(classes);
 		composite.findCompositePattern();
