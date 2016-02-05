@@ -75,7 +75,13 @@ public class CompositeDetector {
 					}
 				}
 			}
-			if (!isComposite(cls) && !isComponent(cls)) {
+			IClass superClass = classMap.get(cls.getSuperClass());
+			if(superClass != null && isComposite(superClass) && !isComposite(cls)) {
+				IClassDecorator decoratedClass = (IClassDecorator) cls;
+				decoratedClass.decorate(new CompositeDecorator(superClass.getName()));
+			}
+			
+			else if (!isComposite(cls) && !isComponent(cls)) {
 				IClassDecorator decoratedClass = (IClassDecorator) cls;
 				decoratedClass.decorate(new CompositeLeafDecorator());
 			}
