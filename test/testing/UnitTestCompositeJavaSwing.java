@@ -1,10 +1,9 @@
 package testing;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
 
 import java.io.IOException;
-
-import javax.swing.JComponent;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -18,6 +17,7 @@ import classRepresentation.decorators.AdapterDecorator;
 import classRepresentation.decorators.CompositeComponentDecorator;
 import classRepresentation.decorators.CompositeDecorator;
 import classRepresentation.decorators.CompositeLeafDecorator;
+import classRepresentation.decorators.DecoratorDecorator;
 import classRepresentation.decorators.IClassDecorator;
 import classRepresentation.decorators.TopLevelDecorator;
 import classRepresentation.designPaterns.CompositeDetector;
@@ -77,6 +77,7 @@ public class UnitTestCompositeJavaSwing {
 			current = cls.getDecorates();
 		}
 	}
+	
 	private boolean isComponent(IClass clazz) {
 		IClassDecorator cls = (IClassDecorator) clazz;
 		Object current = cls.getDecorates();
@@ -94,6 +95,7 @@ public class UnitTestCompositeJavaSwing {
 			current = cls.getDecorates();
 		}
 	}
+	
 	private boolean isLeaf(IClass clazz) {
 		IClassDecorator cls = (IClassDecorator) clazz;
 		Object current = cls.getDecorates();
@@ -111,6 +113,25 @@ public class UnitTestCompositeJavaSwing {
 			current = cls.getDecorates();
 		}
 	}
+	
+	private boolean isDecorator(IClass clazz) {
+		IClassDecorator cls = (IClassDecorator) clazz;
+		Object current = cls.getDecorates();
+		while (true) {
+			if (current instanceof UMLClass) {
+				return false;
+			}
+			cls = (IClassDecorator) current;
+			if (cls == null) {
+				return false;
+			}
+			if (cls instanceof DecoratorDecorator) {
+				return true;
+			}
+			current = cls.getDecorates();
+		}
+	}
+	
 	private boolean isAdapter(IClass clazz) {
 		IClassDecorator cls = (IClassDecorator) clazz;
 		Object current = cls.getDecorates();
@@ -129,6 +150,7 @@ public class UnitTestCompositeJavaSwing {
 		}
 	}
 	
+	
 	@Test 
 	public void buttonIsNotComposite() {
 		assertFalse(isComposite(button));
@@ -145,6 +167,11 @@ public class UnitTestCompositeJavaSwing {
 	public void buttonIsNotAdapter() {
 		assertFalse(isAdapter(button));
 	}
+	@Test
+	public void buttonIsNotDecorator() {
+		assertFalse(isDecorator(button));
+	}
+	
 
 	@Test 
 	public void panelIsComposite() {
@@ -162,7 +189,12 @@ public class UnitTestCompositeJavaSwing {
 	public void panelIsNotAdapter() {
 		assertFalse(isAdapter(panel));
 	}
+	@Test
+	public void panelIsNotDecorator() {
+		assertFalse(isDecorator(panel));
+	}
 
+	
 	@Test 
 	public void compIsNotComposite() {
 		assertFalse(isComposite(comp));
@@ -178,6 +210,10 @@ public class UnitTestCompositeJavaSwing {
 	@Test 
 	public void compIsNotAdapter() {
 		assertFalse(isAdapter(comp));
+	}
+	@Test
+	public void compIsNotDecorator() {
+		assertFalse(isDecorator(comp));
 	}
 
 
@@ -196,5 +232,9 @@ public class UnitTestCompositeJavaSwing {
 	@Test 
 	public void windowIsNotAdapter() {
 		assertFalse(isAdapter(window));
+	}
+	@Test
+	public void windowIsNotDecorator() {
+		assertFalse(isDecorator(window));
 	}
 }
