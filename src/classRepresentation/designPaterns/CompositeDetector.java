@@ -79,7 +79,6 @@ public class CompositeDetector {
 				IClassDecorator decoratedClass = (IClassDecorator) cls;
 				decoratedClass.decorate(new CompositeLeafDecorator());
 			}
-
 		}
 	}
 
@@ -119,7 +118,7 @@ public class CompositeDetector {
 
 	private void checkInterfaces(IClass cls, IField field) {
 		for (String type : field.getInteriorTypes()) {
-			if (cls.getInterfaces().contains(type)) {
+			if (cls.getInterfaces().contains(type) && !isComposite(cls)) {
 				IClassDecorator decoratedClass = (IClassDecorator)cls;
 				decoratedClass.decorate(new CompositeDecorator(type));
 				detectedComposites.add(cls.getName());
@@ -130,7 +129,7 @@ public class CompositeDetector {
 	private void checkSupers(IClass cls, IField field) {
 		List<String> supers = getSuperClasses(cls);
 		for (String type : field.getInteriorTypes()) {
-			if (supers.contains(type)) {
+			if (supers.contains(type) && !isComposite(cls)) {
 				IClassDecorator decoratedClass = (IClassDecorator)cls;
 				decoratedClass.decorate(new CompositeDecorator(type));
 				detectedComposites.add(cls.getName());
@@ -203,24 +202,6 @@ public class CompositeDetector {
 				return false;
 			}
 			if (cls instanceof CompositeComponentDecorator) {
-				return true;
-			}
-			current = cls.getDecorates();
-		}
-	}
-
-	private boolean isLeaf(IClass clazz) {
-		IClassDecorator cls = (IClassDecorator) clazz;
-		Object current = cls.getDecorates();
-		while (true) {
-			if (current instanceof UMLClass) {
-				return false;
-			}
-			cls = (IClassDecorator) current;
-			if (cls == null) {
-				return false;
-			}
-			if (cls instanceof CompositeLeafDecorator) {
 				return true;
 			}
 			current = cls.getDecorates();

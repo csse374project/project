@@ -9,7 +9,7 @@ public class DecoratorComponentDecorator extends IClassDecorator {
 	
 	@Override
 	public void appendGraphVizStereotype(StringBuilder str) {
-		str.append("\\<\\<Component\\>\\>\\n");
+		str.append("\\<\\<Decorator Component\\>\\>\\n");
 		decorates.appendGraphVizStereotype(str);
 	}
 }

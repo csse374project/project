@@ -91,7 +91,7 @@ public class DecoratorDetector {
 				return;
 			}
 		}
-		if (!!isDecorator(cls))
+		if (!isDecorator(cls))
 			cls.decorate(new DecoratorDecorator(component));
 		if (component != null)
 			setComponentToInterface(component);

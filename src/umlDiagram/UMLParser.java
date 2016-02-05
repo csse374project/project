@@ -53,7 +53,7 @@ public class UMLParser {
 
 		AdapterDetector adapterizer = new AdapterDetector(classes);
 		adapterizer.findAdapters();
-		
+
 		CompositeDetector composite = new CompositeDetector(classes);
 		composite.findCompositePattern();
 

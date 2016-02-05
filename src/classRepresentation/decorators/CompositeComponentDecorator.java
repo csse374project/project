@@ -3,7 +3,7 @@ package classRepresentation.decorators;
 public class CompositeComponentDecorator extends IClassDecorator {
 	@Override
 	public void appendGraphVizStereotype(StringBuilder str) {
-		str.append("\\<\\<Component\\>\\>\\n");
+		str.append("\\<\\<Composite Component\\>\\>\\n");
 		decorates.appendGraphVizStereotype(str);
 	}
 	
