@@ -29,7 +29,6 @@ public class UMLParser {
 		for (String className : args) {
 			IClass currentClass = new UMLClass();
 			IClassDecorator topLevelDecorator = new TopLevelDecorator(currentClass);
-			System.out.println(className);
 			ClassReader reader = new ClassReader(className);
 
 			ClassVisitor declVisitor = new ClassDeclarationVisitor(Opcodes.ASM5, topLevelDecorator);
