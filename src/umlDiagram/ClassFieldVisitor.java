@@ -14,6 +14,7 @@ import org.objectweb.asm.signature.SignatureReader;
 public class ClassFieldVisitor extends ClassVisitor {
 
 	private IClass currentClass;
+	private IField field;
 
 	public ClassFieldVisitor(int arg0, ClassVisitor arg1, IClass currentClass) {
 		super(arg0, arg1);
@@ -38,17 +39,18 @@ public class ClassFieldVisitor extends ClassVisitor {
 		field.setName(name);
 		field.setType(type);
 		field.setVisibility(vis);
+		this.field = field;
 
 		currentClass.addField(field);
 		currentClass.addAssociatedClass(type.replace('.', '/'));
-		handleSignature(signature);
+		handleSignature(signature, type);
 		return toDecorate;
 	}
 
-	public void handleSignature(String signature) {
+	public void handleSignature(String signature, String type) {
 		if (signature == null)
 			return;
-		SignatureVisitor sigVis = new SigVisitor(Opcodes.ASM5);
+		SignatureVisitor sigVis = new SigVisitor(Opcodes.ASM5, type);
 		SignatureReader sigReader = new SignatureReader(signature);
 		sigReader.accept(sigVis);
 
@@ -56,13 +58,19 @@ public class ClassFieldVisitor extends ClassVisitor {
 
 	class SigVisitor extends SignatureVisitor {
 
-		public SigVisitor(int opcode) {
+		String type;
+		
+		public SigVisitor(int opcode, String type) {
 			super(opcode);
+			this.type = type;
 		}
 
 		@Override
 		public void visitClassType(String name) {
 			currentClass.addAssociatedClass(name);
+			
+			if(!name.equals(type.replace('.', '/')))
+				field.addInteriorType(name);
 		}
 	}
 }

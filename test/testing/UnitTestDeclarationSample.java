@@ -7,7 +7,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.junit.Before;
-import org.junit.After;
 import org.objectweb.asm.Opcodes;
 
 import classRepresentation.UMLClass;
@@ -28,7 +27,7 @@ import umlDiagram.ClassFieldVisitor;
 import umlDiagram.ClassMethodVisitor;
 import umlDiagram.UMLParser;
 
-public class UnitTestsDeclarationSample {
+public class UnitTestDeclarationSample {
 
 	private static String className = "testingData.SampleClassForReadingInATest";
 	private IClass currentClass;
@@ -37,8 +36,7 @@ public class UnitTestsDeclarationSample {
 	@Before
 	public void setup() throws IOException, NoSuchFieldException, SecurityException, IllegalArgumentException, IllegalAccessException {
 		currentClass = new UMLClass();
-		topDecorator = new TopLevelDecorator();
-		topDecorator.setDecorates(currentClass);
+		topDecorator = new TopLevelDecorator(currentClass);
 		java.lang.reflect.Field f = UMLParser.class.getDeclaredField("classesToAccept");
 		f.setAccessible(true);
 		f.set(null, new String[]{"testingData/SampleClassForReadingInATest"});

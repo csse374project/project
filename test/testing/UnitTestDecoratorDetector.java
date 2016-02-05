@@ -12,7 +12,7 @@ import org.objectweb.asm.Opcodes;
 
 import classRepresentation.Classes;
 import classRepresentation.UMLClass;
-import classRepresentation.decorators.ComponentDecorator;
+import classRepresentation.decorators.DecoratorComponentDecorator;
 import classRepresentation.decorators.DecoratorDecorator;
 import classRepresentation.decorators.IClassDecorator;
 import classRepresentation.decorators.TopLevelDecorator;
@@ -24,26 +24,19 @@ import umlDiagram.ClassFieldVisitor;
 public class UnitTestDecoratorDetector {
 
 	private Classes classes;
-	private IClassDecorator comp, decorator, child, singleton, componentDec;
+	private IClassDecorator comp, decorator, child, singleton;
 
 	@Before
 	public void setUp() throws Exception {
 		classes = new Classes();
 		IClass clazz = new UMLClass();
-		comp = new TopLevelDecorator();
-		comp.setDecorates(clazz);
+		comp = new TopLevelDecorator(clazz);
 		clazz = new UMLClass();
-		decorator = new TopLevelDecorator();
-		decorator.setDecorates(clazz);
+		decorator = new TopLevelDecorator(clazz);
 		clazz = new UMLClass();
-		child = new TopLevelDecorator();
-		child.setDecorates(clazz);
+		child = new TopLevelDecorator(clazz);
 		clazz = new UMLClass();
-		componentDec = new TopLevelDecorator();
-		componentDec.setDecorates(clazz);
-		clazz = new UMLClass();
-		singleton = new TopLevelDecorator();
-		singleton.setDecorates(clazz);
+		singleton = new TopLevelDecorator(clazz);
 
 		ClassReader reader = new ClassReader("interfaces.IClass");
 		ClassVisitor vis1 = new ClassDeclarationVisitor(Opcodes.ASM5, comp);
@@ -62,7 +55,7 @@ public class UnitTestDecoratorDetector {
 		vis2 = new ClassFieldVisitor(Opcodes.ASM5, vis1, child);
 		reader.accept(vis2, ClassReader.EXPAND_FRAMES);
 		
-		reader = new ClassReader("classRepresentation.decorators.ComponentDecorator");
+		reader = new ClassReader("classRepresentation.decorators.DecoratorComponentDecorator");
 		vis1 = new ClassDeclarationVisitor(Opcodes.ASM5, child);
 		vis2 = new ClassFieldVisitor(Opcodes.ASM5, vis1, child);
 		reader.accept(vis2, ClassReader.EXPAND_FRAMES);
@@ -168,7 +161,7 @@ public class UnitTestDecoratorDetector {
 			if (cls == null) {
 				return false;
 			}
-			if (cls instanceof ComponentDecorator) {
+			if (cls instanceof DecoratorComponentDecorator) {
 				return true;
 			}
 			current = f.get(cls);

@@ -1,6 +1,6 @@
 package classRepresentation.decorators;
 
-public class ComponentDecorator extends IClassDecorator {
+public class DecoratorComponentDecorator extends IClassDecorator {
 	
 	@Override
 	public void appendGraphVizColor(StringBuilder str) {
@@ -9,7 +9,7 @@ public class ComponentDecorator extends IClassDecorator {
 	
 	@Override
 	public void appendGraphVizStereotype(StringBuilder str) {
-		str.append("\\<\\<Component\\>\\>\\n");
+		str.append("\\<\\<Decorator Component\\>\\>\\n");
 		decorates.appendGraphVizStereotype(str);
 	}
 }

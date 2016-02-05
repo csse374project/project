@@ -2,6 +2,9 @@
 This tool analyzes java code and generates a UML diagram. It detects and draws all classes complete with their fields and methods. It also draws arrows for inheritance from other classes, implementation of interfaces, other used classes, and other associated classes. The Singleton and Decorator design patterns are also detected and notated.  
 
 #Design:
+Milestone 6:
+No design changes have been made since milestone 5.
+
 Milestone 5:
 Design was overhauled during this milestone. Our object representations of the classes now store their information using decorators. Information about the class's methods and fields are stored in the base UML class. Any further patterns detected are represented with decorators. These decorators are responsible for printing their necessary output to GraphViz. Our decorator detection is implemented by searching over our representation of the classes and adding additional decorators where necessary. The adaptor detection is done by creating a new visitor to ensure that the store instance of the adaptee is used in each method. Once this is done, a decorator is added to the appropriate class representation. An additional class was then created to check the class representations, after parsing the java classes, and modify the appropriate modifiers to add the stereotypes.
 
@@ -18,6 +21,11 @@ Milestone 1:
 The tool expands upon the ASM class visitors discussed in class. The method visitor decorates the field visitor, which decorates the declaration visitor. As each class is visited, data container objects are created to store the required information about the class, its fields, and its methods. After the method has been visited by all of the visitors, its data is stored before moving onto the next argument. After all of the arguments have been examined, each of the created data containers is parsed into a form usable by GraphViz.
 
 #Responsibilities: 
+Milestone 6:
+Jesse Shellabarger - Designed Composite detection with Thomas. Implemented composite detection. Updated with required pictures and documentation.
+Nate Briggs - Found composite examples in awt and swing. Helped to implement composite detection.
+Thomas Bonatti - Designed Composite detection with Jesse. Helped to implement composite detection. Updated project UML.
+
 Milestone 5:
 Jesse Shellabarger - Reworked Milestone 4 design, with Thomas, to make the system more extendible. Designed and wrote decorator detection. Wrote documentation.
 Nate Briggs - Greatly assisted Jesse in writing decorator detection. Assisted Thomas with Adaptor detection. Debugged GraphViz output. Created new project UML.

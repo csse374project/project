@@ -8,11 +8,9 @@ import java.util.HashMap;
 import java.util.List;
 
 import org.junit.Before;
-import org.junit.After;
 import org.objectweb.asm.Opcodes;
 
 import classRepresentation.UMLClass;
-import classRepresentation.UMLField;
 import classRepresentation.decorators.TopLevelDecorator;
 
 import org.objectweb.asm.ClassReader;
@@ -22,12 +20,11 @@ import org.junit.Test;
 
 import interfaces.IClass;
 import interfaces.IField;
-import interfaces.IMethod;
 import umlDiagram.ClassDeclarationVisitor;
 import umlDiagram.ClassFieldVisitor;
 import umlDiagram.UMLParser;
 
-public class UnitTestsFieldVisitor {
+public class UnitTestFieldVisitor {
 	
 	private static String className = "java.lang.String";
 	private IClass currentClass;
@@ -37,8 +34,7 @@ public class UnitTestsFieldVisitor {
 	public void setup() throws IOException, NoSuchFieldException, SecurityException, IllegalArgumentException, IllegalAccessException {
 		// TODO fix this.???
 		currentClass = new UMLClass();
-		topDecorator = new TopLevelDecorator();
-		topDecorator.setDecorates(currentClass);
+		topDecorator = new TopLevelDecorator(currentClass);
 		java.lang.reflect.Field f = UMLParser.class.getDeclaredField("classesToAccept");
 		f.setAccessible(true);
 		f.set(null, new String[]{"java/lang/String"});
@@ -57,7 +53,7 @@ public class UnitTestsFieldVisitor {
 	@Test
 	public void testFields() {
 		List<IField> fields = currentClass.getFields();
-		List<String> allNames = new ArrayList(5);
+		List<String> allNames = new ArrayList<String>(5);
 		String[] expected = new String[]{"CASE_INSENSITIVE_ORDER", "value",
 				"hash", "serialVersionUID", "serialPersistentFields"};
 		for (int i = 0; i < fields.size(); i++) {

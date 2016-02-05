@@ -13,17 +13,15 @@ import org.objectweb.asm.ClassVisitor;
 import org.objectweb.asm.Opcodes;
 
 import classRepresentation.UMLClass;
-import classRepresentation.UMLMethod;
 import classRepresentation.decorators.TopLevelDecorator;
 import interfaces.IClass;
-import interfaces.IField;
 import interfaces.IMethod;
 import umlDiagram.ClassDeclarationVisitor;
 import umlDiagram.ClassFieldVisitor;
 import umlDiagram.ClassMethodVisitor;
 import umlDiagram.UMLParser;
 
-public class UnitTestsMethodVisitor {
+public class UnitTestMethodVisitor {
 
 	private static String className = "java.lang.String";
 	private IClass currentClass;
@@ -35,8 +33,7 @@ public class UnitTestsMethodVisitor {
 				IllegalAccessException {
 		// TODO fix this.
 		currentClass = new UMLClass();
-		topDecorator = new TopLevelDecorator();
-		topDecorator.setDecorates(currentClass);
+		topDecorator = new TopLevelDecorator(currentClass);
 		java.lang.reflect.Field f = UMLParser.class.getDeclaredField("classesToAccept");
 		f.setAccessible(true);
 		f.set(null, new String[]{"java/lang/String"});

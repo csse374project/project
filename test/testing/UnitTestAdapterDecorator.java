@@ -31,8 +31,7 @@ public class UnitTestAdapterDecorator {
 	public void setup() throws IOException {
 		Classes classes = new Classes();
 		IClass toDecorate = new UMLClass();
-		adapter = new TopLevelDecorator();
-		adapter.setDecorates(toDecorate);
+		adapter = new TopLevelDecorator(toDecorate);
 		ClassReader reader = new ClassReader("testingData.AdapterSample");
 		ClassVisitor declVisitor = new ClassDeclarationVisitor(Opcodes.ASM5, adapter);
 		ClassVisitor adapterVisitor = new AdapterClassVisitor(Opcodes.ASM5, declVisitor, adapter);
@@ -40,8 +39,7 @@ public class UnitTestAdapterDecorator {
 		classes.addClass(adapter);
 		
 		toDecorate = new UMLClass();
-		adaptee = new TopLevelDecorator();
-		adaptee.setDecorates(toDecorate);
+		adaptee = new TopLevelDecorator(toDecorate);
 		reader = new ClassReader("testingData.AdapteeSample");
 		declVisitor = new ClassDeclarationVisitor(Opcodes.ASM5, adaptee);
 		adapterVisitor = new AdapterClassVisitor(Opcodes.ASM5, declVisitor, adaptee);
@@ -49,8 +47,7 @@ public class UnitTestAdapterDecorator {
 		classes.addClass(adaptee);
 		
 		toDecorate = new UMLClass();
-		target = new TopLevelDecorator();
-		target.setDecorates(toDecorate);
+		target = new TopLevelDecorator(toDecorate);
 		reader = new ClassReader("testingData.AdapterTargetSample");
 		declVisitor = new ClassDeclarationVisitor(Opcodes.ASM5, target);
 		adapterVisitor = new AdapterClassVisitor(Opcodes.ASM5, declVisitor, target);
@@ -58,8 +55,7 @@ public class UnitTestAdapterDecorator {
 		classes.addClass(target);
 		
 		toDecorate = new UMLClass();
-		singleton = new TopLevelDecorator();
-		singleton.setDecorates(toDecorate);
+		singleton = new TopLevelDecorator(toDecorate);
 		reader = new ClassReader("testingData.SampleSingletonClass");
 		declVisitor = new ClassDeclarationVisitor(Opcodes.ASM5, singleton);
 		adapterVisitor = new AdapterClassVisitor(Opcodes.ASM5, declVisitor, singleton);

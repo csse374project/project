@@ -1,5 +1,6 @@
 package classRepresentation;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import interfaces.*;
@@ -10,6 +11,11 @@ public class UMLField implements IField {
 	private String name;
 	private char visibility;
 	private List<String> nonAccessModifiers;
+	private List<String> interiorTypes;
+	
+	public UMLField() {
+		this.interiorTypes = new ArrayList<String>();
+	}
 
 	@Override
 	public String getType() {
@@ -64,6 +70,16 @@ public class UMLField implements IField {
 			return true;
 		}
 		return false;
+	}
+
+	@Override
+	public List<String> getInteriorTypes() {
+		return this.interiorTypes;
+	}
+
+	@Override
+	public void addInteriorType(String type) {
+		this.interiorTypes.add(type);
 	}
 
 }
