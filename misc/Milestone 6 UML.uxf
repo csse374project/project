@@ -4,7 +4,7 @@
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>0</x>
+      <x>48</x>
       <y>712</y>
       <w>304</w>
       <h>552</h>
@@ -56,7 +56,7 @@
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>944</x>
+      <x>992</x>
       <y>504</y>
       <w>336</w>
       <h>456</h>
@@ -101,7 +101,7 @@
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>296</x>
+      <x>344</x>
       <y>200</y>
       <w>304</w>
       <h>400</h>
@@ -142,7 +142,7 @@ interfaces::IClass
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>512</x>
+      <x>560</x>
       <y>1160</y>
       <w>232</w>
       <h>288</h>
@@ -175,7 +175,7 @@ interfaces::IClass
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>872</x>
+      <x>920</x>
       <y>1080</y>
       <w>232</w>
       <h>232</h>
@@ -204,7 +204,7 @@ interfaces::IClass
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>992</x>
+      <x>1040</x>
       <y>168</y>
       <w>360</w>
       <h>192</h>
@@ -230,7 +230,7 @@ interfaces::IClass
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>584</x>
+      <x>632</x>
       <y>856</y>
       <w>232</w>
       <h>192</h>
@@ -256,7 +256,7 @@ interfaces::IMethod
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>1504</x>
+      <x>1552</x>
       <y>856</y>
       <w>416</w>
       <h>168</h>
@@ -280,7 +280,7 @@ interfaces::IMethod
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>1456</x>
+      <x>1504</x>
       <y>384</y>
       <w>312</w>
       <h>168</h>
@@ -304,7 +304,7 @@ interfaces::IMethod
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>584</x>
+      <x>632</x>
       <y>632</y>
       <w>232</w>
       <h>168</h>
@@ -328,7 +328,7 @@ interfaces::IField
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>1984</x>
+      <x>2032</x>
       <y>552</y>
       <w>304</w>
       <h>152</h>
@@ -351,7 +351,7 @@ interfaces::IField
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>2032</x>
+      <x>2080</x>
       <y>744</y>
       <w>776</w>
       <h>152</h>
@@ -374,7 +374,7 @@ interfaces::IField
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>1312</x>
+      <x>1360</x>
       <y>1104</y>
       <w>312</w>
       <h>144</h>
@@ -396,7 +396,7 @@ interfaces::IField
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>568</x>
+      <x>616</x>
       <y>1504</y>
       <w>304</w>
       <h>128</h>
@@ -417,7 +417,7 @@ interfaces::IField
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>2288</x>
+      <x>2336</x>
       <y>352</y>
       <w>608</w>
       <h>112</h>
@@ -437,7 +437,7 @@ interfaces::IField
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>1760</x>
+      <x>1808</x>
       <y>1320</y>
       <w>576</w>
       <h>112</h>
@@ -457,7 +457,7 @@ interfaces::IField
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>768</x>
+      <x>816</x>
       <y>1328</y>
       <w>600</w>
       <h>112</h>
@@ -477,7 +477,7 @@ interfaces::IField
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>904</x>
+      <x>952</x>
       <y>1480</y>
       <w>576</w>
       <h>96</h>
@@ -496,7 +496,7 @@ interfaces::IField
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>1504</x>
+      <x>1552</x>
       <y>1440</y>
       <w>608</w>
       <h>96</h>
@@ -515,7 +515,7 @@ interfaces::IField
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>1760</x>
+      <x>1808</x>
       <y>1208</y>
       <w>576</w>
       <h>96</h>
@@ -534,7 +534,7 @@ interfaces::IField
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>664</x>
+      <x>712</x>
       <y>144</y>
       <w>304</w>
       <h>88</h>
@@ -552,7 +552,7 @@ interfaces::IField
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>1416</x>
+      <x>1464</x>
       <y>192</y>
       <w>304</w>
       <h>88</h>
@@ -570,7 +570,7 @@ interfaces::IField
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>1520</x>
+      <x>1568</x>
       <y>288</y>
       <w>304</w>
       <h>88</h>
@@ -588,7 +588,7 @@ interfaces::IField
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>1536</x>
+      <x>1584</x>
       <y>728</y>
       <w>304</w>
       <h>88</h>
@@ -606,7 +606,7 @@ interfaces::IField
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>1792</x>
+      <x>1840</x>
       <y>408</y>
       <w>336</w>
       <h>88</h>
@@ -624,7 +624,7 @@ interfaces::IField
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>1760</x>
+      <x>1808</x>
       <y>1096</y>
       <w>440</w>
       <h>88</h>
@@ -642,7 +642,7 @@ interfaces::IField
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>656</x>
+      <x>704</x>
       <y>8</y>
       <w>440</w>
       <h>88</h>
@@ -660,7 +660,7 @@ interfaces::IField
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>40</x>
+      <x>88</x>
       <y>72</y>
       <w>608</w>
       <h>88</h>
@@ -678,7 +678,7 @@ interfaces::IField
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>1968</x>
+      <x>2016</x>
       <y>312</y>
       <w>304</w>
       <h>72</h>
@@ -695,7 +695,7 @@ interfaces::IField
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>2424</x>
+      <x>2472</x>
       <y>560</y>
       <w>280</w>
       <h>72</h>
@@ -712,7 +712,7 @@ interfaces::IField
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>184</x>
+      <x>232</x>
       <y>592</y>
       <w>144</w>
       <h>136</h>
@@ -723,7 +723,7 @@ interfaces::IField
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>296</x>
+      <x>344</x>
       <y>688</y>
       <w>304</w>
       <h>112</h>
@@ -734,7 +734,7 @@ interfaces::IField
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>296</x>
+      <x>344</x>
       <y>832</y>
       <w>304</w>
       <h>120</h>
@@ -745,7 +745,7 @@ interfaces::IField
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>592</x>
+      <x>640</x>
       <y>360</y>
       <w>368</w>
       <h>176</h>
@@ -756,7 +756,7 @@ interfaces::IField
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>592</x>
+      <x>640</x>
       <y>480</y>
       <w>368</w>
       <h>104</h>
@@ -767,7 +767,7 @@ interfaces::IField
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>1272</x>
+      <x>1320</x>
       <y>560</y>
       <w>112</w>
       <h>128</h>
@@ -778,7 +778,7 @@ interfaces::IField
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>808</x>
+      <x>856</x>
       <y>704</y>
       <w>152</w>
       <h>24</h>
@@ -789,7 +789,7 @@ interfaces::IField
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>808</x>
+      <x>856</x>
       <y>912</y>
       <w>152</w>
       <h>24</h>
@@ -800,7 +800,7 @@ interfaces::IField
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>592</x>
+      <x>640</x>
       <y>1040</y>
       <w>56</w>
       <h>136</h>
@@ -811,7 +811,7 @@ interfaces::IField
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>808</x>
+      <x>856</x>
       <y>728</y>
       <w>112</w>
       <h>368</h>
@@ -822,7 +822,7 @@ interfaces::IField
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>592</x>
+      <x>640</x>
       <y>280</y>
       <w>416</w>
       <h>32</h>
@@ -833,7 +833,7 @@ interfaces::IField
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>1272</x>
+      <x>1320</x>
       <y>888</y>
       <w>248</w>
       <h>24</h>
@@ -844,7 +844,7 @@ interfaces::IField
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>592</x>
+      <x>640</x>
       <y>328</y>
       <w>880</w>
       <h>136</h>
@@ -855,7 +855,7 @@ interfaces::IField
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>1344</x>
+      <x>1392</x>
       <y>304</y>
       <w>176</w>
       <h>96</h>
@@ -866,7 +866,7 @@ interfaces::IField
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>1272</x>
+      <x>1320</x>
       <y>640</y>
       <w>728</w>
       <h>88</h>
@@ -877,7 +877,7 @@ interfaces::IField
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>2528</x>
+      <x>2576</x>
       <y>624</y>
       <w>24</w>
       <h>136</h>
@@ -888,7 +888,7 @@ interfaces::IField
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>1240</x>
+      <x>1288</x>
       <y>952</y>
       <w>104</w>
       <h>168</h>
@@ -899,7 +899,7 @@ interfaces::IField
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>592</x>
+      <x>640</x>
       <y>400</y>
       <w>856</w>
       <h>720</h>
@@ -910,7 +910,7 @@ interfaces::IField
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>1616</x>
+      <x>1664</x>
       <y>1136</y>
       <w>160</w>
       <h>24</h>
@@ -921,7 +921,7 @@ interfaces::IField
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>1616</x>
+      <x>1664</x>
       <y>1224</y>
       <w>160</w>
       <h>24</h>
@@ -932,7 +932,7 @@ interfaces::IField
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>1600</x>
+      <x>1648</x>
       <y>1240</y>
       <w>176</w>
       <h>112</h>
@@ -943,7 +943,7 @@ interfaces::IField
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>1512</x>
+      <x>1560</x>
       <y>1240</y>
       <w>56</w>
       <h>216</h>
@@ -954,7 +954,7 @@ interfaces::IField
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>1240</x>
+      <x>1288</x>
       <y>1240</y>
       <w>120</w>
       <h>104</h>
@@ -965,7 +965,7 @@ interfaces::IField
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>1424</x>
+      <x>1472</x>
       <y>1240</y>
       <w>24</w>
       <h>256</h>
@@ -976,7 +976,7 @@ interfaces::IField
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>1480</x>
+      <x>1528</x>
       <y>544</y>
       <w>32</w>
       <h>576</h>
@@ -987,7 +987,7 @@ interfaces::IField
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>1568</x>
+      <x>1616</x>
       <y>1016</y>
       <w>24</w>
       <h>104</h>
@@ -998,7 +998,7 @@ interfaces::IField
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>1272</x>
+      <x>1320</x>
       <y>936</y>
       <w>584</w>
       <h>176</h>
@@ -1009,7 +1009,7 @@ interfaces::IField
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>1272</x>
+      <x>1320</x>
       <y>904</y>
       <w>504</w>
       <h>384</h>
@@ -1020,7 +1020,7 @@ interfaces::IField
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>592</x>
+      <x>640</x>
       <y>512</y>
       <w>1184</w>
       <h>864</h>
@@ -1031,7 +1031,7 @@ interfaces::IField
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>592</x>
+      <x>640</x>
       <y>552</y>
       <w>1064</w>
       <h>904</h>
@@ -1042,7 +1042,7 @@ interfaces::IField
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>1216</x>
+      <x>1264</x>
       <y>952</y>
       <w>192</w>
       <h>544</h>
@@ -1053,7 +1053,7 @@ interfaces::IField
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>1120</x>
+      <x>1168</x>
       <y>952</y>
       <w>48</w>
       <h>392</h>
@@ -1064,7 +1064,7 @@ interfaces::IField
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>744</x>
+      <x>792</x>
       <y>928</y>
       <w>216</w>
       <h>592</h>
@@ -1075,7 +1075,7 @@ interfaces::IField
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>368</x>
+      <x>416</x>
       <y>592</y>
       <w>216</w>
       <h>960</h>
@@ -1086,7 +1086,7 @@ interfaces::IField
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>2600</x>
+      <x>2648</x>
       <y>456</y>
       <w>24</w>
       <h>120</h>
@@ -1097,7 +1097,7 @@ interfaces::IField
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>864</x>
+      <x>912</x>
       <y>224</y>
       <w>112</w>
       <h>296</h>
@@ -1108,7 +1108,7 @@ interfaces::IField
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>1232</x>
+      <x>1280</x>
       <y>272</y>
       <w>272</w>
       <h>248</h>
@@ -1119,7 +1119,7 @@ interfaces::IField
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>1264</x>
+      <x>1312</x>
       <y>320</y>
       <w>272</w>
       <h>200</h>
@@ -1130,7 +1130,7 @@ interfaces::IField
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>1272</x>
+      <x>1320</x>
       <y>776</y>
       <w>280</w>
       <h>32</h>
@@ -1141,7 +1141,7 @@ interfaces::IField
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>1272</x>
+      <x>1320</x>
       <y>488</y>
       <w>704</w>
       <h>152</h>
@@ -1152,7 +1152,7 @@ interfaces::IField
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>536</x>
+      <x>584</x>
       <y>88</y>
       <w>344</w>
       <h>128</h>
@@ -1163,7 +1163,7 @@ interfaces::IField
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>600</x>
+      <x>648</x>
       <y>152</y>
       <w>400</w>
       <h>368</h>
@@ -1174,7 +1174,7 @@ interfaces::IField
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>1272</x>
+      <x>1320</x>
       <y>376</y>
       <w>960</w>
       <h>240</h>
@@ -1185,7 +1185,7 @@ interfaces::IField
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>832</x>
+      <x>880</x>
       <y>88</y>
       <w>160</w>
       <h>1256</h>
@@ -1196,7 +1196,7 @@ interfaces::IField
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>2720</x>
+      <x>2768</x>
       <y>456</y>
       <w>56</w>
       <h>304</h>
@@ -1207,7 +1207,7 @@ interfaces::IField
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>1456</x>
+      <x>1504</x>
       <y>456</y>
       <w>920</w>
       <h>1040</h>
@@ -1218,7 +1218,7 @@ interfaces::IField
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>1392</x>
+      <x>1440</x>
       <y>624</y>
       <w>1080</w>
       <h>872</h>
@@ -1229,7 +1229,7 @@ interfaces::IField
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>1176</x>
+      <x>1224</x>
       <y>16</y>
       <w>280</w>
       <h>72</h>
@@ -1245,7 +1245,7 @@ interfaces::IField
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>1480</x>
+      <x>1528</x>
       <y>0</y>
       <w>280</w>
       <h>112</h>
@@ -1264,7 +1264,7 @@ interfaces::IField
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>1776</x>
+      <x>1824</x>
       <y>64</y>
       <w>280</w>
       <h>80</h>
@@ -1280,7 +1280,7 @@ interfaces::IField
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>1272</x>
+      <x>1320</x>
       <y>120</y>
       <w>520</w>
       <h>448</h>
@@ -1291,7 +1291,7 @@ interfaces::IField
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>1272</x>
+      <x>1320</x>
       <y>88</y>
       <w>224</w>
       <h>464</h>
@@ -1302,7 +1302,7 @@ interfaces::IField
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>1272</x>
+      <x>1320</x>
       <y>80</y>
       <w>120</w>
       <h>456</h>
@@ -1313,26 +1313,67 @@ interfaces::IField
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>56</x>
-      <y>320</y>
-      <w>208</w>
-      <h>152</h>
+      <x>16</x>
+      <y>216</y>
+      <w>248</w>
+      <h>296</h>
     </coordinates>
-    <panel_attributes>
-CompositeDetector
+    <panel_attributes>CompositeDetector
 --
 - Map&lt;String, IClass&gt; classMap
 - List&lt;String&gt; detectedComponents
 - List&lt;String&gt; detectedComposites
 - List&lt;String&gt; detectedLeaves
+- Set&lt;String&gt; classesInPattern
+- final static List&lt;String&gt; COLLECTIONS
 --
-+ CompositeDetector(IClass) : ctor
-+ findCompositePattern : void
-- findComposites() : void
-- decorateComponents() : void
-- findLeafChildren() : void
-- findCompositeChildren() : void
-- decorateFirstLevelLeaves() : void</panel_attributes>
++ CompositeDetector(Classes): ctor
++ findCompositePattern() : void
+- identifyPatternClasses() : void
+- getClassesInPattern()  : void
+- findSeedComposites() : void
+- checkInterfaces(IClass, IField) : void
+- checkSupers(IClass, IField) : void
+- getSuperClasses(IClass) : List&lt;String&gt;
+- decorateComponents()  : void
+- isComposite(IClass) : boolean
+- isComponent(IClass) : boolean
+- isLeaf(IClass) : boolean
+- findComposite(IClass) : CompositeDecorator
+</panel_attributes>
     <additional_attributes/>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>256</x>
+      <y>360</y>
+      <w>104</w>
+      <h>24</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;-</panel_attributes>
+    <additional_attributes>110.0;10.0;10.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>592</x>
+      <y>592</y>
+      <w>56</w>
+      <h>56</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;-</panel_attributes>
+    <additional_attributes>50.0;50.0;10.0;10.0</additional_attributes>
+  </element>
+  <element>
+    <id>Relation</id>
+    <coordinates>
+      <x>192</x>
+      <y>504</y>
+      <w>456</w>
+      <h>176</h>
+    </coordinates>
+    <panel_attributes>lt=&lt;-</panel_attributes>
+    <additional_attributes>550.0;200.0;10.0;190.0;10.0;10.0</additional_attributes>
   </element>
 </diagram>
