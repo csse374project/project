@@ -90,8 +90,8 @@ public class CompositeVisitor extends ClassVisitor {
 
 		@Override
 		public void visitClassType(String name) {
-			if(currentClass.getInterfaces().contains(name)) currentClass.decorate(new CompositeDecorator(name));
-			else if(name.equals(currentClass.getSuperClass())) currentClass.decorate(new CompositeDecorator(name));
+			//if(currentClass.getInterfaces().contains(name)) currentClass.decorate(new CompositeDecorator(name));
+			//else if(name.equals(currentClass.getSuperClass())) currentClass.decorate(new CompositeDecorator(name));
 		}
 	}
 	

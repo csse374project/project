@@ -44,10 +44,8 @@ public class UMLParser {
 					topLevelDecorator);
 
 			ClassVisitor adapterVisitor = new AdapterClassVisitor(Opcodes.ASM5, classCodeVisitor, topLevelDecorator);
-			
-			ClassVisitor compositeVisitor = new CompositeVisitor(Opcodes.ASM5, adapterVisitor, topLevelDecorator);
 
-			reader.accept(compositeVisitor, ClassReader.EXPAND_FRAMES);
+			reader.accept(adapterVisitor, ClassReader.EXPAND_FRAMES);
 			classes.addClass(topLevelDecorator);
 		}
 		DecoratorDetector decDet = new DecoratorDetector(classes);

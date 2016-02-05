@@ -43,14 +43,14 @@ public class ClassFieldVisitor extends ClassVisitor {
 
 		currentClass.addField(field);
 		currentClass.addAssociatedClass(type.replace('.', '/'));
-		handleSignature(signature);
+		handleSignature(signature, type);
 		return toDecorate;
 	}
 
-	public void handleSignature(String signature) {
+	public void handleSignature(String signature, String type) {
 		if (signature == null)
 			return;
-		SignatureVisitor sigVis = new SigVisitor(Opcodes.ASM5);
+		SignatureVisitor sigVis = new SigVisitor(Opcodes.ASM5, type);
 		SignatureReader sigReader = new SignatureReader(signature);
 		sigReader.accept(sigVis);
 
@@ -58,14 +58,19 @@ public class ClassFieldVisitor extends ClassVisitor {
 
 	class SigVisitor extends SignatureVisitor {
 
-		public SigVisitor(int opcode) {
+		String type;
+		
+		public SigVisitor(int opcode, String type) {
 			super(opcode);
+			this.type = type;
 		}
 
 		@Override
 		public void visitClassType(String name) {
 			currentClass.addAssociatedClass(name);
-			field.addInteriorType(name);
+			
+			if(!name.equals(type.replace('.', '/')))
+				field.addInteriorType(name);
 		}
 	}
 }

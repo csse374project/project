@@ -73,7 +73,7 @@ public class UMLField implements IField {
 	}
 
 	@Override
-	public List<String> getInteriorType() {
+	public List<String> getInteriorTypes() {
 		return this.interiorTypes;
 	}
 

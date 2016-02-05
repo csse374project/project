@@ -16,7 +16,7 @@ public interface IField {
 	List<String> getNonAccessModifiers();
 	void setNonAccessModifiers(List<String> mods);
 	
-	List<String> getInteriorType();
+	List<String> getInteriorTypes();
 	void addInteriorType(String type);
 	
 }

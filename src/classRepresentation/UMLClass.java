@@ -143,8 +143,8 @@ public class UMLClass implements IClass {
 	public void appendGraphVizFields(StringBuilder str) {
 		for (IField field : this.getFields()) {
 			str.append(field.getVisibility() + " " + field.getName() + ": " + field.getType());
-			if (!field.getInteriorType().isEmpty()) {
-				str.append(field.getInteriorType().toString());
+			if (!field.getInteriorTypes().isEmpty()) {
+				str.append(field.getInteriorTypes().toString());
 			}
 			str.append("\\l");
 		}
