@@ -324,7 +324,7 @@ public class UnitTestSimpleCompositeDetector {
 
 	@Test
 	public void arrayCompositeDecoratorHasCorrectComponent() throws Exception {
-		IClassDecorator current = abstractCompositeSample;
+		IClassDecorator current = arrayCompositeSample;
 		while(true) {
 			if (current instanceof CompositeDecorator) {
 				break;
@@ -339,7 +339,7 @@ public class UnitTestSimpleCompositeDetector {
 		Field f = CompositeDecorator.class.getDeclaredField("component");
 		f.setAccessible(true);
 		String comp = (String) f.get(decorator);
-		assertEquals("testingData/compositePattern/CompositeComponenetWithArray", comp);
+		assertEquals("testingData/compositePattern/CompositeComponentWithArray", comp);
 	}
 	
 
@@ -370,7 +370,7 @@ public class UnitTestSimpleCompositeDetector {
 	}
 	
 	@Test
-	public void arrayCeafHasLeafDecorator() {
+	public void arrayLeafHasLeafDecorator() {
 		assertTrue(isLeaf(arrayLeaf));
 	}
 	

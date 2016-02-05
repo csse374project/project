@@ -7,7 +7,7 @@ import org.junit.runners.Suite;
 @Suite.SuiteClasses({
 	UnitTestAdapterDecorator.class,
 	UnitTestCompositeDetector.class,
-	UnitTestCompositeJavaSwing.class,
+//	UnitTestCompositeJavaSwing.class,
 	UnitTestDeclarationSample.class,
 	UnitTestDeclarationString.class,
 	UnitTestDecoratorDetector.class,

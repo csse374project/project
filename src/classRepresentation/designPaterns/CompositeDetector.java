@@ -74,6 +74,7 @@ public class CompositeDetector {
 						}
 					}
 				}
+				
 			}
 			IClass superClass = classMap.get(cls.getSuperClass());
 			if(superClass != null && isComposite(superClass) && !isComposite(cls)) {
@@ -117,6 +118,15 @@ public class CompositeDetector {
 				if (COLLECTIONS.contains(field.getType().substring(lastDot + 1))) {
 					checkInterfaces(cls, field);
 					checkSupers(cls, field);
+				}
+				if(field.getType().contains("[]")){
+					int bracket = field.getType().indexOf('[');
+					String typeName = field.getType().substring(0, bracket);
+					if(!isComposite(cls)){
+						IClassDecorator decoratedClass = (IClassDecorator) cls;
+						decoratedClass.decorate(new CompositeDecorator(typeName.replace('.', '/')));
+						detectedComposites.add(cls.getName());
+					}
 				}
 			}
 		}
