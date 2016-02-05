@@ -39,20 +39,20 @@ public class UnitTestCompositeDetector {
 		component = new TopLevelDecorator(new UMLClass());
 		
 		setupHelper(classes, compositeSample, "testingData.compositePattern.CompositeSample");
-		setupHelper(classes, leaf, "testingData.SampleInterface01");
-		setupHelper(classes, component, "testingData.compositePattern.CompositeLeafSample");
+		setupHelper(classes, leaf, "testingData.compositePattern.CompositeLeafSample");
+		setupHelper(classes, component, "testingData.SampleInterface01");
 		
 		CompositeDetector composite = new CompositeDetector(classes);
 		composite.findCompositePattern();
+		System.out.println(isLeaf(leaf));
 	}
 	
 	private static void setupHelper(Classes classes, IClassDecorator top, String className) throws IOException {
 		ClassVisitor declVisitor = new ClassDeclarationVisitor(Opcodes.ASM5, top);
 		ClassVisitor fieldVisitor = new ClassFieldVisitor(Opcodes.ASM5, declVisitor, top);
-		ClassVisitor compositeVisitor = new CompositeVisitor(Opcodes.ASM5, fieldVisitor, top);
 
 		ClassReader reader = new ClassReader(className);
-		reader.accept(compositeVisitor, ClassReader.EXPAND_FRAMES);
+		reader.accept(fieldVisitor, ClassReader.EXPAND_FRAMES);
 		classes.addClass(top);
 	}
 	
