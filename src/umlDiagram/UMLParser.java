@@ -1,6 +1,15 @@
 package umlDiagram;
 
+import java.io.BufferedWriter;
+import java.io.File;
 import java.io.IOException;
+import java.lang.ProcessBuilder.Redirect;
+import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.nio.file.StandardOpenOption;
+import java.util.Map;
 
 import org.objectweb.asm.ClassReader;
 import org.objectweb.asm.ClassVisitor;
@@ -13,7 +22,6 @@ import classRepresentation.decorators.TopLevelDecorator;
 import classRepresentation.designPaterns.AdapterClassVisitor;
 import classRepresentation.designPaterns.AdapterDetector;
 import classRepresentation.designPaterns.CompositeDetector;
-import classRepresentation.designPaterns.CompositeVisitor;
 import classRepresentation.designPaterns.DecoratorDetector;
 import interfaces.IClass;
 
@@ -56,7 +64,37 @@ public class UMLParser {
 		CompositeDetector composite = new CompositeDetector(classes);
 		composite.findCompositePattern();
 
-		System.out.println(classes.printGraphVizInput());
+		String digraph = classes.printGraphVizInput();
+		createGraph(digraph);
+		System.out.println(digraph);
+	}
+	
+	private static void createGraph(String digraph){
+		final Path path = Paths.get("temp.dot");
+
+		try (final BufferedWriter writer = Files.newBufferedWriter(path, StandardCharsets.UTF_8,
+				StandardOpenOption.CREATE);) {
+			writer.write(digraph);
+			writer.flush();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		ProcessBuilder pb = new ProcessBuilder("dot", "-Tpng", "temp.dot", "-o", "out.png");
+		Map<String, String> env = pb.environment();
+		// pb.directory();
+		System.out.println(System.getProperty("user.dir"));
+		try {
+			// Process p = pb.start();
+			File log = new File("log");
+			pb.redirectErrorStream(true);
+			pb.redirectOutput(Redirect.appendTo(log));
+			Process p = pb.start();
+			// Files.delete(path);//uncomment to clean up after yourself
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 
 	private static void setClassesToAccept(String[] args) {
