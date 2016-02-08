@@ -9,7 +9,6 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.StandardOpenOption;
-import java.util.Map;
 
 import org.objectweb.asm.ClassReader;
 import org.objectweb.asm.ClassVisitor;
@@ -68,8 +67,9 @@ public class UMLParser {
 		createGraph(digraph);
 		System.out.println(digraph);
 	}
-	
-	private static void createGraph(String digraph){
+
+	private static void createGraph(String digraph) {
+		// Temp file to write digraph string to
 		final Path path = Paths.get("temp.dot");
 
 		try (final BufferedWriter writer = Files.newBufferedWriter(path, StandardCharsets.UTF_8,
@@ -77,22 +77,18 @@ public class UMLParser {
 			writer.write(digraph);
 			writer.flush();
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		ProcessBuilder pb = new ProcessBuilder("dot", "-Tpng", "temp.dot", "-o", "out.png");
-		Map<String, String> env = pb.environment();
-		// pb.directory();
-		System.out.println(System.getProperty("user.dir"));
+
 		try {
 			// Process p = pb.start();
-			File log = new File("log");
+			File log = new File("errorLog.txt");
 			pb.redirectErrorStream(true);
 			pb.redirectOutput(Redirect.appendTo(log));
-			Process p = pb.start();
-			// Files.delete(path);//uncomment to clean up after yourself
+			pb.start();
+			// Files.delete(path); //uncomment to clean up after yourself
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
