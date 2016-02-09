@@ -1,5 +1,5 @@
 /**
- * 
+ * Interface for our DesignPatternDetectors
  */
 package classRepresentation.designPaterns;
 
