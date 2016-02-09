@@ -121,9 +121,11 @@ public class CompositeDetector implements DesignPatternDetector{
 					int bracket = field.getType().indexOf('[');
 					String typeName = field.getType().substring(0, bracket);
 					if(!isComposite(cls)){
-						IClassDecorator decoratedClass = (IClassDecorator) cls;
+						checkInterfaces(cls, field);
+						checkSupers(cls, field);
+						/*IClassDecorator decoratedClass = (IClassDecorator) cls;
 						decoratedClass.decorate(new CompositeDecorator(typeName.replace('.', '/')));
-						detectedComposites.add(cls.getName());
+						detectedComposites.add(cls.getName());*/
 					}
 				}
 			}
