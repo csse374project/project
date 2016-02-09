@@ -88,11 +88,6 @@ public abstract class IClassDecorator implements IClass {
 	}
 
 	@Override
-	public void setIsInterface(boolean isInterface) {
-		decorates.setIsInterface(isInterface);
-	}
-
-	@Override
 	public void addAssociatedClass(String arg) {
 		decorates.addAssociatedClass(arg);
 	}

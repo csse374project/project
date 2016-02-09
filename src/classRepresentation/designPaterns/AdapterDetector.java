@@ -13,8 +13,6 @@ import interfaces.IClass;
 
 public class AdapterDetector implements DesignPatternDetector{
 
-	private static String OBJECT = "java.lang.Object";
-
 	private Map<String, IClass> classMap;
 
 	public AdapterDetector(Classes classes) {

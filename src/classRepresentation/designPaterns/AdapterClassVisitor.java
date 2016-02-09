@@ -10,7 +10,6 @@ import org.objectweb.asm.Type;
 
 import classRepresentation.decorators.AdapterDecorator;
 import classRepresentation.decorators.IClassDecorator;
-import sun.security.action.GetIntegerAction;
 
 public class AdapterClassVisitor extends ClassVisitor {
 

@@ -21,7 +21,6 @@ public class CompositeDetector implements DesignPatternDetector{
 	private Map<String, IClass> classMap;
 	private List<String> detectedComponents;
 	private List<String> detectedComposites;
-	private List<String> detectedLeaves;
 	private Set<String> classesInPattern;
 	private final static List<String> COLLECTIONS = new ArrayList<String>();
 
@@ -40,7 +39,6 @@ public class CompositeDetector implements DesignPatternDetector{
 
 		detectedComponents = new ArrayList<String>();
 		detectedComposites = new ArrayList<String>();
-		detectedLeaves = new ArrayList<String>();
 		classesInPattern = new TreeSet<String>();
 		classMap = new HashMap<String, IClass>();
 		this.classMap = classes.getClasses();
