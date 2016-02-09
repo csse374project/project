@@ -29,6 +29,7 @@ import interfaces.IClass;
 
 public class UMLParser {
 
+
 	public static void main(String[] args) throws IOException {
 		setClassesToAccept(args);
 		UMLParser parser = new UMLParser(Arrays.asList(args));

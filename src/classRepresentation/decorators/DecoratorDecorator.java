@@ -1,11 +1,8 @@
 package classRepresentation.decorators;
 
-import interfaces.IClass;
-
 public class DecoratorDecorator extends IClassDecorator {
 
 	private String component;
-	private IClass decorator;
 
 	public DecoratorDecorator(String component) {
 		this.component = component;

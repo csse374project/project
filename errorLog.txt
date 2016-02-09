@@ -2,3 +2,7 @@ Error: dot: can't open temp.dot
 Error: dot: can't open temp.dot
 Error: temp.dot: syntax error in line 121 near 'java'
 Error: temp.dot: syntax error in line 121 near 'aintHeavyweightComponents'
+Error: temp.dot: syntax error in line 436 near 'an'
+Error: temp.dot: syntax error in line 436 near 'an'
+Error: temp.dot: syntax error in line 436 near 'an'
+Error: temp.dot: syntax error in line 434 near 'CompositeDetector'
