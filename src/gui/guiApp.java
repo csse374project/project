@@ -1,6 +1,8 @@
 package gui;
 
 import java.awt.BorderLayout;
+import java.awt.Dimension;
+import java.awt.List;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
@@ -9,32 +11,41 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.Properties;
 
+import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JFileChooser;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
 
 public class guiApp {
 	
 	private static Properties config;
-	private static JFrame window;
+	private static JFrame landingWindow, mainWindow;
+	private static String inputDirec, outputDirec, dotPath;
+	private static String[] targetClasses, designPatterns;
+	private static String phases;
  
 	public static void main(String[] args) {
-		displayLandingScreen();
+//		displayLandingScreen();
+		loadConfigFile(new File("input_output/config"));
+		displayMainWindow();
 	}
 	
 	private static void displayLandingScreen() {
-		window = new JFrame();
-		window.setTitle("Design Parser");
-		window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		window.setSize(400, 200);
+		landingWindow = new JFrame();
+		landingWindow.setTitle("Design Parser");
+		landingWindow.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		landingWindow.setSize(400, 200);
 		
 		JPanel panel = new JPanel();
 		panel.add(getLoadConfigButton(), BorderLayout.WEST);
 		panel.add(getAnalyzeButton(), BorderLayout.EAST);
-		window.add(panel, BorderLayout.CENTER);
+		landingWindow.add(panel, BorderLayout.CENTER);
 		
-		window.setVisible(true);
+		landingWindow.setVisible(true);
 	}
 	
 	private static JButton getAnalyzeButton() {
@@ -45,8 +56,15 @@ public class guiApp {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				// TODO Auto-generated method stub
 				System.out.println("ANALYZE");
+				if (config == null) {
+					// TODO
+					String message = "please load a config file before trying to analyze";
+					System.out.println(message);
+					JOptionPane.showMessageDialog(landingWindow, message);
+				} else {
+					displayMainWindow();
+				}
 			}
 		});
 		
@@ -63,7 +81,7 @@ public class guiApp {
 				System.out.println("DEBUG - load confige");
 				JFileChooser dialogue = new JFileChooser();
 				dialogue.setCurrentDirectory(new File("input_output/"));
-				int result = dialogue.showOpenDialog(window);
+				int result = dialogue.showOpenDialog(landingWindow);
 				if (result == JFileChooser.APPROVE_OPTION) {
 					File selectedFile = dialogue.getSelectedFile();
 					loadConfigFile(selectedFile);
@@ -80,16 +98,55 @@ public class guiApp {
 			config.load(new FileInputStream(file));
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
+			return;
 		} catch (IOException e) {
 			e.printStackTrace();
+			return;
 		}
-		for(Object key : config.keySet()) {
-			System.out.printf("%s = %s\n", (String) key, config.getProperty((String) key));
-		}
+		inputDirec = config.getProperty("inputDirec");
+		targetClasses = config.getProperty("targetClasses").split(" ");
+		designPatterns = config.getProperty("designPatterns").split(" ");
+		outputDirec = config.getProperty("outputDirec");
+		dotPath = config.getProperty("dotPath");
+		phases = config.getProperty("phases");
 	}
 	
-	private static JPanel makeOptionPane() {
-		// TODO
-		return null;
+	private static void displayMainWindow() {
+		mainWindow = new JFrame();
+		mainWindow.setTitle("Design Parser :: " + inputDirec);
+		mainWindow.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		mainWindow.setSize(1000, 1000);
+		
+		mainWindow.add(getOptionPanel(), BorderLayout.WEST);
+		mainWindow.add(getImagePanel(), BorderLayout.EAST);
+		
+//		landingWindow.setVisible(false);
+		mainWindow.setVisible(true);
+//		landingWindow.dispose();
 	}
+	
+	private static JScrollPane getOptionPanel() {
+		JPanel panel = new JPanel();
+
+		panel.setLayout(new BoxLayout(panel, BoxLayout.PAGE_AXIS));
+		
+		
+		JScrollPane scrollPanel = new JScrollPane(panel,
+				 JScrollPane.VERTICAL_SCROLLBAR_ALWAYS, JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
+		scrollPanel.setPreferredSize(new Dimension(300, 1000));
+		return scrollPanel;
+	}
+	
+	private static JScrollPane getImagePanel() {
+		JPanel panel = new JPanel();
+		
+		// TODO add an image
+		panel.add(new JLabel("image"));
+		
+		JScrollPane scrollPanel = new JScrollPane(panel,
+				JScrollPane.VERTICAL_SCROLLBAR_ALWAYS, JScrollPane.HORIZONTAL_SCROLLBAR_ALWAYS);
+		scrollPanel.setPreferredSize(new Dimension(700, 1000));
+		return scrollPanel;
+	}
+	
 }
