@@ -1,0 +1,1 @@
+Error: temp.dot: syntax error in line 121 near 'aintHeavyweightComponents'

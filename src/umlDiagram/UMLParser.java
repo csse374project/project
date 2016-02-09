@@ -70,7 +70,8 @@ public class UMLParser {
 
 	private static void createGraph(String digraph) {
 		// Temp file to write digraph string to
-		final Path path = Paths.get("temp.dot");
+		// Will be deleted once complete
+		Path path = Paths.get("temp.dot");
 
 		try (final BufferedWriter writer = Files.newBufferedWriter(path, StandardCharsets.UTF_8,
 				StandardOpenOption.CREATE);) {
@@ -79,7 +80,7 @@ public class UMLParser {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		ProcessBuilder pb = new ProcessBuilder("dot", "-Tpng", "temp.dot", "-o", "out.png");
+		ProcessBuilder pb = new ProcessBuilder("C:\\Program Files (x86)\\Graphviz2.38\\bin\\dot", "-Tpng", "temp.dot", "-o", "out.png");
 
 		try {
 			// Process p = pb.start();
@@ -87,7 +88,7 @@ public class UMLParser {
 			pb.redirectErrorStream(true);
 			pb.redirectOutput(Redirect.appendTo(log));
 			pb.start();
-			// Files.delete(path); //uncomment to clean up after yourself
+			Files.delete(path); //clean up after yourself
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
