@@ -1,0 +1,69 @@
+digraph UML {
+
+	node [
+		shape = "record"
+	]
+
+	MenuItem [
+		label = "{\<\<Leaf\>\>\njava/awt/MenuItem|  enabled: boolean\l  label: java.lang.String\l  actionCommand: java.lang.String\l  eventMask: long\l  actionListener: java.awt.event.ActionListener\l- shortcut: java.awt.MenuShortcut\l- base: java.lang.String\l- nameCounter: int\l- serialVersionUID: long\l- menuItemSerializedDataVersion: int\l|  String constructComponentName()\l+ void addNotify()\l+ String getLabel()\l+ void setLabel(java.lang.String)\l+ boolean isEnabled()\l+ void setEnabled(boolean)\l+ void enable()\l+ void enable(boolean)\l+ void disable()\l+ MenuShortcut getShortcut()\l+ void setShortcut(java.awt.MenuShortcut)\l+ void deleteShortcut()\l  void deleteShortcut(java.awt.MenuShortcut)\l  void doMenuEvent(long, int)\l- boolean isItemEnabled()\l  boolean handleShortcut(java.awt.event.KeyEvent)\l  MenuItem getShortcutMenuItem(java.awt.MenuShortcut)\l# void enableEvents(long)\l# void disableEvents(long)\l+ void setActionCommand(java.lang.String)\l+ String getActionCommand()\l  String getActionCommandImpl()\l+ void addActionListener(java.awt.event.ActionListener)\l+ void removeActionListener(java.awt.event.ActionListener)\l+ ActionListener[] getActionListeners()\l+ EventListener[] getListeners(java.lang.Class)\l# void processEvent(java.awt.AWTEvent)\l  boolean eventEnabled(java.awt.AWTEvent)\l# void processActionEvent(java.awt.event.ActionEvent)\l+ String paramString()\l- void writeObject(java.io.ObjectOutputStream)\l- void readObject(java.io.ObjectInputStream)\l- void initIDs()\l+ AccessibleContext getAccessibleContext()\l  MenuShortcut access$000(java.awt.MenuItem)\l  boolean access$100(java.awt.MenuItem)\l|}"
+		style=filled
+		fillcolor=yellow
+
+	]
+
+	MenuComponent [
+		label = "{\<\<Composite Component\>\>\njava/awt/MenuComponent|  peer: java.awt.peer.MenuComponentPeer\l  parent: java.awt.MenuContainer\l  appContext: sun.awt.AppContext\l  font: java.awt.Font\l- name: java.lang.String\l- nameExplicitlySet: boolean\l  newEventsOnly: boolean\l- acc: java.security.AccessControlContext\l  actionListenerK: java.lang.String\l  itemListenerK: java.lang.String\l- serialVersionUID: long\l  accessibleContext: javax.accessibility.AccessibleContext\l|  AccessControlContext getAccessControlContext()\l  String constructComponentName()\l+ String getName()\l+ void setName(java.lang.String)\l+ MenuContainer getParent()\l  MenuContainer getParent_NoClientCode()\l+ MenuComponentPeer getPeer()\l+ Font getFont()\l  Font getFont_NoClientCode()\l+ void setFont(java.awt.Font)\l+ void removeNotify()\l+ boolean postEvent(java.awt.Event)\l+ void dispatchEvent(java.awt.AWTEvent)\l  void dispatchEventImpl(java.awt.AWTEvent)\l  boolean eventEnabled(java.awt.AWTEvent)\l# void processEvent(java.awt.AWTEvent)\l# String paramString()\l+ String toString()\l# Object getTreeLock()\l- void readObject(java.io.ObjectInputStream)\l- void initIDs()\l+ AccessibleContext getAccessibleContext()\l  int getAccessibleIndexInParent()\l  int getAccessibleChildIndex(java.awt.MenuComponent)\l  AccessibleStateSet getAccessibleStateSet()\l|}"
+		style=filled
+		fillcolor=yellow
+
+	]
+
+	Menu [
+		label = "{\<\<Composite\>\>\njava/awt/Menu|  items: java.util.Vector[java/awt/MenuComponent]\l  tearOff: boolean\l  isHelpMenu: boolean\l- base: java.lang.String\l- nameCounter: int\l- serialVersionUID: long\l- menuSerializedDataVersion: int\l|  String constructComponentName()\l+ void addNotify()\l+ void removeNotify()\l+ boolean isTearOff()\l+ int getItemCount()\l+ int countItems()\l  int countItemsImpl()\l+ MenuItem getItem(int)\l  MenuItem getItemImpl(int)\l+ MenuItem add(java.awt.MenuItem)\l+ void add(java.lang.String)\l+ void insert(java.awt.MenuItem, int)\l+ void insert(java.lang.String, int)\l+ void addSeparator()\l+ void insertSeparator(int)\l+ void remove(int)\l+ void remove(java.awt.MenuComponent)\l+ void removeAll()\l  boolean handleShortcut(java.awt.event.KeyEvent)\l  MenuItem getShortcutMenuItem(java.awt.MenuShortcut)\l  Enumeration shortcuts()\l  void deleteShortcut(java.awt.MenuShortcut)\l- void writeObject(java.io.ObjectOutputStream)\l- void readObject(java.io.ObjectInputStream)\l+ String paramString()\l- void initIDs()\l+ AccessibleContext getAccessibleContext()\l  int getAccessibleChildIndex(java.awt.MenuComponent)\l|}"
+		style=filled
+		fillcolor=yellow
+
+	]
+
+	MenuBar [
+		label = "{\<\<Composite\>\>\njava/awt/MenuBar|  menus: java.util.Vector[java/awt/Menu]\l  helpMenu: java.awt.Menu\l- base: java.lang.String\l- nameCounter: int\l- serialVersionUID: long\l- menuBarSerializedDataVersion: int\l|  String constructComponentName()\l+ void addNotify()\l+ void removeNotify()\l+ Menu getHelpMenu()\l+ void setHelpMenu(java.awt.Menu)\l+ Menu add(java.awt.Menu)\l+ void remove(int)\l+ void remove(java.awt.MenuComponent)\l+ int getMenuCount()\l+ int countMenus()\l  int getMenuCountImpl()\l+ Menu getMenu(int)\l  Menu getMenuImpl(int)\l+ Enumeration shortcuts()\l+ MenuItem getShortcutMenuItem(java.awt.MenuShortcut)\l  boolean handleShortcut(java.awt.event.KeyEvent)\l+ void deleteShortcut(java.awt.MenuShortcut)\l- void writeObject(java.io.ObjectOutputStream)\l- void readObject(java.io.ObjectInputStream)\l- void initIDs()\l+ AccessibleContext getAccessibleContext()\l  int getAccessibleChildIndex(java.awt.MenuComponent)\l|}"
+		style=filled
+		fillcolor=yellow
+
+	]
+
+	edge [
+		arrowhead = "empty"
+	]
+
+	MenuItem -> MenuComponent
+
+	Menu -> MenuItem
+
+	MenuBar -> MenuComponent
+
+	edge [
+		style = "dashed"
+	]
+
+	edge [
+		arrowhead = "normal" style = "solid"
+	]
+
+	Menu -> MenuComponent
+
+	MenuBar -> Menu
+
+	edge [
+		arrowhead = "normal" style = "dashed"
+	]
+
+	MenuItem -> Menu
+
+	Menu -> MenuItem
+
+	MenuBar -> MenuComponent
+
+	MenuBar -> MenuItem
+
+}

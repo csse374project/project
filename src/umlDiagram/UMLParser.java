@@ -88,7 +88,7 @@ public class UMLParser {
 			pb.redirectErrorStream(true);
 			pb.redirectOutput(Redirect.appendTo(log));
 			pb.start();
-			Files.delete(path); //clean up after yourself
+			//Files.delete(path); //intended to be used to clean up temp file...breaks it
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
