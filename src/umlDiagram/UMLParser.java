@@ -65,7 +65,7 @@ public class UMLParser {
 
 		String digraph = classes.printGraphVizInput();
 		createGraph(digraph);
-		System.out.println(digraph);
+		//System.out.println(digraph);
 	}
 
 	private static void createGraph(String digraph) {
@@ -80,7 +80,7 @@ public class UMLParser {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		ProcessBuilder pb = new ProcessBuilder("C:\\Program Files (x86)\\Graphviz2.38\\bin\\dot", "-Tpng", "temp.dot", "-o", "out.png");
+		ProcessBuilder pb = new ProcessBuilder("C:\\Program Files (x86)\\Graphviz2.38\\bin\\dot.exe", "-Tpng", "temp.dot", "-o", "out.png");
 
 		try {
 			// Process p = pb.start();
