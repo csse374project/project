@@ -12,7 +12,6 @@ import org.objectweb.asm.signature.SignatureVisitor;
 
 import classRepresentation.UMLClass;
 import classRepresentation.decorators.CompositeDecorator;
-import classRepresentation.decorators.DecoratorDecorator;
 import classRepresentation.decorators.IClassDecorator;
 import interfaces.IClass;
 

@@ -17,7 +17,7 @@ public interface IClass {
 	void addMethod(IMethod method);
 	void addField(IField field);
 //	boolean isInterface();
-	void setIsInterface(boolean isInterface);
+//	void setIsInterface(boolean isInterface);
 	void addAssociatedClass(String arg);
 	void addUsedClass(String arg);
 	List<String> getAssociatedClasses();

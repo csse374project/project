@@ -8,12 +8,10 @@ import umlDiagram.UMLParser;
 
 public class UMLClass implements IClass {
 
-	private String name, superClass, color;
+	private String name, superClass;
 	private List<String> interfaces, associatedClasses, usedClasses;
 	private List<IField> fields;
 	private List<IMethod> methods;
-	private List<String> stereotypes;
-	private boolean isInterface, isSingleton;
 
 	public UMLClass() {
 		this.name = "";
@@ -21,11 +19,8 @@ public class UMLClass implements IClass {
 		this.interfaces = new ArrayList<String>();
 		this.fields = new ArrayList<IField>();
 		this.methods = new ArrayList<IMethod>();
-		this.isInterface = false;
 		this.associatedClasses = new ArrayList<String>();
 		this.usedClasses = new ArrayList<String>();
-		this.stereotypes = new ArrayList<String>();
-		this.color = "black";
 	}
 
 	@Override
@@ -86,11 +81,6 @@ public class UMLClass implements IClass {
 	@Override
 	public void addField(IField field) {
 		this.fields.add(field);
-	}
-
-	@Override
-	public void setIsInterface(boolean isInterface) {
-		this.isInterface = isInterface;
 	}
 	
 	@Override

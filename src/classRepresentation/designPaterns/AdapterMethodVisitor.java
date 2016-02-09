@@ -3,12 +3,9 @@ package classRepresentation.designPaterns;
 import org.objectweb.asm.MethodVisitor;
 import org.objectweb.asm.Opcodes;
 
-import interfaces.IClass;
-import interfaces.IField;
-
 public class AdapterMethodVisitor extends MethodVisitor {
 
-	private String fieldName, fieldType;
+	private String fieldName;
 	private MutableBoolean bool;
 	private boolean fieldFound;
 	
@@ -16,7 +13,6 @@ public class AdapterMethodVisitor extends MethodVisitor {
 			String field, String type, MutableBoolean bool) {
 		super(opCode, toDecorate);
 		fieldName = field;
-		fieldType = type;
 		this.bool = bool;
 	}
 	

@@ -17,6 +17,7 @@ import classRepresentation.decorators.DecoratorDecorator;
 import classRepresentation.decorators.IClassDecorator;
 import classRepresentation.decorators.TopLevelDecorator;
 import classRepresentation.designPaterns.DecoratorDetector;
+import classRepresentation.designPaterns.DesignPatternDetector;
 import interfaces.IClass;
 import umlDiagram.ClassDeclarationVisitor;
 import umlDiagram.ClassFieldVisitor;
@@ -67,8 +68,8 @@ public class UnitTestDecoratorDetector {
 		reader.accept(vis2, ClassReader.EXPAND_FRAMES);
 		classes.addClass(singleton);
 
-		DecoratorDetector detector = new DecoratorDetector(classes);
-		detector.findDecorators();
+		DesignPatternDetector detector = new DecoratorDetector(classes);
+		detector.detectPattern();
 	}
 
 	@Test
