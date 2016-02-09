@@ -12,7 +12,7 @@ import classRepresentation.decorators.IClassDecorator;
 import interfaces.IClass;
 import interfaces.IField;
 
-public class DecoratorDetector {
+public class DecoratorDetector implements DesignPatternDetector {
 
 	private Map<String, IClass> classMap;
 	private List<String> discoveredDecorators;
@@ -22,7 +22,7 @@ public class DecoratorDetector {
 		discoveredDecorators = new ArrayList<String>();
 	}
 
-	public void findDecorators() {
+	public void detectPattern() {
 		for (String className : classMap.keySet()) {
 			IClass currentClass = classMap.get(className);
 			if (!isDecorator(currentClass)) {

@@ -20,6 +20,7 @@ import classRepresentation.decorators.IClassDecorator;
 import classRepresentation.decorators.TopLevelDecorator;
 import classRepresentation.designPaterns.CompositeDetector;
 import classRepresentation.designPaterns.CompositeVisitor;
+import classRepresentation.designPaterns.DesignPatternDetector;
 import interfaces.IClass;
 import umlDiagram.ClassDeclarationVisitor;
 import umlDiagram.ClassFieldVisitor;
@@ -42,8 +43,8 @@ public class UnitTestCompositeDetector {
 		setupHelper(classes, leaf, "testingData.compositePattern.CompositeLeafSample");
 		setupHelper(classes, component, "testingData.SampleInterface01");
 		
-		CompositeDetector composite = new CompositeDetector(classes);
-		composite.findCompositePattern();
+		DesignPatternDetector composite = new CompositeDetector(classes);
+		composite.detectPattern();
 		System.out.println(isLeaf(leaf));
 	}
 	

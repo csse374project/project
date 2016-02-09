@@ -23,6 +23,7 @@ import classRepresentation.decorators.IClassDecorator;
 import classRepresentation.decorators.TopLevelDecorator;
 import classRepresentation.designPaterns.CompositeDetector;
 import classRepresentation.designPaterns.CompositeVisitor;
+import classRepresentation.designPaterns.DesignPatternDetector;
 import interfaces.IClass;
 import umlDiagram.ClassDeclarationVisitor;
 import umlDiagram.ClassFieldVisitor;
@@ -65,8 +66,8 @@ public class UnitTestSimpleCompositeDetector {
 		setupHelper(classes, arrayLeaf, "testingData.compositePattern.CompositeLeafWithArray");
 		setupHelper(classes, arrayComponent, "testingData.compositePattern.CompositeComponentWithArray");
 		
-		CompositeDetector composite = new CompositeDetector(classes);
-		composite.findCompositePattern();
+		DesignPatternDetector composite = new CompositeDetector(classes);
+		composite.detectPattern();
 	}
 	
 	private static void setupHelper(Classes classes, IClassDecorator top, String className) throws IOException {

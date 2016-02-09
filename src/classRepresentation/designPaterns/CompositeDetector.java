@@ -16,7 +16,7 @@ import classRepresentation.decorators.IClassDecorator;
 import interfaces.IClass;
 import interfaces.IField;
 
-public class CompositeDetector {
+public class CompositeDetector implements DesignPatternDetector{
 
 	private Map<String, IClass> classMap;
 	private List<String> detectedComponents;
@@ -46,7 +46,7 @@ public class CompositeDetector {
 		this.classMap = classes.getClasses();
 	}
 
-	public void findCompositePattern() {
+	public void detectPattern() {
 		// First, we find the "seed" composites
 		findSeedComposites();
 

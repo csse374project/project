@@ -20,6 +20,7 @@ import classRepresentation.decorators.IClassDecorator;
 import classRepresentation.decorators.TopLevelDecorator;
 import classRepresentation.designPaterns.AdapterClassVisitor;
 import classRepresentation.designPaterns.AdapterDetector;
+import classRepresentation.designPaterns.DesignPatternDetector;
 import interfaces.IClass;
 import umlDiagram.ClassDeclarationVisitor;
 
@@ -62,8 +63,8 @@ public class UnitTestAdapterDecorator {
 		reader.accept(adapterVisitor, ClassReader.EXPAND_FRAMES);
 		classes.addClass(singleton);
 		
-		AdapterDetector detector = new AdapterDetector(classes);
-		detector.findAdapters();
+		DesignPatternDetector detector = new AdapterDetector(classes);
+		detector.detectPattern();
 		
 	}
 

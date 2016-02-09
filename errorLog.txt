@@ -1,2 +1,3 @@
 Error: dot: can't open temp.dot
 Error: dot: can't open temp.dot
+Error: temp.dot: syntax error in line 121 near 'java'

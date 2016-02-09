@@ -11,7 +11,7 @@ import classRepresentation.decorators.AdaptionTargetDecorator;
 import classRepresentation.decorators.IClassDecorator;
 import interfaces.IClass;
 
-public class AdapterDetector {
+public class AdapterDetector implements DesignPatternDetector{
 
 	private static String OBJECT = "java.lang.Object";
 
@@ -21,7 +21,7 @@ public class AdapterDetector {
 		classMap = classes.getClasses();
 	}
 
-	public void findAdapters() {
+	public void detectPattern() {
 		for (String className : classMap.keySet()) {
 			IClassDecorator clazz = (IClassDecorator) classMap.get(className);
 			AdapterDecorator adapter = getAdapter(clazz);

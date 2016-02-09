@@ -22,6 +22,7 @@ import classRepresentation.designPaterns.AdapterClassVisitor;
 import classRepresentation.designPaterns.AdapterDetector;
 import classRepresentation.designPaterns.CompositeDetector;
 import classRepresentation.designPaterns.DecoratorDetector;
+import classRepresentation.designPaterns.DesignPatternDetector;
 import interfaces.IClass;
 
 public class UMLParser {
@@ -54,14 +55,14 @@ public class UMLParser {
 			reader.accept(adapterVisitor, ClassReader.EXPAND_FRAMES);
 			classes.addClass(topLevelDecorator);
 		}
-		DecoratorDetector decDet = new DecoratorDetector(classes);
-		decDet.findDecorators();
+		DesignPatternDetector decDet = new DecoratorDetector(classes);
+		decDet.detectPattern();
 
-		AdapterDetector adapterizer = new AdapterDetector(classes);
-		adapterizer.findAdapters();
+		DesignPatternDetector adapterizer = new AdapterDetector(classes);
+		adapterizer.detectPattern();
 
-		CompositeDetector composite = new CompositeDetector(classes);
-		composite.findCompositePattern();
+		DesignPatternDetector composite = new CompositeDetector(classes);
+		composite.detectPattern();
 
 		String digraph = classes.printGraphVizInput();
 		createGraph(digraph);
