@@ -16,7 +16,7 @@ import classRepresentation.decorators.IClassDecorator;
 import interfaces.IClass;
 import interfaces.IField;
 
-public class CompositeDetector implements DesignPatternDetector{
+public class CompositeDetector implements DesignPatternDetector {
 
 	private Map<String, IClass> classMap;
 	private List<String> detectedComponents;
@@ -72,14 +72,14 @@ public class CompositeDetector implements DesignPatternDetector{
 						}
 					}
 				}
-				
+
 			}
 			IClass superClass = classMap.get(cls.getSuperClass());
-			if(superClass != null && isComposite(superClass) && !isComposite(cls)) {
+			if (superClass != null && isComposite(superClass) && !isComposite(cls)) {
 				IClassDecorator decoratedClass = (IClassDecorator) cls;
 				decoratedClass.decorate(new CompositeDecorator(superClass.getName()));
 			}
-			
+
 			else if (!isComposite(cls) && !isComponent(cls)) {
 				IClassDecorator decoratedClass = (IClassDecorator) cls;
 				decoratedClass.decorate(new CompositeLeafDecorator());
@@ -90,13 +90,14 @@ public class CompositeDetector implements DesignPatternDetector{
 	private void getClassesInPattern() {
 		boolean foundSomething = false;
 		for (IClass cls : classMap.values()) {
-			if(classesInPattern.contains(cls.getName())) continue;
+			if (classesInPattern.contains(cls.getName()))
+				continue;
 			if (classesInPattern.contains(cls.getSuperClass())) {
 				classesInPattern.add(cls.getName());
 				foundSomething = true;
 			}
-			for (String interfaze: cls.getInterfaces()){
-				if(classesInPattern.contains(interfaze)){
+			for (String interfaze : cls.getInterfaces()) {
+				if (classesInPattern.contains(interfaze)) {
 					classesInPattern.add(cls.getName());
 					foundSomething = true;
 				}
@@ -117,15 +118,12 @@ public class CompositeDetector implements DesignPatternDetector{
 					checkInterfaces(cls, field);
 					checkSupers(cls, field);
 				}
-				if(field.getType().contains("[]")){
+				if (field.getType().contains("[]")) {
 					int bracket = field.getType().indexOf('[');
 					String typeName = field.getType().substring(0, bracket);
-					if(!isComposite(cls)){
-						checkInterfaces(cls, field);
-						checkSupers(cls, field);
-						/*IClassDecorator decoratedClass = (IClassDecorator) cls;
-						decoratedClass.decorate(new CompositeDecorator(typeName.replace('.', '/')));
-						detectedComposites.add(cls.getName());*/
+					if (!isComposite(cls)) {
+						checkInterfacesArray(cls, field);
+						checkSupersArray(cls, field);
 					}
 				}
 			}
@@ -135,7 +133,7 @@ public class CompositeDetector implements DesignPatternDetector{
 	private void checkInterfaces(IClass cls, IField field) {
 		for (String type : field.getInteriorTypes()) {
 			if (cls.getInterfaces().contains(type) && !isComposite(cls)) {
-				IClassDecorator decoratedClass = (IClassDecorator)cls;
+				IClassDecorator decoratedClass = (IClassDecorator) cls;
 				decoratedClass.decorate(new CompositeDecorator(type));
 				detectedComposites.add(cls.getName());
 			}
@@ -146,11 +144,32 @@ public class CompositeDetector implements DesignPatternDetector{
 		List<String> supers = getSuperClasses(cls);
 		for (String type : field.getInteriorTypes()) {
 			if (supers.contains(type) && !isComposite(cls)) {
-				IClassDecorator decoratedClass = (IClassDecorator)cls;
+				IClassDecorator decoratedClass = (IClassDecorator) cls;
 				decoratedClass.decorate(new CompositeDecorator(type));
 				detectedComposites.add(cls.getName());
 			}
 		}
+	}
+	
+	private void checkInterfacesArray(IClass cls, IField field) {
+		String type = field.getType();
+		type = type.substring(0, type.length() - 2);
+		if (cls.getInterfaces().contains(type.replace('.', '/')) && !isComposite(cls)) {
+			IClassDecorator decoratedClass = (IClassDecorator) cls;
+			decoratedClass.decorate(new CompositeDecorator(type.replace('.', '/')));
+			detectedComposites.add(cls.getName());
+		}
+	}
+
+	private void checkSupersArray(IClass cls, IField field) {
+		List<String> supers = getSuperClasses(cls);
+		String type = field.getType().substring(0, field.getType().length()-2);
+		if (supers.contains(type.replace('.', '/')) && !isComposite(cls)) {
+			IClassDecorator decoratedClass = (IClassDecorator) cls;
+			decoratedClass.decorate(new CompositeDecorator(type.replace('.', '/')));
+			detectedComposites.add(cls.getName());
+		}
+
 	}
 
 	private List<String> getSuperClasses(IClass cls) {
