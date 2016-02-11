@@ -32,7 +32,7 @@ public class UMLParser {
 
 	public static void main(String[] args) throws IOException {
 		setClassesToAccept(args);
-		UMLParser parser = new UMLParser(Arrays.asList(args));
+		UMLParser parser = new UMLParser(Arrays.asList(args), "", "", "C:\\Program Files (x86)\\Graphviz2.38\\bin\\dot.exe");
 		parser.parseByteCode();
 		parser.detectPatterns();
 	}
@@ -44,9 +44,12 @@ public class UMLParser {
 	private Classes classes;
 	
 	
-	public UMLParser(List<String> argClasses){
+	public UMLParser(List<String> argClasses, String inputFolder, String outputDirectory, String dotPath){
 		classes = new Classes();
 		inputClasses = argClasses;
+		this.inputFolder = inputFolder;
+		this.outputDir = outputDirectory;
+		this.dotPath = dotPath;
 	}
 
 	
@@ -102,7 +105,7 @@ public class UMLParser {
 			e.printStackTrace();
 		}
 		//TODO this will need to be replaced with dotPath once we recieve this argument from the UI
-		ProcessBuilder pb = new ProcessBuilder("C:\\Program Files (x86)\\Graphviz2.38\\bin\\dot.exe", "-Tpng", "temp.dot", "-o", "out.png");
+		ProcessBuilder pb = new ProcessBuilder(this.dotPath, "-Tpng", "temp.dot", "-o", "out.png");
 
 		try {
 			// Process p = pb.start();

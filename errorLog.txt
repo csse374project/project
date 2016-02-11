@@ -26,3 +26,9 @@ Error: temp.dot: syntax error in line 434 near 't'
 Error: temp.dot: syntax error in line 434 near 't'
 Error: temp.dot: syntax error in line 54 near '"'
 Error: temp.dot: syntax error in line 54 near '"'
+Error: dot: can't open temp.dot
+Error: dot: can't open temp.dot
+Error: dot: can't open temp.dot
+Error: dot: can't open temp.dot
+Error: dot: can't open temp.dot
+Error: temp.dot: syntax error in line 121 near 'lder'
