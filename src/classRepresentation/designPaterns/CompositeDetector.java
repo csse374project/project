@@ -119,8 +119,6 @@ public class CompositeDetector implements DesignPatternDetector {
 					checkSupers(cls, field);
 				}
 				if (field.getType().contains("[]")) {
-					int bracket = field.getType().indexOf('[');
-					String typeName = field.getType().substring(0, bracket);
 					if (!isComposite(cls)) {
 						checkInterfacesArray(cls, field);
 						checkSupersArray(cls, field);
