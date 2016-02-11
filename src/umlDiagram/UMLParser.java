@@ -1,6 +1,16 @@
 package umlDiagram;
 
+import java.io.BufferedWriter;
+import java.io.File;
 import java.io.IOException;
+import java.lang.ProcessBuilder.Redirect;
+import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.nio.file.StandardOpenOption;
+import java.util.Arrays;
+import java.util.List;
 
 import org.objectweb.asm.ClassReader;
 import org.objectweb.asm.ClassVisitor;
@@ -13,50 +23,96 @@ import classRepresentation.decorators.TopLevelDecorator;
 import classRepresentation.designPaterns.AdapterClassVisitor;
 import classRepresentation.designPaterns.AdapterDetector;
 import classRepresentation.designPaterns.CompositeDetector;
-import classRepresentation.designPaterns.CompositeVisitor;
 import classRepresentation.designPaterns.DecoratorDetector;
+import classRepresentation.designPaterns.DesignPatternDetector;
 import interfaces.IClass;
 
 public class UMLParser {
 
-	private static String[] classesToAccept = new String[0];
-
 	public static void main(String[] args) throws IOException {
-		Classes classes = new Classes();
-
 		setClassesToAccept(args);
+		UMLParser parser = new UMLParser(Arrays.asList(args));
+		parser.parseByteCode();
+		parser.detectPatterns();
+	}
+	
+	private static String[] classesToAccept = new String[0];
+	@SuppressWarnings("unused") //Will be used once the UI gets farther along
+	private String inputFolder, outputDir, dotPath;
+	private List<String> inputClasses;
+	private Classes classes;
+	
+	
+	public UMLParser(List<String> argClasses){
+		classes = new Classes();
+		inputClasses = argClasses;
+	}
 
-		for (String className : args) {
+	
+	private void parseByteCode() throws IOException{
+		for(String className : inputClasses){	
 			IClass currentClass = new UMLClass();
 			IClassDecorator topLevelDecorator = new TopLevelDecorator(currentClass);
 			ClassReader reader = new ClassReader(className);
-
+	
 			ClassVisitor declVisitor = new ClassDeclarationVisitor(Opcodes.ASM5, topLevelDecorator);
-
+	
 			ClassVisitor singletonVisitor = new SingletonFieldVisitor(Opcodes.ASM5, declVisitor, topLevelDecorator);
-
+	
 			ClassVisitor fieldVisitor = new ClassFieldVisitor(Opcodes.ASM5, singletonVisitor, topLevelDecorator);
-
+	
 			ClassVisitor methodVisitor = new ClassMethodVisitor(Opcodes.ASM5, fieldVisitor, topLevelDecorator);
-
+	
 			ClassVisitor classCodeVisitor = new MethodDeclarationVisitor(Opcodes.ASM5, methodVisitor,
 					topLevelDecorator);
-
+	
 			ClassVisitor adapterVisitor = new AdapterClassVisitor(Opcodes.ASM5, classCodeVisitor, topLevelDecorator);
-
+	
 			reader.accept(adapterVisitor, ClassReader.EXPAND_FRAMES);
 			classes.addClass(topLevelDecorator);
 		}
-		DecoratorDetector decDet = new DecoratorDetector(classes);
-		decDet.findDecorators();
+	}
+	
+	private void detectPatterns(){
+		DesignPatternDetector decDet = new DecoratorDetector(classes);
+		decDet.detectPattern();
 
-		AdapterDetector adapterizer = new AdapterDetector(classes);
-		adapterizer.findAdapters();
+		DesignPatternDetector adapterizer = new AdapterDetector(classes);
+		adapterizer.detectPattern();
 
-		CompositeDetector composite = new CompositeDetector(classes);
-		composite.findCompositePattern();
+		DesignPatternDetector composite = new CompositeDetector(classes);
+		composite.detectPattern();
 
-		System.out.println(classes.printGraphVizInput());
+		String digraph = classes.printGraphVizInput();
+		createGraph(digraph);
+		//System.out.println(digraph);
+	}
+
+	private void createGraph(String digraph) {
+		// Temp file to write digraph string to
+		// Will be deleted once complete
+		Path path = Paths.get("temp.dot");
+
+		try (final BufferedWriter writer = Files.newBufferedWriter(path, StandardCharsets.UTF_8,
+				StandardOpenOption.CREATE);) {
+			writer.write(digraph);
+			writer.flush();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		//TODO this will need to be replaced with dotPath once we recieve this argument from the UI
+		ProcessBuilder pb = new ProcessBuilder("C:\\Program Files (x86)\\Graphviz2.38\\bin\\dot.exe", "-Tpng", "temp.dot", "-o", "out.png");
+
+		try {
+			// Process p = pb.start();
+			File log = new File("errorLog.txt");
+			pb.redirectErrorStream(true);
+			pb.redirectOutput(Redirect.appendTo(log));
+			pb.start();
+			//Files.delete(path); //intended to be used to clean up temp file...breaks it
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 	}
 
 	private static void setClassesToAccept(String[] args) {
