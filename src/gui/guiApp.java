@@ -2,6 +2,7 @@ package gui;
 
 import java.awt.BorderLayout;
 import java.awt.Dimension;
+import java.awt.Window;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
@@ -134,7 +135,9 @@ public class guiApp {
 		JPanel panel = new JPanel();
 
 		panel.setLayout(new BoxLayout(panel, BoxLayout.PAGE_AXIS));
-		panel.add(getButtonTree());
+		panel.add(new PatternViewsTree());
+		panel.add(new PatternViewsTree());
+		panel.add(new PatternViewsTree());
 		JScrollPane scrollPanel = new JScrollPane(panel,
 				 JScrollPane.VERTICAL_SCROLLBAR_ALWAYS, JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
 		scrollPanel.setPreferredSize(new Dimension(300, 1000));
@@ -150,24 +153,5 @@ public class guiApp {
 				JScrollPane.VERTICAL_SCROLLBAR_ALWAYS, JScrollPane.HORIZONTAL_SCROLLBAR_ALWAYS);
 		scrollPanel.setPreferredSize(new Dimension(700, 1000));
 		return scrollPanel;
-	}
-	
-	private static JTree getButtonTree() {
-		JTree tree;
-//		TreeNode head = new DefaultMutableTreeNode("top of the big 'awesome' tree.");
-		DefaultMutableTreeNode top = new DefaultMutableTreeNode("Top apowjfdpoawejdpojawpodjawpodjapowdjpoawj");
-		DefaultMutableTreeNode node;
-		String[] strings = new String[]{"1) one", "2) two", "3) three", "4) four", "5) five"};
-		for (int i = 0; i < strings.length; i++) {
-			node = new DefaultMutableTreeNode(strings[i]);
-			top.add(node);
-		}
-		
-		tree = new JTree(top);
-//		tree.setSize(new Dimension(300, 1000));
-		
-		
-		return tree;
-	}
-	
+	}	
 }
