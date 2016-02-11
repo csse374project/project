@@ -32,3 +32,6 @@ Error: dot: can't open temp.dot
 Error: dot: can't open temp.dot
 Error: dot: can't open temp.dot
 Error: temp.dot: syntax error in line 121 near 'lder'
+Error: temp.dot: syntax error in line 41 near 'bel'
+Error: temp.dot: syntax error in line 50 near 'manWithBoxSprite'
+Error: temp.dot: syntax error in line 37 near '}'
