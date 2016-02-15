@@ -31,13 +31,13 @@ public class guiApp {
 	private static JFrame landingWindow, mainWindow;
 	private static String inputDirec, outputDirec, dotPath;
 	private static String[] targetClasses, designPatterns;
-	private static String phases;
+	private static String[] phases;
 	private static List<JCheckBox> checkBoxes;
  
 	public static void main(String[] args) {
-//		displayLandingScreen();
-		loadConfigFile(new File("input_output/config"));
-		displayMainWindow();
+		displayLandingScreen();
+//		loadConfigFile(new File("input_output/config"));
+//		displayMainWindow();
 	}
 	
 	private static void displayLandingScreen() {
@@ -114,7 +114,7 @@ public class guiApp {
 		designPatterns = config.getProperty("designPatterns").split(" ");
 		outputDirec = config.getProperty("outputDirec");
 		dotPath = config.getProperty("dotPath");
-		phases = config.getProperty("phases");
+		phases = config.getProperty("phases").split(" ");
 	}
 	
 	private static void displayMainWindow() {
