@@ -118,40 +118,16 @@ public class guiApp {
 	}
 	
 	private static void displayMainWindow() {
-		mainWindow = new JFrame();
+		mainWindow = new MainWindow();
 		mainWindow.setTitle("Design Parser :: " + inputDirec);
 		mainWindow.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		mainWindow.setSize(1000, 1000);
+//		
+//		mainWindow.add(getOptionPanel(), BorderLayout.WEST);
+//		mainWindow.add(getImagePanel(), BorderLayout.EAST);
 		
-		mainWindow.add(getOptionPanel(), BorderLayout.WEST);
-		mainWindow.add(getImagePanel(), BorderLayout.EAST);
-		
-//		landingWindow.setVisible(false);
+		landingWindow.setVisible(false);
 		mainWindow.setVisible(true);
-//		landingWindow.dispose();
+		landingWindow.dispose();
 	}
-	
-	private static JScrollPane getOptionPanel() {
-		JPanel panel = new JPanel();
-
-		panel.setLayout(new BoxLayout(panel, BoxLayout.PAGE_AXIS));
-		panel.add(new PatternViewsTree("decorator", Arrays.asList(new String[]{"decorator1", "decorator2", "thing"})));
-		panel.add(new PatternViewsTree("singleton", Arrays.asList(new String[]{"Lonely", "SingleThing"})));
-		panel.add(new PatternViewsTree("adapter", Arrays.asList(new String[]{"AdapterToDecoratorAdapter"})));
-		JScrollPane scrollPanel = new JScrollPane(panel,
-				 JScrollPane.VERTICAL_SCROLLBAR_ALWAYS, JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
-		scrollPanel.setPreferredSize(new Dimension(300, 1000));
-		return scrollPanel;
-	}
-	
-	private static JScrollPane getImagePanel() {
-		JPanel panel = new JPanel();
-		//ImageIcon image = new ImageIcon("input_output/TolkienMiddleEarthMap2.jpg");
-		Icon image = new LoadingProxy("input_output/TolkienMiddleEarthMap2.jpg");
-		
-		JScrollPane scrollPanel = new JScrollPane(new JLabel(image),
-				JScrollPane.VERTICAL_SCROLLBAR_ALWAYS, JScrollPane.HORIZONTAL_SCROLLBAR_ALWAYS);
-		scrollPanel.setPreferredSize(new Dimension(700, 1000));
-		return scrollPanel;
-	}	
 }
