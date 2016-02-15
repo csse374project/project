@@ -2,6 +2,7 @@ package gui;
 
 import java.awt.BorderLayout;
 import java.awt.GridLayout;
+import java.util.List;
 
 import javax.swing.JCheckBox;
 import javax.swing.JLabel;
@@ -14,26 +15,39 @@ public class PatternViewsTree extends JPanel {
 	 */
 	private static final long serialVersionUID = -9052034162028232375L;
 	
-	public PatternViewsTree() {
-		// TODO calculate this!!!
-		int arbitraryDefaultHieght = 5;
-		int height = arbitraryDefaultHieght;
+	private String designPattern;
+	private List<String> instances;
+	
+	public PatternViewsTree(String designPattern, List<String> instances) {
+		this.designPattern = designPattern;
+		this.instances = instances;
+		int height = instances.size() + 1;
+	
+		addLeftSide(height);
+		addRightSide(height);
+		
+	}
+	
+	private void addLeftSide(int height) {
 		JPanel leftSide = new JPanel();
 		leftSide.setLayout(new GridLayout(height, 1));
-//		for (int i = 1; i < height; i++) {
-//			leftSide.add(new JLabel(""));
-//		}
-		leftSide.add(new JCheckBox("[design pattern]"));
+		leftSide.add(new JCheckBox(designPattern));
 		this.add(leftSide, BorderLayout.WEST);
-		
+	}
+	
+	private void addRightSide(int height) {
 		JPanel rightSide = new JPanel();
 		rightSide.setLayout(new GridLayout(height, 1));
 		rightSide.add(new JLabel(""));
 		for (int i = 1; i < height; i++) {
-			rightSide.add(new JCheckBox("[an instance]"));
+			String name = instances.get(i-1);
+			rightSide.add(getCheckBox(name));
 		}
 		this.add(rightSide, BorderLayout.EAST);
 	}
 	
+	private JCheckBox getCheckBox(String className) {
+		return new JCheckBox(className);
+	}
 	
 }

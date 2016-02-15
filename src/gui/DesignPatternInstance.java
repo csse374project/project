@@ -7,14 +7,19 @@ import java.util.function.Consumer;
 
 public class DesignPatternInstance implements Iterable<String> {
 	
+	private String designName;
 	private List<String> classNames;
 	
-	public DesignPatternInstance(List<String> classNames) {
+	public DesignPatternInstance(String designPattern, List<String> classNames) {
 		this.classNames = classNames;
 	}
 	
-	public DesignPatternInstance() {
-		this(new ArrayList<String>());
+	public DesignPatternInstance(String designPattern) {
+		this(designPattern, new ArrayList<String>());
+	}
+	
+	public String getDesignPattern() {
+		return designName;
 	}
 	
 	public List<String> getClasses() {
