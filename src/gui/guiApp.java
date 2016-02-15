@@ -68,6 +68,7 @@ public class guiApp {
 					JOptionPane.showMessageDialog(landingWindow, message);
 				} else {
 					displayMainWindow();
+					
 				}
 			}
 		});
