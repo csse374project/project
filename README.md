@@ -2,6 +2,9 @@
 This tool analyzes java code and generates a UML diagram. It detects and draws all classes complete with their fields and methods. It also draws arrows for inheritance from other classes, implementation of interfaces, other used classes, and other associated classes. The Singleton and Decorator design patterns are also detected and notated.  
 
 #Design:
+Milestone 7:
+In order to facilitate parsing patterns, the UMLParser class was changed to a concrete class. It was previously a class consisting only of static methods. Now, it manages the diagram generation and stores variables relevant to its administration. This object can now be created from the UI and used to interact with the visitors and PatternDetectors.
+
 Milestone 6:
 No design changes have been made since milestone 5.
 

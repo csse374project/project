@@ -10,13 +10,12 @@ import jdk.internal.org.objectweb.asm.Type;
 public class SingletonMethodVisitor extends ClassVisitor {
 
 	private IClassDecorator currentClass;
-	
+
 	public SingletonMethodVisitor(int opCode, IClassDecorator currentClass) {
 		super(opCode);
 		this.currentClass = currentClass;
 	}
-	
-	
+
 	@Override
 	public MethodVisitor visitMethod(int access, String name, String desc, String signature, String[] exceptions) {
 		MethodVisitor toDecorate = super.visitMethod(access, name, desc, signature, exceptions);
