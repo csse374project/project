@@ -13,6 +13,7 @@ import java.util.List;
 import java.util.Properties;
 
 import javax.swing.BoxLayout;
+import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
@@ -67,8 +68,8 @@ public class guiApp {
 					System.out.println(message);
 					JOptionPane.showMessageDialog(landingWindow, message);
 				} else {
+					landingWindow.setVisible(false);
 					displayMainWindow();
-					
 				}
 			}
 		});
@@ -145,8 +146,8 @@ public class guiApp {
 	
 	private static JScrollPane getImagePanel() {
 		JPanel panel = new JPanel();
-		ImageIcon image = new ImageIcon("input_output/TolkienMiddleEarthMap2.jpg");
-		
+		//ImageIcon image = new ImageIcon("input_output/TolkienMiddleEarthMap2.jpg");
+		Icon image = new LoadingProxy("input_output/TolkienMiddleEarthMap2.jpg");
 		
 		JScrollPane scrollPanel = new JScrollPane(new JLabel(image),
 				JScrollPane.VERTICAL_SCROLLBAR_ALWAYS, JScrollPane.HORIZONTAL_SCROLLBAR_ALWAYS);
