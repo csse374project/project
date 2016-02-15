@@ -34,8 +34,8 @@ public class guiApp {
  
 	public static void main(String[] args) {
 //		displayLandingScreen();
-		loadConfigFile(new File("input_output/config"));
-		displayLandingScreen();
+//		loadConfigFile(new File("input_output/config"));
+		displayMainWindow();
 	}
 	
 	private static void displayLandingScreen() {
