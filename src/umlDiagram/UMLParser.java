@@ -9,7 +9,6 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.StandardOpenOption;
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.LinkedList;
@@ -31,6 +30,8 @@ import interfaces.IClass;
 
 public class UMLParser {
 
+	//main shouldn't be used to run from UI. Construct a UMLParser object
+	//and call the appropriate methods.
 	public static void main(String[] args) throws IOException {
 		setClassesToAccept(args);
 		List<String> phases = new LinkedList<String>();
@@ -67,6 +68,13 @@ public class UMLParser {
 		detectors.put("Composite", new CompositeDetector(this.classes));
 	}
 
+	/**
+	 * Adds a detector to the system. The detector can then be used to detect patterns
+	 * within the provided java bytecode.
+	 * 
+	 * @param name	name of the DecoratorDetector
+	 * @param detector	DecoratorDetector object
+	 */
 	public void addDetectorPhase(String name, DesignPatternDetector detector) {
 		this.inputPhases.add(name);
 		this.detectors.put(name, detector);
@@ -90,8 +98,9 @@ public class UMLParser {
 	}
 
 	private void detectPatterns() {
-		for (String pattern : inputPhases) {\
+		for (String pattern : inputPhases) {
 			DesignPatternDetector detector = detectors.get(pattern);
+			//Check for patterns that were not added
 			if (detector != null) detector.detectPattern();
 		}
 	}
@@ -130,6 +139,12 @@ public class UMLParser {
 		}
 	}
 
+	/**
+	 * Checks to see if the given class name was provided as input
+	 * 
+	 * @param className	name of the class to check
+	 * @return	true if the class was found in the input, false otherwise
+	 */
 	public static boolean classIsUsed(String className) {
 		for (int i = 0; i < classesToAccept.length; i++) {
 			if (classesToAccept[i].equals(className)) {
@@ -139,6 +154,13 @@ public class UMLParser {
 		return false;
 	}
 
+	/**
+	 * Replaces all dots, '.', in the given string with slashes, '/'.
+	 * Helps to fix ASM's seeming arbitrary naming scheme.
+	 * 
+	 * @param string	String to modify
+	 * @return	modified string
+	 */
 	public static String replaceDotsWithSlashes(String string) {
 		return string.replace('.', '/');
 	}
