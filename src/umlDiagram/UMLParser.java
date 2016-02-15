@@ -9,18 +9,20 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.StandardOpenOption;
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashMap;
+import java.util.LinkedList;
 import java.util.List;
+import java.util.Map;
 
 import org.objectweb.asm.ClassReader;
 import org.objectweb.asm.ClassVisitor;
-import org.objectweb.asm.Opcodes;
 
 import classRepresentation.Classes;
 import classRepresentation.UMLClass;
 import classRepresentation.decorators.IClassDecorator;
 import classRepresentation.decorators.TopLevelDecorator;
-import classRepresentation.designPaterns.AdapterClassVisitor;
 import classRepresentation.designPaterns.AdapterDetector;
 import classRepresentation.designPaterns.CompositeDetector;
 import classRepresentation.designPaterns.DecoratorDetector;
@@ -31,8 +33,13 @@ public class UMLParser {
 
 	public static void main(String[] args) throws IOException {
 		setClassesToAccept(args);
+		List<String> phases = new LinkedList<String>();
+		phases.add("Decorator");
+		phases.add("Singleton");
+		phases.add("Adapter");
+		phases.add("Composite");
 		UMLParser parser = new UMLParser(Arrays.asList(args), "", "",
-				"C:\\Program Files (x86)\\Graphviz2.38\\bin\\dot.exe");
+				"C:\\Program Files (x86)\\Graphviz2.38\\bin\\dot.exe", phases);
 		parser.parseByteCode();
 		parser.detectPatterns();
 		parser.createGraph();
@@ -41,15 +48,28 @@ public class UMLParser {
 	private static String[] classesToAccept = new String[0];
 	@SuppressWarnings("unused") // Will be used once the UI gets farther along
 	private String inputFolder, outputDir, dotPath;
-	private List<String> inputClasses;
+	private Map<String, DesignPatternDetector> detectors;
+	private List<String> inputClasses, inputPhases;
 	private Classes classes;
 
-	public UMLParser(List<String> argClasses, String inputFolder, String outputDirectory, String dotPath) {
+	public UMLParser(List<String> argClasses, String inputFolder, String outputDirectory, String dotPath,
+			List<String> phases) {
 		classes = new Classes();
 		inputClasses = argClasses;
 		this.inputFolder = inputFolder;
 		this.outputDir = outputDirectory;
 		this.dotPath = dotPath;
+		this.inputPhases = phases;
+		
+		this.detectors = new HashMap<String, DesignPatternDetector>();
+		detectors.put("Decorator", new DecoratorDetector(this.classes));
+		detectors.put("Adapter", new AdapterDetector(this.classes));
+		detectors.put("Composite", new CompositeDetector(this.classes));
+	}
+
+	public void addDetectorPhase(String name, DesignPatternDetector detector) {
+		this.inputPhases.add(name);
+		this.detectors.put(name, detector);
 	}
 
 	private void parseByteCode() throws IOException {
@@ -58,33 +78,22 @@ public class UMLParser {
 			IClassDecorator topLevelDecorator = new TopLevelDecorator(currentClass);
 			ClassReader reader = new ClassReader(className);
 
-			ClassVisitor declVisitor = new ClassDeclarationVisitor(Opcodes.ASM5, topLevelDecorator);
+			ClassVisitor visitor = createVisitors(topLevelDecorator);
 
-			ClassVisitor singletonVisitor = new SingletonFieldVisitor(Opcodes.ASM5, declVisitor, topLevelDecorator);
-
-			ClassVisitor fieldVisitor = new ClassFieldVisitor(Opcodes.ASM5, singletonVisitor, topLevelDecorator);
-
-			ClassVisitor methodVisitor = new ClassMethodVisitor(Opcodes.ASM5, fieldVisitor, topLevelDecorator);
-
-			ClassVisitor classCodeVisitor = new MethodDeclarationVisitor(Opcodes.ASM5, methodVisitor,
-					topLevelDecorator);
-
-			ClassVisitor adapterVisitor = new AdapterClassVisitor(Opcodes.ASM5, classCodeVisitor, topLevelDecorator);
-
-			reader.accept(adapterVisitor, ClassReader.EXPAND_FRAMES);
+			reader.accept(visitor, ClassReader.EXPAND_FRAMES);
 			classes.addClass(topLevelDecorator);
 		}
 	}
 
+	private ClassVisitor createVisitors(IClassDecorator topLevelDecorator) {
+		return VisitorFactory.generateVisitors(this.inputPhases, topLevelDecorator);
+	}
+
 	private void detectPatterns() {
-		DesignPatternDetector decDet = new DecoratorDetector(classes);
-		decDet.detectPattern();
-
-		DesignPatternDetector adapterizer = new AdapterDetector(classes);
-		adapterizer.detectPattern();
-
-		DesignPatternDetector composite = new CompositeDetector(classes);
-		composite.detectPattern();
+		for (String pattern : inputPhases) {\
+			DesignPatternDetector detector = detectors.get(pattern);
+			if (detector != null) detector.detectPattern();
+		}
 	}
 
 	private void createGraph() {
@@ -107,7 +116,8 @@ public class UMLParser {
 			pb.redirectErrorStream(true);
 			pb.redirectOutput(Redirect.appendTo(log));
 			pb.start();
-			// Files.delete(path); //intended to be used to clean up temp file...breaks it
+			// Files.delete(path); //intended to be used to clean up temp
+			// file...breaks it
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
