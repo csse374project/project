@@ -22,11 +22,12 @@ import umlDiagram.UMLParser;
 public class MainWindow {
 	
 	private JFrame frame;
-	private List<String> classArgs;
+	private List<String> classArgs, phases;
 	private String inputFolder, outputDirectory, dotPath;
 
 	public MainWindow(Properties config) {
 		this.classArgs = Arrays.asList(config.getProperty("targetClasses").split(" "));
+		this.phases = Arrays.asList(config.getProperty("phases").split(" "));
 		this.inputFolder = config.getProperty("inputFolder");
 		this.outputDirectory = config.getProperty("outputDirectory");
 		this.dotPath = config.getProperty("dotPath");
@@ -59,7 +60,7 @@ public class MainWindow {
 	}
 	
 	private void runUMLparser() throws IOException {
-		UMLParser parser = new UMLParser(classArgs, inputFolder, outputDirectory, dotPath);
+		UMLParser parser = new UMLParser(classArgs, inputFolder, outputDirectory, dotPath, phases);
 		parser.parseByteCode();
 	}
 	

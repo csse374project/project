@@ -1,7 +1,12 @@
 #Project
-This tool analyzes java code and generates a UML diagram. It detects and draws all classes complete with their fields and methods. It also draws arrows for inheritance from other classes, implementation of interfaces, other used classes, and other associated classes. The Singleton and Decorator design patterns are also detected and notated.  
+This tool analyzes java code and generates a UML diagram. It detects and draws all classes complete with their fields and methods. It also draws arrows for inheritance from other classes, implementation of interfaces, other used classes, and other associated classes. The Singleton, Decorator, Adapter, and Composite design patterns are also detected and notated.  
 
 #Design:
+This section will describe how the design of the project has evolved as it progressed.
+
+Milestone 7:
+In order to facilitate parsing patterns, the UMLParser class was changed to a concrete class. It was previously a class consisting only of static methods. Now, it manages the diagram generation and stores variables relevant to its administration. This object can now be created from the UI and used to interact with the visitors and PatternDetectors.
+
 Milestone 6:
 No design changes have been made since milestone 5.
 
@@ -21,6 +26,13 @@ Milestone 1:
 The tool expands upon the ASM class visitors discussed in class. The method visitor decorates the field visitor, which decorates the declaration visitor. As each class is visited, data container objects are created to store the required information about the class, its fields, and its methods. After the method has been visited by all of the visitors, its data is stored before moving onto the next argument. After all of the arguments have been examined, each of the created data containers is parsed into a form usable by GraphViz.
 
 #Responsibilities: 
+This sections will describe the resposibilites of each team member during each project milestone.
+
+Milestone 7:
+Jesse Shellabarger - Updated back end code to facilitate adding of a UI and use of phases.
+Nate Briggs - Made a proxy to display a loading message (in progress).
+Thomas Bonatti - Created UI to run the projects back end.
+
 Milestone 6:
 Jesse Shellabarger - Designed Composite detection with Thomas. Implemented composite detection. Updated with required pictures and documentation.
 Nate Briggs - Found composite examples in awt and swing. Helped to implement composite detection.
@@ -54,6 +66,13 @@ Nate Briggs - Pair programmed with Jesse Shellabarger. Primarily drove when pars
 Thomas Bonatti - Produced automated tests that establish the correct behavior of your ASM parsing code.
 
 #Instructions:
+This section will provide instructions to use the project, both through the command line and the user interface. 
+
+The system can be further extended by creating new classes to examine the class representation objects, after the java byte code has been analyzed. If additional information is needed, additional visitors can be added to the current implementation via the decorator pattern.
+
+User Interface:
+Once the user interface has been loaded, the user is able to select a configuration file. A default configuration file has been provided, but additional files can be created as desired. After the file is selected, the analyze button can be clicked to generate the UML. A new window will open, displaying the UML and various options for interacting with it. The checkboxes on the left can be used to toggle which classes will and will not display. 
+
 UML Generation:
 DesignParser is the class that drives the application. If running through eclipse, change the run configuration to include the desired 
 arguments. If running through the command line, include the desired arguments as usual. The tool will then analyze the given classes and 
@@ -61,5 +80,3 @@ print out the data in a form usable by GraphViz. This output can either be given
 
 Sequence Diagram Generation:
 SequenceParser is the class that drives the application. If running through eclipse, change the run configuration to include a fully qualified method as an argument. The second argument is optional, and determines how deep the program will examine method calls. After running, the program will output code that can be entered directly into SDEdit.
-
-The system can be further extended by creating new classes to examine the class representation objects, after the java byte code has been analyzed. If additional information is needed, additional visitors can be added to the current implementation via the decorator pattern.

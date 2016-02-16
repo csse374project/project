@@ -1,14 +1,17 @@
-package umlDiagram;
+package classRepresentation.designPaterns;
 
 import java.io.IOException;
 
 import org.objectweb.asm.ClassReader;
 import org.objectweb.asm.ClassVisitor;
 import org.objectweb.asm.FieldVisitor;
+import org.objectweb.asm.MethodVisitor;
 import org.objectweb.asm.Opcodes;
 import org.objectweb.asm.Type;
 
 import classRepresentation.decorators.IClassDecorator;
+import classRepresentation.decorators.SingletonDecorator;
+import umlDiagram.UMLParser;
 
 public class SingletonFieldVisitor extends ClassVisitor {
 
@@ -31,6 +34,7 @@ public class SingletonFieldVisitor extends ClassVisitor {
 		}
 		return toDecorate;
 	}
+
 
 	private void lookForGetter() {
 		SingletonMethodVisitor visitor = new SingletonMethodVisitor(Opcodes.ASM5, currentClass);
