@@ -102,7 +102,11 @@ public class UMLParser {
 		return VisitorFactory.generateVisitors(this.inputPhases, topLevelDecorator);
 	}
 
-	private void detectPatterns() {
+	/**
+	 * Detects various design patterns in the class representation objects created by 
+	 * parseByteCode()
+	 */
+	public void detectPatterns() {
 		for (String pattern : inputPhases) {
 			DesignPatternDetector detector = detectors.get(pattern);
 			//Check for patterns that were not added
@@ -110,10 +114,13 @@ public class UMLParser {
 		}
 	}
 
-	private void createGraph() {
+	/**
+	 * Creates the string to pass into graphViz and generates the graph.
+	 */
+	public void createGraph() {
 		String digraph = this.classes.printGraphVizInput();
 		// Temp file to write digraph string to
-		Path path = Paths.get("temp.dot");
+		Path path = Paths.get("./input_output/temp.dot");
 		File f = path.toFile();
 		f.delete();
 
@@ -125,10 +132,10 @@ public class UMLParser {
 			e.printStackTrace();
 		}
 
-		ProcessBuilder pb = new ProcessBuilder(this.dotPath, "-Tpng", "temp.dot", "-o", "out.png");
+		ProcessBuilder pb = new ProcessBuilder(this.dotPath, "-Tpng", "temp.dot", "-o", ".\\input_output\\out.png");
 
 		try {
-			File log = new File("errorLog.txt");
+			File log = new File(".\\input_output\\errorLog.txt");
 			pb.redirectErrorStream(true);
 			pb.redirectOutput(Redirect.appendTo(log));
 			pb.start();

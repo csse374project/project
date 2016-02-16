@@ -1,0 +1,28 @@
+digraph UML {
+
+	node [
+		shape = "record"
+	]
+
+	AdapteeSample [
+		label = "{testingData/AdapteeSample||+ String getStuff()\l+ int getNumber()\l+ void doNothing()\l|}"
+		
+	]
+
+	edge [
+		arrowhead = "empty"
+	]
+
+	edge [
+		style = "dashed"
+	]
+
+	edge [
+		arrowhead = "normal" style = "solid"
+	]
+
+	edge [
+		arrowhead = "normal" style = "dashed"
+	]
+
+}
