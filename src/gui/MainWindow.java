@@ -7,7 +7,7 @@ import java.awt.event.ActionListener;
 import java.util.Arrays;
 
 import javax.swing.BoxLayout;
-import javax.swing.Icon;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -15,23 +15,29 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 
 @SuppressWarnings("serial")
-public class MainWindow extends JFrame {
+public class MainWindow {
+	
+	JFrame frame;
 
 	public MainWindow() {
-		super();
-		setup();
+		setupFrame();
 	}
 	
-	private void setup() {
-		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		this.setSize(1000, 1000);
+	public JFrame get() {
+		return frame;
+	}
+	
+	private void setupFrame() {
+		frame = new JFrame("name");
+		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frame.setSize(1000, 1000);
 		
-		this.add(getOptionPanel(), BorderLayout.WEST);
-		this.add(getImagePanel(), BorderLayout.EAST);
-		this.add(getReloadPanel(), BorderLayout.SOUTH);
+		frame.add(getOptionPanel(), BorderLayout.WEST);
+		frame.add(getImagePanel(), BorderLayout.EAST);
+		frame.add(getReloadPanel(), BorderLayout.SOUTH);
 		
 //		landingWindow.setVisible(false);
-		this.setVisible(true);
+		frame.setVisible(true);
 //		landingWindow.dispose();
 	}
 	
@@ -55,9 +61,10 @@ public class MainWindow extends JFrame {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-//				setup();
-				add(new JLabel("nope"), BorderLayout.WEST);
-				add(new JLabel("yes"), BorderLayout.EAST);
+				System.out.println("Reload button pressed");
+				frame.setVisible(false);
+				frame.dispose();
+				setupFrame();
 			}
 		});
 		panel.add(button);
@@ -65,8 +72,8 @@ public class MainWindow extends JFrame {
 	}
 	
 	private JScrollPane getImagePanel() {
-//		ImageIcon image = new ImageIcon("input_output/TolkienMiddleEarthMap2.jpg");
-		Icon image = new LoadingProxy("input_output/TolkienMiddleEarthMap2.jpg");
+		ImageIcon image = new ImageIcon("input_output/TolkienMiddleEarthMap2.jpg");
+//		Icon image = new LoadingProxy("input_output/TolkienMiddleEarthMap2.jpg");
 		
 		JScrollPane scrollPanel = new JScrollPane(new JLabel(image),
 				JScrollPane.VERTICAL_SCROLLBAR_ALWAYS, JScrollPane.HORIZONTAL_SCROLLBAR_ALWAYS);

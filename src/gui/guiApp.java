@@ -118,7 +118,8 @@ public class guiApp {
 	}
 	
 	private static void displayMainWindow() {
-		mainWindow = new MainWindow();
+		MainWindow window = new MainWindow();
+		mainWindow = window.get();
 		mainWindow.setTitle("Design Parser :: " + inputDirec);
 		mainWindow.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		mainWindow.setSize(1000, 1000);
