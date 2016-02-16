@@ -4,7 +4,9 @@ import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.IOException;
 import java.util.Arrays;
+import java.util.List;
 
 import javax.swing.BoxLayout;
 import javax.swing.ImageIcon;
@@ -14,11 +16,15 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 
+import umlDiagram.UMLParser;
+
 public class MainWindow {
 	
-	JFrame frame;
+	private JFrame frame;
+	private List<String> classArgs;
 
-	public MainWindow() {
+	public MainWindow(List<String> classArgs) {
+		this.classArgs = classArgs;
 		setupFrame();
 	}
 	
@@ -30,14 +36,26 @@ public class MainWindow {
 		frame = new JFrame("name");
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.setSize(1000, 1000);
-		
-		frame.add(getOptionPanel(), BorderLayout.WEST);
-		frame.add(getImagePanel(), BorderLayout.EAST);
-		frame.add(getReloadPanel(), BorderLayout.SOUTH);
-		
-//		landingWindow.setVisible(false);
+		try {
+			runUMLparser();
+			frame.add(getOptionPanel(), BorderLayout.WEST);
+			frame.add(getImagePanel(), BorderLayout.EAST);
+			frame.add(getReloadPanel(), BorderLayout.SOUTH);
+		} catch (IOException e) {
+			frame.add(getExceptionPanel());
+		}
 		frame.setVisible(true);
-//		landingWindow.dispose();
+	}
+	
+	private JPanel getExceptionPanel() {
+		JPanel panel = new JPanel();
+		panel.add(new JLabel("failed to load design :("));
+		return panel;
+	}
+	
+	private void runUMLparser() throws IOException {
+		UMLParser parser = new UMLParser(classArgs);
+		parser.parseByteCode();
 	}
 	
 	private JScrollPane getOptionPanel() {
