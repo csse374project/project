@@ -30,13 +30,13 @@ public class guiApp {
 	private static JFrame landingWindow, mainWindow;
 	private static String inputDirec, outputDirec, dotPath;
 	private static String[] targetClasses, designPatterns;
-	private static String[] phases;
+	private static String phases;
 	private static List<JCheckBox> checkBoxes;
  
 	public static void main(String[] args) {
-		displayLandingScreen();
-//		loadConfigFile(new File("input_output/config"));
-//		displayMainWindow();
+//		displayLandingScreen();
+		loadConfigFile(new File("input_output/config"));
+		displayMainWindow();
 	}
 	
 	private static void displayLandingScreen() {
@@ -109,21 +109,17 @@ public class guiApp {
 			e.printStackTrace();
 			return;
 		}
-		inputDirec = config.getProperty("inputDirec");
-		targetClasses = config.getProperty("targetClasses").split(" ");
-		designPatterns = config.getProperty("designPatterns").split(" ");
-		outputDirec = config.getProperty("outputDirec");
-		dotPath = config.getProperty("dotPath");
-		phases = config.getProperty("phases").split(" ");
+//		inputDirec = config.getProperty("inputDirec");
+//		targetClasses = config.getProperty("targetClasses").split(" ");
+//		designPatterns = config.getProperty("designPatterns").split(" ");
+//		outputDirec = config.getProperty("outputDirec");
+//		dotPath = config.getProperty("dotPath");
+//		phases = config.getProperty("phases");
 	}
 	
 	private static void displayMainWindow() {
-		System.out.print("target classes: ");
-		for (int i = 0; i < targetClasses.length; i++) {
-			System.out.print(targetClasses[i] + " ");
-		}
 		System.out.println();
-		MainWindow window = new MainWindow(Arrays.asList(targetClasses));
+		MainWindow window = new MainWindow(config);
 		mainWindow = window.get();
 		mainWindow.setTitle("Design Parser :: " + inputDirec);
 		mainWindow.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -132,8 +128,8 @@ public class guiApp {
 //		mainWindow.add(getOptionPanel(), BorderLayout.WEST);
 //		mainWindow.add(getImagePanel(), BorderLayout.EAST);
 		
-		landingWindow.setVisible(false);
+//		landingWindow.setVisible(false);
 		mainWindow.setVisible(true);
-		landingWindow.dispose();
+//		landingWindow.dispose();
 	}
 }

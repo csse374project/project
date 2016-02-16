@@ -7,6 +7,7 @@ import java.awt.event.ActionListener;
 import java.io.IOException;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Properties;
 
 import javax.swing.BoxLayout;
 import javax.swing.ImageIcon;
@@ -22,9 +23,13 @@ public class MainWindow {
 	
 	private JFrame frame;
 	private List<String> classArgs;
+	private String inputFolder, outputDirectory, dotPath;
 
-	public MainWindow(List<String> classArgs) {
-		this.classArgs = classArgs;
+	public MainWindow(Properties config) {
+		this.classArgs = Arrays.asList(config.getProperty("targetClasses").split(" "));
+		this.inputFolder = config.getProperty("inputFolder");
+		this.outputDirectory = config.getProperty("outputDirectory");
+		this.dotPath = config.getProperty("dotPath");
 		setupFrame();
 	}
 	
@@ -54,7 +59,7 @@ public class MainWindow {
 	}
 	
 	private void runUMLparser() throws IOException {
-		UMLParser parser = new UMLParser(classArgs);
+		UMLParser parser = new UMLParser(classArgs, inputFolder, outputDirectory, dotPath);
 		parser.parseByteCode();
 	}
 	
