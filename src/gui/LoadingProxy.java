@@ -3,6 +3,8 @@ package gui;
 import java.awt.Component;
 import java.awt.Graphics;
 import java.awt.MediaTracker;
+import java.io.File;
+import java.net.URL;
 
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
@@ -20,19 +22,27 @@ public class LoadingProxy implements Icon {
 
 	@Override
 	public void paintIcon(Component c, Graphics g, int x, int y) {
-		System.out.println("painticon entered");
-		//while (imageIcon == null || imageIcon.getImageLoadStatus() != MediaTracker.COMPLETE) {
-			System.out.println("paint icon LOOP");
+		if (imageIcon != null && imageIcon.getImageLoadStatus() == MediaTracker.COMPLETE) {
+			imageIcon.paintIcon(c, g, x, y);
+		}
+		else {
 			g.drawString("Reticulating splines...", x, y);
 			if (!retrieving) {
 				retrieving = true;
 
 				retrievalThread = new Thread(new Runnable() {
 					public void run() {
-						System.out.println("THREAD RUNING!!!!!!");
 						try {
-							while (imageIcon == null || imageIcon.getImageLoadStatus() != MediaTracker.COMPLETE) {
-								imageIcon = new ImageIcon(imagePath);
+							File imageFile = new File(imagePath);
+							URL imageURL = null;
+							if (imageFile.exists()) {
+								imageURL = imageFile.toURI().toURL();
+							}
+							if (imageURL != null) {
+								imageIcon = new ImageIcon(imageURL);
+							}
+							if (imageIcon == null) {
+								retrieving = false;
 							}
 						} catch (Exception e) {
 							e.printStackTrace();
@@ -40,28 +50,14 @@ public class LoadingProxy implements Icon {
 					}
 				});
 				retrievalThread.start();
-//				try {
-//					retrievalThread.start();
-//					retrievalThread.join();
-//				} catch (InterruptedException e) {
-//					// do nothing???
-//				}
-//				retrieving = false;
-			//}
-			c.repaint();
+			}
 //			try {
 //				Thread.sleep(100);
 //			} catch (InterruptedException e) {
 //				// do nothing
 //			}
 		}
-		
-//		System.out.println("imageIcon: " + imageIcon);
-//		System.out.printf("Aborted %d, Errored %d, Complete %d\n", 
-//				MediaTracker.ABORTED, MediaTracker.ERRORED, MediaTracker.COMPLETE);;
-//		System.out.println("load status: " + imageIcon.getImageLoadStatus());
-//		imageIcon.paintIcon(c,g,x,y);
-//		System.out.println("paint icon exited");
+		c.repaint();
 	}
 
 
