@@ -43,6 +43,7 @@ public class PatternViewsTree extends JPanel {
 		JPanel leftSide = new JPanel();
 		leftSide.setLayout(new GridLayout(height, 1));
 		topButton = new JCheckBox(designPattern);
+		topButton.setSelected(true);
 		leftSide.add(topButton);
 		topButton.addActionListener(new TopBoxActionListener());
 		this.add(leftSide, BorderLayout.WEST);
@@ -55,6 +56,7 @@ public class PatternViewsTree extends JPanel {
 		for (int i = 1; i < height; i++) {
 			String name = instances.get(i-1);
 			JCheckBox newButton = getCheckBox(name);
+			newButton.setSelected(true);
 			rightSide.add(newButton);
 			newButton.addActionListener(new BodyCheckBoxActionListener());
 			buttons.add(newButton);
