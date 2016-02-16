@@ -80,7 +80,7 @@ public class UMLParser {
 		this.detectors.put(name, detector);
 	}
 
-	private void parseByteCode() throws IOException {
+	public void parseByteCode() throws IOException {
 		for (String className : inputClasses) {
 			IClass currentClass = new UMLClass();
 			IClassDecorator topLevelDecorator = new TopLevelDecorator(currentClass);
