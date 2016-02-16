@@ -2,13 +2,13 @@ package gui;
 
 import java.awt.BorderLayout;
 import java.awt.Dimension;
-import java.awt.Window;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Properties;
 
@@ -22,8 +22,6 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
-import javax.swing.JTree;
-import javax.swing.tree.DefaultMutableTreeNode;
 
 public class guiApp {
 	
@@ -36,8 +34,8 @@ public class guiApp {
  
 	public static void main(String[] args) {
 //		displayLandingScreen();
-		loadConfigFile(new File("input_output/config"));
-		displayLandingScreen();
+//		loadConfigFile(new File("input_output/config"));
+		displayMainWindow();
 	}
 	
 	private static void displayLandingScreen() {
@@ -135,9 +133,9 @@ public class guiApp {
 		JPanel panel = new JPanel();
 
 		panel.setLayout(new BoxLayout(panel, BoxLayout.PAGE_AXIS));
-		panel.add(new PatternViewsTree());
-		panel.add(new PatternViewsTree());
-		panel.add(new PatternViewsTree());
+		panel.add(new PatternViewsTree("decorator", Arrays.asList(new String[]{"decorator1", "decorator2", "thing"})));
+		panel.add(new PatternViewsTree("singleton", Arrays.asList(new String[]{"Lonely", "SingleThing"})));
+		panel.add(new PatternViewsTree("adapter", Arrays.asList(new String[]{"AdapterToDecoratorAdapter"})));
 		JScrollPane scrollPanel = new JScrollPane(panel,
 				 JScrollPane.VERTICAL_SCROLLBAR_ALWAYS, JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
 		scrollPanel.setPreferredSize(new Dimension(300, 1000));
