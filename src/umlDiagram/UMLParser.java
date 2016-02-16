@@ -48,16 +48,16 @@ public class UMLParser {
 
 	private static String[] classesToAccept = new String[0];
 	@SuppressWarnings("unused") // Will be used once the UI gets farther along
-	private String inputFolder, outputDir, dotPath;
+	private String inputDir, outputDir, dotPath;
 	private Map<String, DesignPatternDetector> detectors;
 	private List<String> inputClasses, inputPhases;
 	private Classes classes;
 
-	public UMLParser(List<String> argClasses, String inputFolder, String outputDirectory, String dotPath,
+	public UMLParser(List<String> argClasses, String inputDir, String outputDirectory, String dotPath,
 			List<String> phases) {
 		classes = new Classes();
 		inputClasses = argClasses;
-		this.inputFolder = inputFolder;
+		this.inputDir = inputDir;
 		this.outputDir = outputDirectory;
 		this.dotPath = dotPath;
 		this.inputPhases = phases;
