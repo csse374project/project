@@ -1,4 +1,4 @@
-package umlDiagram;
+package classRepresentation.designPaterns;
 
 import java.io.IOException;
 
@@ -11,6 +11,7 @@ import org.objectweb.asm.Type;
 
 import classRepresentation.decorators.IClassDecorator;
 import classRepresentation.decorators.SingletonDecorator;
+import umlDiagram.UMLParser;
 
 public class SingletonFieldVisitor extends ClassVisitor {
 

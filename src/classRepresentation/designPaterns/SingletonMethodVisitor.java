@@ -1,4 +1,4 @@
-package umlDiagram;
+package classRepresentation.designPaterns;
 
 import org.objectweb.asm.ClassVisitor;
 import org.objectweb.asm.MethodVisitor;
@@ -6,6 +6,7 @@ import org.objectweb.asm.MethodVisitor;
 import classRepresentation.decorators.IClassDecorator;
 import classRepresentation.decorators.SingletonDecorator;
 import jdk.internal.org.objectweb.asm.Type;
+import umlDiagram.UMLParser;
 
 public class SingletonMethodVisitor extends ClassVisitor {
 

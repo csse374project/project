@@ -8,6 +8,7 @@ import org.objectweb.asm.Opcodes;
 import classRepresentation.decorators.IClassDecorator;
 import classRepresentation.designPaterns.AdapterClassVisitor;
 import classRepresentation.designPaterns.CompositeVisitor;
+import classRepresentation.designPaterns.SingletonFieldVisitor;
 
 public class VisitorFactory {
 	
