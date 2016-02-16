@@ -80,6 +80,11 @@ public class UMLParser {
 		this.detectors.put(name, detector);
 	}
 
+	/**
+	 * Parses the provided java classes and creates the class representation objects.
+	 * 
+	 * @throws IOException
+	 */
 	public void parseByteCode() throws IOException {
 		for (String className : inputClasses) {
 			IClass currentClass = new UMLClass();
