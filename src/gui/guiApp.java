@@ -31,6 +31,7 @@ public class guiApp {
 	private static String inputDirec, outputDirec, dotPath;
 	private static String[] targetClasses, designPatterns;
 	private static String[] phases;
+	private static String[] adapterSettings, compositeSettings, decoratorSettings, singletonSettings;
 	private static List<JCheckBox> checkBoxes;
  
 	public static void main(String[] args) {
@@ -115,6 +116,10 @@ public class guiApp {
 		outputDirec = config.getProperty("outputDirec");
 		dotPath = config.getProperty("dotPath");
 		phases = config.getProperty("phases").split(" ");
+		adapterSettings = config.getProperty("adapter").split(" ");
+		compositeSettings = config.getProperty("composite").split(" ");
+		decoratorSettings = config.getProperty("decorator").split(" ");
+		singletonSettings = config.getProperty("singleton").split(" ");
 	}
 	
 	private static void displayMainWindow() {

@@ -2,3 +2,10 @@ Error: dot: can't open temp.dot
 Error: dot: can't open temp.dot
 Error: temp.dot: syntax error in line 121 near 'java'
 Error: temp.dot: syntax error in line 121 near 'aintHeavyweightComponents'
+Error: temp.dot: syntax error in line 69 near '+'
+Error: temp.dot: syntax error in line 30 near '\'
+Error: temp.dot: syntax error in line 30 near '\'
+Error: temp.dot: syntax error in line 30 near '\'
+Error: temp.dot: syntax error in line 30 near '\'
+Error: temp.dot: syntax error in line 30 near '"'
+Error: temp.dot: syntax error in line 30 near '\'

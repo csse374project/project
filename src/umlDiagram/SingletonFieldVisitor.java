@@ -13,12 +13,20 @@ import classRepresentation.decorators.IClassDecorator;
 public class SingletonFieldVisitor extends ClassVisitor {
 
 	private IClassDecorator currentClass;
+	private String[] arguments;
 
 	public SingletonFieldVisitor(int opCode, ClassVisitor toDecorate, IClassDecorator currentClass) {
 		super(opCode, toDecorate);
 		this.currentClass = currentClass;
+		arguments = new String[0];
 	}
 
+	public SingletonFieldVisitor(int opCode, ClassVisitor toDecorate, IClassDecorator currentClass, String[] args) {
+		super(opCode, toDecorate);
+		this.currentClass = currentClass;
+		arguments = args;
+	}
+	
 	@Override
 	public FieldVisitor visitField(int access, String name, String desc, String signature, Object value) {
 		FieldVisitor toDecorate = super.visitField(access, name, desc, signature, value);
@@ -33,7 +41,7 @@ public class SingletonFieldVisitor extends ClassVisitor {
 	}
 
 	private void lookForGetter() {
-		SingletonMethodVisitor visitor = new SingletonMethodVisitor(Opcodes.ASM5, currentClass);
+		SingletonMethodVisitor visitor = new SingletonMethodVisitor(Opcodes.ASM5, currentClass, arguments);
 		ClassReader reader = null;
 		try {
 			reader = new ClassReader(currentClass.getName());

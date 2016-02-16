@@ -4,65 +4,51 @@ digraph UML {
 		shape = "record"
 	]
 
-	ISprite [
-		label = "{\<\<Composite Component\>\>\n\<\<Interface\>\>\nproblem/sprites/ISprite||+ void move(java.awt.Dimension)\l+ Shape getShape()\l+ Iterator iterator()\l|}"
+	SampleSingletonClass [
+		label = "{\<\<Singleton\>\>\ntestingData/SampleSingletonClass|- instance: testingData.SampleSingletonClass\l+ useless: testingData.SampleClassForInitializing\l|+ SampleSingletonClass getInstance()\l|}"
+		color=blue
+	]
+
+	edge [
+		arrowhead = "empty"
+	]
+
+	edge [
+		style = "dashed"
+	]
+
+	edge [
+		arrowhead = "normal" style = "solid"
+	]
+
+	SampleSingletonClass -> SampleSingletonClass
+
+	edge [
+		arrowhead = "normal" style = "dashed"
+	]
+
+}\l+ boolean isEnabled()\l+ void setEnabled(boolean)\l+ void enable()\l+ void enable(boolean)\l+ void disable()\l+ MenuShortcut getShortcut()\l+ void setShortcut(java.awt.MenuShortcut)\l+ void deleteShortcut()\l  void deleteShortcut(java.awt.MenuShortcut)\l  void doMenuEvent(long, int)\l- boolean isItemEnabled()\l  boolean handleShortcut(java.awt.event.KeyEvent)\l  MenuItem getShortcutMenuItem(java.awt.MenuShortcut)\l# void enableEvents(long)\l# void disableEvents(long)\l+ void setActionCommand(java.lang.String)\l+ String getActionCommand()\l  String getActionCommandImpl()\l+ void addActionListener(java.awt.event.ActionListener)\l+ void removeActionListener(java.awt.event.ActionListener)\l+ ActionListener[] getActionListeners()\l+ EventListener[] getListeners(java.lang.Class)\l# void processEvent(java.awt.AWTEvent)\l  boolean eventEnabled(java.awt.AWTEvent)\l# void processActionEvent(java.awt.event.ActionEvent)\l+ String paramString()\l- void writeObject(java.io.ObjectOutputStream)\l- void readObject(java.io.ObjectInputStream)\l- void initIDs()\l+ AccessibleContext getAccessibleContext()\l  MenuShortcut access$000(java.awt.MenuItem)\l  boolean access$100(java.awt.MenuItem)\l|}"
 		style=filled
 		fillcolor=yellow
 
 	]
 
-	AbstractSprite [
-		label = "{\<\<Leaf\>\>\nproblem/sprites/AbstractSprite|# dx: double\l# dy: double\l# shape: java.awt.Shape\l|# Rectangle2D computeNewBoundsAfterMoving(java.awt.Dimension)\l+ Shape getShape()\l+ void move(java.awt.Dimension)\l+ Iterator iterator()\l|}"
+	MenuComponent [
+		label = "{\<\<Composite Component\>\>\njava/awt/MenuComponent|  peer: java.awt.peer.MenuComponentPeer\l  parent: java.awt.MenuContainer\l  appContext: sun.awt.AppContext\l  font: java.awt.Font\l- name: java.lang.String\l- nameExplicitlySet: boolean\l  newEventsOnly: boolean\l- acc: java.security.AccessControlContext\l  actionListenerK: java.lang.String\l  itemListenerK: java.lang.String\l- serialVersionUID: long\l  accessibleContext: javax.accessibility.AccessibleContext\l|  AccessControlContext getAccessControlContext()\l  String constructComponentName()\l+ String getName()\l+ void setName(java.lang.String)\l+ MenuContainer getParent()\l  MenuContainer getParent_NoClientCode()\l+ MenuComponentPeer getPeer()\l+ Font getFont()\l  Font getFont_NoClientCode()\l+ void setFont(java.awt.Font)\l+ void removeNotify()\l+ boolean postEvent(java.awt.Event)\l+ void dispatchEvent(java.awt.AWTEvent)\l  void dispatchEventImpl(java.awt.AWTEvent)\l  boolean eventEnabled(java.awt.AWTEvent)\l# void processEvent(java.awt.AWTEvent)\l# String paramString()\l+ String toString()\l# Object getTreeLock()\l- void readObject(java.io.ObjectInputStream)\l- void initIDs()\l+ AccessibleContext getAccessibleContext()\l  int getAccessibleIndexInParent()\l  int getAccessibleChildIndex(java.awt.MenuComponent)\l  AccessibleStateSet getAccessibleStateSet()\l|}"
 		style=filled
 		fillcolor=yellow
 
 	]
 
-	SnowmanSprite [
-		label = "{\<\<Composite\>\>\nproblem/sprites/SnowmanSprite||+ void move(java.awt.Dimension)\l|}"
+	Menu [
+		label = "{\<\<Composite\>\>\njava/awt/Menu|  items: java.util.Vector[java/awt/MenuComponent]\l  tearOff: boolean\l  isHelpMenu: boolean\l- base: java.lang.String\l- nameCounter: int\l- serialVersionUID: long\l- menuSerializedDataVersion: int\l|  String constructComponentName()\l+ void addNotify()\l+ void removeNotify()\l+ boolean isTearOff()\l+ int getItemCount()\l+ int countItems()\l  int countItemsImpl()\l+ MenuItem getItem(int)\l  MenuItem getItemImpl(int)\l+ MenuItem add(java.awt.MenuItem)\l+ void add(java.lang.String)\l+ void insert(java.awt.MenuItem, int)\l+ void insert(java.lang.String, int)\l+ void addSeparator()\l+ void insertSeparator(int)\l+ void remove(int)\l+ void remove(java.awt.MenuComponent)\l+ void removeAll()\l  boolean handleShortcut(java.awt.event.KeyEvent)\l  MenuItem getShortcutMenuItem(java.awt.MenuShortcut)\l  Enumeration shortcuts()\l  void deleteShortcut(java.awt.MenuShortcut)\l- void writeObject(java.io.ObjectOutputStream)\l- void readObject(java.io.ObjectInputStream)\l+ String paramString()\l- void initIDs()\l+ AccessibleContext getAccessibleContext()\l  int getAccessibleChildIndex(java.awt.MenuComponent)\l|}"
 		style=filled
 		fillcolor=yellow
 
 	]
 
-	RectangleSprite [
-		label = "{\<\<Leaf\>\>\nproblem/sprites/RectangleSprite||+ void move(java.awt.Dimension)\l|}"
-		style=filled
-		fillcolor=yellow
-
-	]
-
-	SnowmanWithBoxSprite [
-		label = "{\<\<Composite\>\>\nproblem/sprites/SnowmanWithBoxSprite||+ void move(java.awt.Dimension)\l|}"
-		style=filled
-		fillcolor=yellow
-
-	]
-
-	MainWindow [
-		label = "{problem/graphics/MainWindow|- frame: javax.swing.JFrame\l- actionPanel: javax.swing.JPanel\l- animationPanel: problem.graphics.AnimationPanel\l- moveButton: javax.swing.JButton\l- createButton: javax.swing.JButton\l- resetButton: javax.swing.JButton\l|- void createWidgets(java.lang.String, long)\l- void assignActions()\l+ void show()\l  AnimationPanel access$0(problem.graphics.MainWindow)\l  JButton access$1(problem.graphics.MainWindow)\l  JButton access$2(problem.graphics.MainWindow)\l|}"
-		
-	]
-
-	CircleSprite [
-		label = "{\<\<Leaf\>\>\nproblem/sprites/CircleSprite||+ void move(java.awt.Dimension)\l|}"
-		style=filled
-		fillcolor=yellow
-
-	]
-
-	SpriteFactory [
-		label = "{problem/sprites/SpriteFactory|+ DX: double\l+ DY: double\l+ WIDTH: double\l+ HEIGHT: double\l- random: java.util.Random\l- sprites: java.util.List[java/lang/Class, problem/sprites/ISprite]\l|+ Point2D computeRandomLocation(java.awt.Dimension)\l+ ISprite createRandomSprite(java.awt.Dimension)\l|}"
-		
-	]
-
-	AnimationPanel [
-		label = "{problem/graphics/AnimationPanel|- serialVersionUID: long\l- sprites: java.util.List[problem/sprites/ISprite]\l- animating: boolean\l- sleepTime: long\l|+ void add(problem.sprites.ISprite)\l+ Dimension getSize()\l+ void animate()\l+ void reset()\l# void paintComponent(java.awt.Graphics)\l- void drawSprite(problem.sprites.ISprite, java.awt.Graphics2D)\l  boolean access$0(problem.graphics.AnimationPanel)\l  List access$1(problem.graphics.AnimationPanel)\l  long access$2(problem.graphics.AnimationPanel)\l|}"
-		
-	]
-
-	AbstractCompositeSprite [
-		label = "{\<\<Composite\>\>\nproblem/sprites/AbstractCompositeSprite|# dx: double\l# dy: double\l# shape: java.awt.Shape\l# children: java.util.List[problem/sprites/ISprite]\l|# Rectangle2D computeNewBoundsAfterMoving(java.awt.Dimension)\l+ Shape getShape()\l+ void move(java.awt.Dimension)\l+ Iterator iterator()\l|}"
+	MenuBar [
+		label = "{\<\<Composite\>\>\njava/awt/MenuBar|  menus: java.util.Vector[java/awt/Menu]\l  helpMenu: java.awt.Menu\l- base: java.lang.String\l- nameCounter: int\l- serialVersionUID: long\l- menuBarSerializedDataVersion: int\l|  String constructComponentName()\l+ void addNotify()\l+ void removeNotify()\l+ Menu getHelpMenu()\l+ void setHelpMenu(java.awt.Menu)\l+ Menu add(java.awt.Menu)\l+ void remove(int)\l+ void remove(java.awt.MenuComponent)\l+ int getMenuCount()\l+ int countMenus()\l  int getMenuCountImpl()\l+ Menu getMenu(int)\l  Menu getMenuImpl(int)\l+ Enumeration shortcuts()\l+ MenuItem getShortcutMenuItem(java.awt.MenuShortcut)\l  boolean handleShortcut(java.awt.event.KeyEvent)\l+ void deleteShortcut(java.awt.MenuShortcut)\l- void writeObject(java.io.ObjectOutputStream)\l- void readObject(java.io.ObjectInputStream)\l- void initIDs()\l+ AccessibleContext getAccessibleContext()\l  int getAccessibleChildIndex(java.awt.MenuComponent)\l|}"
 		style=filled
 		fillcolor=yellow
 
@@ -72,53 +58,37 @@ digraph UML {
 		arrowhead = "empty"
 	]
 
-	SnowmanSprite -> AbstractCompositeSprite
+	MenuItem -> MenuComponent
 
-	RectangleSprite -> AbstractSprite
+	Menu -> MenuItem
 
-	SnowmanWithBoxSprite -> AbstractCompositeSprite
-
-	CircleSprite -> AbstractSprite
+	MenuBar -> MenuComponent
 
 	edge [
 		style = "dashed"
 	]
 
-	AbstractSprite -> ISprite
-
-	AbstractCompositeSprite -> ISprite
-
 	edge [
 		arrowhead = "normal" style = "solid"
 	]
 
-	MainWindow -> AnimationPanel
+	Menu -> MenuComponent
 
-	SpriteFactory -> ISprite
-
-	AnimationPanel -> ISprite
-
-	AbstractCompositeSprite -> ISprite
+	MenuBar -> Menu
 
 	edge [
 		arrowhead = "normal" style = "dashed"
 	]
 
-	AbstractSprite -> ISprite
+	MenuItem -> Menu
 
-	SnowmanSprite -> CircleSprite
+	Menu -> MenuItem
 
-	SnowmanSprite -> ISprite
+	MenuBar -> MenuComponent
 
-	SnowmanWithBoxSprite -> RectangleSprite
+	MenuBar -> MenuItem
 
-	SnowmanWithBoxSprite -> SnowmanSprite
-
-	SnowmanWithBoxSprite -> ISprite
-
-	AnimationPanel -> AbstractCompositeSprite
-
-}aintHeavyweightComponents(java.awt.Graphics)\l+ void printComponents(java.awt.Graphics)\l  void lightweightPrint(java.awt.Graphics)\l  void printHeavyweightComponents(java.awt.Graphics)\l+ void addContainerListener(java.awt.event.ContainerListener)\l+ void removeContainerListener(java.awt.event.ContainerListener)\l+ ContainerListener[] getContainerListeners()\l+ EventListener[] getListeners(java.lang.Class)\l  boolean eventEnabled(java.awt.AWTEvent)\l# void processEvent(java.awt.AWTEvent)\l# void processContainerEvent(java.awt.event.ContainerEvent)\l  void dispatchEventImpl(java.awt.AWTEvent)\l  void dispatchEventToSelf(java.awt.AWTEvent)\l  Component getMouseEventTarget(int, int, boolean)\l  Component getDropTargetEventTarget(int, int, boolean)\l- Component getMouseEventTarget(int, int, boolean, java.awt.Container$EventTargetFilter, boolean)\l- Component getMouseEventTargetImpl(int, int, boolean, java.awt.Container$EventTargetFilter, boolean, boolean)\l  void proxyEnableEvents(long)\l+ void deliverEvent(java.awt.Event)\l+ Component getComponentAt(int, int)\l+ Component locate(int, int)\l+ Component getComponentAt(java.awt.Point)\l+ Point getMousePosition(boolean)\l  boolean isSameOrAncestorOf(java.awt.Component, boolean)\l+ Component findComponentAt(int, int)\l  Component findComponentAt(int, int, boolean)\l  Component findComponentAtImpl(int, int, boolean)\l- Component getChildAt(java.awt.Component, int, int, boolean)\l+ Component findComponentAt(java.awt.Point)\l+ void addNotify()\l+ void removeNotify()\l+ boolean isAncestorOf(java.awt.Component)\l- void startLWModal()\l- void stopLWModal()\l# String paramString()\l+ void list(java.io.PrintStream, int)\l+ void list(java.io.PrintWriter, int)\l+ void setFocusTraversalKeys(int, java.util.Set)\l+ Set getFocusTraversalKeys(int)\l+ boolean areFocusTraversalKeysSet(int)\l+ boolean isFocusCycleRoot(java.awt.Container)\l- Container findTraversalRoot()\l  boolean containsFocus()\l- boolean isParentOf(java.awt.Component)\l  void clearMostRecentFocusOwnerOnHide()\l  void clearCurrentFocusCycleRootOnHide()\l  Container getTraversalRoot()\l+ void setFocusTraversalPolicy(java.awt.FocusTraversalPolicy)\l+ FocusTraversalPolicy getFocusTraversalPolicy()\l+ boolean isFocusTraversalPolicySet()\l+ void setFocusCycleRoot(boolean)\l+ boolean isFocusCycleRoot()\l+ void setFocusTraversalPolicyProvider(boolean)\l+ boolean isFocusTraversalPolicyProvider()\l+ void transferFocusDownCycle()\l  void preProcessKeyEvent(java.awt.event.KeyEvent)\l  void postProcessKeyEvent(java.awt.event.KeyEvent)\l  boolean postsOldMouseEvents()\l+ void applyComponentOrientation(java.awt.ComponentOrientation)\l+ void addPropertyChangeListener(java.beans.PropertyChangeListener)\l+ void addPropertyChangeListener(java.lang.String, java.beans.PropertyChangeListener)\l- void writeObject(java.io.ObjectOutputStream)\l- void readObject(java.io.ObjectInputStream)\l  Accessible getAccessibleAt(java.awt.Point)\l  int getAccessibleChildrenCount()\l  Accessible getAccessibleChild(int)\l  void increaseComponentCount(java.awt.Component)\l  void decreaseComponentCount(java.awt.Component)\l- int getTopmostComponentIndex()\l- int getBottommostComponentIndex()\l  Region getOpaqueShape()\l  void recursiveSubtractAndApplyShape(sun.java2d.pipe.Region)\l  void recursiveSubtractAndApplyShape(sun.java2d.pipe.Region, int)\l  void recursiveSubtractAndApplyShape(sun.java2d.pipe.Region, int, int)\l  void recursiveApplyCurrentShape()\l  void recursiveApplyCurrentShape(int)\l  void recursiveApplyCurrentShape(int, int)\l- void recursiveShowHeavyweightChildren()\l- void recursiveHideHeavyweightChildren()\l- void recursiveRelocateHeavyweightChildren(java.awt.Point)\l  boolean isRecursivelyVisibleUpToHeavyweightContainer()\l  void mixOnShowing()\l  void mixOnHiding(boolean)\l  void mixOnReshaping()\l  void mixOnZOrderChanging(int, int)\l  void mixOnValidating()\l|}"
+}+ boolean isFocusCycleRoot(java.awt.Container)\l- Container findTraversalRoot()\l  boolean containsFocus()\l- boolean isParentOf(java.awt.Component)\l  void clearMostRecentFocusOwnerOnHide()\l  void clearCurrentFocusCycleRootOnHide()\l  Container getTraversalRoot()\l+ void setFocusTraversalPolicy(java.awt.FocusTraversalPolicy)\l+ FocusTraversalPolicy getFocusTraversalPolicy()\l+ boolean isFocusTraversalPolicySet()\l+ void setFocusCycleRoot(boolean)\l+ boolean isFocusCycleRoot()\l+ void setFocusTraversalPolicyProvider(boolean)\l+ boolean isFocusTraversalPolicyProvider()\l+ void transferFocusDownCycle()\l  void preProcessKeyEvent(java.awt.event.KeyEvent)\l  void postProcessKeyEvent(java.awt.event.KeyEvent)\l  boolean postsOldMouseEvents()\l+ void applyComponentOrientation(java.awt.ComponentOrientation)\l+ void addPropertyChangeListener(java.beans.PropertyChangeListener)\l+ void addPropertyChangeListener(java.lang.String, java.beans.PropertyChangeListener)\l- void writeObject(java.io.ObjectOutputStream)\l- void readObject(java.io.ObjectInputStream)\l  Accessible getAccessibleAt(java.awt.Point)\l  int getAccessibleChildrenCount()\l  Accessible getAccessibleChild(int)\l  void increaseComponentCount(java.awt.Component)\l  void decreaseComponentCount(java.awt.Component)\l- int getTopmostComponentIndex()\l- int getBottommostComponentIndex()\l  Region getOpaqueShape()\l  void recursiveSubtractAndApplyShape(sun.java2d.pipe.Region)\l  void recursiveSubtractAndApplyShape(sun.java2d.pipe.Region, int)\l  void recursiveSubtractAndApplyShape(sun.java2d.pipe.Region, int, int)\l  void recursiveApplyCurrentShape()\l  void recursiveApplyCurrentShape(int)\l  void recursiveApplyCurrentShape(int, int)\l- void recursiveShowHeavyweightChildren()\l- void recursiveHideHeavyweightChildren()\l- void recursiveRelocateHeavyweightChildren(java.awt.Point)\l  boolean isRecursivelyVisibleUpToHeavyweightContainer()\l  void mixOnShowing()\l  void mixOnHiding(boolean)\l  void mixOnReshaping()\l  void mixOnZOrderChanging(int, int)\l  void mixOnValidating()\l|}"
 		style=filled
 		fillcolor=yellow
 
