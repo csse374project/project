@@ -39,7 +39,7 @@ public class UMLParser {
 		phases.add("Singleton");
 		phases.add("Adapter");
 		phases.add("Composite");
-		UMLParser parser = new UMLParser(Arrays.asList(args), "", "",
+		UMLParser parser = new UMLParser(Arrays.asList(args), "", ".\\input_output",
 				"C:\\Program Files (x86)\\Graphviz2.38\\bin\\dot.exe", phases);
 		parser.parseByteCode();
 		parser.detectPatterns();
@@ -120,7 +120,8 @@ public class UMLParser {
 	public void createGraph() {
 		String digraph = this.classes.printGraphVizInput();
 		// Temp file to write digraph string to
-		Path path = Paths.get("./input_output/temp.dot");
+		String tempPath = this.outputDir + "\\temp.dot";
+		Path path = Paths.get(tempPath);
 		File f = path.toFile();
 		f.delete();
 
@@ -132,10 +133,12 @@ public class UMLParser {
 			e.printStackTrace();
 		}
 
-		ProcessBuilder pb = new ProcessBuilder(this.dotPath, "-Tpng", "temp.dot", "-o", ".\\input_output\\out.png");
+		String outPath = this.outputDir + "\\out.png";
+		ProcessBuilder pb = new ProcessBuilder(this.dotPath, "-Tpng", tempPath, "-o", outPath);
 
 		try {
-			File log = new File(".\\input_output\\errorLog.txt");
+			String logPath = this.outputDir + "\\errorLog.txt";
+			File log = new File(logPath);
 			pb.redirectErrorStream(true);
 			pb.redirectOutput(Redirect.appendTo(log));
 			pb.start();
