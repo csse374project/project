@@ -2,10 +2,10 @@
 This tool analyzes java code and generates a UML diagram. It detects and draws all classes complete with their fields and methods. It also draws arrows for inheritance from other classes, implementation of interfaces, other used classes, and other associated classes. The Singleton and Decorator design patterns are also detected and notated.  
 
 #Design:
-Milestone 7:
+##Milestone 7:
 In order to facilitate parsing patterns, the UMLParser class was changed to a concrete class. It was previously a class consisting only of static methods. Now, it manages the diagram generation and stores variables relevant to its administration. This object can now be created from the UI and used to interact with the visitors and PatternDetectors.
 
-Milestone 6:
+##Milestone 6:
 No design changes have been made since milestone 5.
 
 Milestone 5:
@@ -24,6 +24,11 @@ Milestone 1:
 The tool expands upon the ASM class visitors discussed in class. The method visitor decorates the field visitor, which decorates the declaration visitor. As each class is visited, data container objects are created to store the required information about the class, its fields, and its methods. After the method has been visited by all of the visitors, its data is stored before moving onto the next argument. After all of the arguments have been examined, each of the created data containers is parsed into a form usable by GraphViz.
 
 #Responsibilities: 
+Milestone 7:
+Jesse Shellabarger - Updated back end code to facilitate adding of a UI and use of phases.
+Nate Briggs - Made a proxy to display a loading message (in progress).
+Thomas Bonatti - Created UI to run the projects back end.
+
 Milestone 6:
 Jesse Shellabarger - Designed Composite detection with Thomas. Implemented composite detection. Updated with required pictures and documentation.
 Nate Briggs - Found composite examples in awt and swing. Helped to implement composite detection.
