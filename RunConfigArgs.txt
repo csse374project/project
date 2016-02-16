@@ -29,6 +29,8 @@ classRepresentation.designPaterns.CompositeDetector
 classRepresentation.designPaterns.DecoratorDetector
 classRepresentation.designPaterns.MutableBoolean
 classRepresentation.designPaterns.CompositeDetector
+classRepresentation.designPaterns.SingletonFieldVisitor
+classRepresentation.designPaterns.SingletonMethodVisitor
 
 interfaces.IClass
 interfaces.IField
@@ -43,6 +45,4 @@ umlDiagram.ClassFieldVisitor
 umlDiagram.ClassMethodVisitor
 umlDiagram.MethodCodeVisitor
 umlDiagram.MethodDeclarationVisitor
-umlDiagram.SingletonFieldVisitor
-umlDiagram.SingletonMethodVisitor
 umlDiagram.UMLParser
