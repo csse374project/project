@@ -14,7 +14,6 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 
-@SuppressWarnings("serial")
 public class MainWindow {
 	
 	JFrame frame;
