@@ -22,10 +22,10 @@ import classRepresentation.Classes;
 import classRepresentation.UMLClass;
 import classRepresentation.decorators.IClassDecorator;
 import classRepresentation.decorators.TopLevelDecorator;
-import classRepresentation.designPaterns.AdapterDetector;
-import classRepresentation.designPaterns.CompositeDetector;
-import classRepresentation.designPaterns.DecoratorDetector;
-import classRepresentation.designPaterns.DesignPatternDetector;
+import classRepresentation.designPatterns.AdapterDetector;
+import classRepresentation.designPatterns.CompositeDetector;
+import classRepresentation.designPatterns.DecoratorDetector;
+import classRepresentation.designPatterns.DesignPatternDetector;
 import interfaces.IClass;
 
 public class UMLParser {

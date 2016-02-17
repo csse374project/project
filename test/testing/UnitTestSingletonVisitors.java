@@ -14,7 +14,7 @@ import classRepresentation.UMLClass;
 import classRepresentation.decorators.IClassDecorator;
 import classRepresentation.decorators.SingletonDecorator;
 import classRepresentation.decorators.TopLevelDecorator;
-import classRepresentation.designPaterns.SingletonFieldVisitor;
+import classRepresentation.designPatterns.SingletonFieldVisitor;
 import interfaces.IClass;
 import umlDiagram.ClassDeclarationVisitor;
 

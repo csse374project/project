@@ -1,4 +1,4 @@
-package classRepresentation.designPaterns;
+package classRepresentation.designPatterns;
 
 import java.util.Arrays;
 import java.util.List;
