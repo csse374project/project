@@ -4,118 +4,59 @@ digraph UML {
 		shape = "record"
 	]
 
-	ISprite [
-		label = "{\<\<Composite Component\>\>\n\<\<Interface\>\>\nproblem/sprites/ISprite||+ void move(java.awt.Dimension)\l+ Shape getShape()\l+ Iterator iterator()\l|}"
+	AdapterSample [
+		label = "{\<\<Adapter\>\>\ntestingData/AdapterSample|- adaptee: testingData.AdapteeSample\l|+ void methodOfThings()\l+ void methodOfStuff()\l+ int testMePlease()\l|}"
 		style=filled
-		fillcolor=yellow
+		fillcolor=red
 
 	]
 
-	AbstractSprite [
-		label = "{\<\<Leaf\>\>\nproblem/sprites/AbstractSprite|# dx: double\l# dy: double\l# shape: java.awt.Shape\l|# Rectangle2D computeNewBoundsAfterMoving(java.awt.Dimension)\l+ Shape getShape()\l+ void move(java.awt.Dimension)\l+ Iterator iterator()\l|}"
-		style=filled
-		fillcolor=yellow
+	AdapterSample -> AdapteeSample [label = "\<\<adapts\>\>"]
 
+	edge [
+		arrowhead = "empty" style = "dashed"
+	]
+	AdapterSample -> AdapterTargetSample	ChocolateBoilerLazy [
+		label = "{\<\<Singleton\>\>\ntestingData/ChocolateBoilerLazy|- empty: boolean\l- boiled: boolean\l- uniqueInstance: testingData.ChocolateBoilerLazy\l|+ ChocolateBoilerLazy getInstance()\l+ void fill()\l+ void drain()\l+ void boil()\l+ boolean isEmpty()\l+ boolean isBoiled()\l|}"
+		color=blue
 	]
 
-	SnowmanSprite [
-		label = "{\<\<Composite\>\>\nproblem/sprites/SnowmanSprite||+ void move(java.awt.Dimension)\l|}"
-		style=filled
-		fillcolor=yellow
-
-	]
-
-	RectangleSprite [
-		label = "{\<\<Leaf\>\>\nproblem/sprites/RectangleSprite||+ void move(java.awt.Dimension)\l|}"
-		style=filled
-		fillcolor=yellow
-
-	]
-
-	SnowmanWithBoxSprite [
-		label = "{\<\<Composite\>\>\nproblem/sprites/SnowmanWithBoxSprite||+ void move(java.awt.Dimension)\l|}"
-		style=filled
-		fillcolor=yellow
-
-	]
-
-	MainWindow [
-		label = "{problem/graphics/MainWindow|- frame: javax.swing.JFrame\l- actionPanel: javax.swing.JPanel\l- animationPanel: problem.graphics.AnimationPanel\l- moveButton: javax.swing.JButton\l- createButton: javax.swing.JButton\l- resetButton: javax.swing.JButton\l|- void createWidgets(java.lang.String, long)\l- void assignActions()\l+ void show()\l  AnimationPanel access$0(problem.graphics.MainWindow)\l  JButton access$1(problem.graphics.MainWindow)\l  JButton access$2(problem.graphics.MainWindow)\l|}"
+	SampleInterface01 [
+		label = "{\<\<Interface\>\>\ntestingData/SampleInterface01|||}"
 		
 	]
 
-	CircleSprite [
-		label = "{\<\<Leaf\>\>\nproblem/sprites/CircleSprite||+ void move(java.awt.Dimension)\l|}"
+	AdapteeSample [
+		label = "{\<\<Adaptee\>\>\ntestingData/AdapteeSample||+ String getStuff()\l+ int getNumber()\l+ void doNothing()\l|}"
 		style=filled
-		fillcolor=yellow
+		fillcolor=red
 
 	]
 
-	SpriteFactory [
-		label = "{problem/sprites/SpriteFactory|+ DX: double\l+ DY: double\l+ WIDTH: double\l+ HEIGHT: double\l- random: java.util.Random\l- sprites: java.util.List[java/lang/Class, problem/sprites/ISprite]\l|+ Point2D computeRandomLocation(java.awt.Dimension)\l+ ISprite createRandomSprite(java.awt.Dimension)\l|}"
+	SampleInterface02 [
+		label = "{\<\<Interface\>\>\ntestingData/SampleInterface02|||}"
 		
 	]
 
-	AnimationPanel [
-		label = "{problem/graphics/AnimationPanel|- serialVersionUID: long\l- sprites: java.util.List[problem/sprites/ISprite]\l- animating: boolean\l- sleepTime: long\l|+ void add(problem.sprites.ISprite)\l+ Dimension getSize()\l+ void animate()\l+ void reset()\l# void paintComponent(java.awt.Graphics)\l- void drawSprite(problem.sprites.ISprite, java.awt.Graphics2D)\l  boolean access$0(problem.graphics.AnimationPanel)\l  List access$1(problem.graphics.AnimationPanel)\l  long access$2(problem.graphics.AnimationPanel)\l|}"
-		
-	]
-
-	AbstractCompositeSprite [
-		label = "{\<\<Composite\>\>\nproblem/sprites/AbstractCompositeSprite|# dx: double\l# dy: double\l# shape: java.awt.Shape\l# children: java.util.List[problem/sprites/ISprite]\l|# Rectangle2D computeNewBoundsAfterMoving(java.awt.Dimension)\l+ Shape getShape()\l+ void move(java.awt.Dimension)\l+ Iterator iterator()\l|}"
-		style=filled
-		fillcolor=yellow
-
+	ChocolateBoilerEager [
+		label = "{\<\<Singleton\>\>\ntestingData/ChocolateBoilerEager|- empty: boolean\l- boiled: boolean\l- uniqueInstance: testingData.ChocolateBoilerEager\l|+ ChocolateBoilerEager getInstance()\l+ void fill()\l+ void drain()\l+ void boil()\l+ boolean isEmpty()\l+ boolean isBoiled()\l|}"
+		color=blue
 	]
 
 	edge [
 		arrowhead = "empty"
 	]
 
-	SnowmanSprite -> AbstractCompositeSprite
-
-	RectangleSprite -> AbstractSprite
-
-	SnowmanWithBoxSprite -> AbstractCompositeSprite
-
-	CircleSprite -> AbstractSprite
-
 	edge [
 		style = "dashed"
 	]
-
-	AbstractSprite -> ISprite
-
-	AbstractCompositeSprite -> ISprite
 
 	edge [
 		arrowhead = "normal" style = "solid"
 	]
 
-	MainWindow -> AnimationPanel
-
-	SpriteFactory -> ISprite
-
-	AnimationPanel -> ISprite
-
-	AbstractCompositeSprite -> ISprite
-
 	edge [
 		arrowhead = "normal" style = "dashed"
 	]
-
-	AbstractSprite -> ISprite
-
-	SnowmanSprite -> CircleSprite
-
-	SnowmanSprite -> ISprite
-
-	SnowmanWithBoxSprite -> RectangleSprite
-
-	SnowmanWithBoxSprite -> SnowmanSprite
-
-	SnowmanWithBoxSprite -> ISprite
-
-	AnimationPanel -> AbstractCompositeSprite
 
 }
