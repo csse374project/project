@@ -9,6 +9,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.StandardOpenOption;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.LinkedList;
@@ -26,6 +27,7 @@ import classRepresentation.designPatterns.AdapterDetector;
 import classRepresentation.designPatterns.CompositeDetector;
 import classRepresentation.designPatterns.DecoratorDetector;
 import classRepresentation.designPatterns.DesignPatternDetector;
+import gui.DesignPatternInstance;
 import interfaces.IClass;
 
 public class UMLParser {
@@ -54,6 +56,7 @@ public class UMLParser {
 	private Map<String, String[]> phaseAttributes;
 	private List<String> inputClasses, inputPhases;
 	private Classes classes;
+	private List<DesignPatternInstance> designPatternInstances;
 
 	public UMLParser(List<String> argClasses, String inputFolder, String outputDirectory, String dotPath,
 			List<String> phases, Map<String, String[]> phaseAttributes) {
@@ -64,6 +67,7 @@ public class UMLParser {
 		this.dotPath = dotPath;
 		this.inputPhases = phases;
 		this.outputType = "-Tpng";
+		this.designPatternInstances = new ArrayList<DesignPatternInstance>();
 		
 		this.detectors = new HashMap<String, DesignPatternDetector>();
 		detectors.put("Decorator", new DecoratorDetector(this.classes));
@@ -71,6 +75,10 @@ public class UMLParser {
 		detectors.put("Composite", new CompositeDetector(this.classes));
 		
 		this.phaseAttributes = phaseAttributes;
+	}
+	
+	public List<DesignPatternInstance> getDesignPatternInstances() {
+		return this.designPatternInstances;
 	}
 
 	/**
@@ -104,7 +112,7 @@ public class UMLParser {
 			IClassDecorator topLevelDecorator = new TopLevelDecorator(currentClass);
 			ClassReader reader = new ClassReader(className);
 
-			ClassVisitor visitor = VisitorFactory.generateVisitors(this.inputPhases, topLevelDecorator, this.phaseAttributes);
+			ClassVisitor visitor = VisitorFactory.generateVisitors(this.inputPhases, topLevelDecorator, this.phaseAttributes, this.designPatternInstances);
 
 			reader.accept(visitor, ClassReader.EXPAND_FRAMES);
 			classes.addClass(topLevelDecorator);

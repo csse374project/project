@@ -10,6 +10,7 @@ import classRepresentation.decorators.IClassDecorator;
 import classRepresentation.designPatterns.AdapterClassVisitor;
 import classRepresentation.designPatterns.CompositeVisitor;
 import classRepresentation.designPatterns.SingletonFieldVisitor;
+import gui.DesignPatternInstance;
 
 public class VisitorFactory {
 
@@ -24,7 +25,7 @@ public class VisitorFactory {
 	 * @return The decorated visitor
 	 */
 	public static ClassVisitor generateVisitors(List<String> patternDetectors, IClassDecorator topLevelDecorator,
-			Map<String, String[]> phaseAttributes) {
+			Map<String, String[]> phaseAttributes, List<DesignPatternInstance> designPatternInstances) {
 		// Base visitors that are always required.
 		ClassVisitor declVisitor = new ClassDeclarationVisitor(Opcodes.ASM5, topLevelDecorator);
 		ClassVisitor fieldVisitor = new ClassFieldVisitor(Opcodes.ASM5, declVisitor, topLevelDecorator);
@@ -35,7 +36,7 @@ public class VisitorFactory {
 		for (String phase : patternDetectors) {
 			if (phase.equals("Singleton")) {
 				finalVisitor = new SingletonFieldVisitor(Opcodes.ASM5, finalVisitor, topLevelDecorator,
-						phaseAttributes.get("Singleton"));
+						phaseAttributes.get("Singleton"), designPatternInstances);
 			} else if (phase.equals("Adapter")) {
 				finalVisitor = new AdapterClassVisitor(Opcodes.ASM5, finalVisitor, topLevelDecorator);
 			} else if (phase.equals("Composite")) {

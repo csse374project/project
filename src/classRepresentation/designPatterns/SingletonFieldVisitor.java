@@ -1,6 +1,7 @@
 package classRepresentation.designPatterns;
 
 import java.io.IOException;
+import java.util.List;
 
 import org.objectweb.asm.ClassReader;
 import org.objectweb.asm.ClassVisitor;
@@ -11,23 +12,20 @@ import org.objectweb.asm.Type;
 
 import classRepresentation.decorators.IClassDecorator;
 import classRepresentation.decorators.SingletonDecorator;
+import gui.DesignPatternInstance;
 import umlDiagram.UMLParser;
 
 public class SingletonFieldVisitor extends ClassVisitor {
 
 	private IClassDecorator currentClass;
 	private String[] arguments;
+	private List<DesignPatternInstance> designPatternInstances;
 
-	public SingletonFieldVisitor(int opCode, ClassVisitor toDecorate, IClassDecorator currentClass) {
-		super(opCode, toDecorate);
-		this.currentClass = currentClass;
-		arguments = new String[0];
-	}
-
-	public SingletonFieldVisitor(int opCode, ClassVisitor toDecorate, IClassDecorator currentClass, String[] args) {
+	public SingletonFieldVisitor(int opCode, ClassVisitor toDecorate, IClassDecorator currentClass, String[] args, List<DesignPatternInstance> designPatternInstances) {
 		super(opCode, toDecorate);
 		this.currentClass = currentClass;
 		arguments = args;
+		this.designPatternInstances = designPatternInstances;
 	}
 	
 	@Override
@@ -45,7 +43,7 @@ public class SingletonFieldVisitor extends ClassVisitor {
 
 
 	private void lookForGetter() {
-		SingletonMethodVisitor visitor = new SingletonMethodVisitor(Opcodes.ASM5, currentClass, arguments);
+		SingletonMethodVisitor visitor = new SingletonMethodVisitor(Opcodes.ASM5, currentClass, arguments, this.designPatternInstances);
 		ClassReader reader = null;
 		try {
 			reader = new ClassReader(currentClass.getName());
