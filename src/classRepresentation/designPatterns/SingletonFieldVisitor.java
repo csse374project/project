@@ -28,6 +28,13 @@ public class SingletonFieldVisitor extends ClassVisitor {
 		this.designPatternInstances = designPatternInstances;
 	}
 	
+	public SingletonFieldVisitor(int opCode, ClassVisitor toDecorate, IClassDecorator currentClass, List<DesignPatternInstance> designPatternInstances) {
+		super(opCode, toDecorate);
+		this.arguments = new String[0];
+		this.currentClass = currentClass;
+		this.designPatternInstances = designPatternInstances;
+	}
+	
 	@Override
 	public FieldVisitor visitField(int access, String name, String desc, String signature, Object value) {
 		FieldVisitor toDecorate = super.visitField(access, name, desc, signature, value);

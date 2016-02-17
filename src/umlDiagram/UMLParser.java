@@ -48,6 +48,11 @@ public class UMLParser {
 		parser.parseByteCode();
 		parser.detectPatterns();
 		parser.createGraph();
+		
+		//Testing purposes. Remove later. Singletons are detected!
+		for(DesignPatternInstance instance : parser.getDesignPatternInstances()){
+			System.out.println(instance.getDesignPattern());
+		}
 	}
 
 	private static String[] classesToAccept = new String[0];

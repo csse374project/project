@@ -1,9 +1,12 @@
 package testing;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
 
 import java.io.IOException;
 import java.lang.reflect.Field;
+import java.util.ArrayList;
+import java.util.List;
 
 import org.junit.Test;
 import org.objectweb.asm.ClassReader;
@@ -15,6 +18,7 @@ import classRepresentation.decorators.IClassDecorator;
 import classRepresentation.decorators.SingletonDecorator;
 import classRepresentation.decorators.TopLevelDecorator;
 import classRepresentation.designPatterns.SingletonFieldVisitor;
+import gui.DesignPatternInstance;
 import interfaces.IClass;
 import umlDiagram.ClassDeclarationVisitor;
 
@@ -23,13 +27,14 @@ public class UnitTestSingletonVisitors {
 //	private static String className = "java.lang.String";
 	private IClass currentClass;
 	private TopLevelDecorator topDecorator;
+	private List<DesignPatternInstance> instances = new ArrayList<DesignPatternInstance>();
 	
 	public void setup(String className) throws IOException {
 		currentClass = new UMLClass();
 		topDecorator = new TopLevelDecorator(currentClass);
 		ClassReader reader = new ClassReader(className);
 		ClassVisitor vis1 = new ClassDeclarationVisitor(Opcodes.ASM5, topDecorator);
-		ClassVisitor vis2 = new SingletonFieldVisitor(Opcodes.ASM5, vis1, topDecorator);
+		ClassVisitor vis2 = new SingletonFieldVisitor(Opcodes.ASM5, vis1, topDecorator, instances);
 		reader.accept(vis2, ClassReader.EXPAND_FRAMES);
 	}
 	
@@ -38,7 +43,7 @@ public class UnitTestSingletonVisitors {
 		topDecorator = new TopLevelDecorator(currentClass);
 		ClassReader reader = new ClassReader(className);
 		ClassVisitor vis1 = new ClassDeclarationVisitor(Opcodes.ASM5, topDecorator);
-		ClassVisitor vis2 = new SingletonFieldVisitor(Opcodes.ASM5, vis1, topDecorator, arguments);
+		ClassVisitor vis2 = new SingletonFieldVisitor(Opcodes.ASM5, vis1, topDecorator, arguments, instances);
 		reader.accept(vis2, ClassReader.EXPAND_FRAMES);
 	}
 	
