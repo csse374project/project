@@ -69,7 +69,7 @@ public class UnitTestDecoratorDetector {
 		classes.addClass(singleton);
 
 		DesignPatternDetector detector = new DecoratorDetector(classes);
-		detector.detectPattern();
+		detector.detectPattern(new String[]{});
 	}
 
 	@Test

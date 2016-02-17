@@ -89,7 +89,7 @@ public class MainWindow {
 	}
 	
 	private void runUMLparser() throws IOException {
-		UMLParser parser = new UMLParser(classArgs, inputFolder, outputDirectory, dotPath, phases);
+		UMLParser parser = new UMLParser(classArgs, inputFolder, outputDirectory, dotPath, phases, guiApp.getPatternToSettings());
 		parser.parseByteCode();
 	}
 	

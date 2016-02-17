@@ -67,7 +67,7 @@ public class UnitTestSimpleCompositeDetector {
 		setupHelper(classes, arrayComponent, "testingData.compositePattern.CompositeComponentWithArray");
 		
 		DesignPatternDetector composite = new CompositeDetector(classes);
-		composite.detectPattern();
+		composite.detectPattern(new String[]{});
 	}
 	
 	private static void setupHelper(Classes classes, IClassDecorator top, String className) throws IOException {

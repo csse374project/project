@@ -48,7 +48,7 @@ public class UnitTestCompositeJavaSwing {
 		setupHelper(classes, window, "java.awt.Window");
 
 		DesignPatternDetector composite = new CompositeDetector(classes);
-		composite.detectPattern();
+		composite.detectPattern(new String[]{});
 	}
 	
 	private static void setupHelper(Classes classes, IClassDecorator top, String className) throws IOException {
