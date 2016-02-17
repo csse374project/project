@@ -30,7 +30,8 @@ public class guiApp {
 	private static JFrame landingWindow, mainWindow;
 	private static String inputDirec, outputDirec, dotPath;
 	private static String[] targetClasses, designPatterns;
-	private static String phases;
+	private static String[] phases;
+	private static String[] adapterSettings, compositeSettings, decoratorSettings, singletonSettings;
 	private static List<JCheckBox> checkBoxes;
  
 	public static void main(String[] args) {
@@ -109,12 +110,16 @@ public class guiApp {
 			e.printStackTrace();
 			return;
 		}
-//		inputDirec = config.getProperty("inputDirec");
-//		targetClasses = config.getProperty("targetClasses").split(" ");
-//		designPatterns = config.getProperty("designPatterns").split(" ");
-//		outputDirec = config.getProperty("outputDirec");
-//		dotPath = config.getProperty("dotPath");
-//		phases = config.getProperty("phases");
+		inputDirec = config.getProperty("inputDirec");
+		targetClasses = config.getProperty("targetClasses").split(" ");
+		designPatterns = config.getProperty("designPatterns").split(" ");
+		outputDirec = config.getProperty("outputDirec");
+		dotPath = config.getProperty("dotPath");
+		phases = config.getProperty("phases").split(" ");
+		adapterSettings = config.getProperty("adapter").split(" ");
+		compositeSettings = config.getProperty("composite").split(" ");
+		decoratorSettings = config.getProperty("decorator").split(" ");
+		singletonSettings = config.getProperty("singleton").split(" ");
 	}
 	
 	private static void displayMainWindow() {

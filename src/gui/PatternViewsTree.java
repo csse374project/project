@@ -18,31 +18,36 @@ public class PatternViewsTree extends JPanel {
 	 */
 	private static final long serialVersionUID = -9052034162028232375L;
 	
-	private String designPattern;
-	private List<String> instances;
+	private String patternName;
+	private List<DesignPatternInstance> designInstances;
 	private JCheckBox topButton;
-	private List<JCheckBox> buttons;
+	private List<AppCheckBox> buttons;
 	
-	public PatternViewsTree(DesignPatternInstance designInstance) {
-		this(designInstance.getDesignPattern(), designInstance.getClasses());
-	}
-	
-	
-	protected PatternViewsTree(String designPattern, List<String> instances) {
-		this.designPattern = designPattern;
-		this.instances = instances;
-		int height = instances.size() + 1;
-		this.buttons = new ArrayList<JCheckBox>(height);
-		
+	public PatternViewsTree(List<DesignPatternInstance> designInstances, String patternName) {
+		this.patternName = patternName;
+		int height = designInstances.size() + 1;
+		this.designInstances = designInstances;
+		buttons = new ArrayList<>(height);
+
 		addLeftSide(height);
 		addRightSide(height);
-		
+	}
+	
+	public List<String> getClassesToParse() {
+		ArrayList<String> list = new ArrayList<>();
+		for (AppCheckBox button : buttons) {
+			if (button.isSelected()) {
+				List<String> classes = button.getDesignInstance().getClasses();
+				list.addAll(classes);
+			}
+		}
+		return list;
 	}
 	
 	private void addLeftSide(int height) {
 		JPanel leftSide = new JPanel();
 		leftSide.setLayout(new GridLayout(height, 1));
-		topButton = new JCheckBox(designPattern);
+		topButton = new JCheckBox(patternName);
 		topButton.setSelected(true);
 		leftSide.add(topButton);
 		topButton.addActionListener(new TopBoxActionListener());
@@ -53,20 +58,18 @@ public class PatternViewsTree extends JPanel {
 		JPanel rightSide = new JPanel();
 		rightSide.setLayout(new GridLayout(height, 1));
 		rightSide.add(new JLabel(""));
-		for (int i = 1; i < height; i++) {
-			String name = instances.get(i-1);
-			JCheckBox newButton = getCheckBox(name);
-			newButton.setSelected(true);
+		for (DesignPatternInstance instance : designInstances) {
+			AppCheckBox newButton = getCheckBox(instance);
 			rightSide.add(newButton);
-			newButton.addActionListener(new BodyCheckBoxActionListener());
 			buttons.add(newButton);
 		}
 		this.add(rightSide, BorderLayout.EAST);
 	}
 	
-	private JCheckBox getCheckBox(String className) {
-		JCheckBox newButton = new JCheckBox(className);
-		
+	private AppCheckBox getCheckBox(DesignPatternInstance instance) {
+		AppCheckBox newButton = new AppCheckBox(instance);
+		newButton.setSelected(true);
+		newButton.addActionListener(new BodyCheckBoxActionListener());
 		return newButton;
 	}
 	
@@ -75,7 +78,7 @@ public class PatternViewsTree extends JPanel {
 		@Override
 		public void actionPerformed(ActionEvent e) {
 			boolean selected = topButton.isSelected();
-			for (JCheckBox button : buttons) {
+			for (AppCheckBox button : buttons) {
 				button.setSelected(selected);
 			}
 		}
@@ -85,7 +88,7 @@ public class PatternViewsTree extends JPanel {
 
 		@Override
 		public void actionPerformed(ActionEvent e) {
-			for (JCheckBox button : buttons) {
+			for (AppCheckBox button : buttons) {
 				if(! button.isSelected()) {
 					topButton.setSelected(false);
 					return;
@@ -94,5 +97,4 @@ public class PatternViewsTree extends JPanel {
 			topButton.setSelected(true);
 		}
 	}
-	
 }

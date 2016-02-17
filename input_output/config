@@ -6,3 +6,7 @@ designPatterns=
 outputDirec=
 dotPath=
 phases=
+adapter=
+composite=
+decorator=
+singleton=

@@ -5,6 +5,7 @@ import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Properties;
@@ -22,15 +23,14 @@ import umlDiagram.UMLParser;
 public class MainWindow {
 	
 	private JFrame frame;
+	private Properties config;
 	private List<String> classArgs, phases;
 	private String inputFolder, outputDirectory, dotPath;
+	private List<PatternViewsTree> buttonTrees;
 
 	public MainWindow(Properties config) {
-		this.classArgs = Arrays.asList(config.getProperty("targetClasses").split(" "));
-		this.phases = Arrays.asList(config.getProperty("phases").split(" "));
-		this.inputFolder = config.getProperty("inputFolder");
-		this.outputDirectory = config.getProperty("outputDirectory");
-		this.dotPath = config.getProperty("dotPath");
+		this.config = config;
+		buttonTrees = new ArrayList<>();
 		setupFrame();
 	}
 	
@@ -38,7 +38,33 @@ public class MainWindow {
 		return frame;
 	}
 	
+	private void setupConfigs() {
+		this.phases = Arrays.asList(config.getProperty("phases").split(" "));
+		this.inputFolder = config.getProperty("inputFolder");
+		this.outputDirectory = config.getProperty("outputDirectory");
+		this.dotPath = config.getProperty("dotPath");
+		
+		if (buttonTrees.size() == 0) {
+			this.classArgs = Arrays.asList(config.getProperty("targetClasses").split(" "));
+		} else {
+			loadClassArgsFromButtons();
+		}
+	} 
+
+	private void loadClassArgsFromButtons() {
+		this.classArgs = new ArrayList<>();
+		System.out.print("DEBUG: ");
+		for (PatternViewsTree tree : buttonTrees) {
+			classArgs.addAll(tree.getClassesToParse());
+		}
+		
+		for (String arg : classArgs) {
+			System.out.print(arg + " ");
+		} System.out.println();
+	}
+	
 	private void setupFrame() {
+		setupConfigs();
 		frame = new JFrame("name");
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.setSize(1000, 1000);
@@ -68,13 +94,44 @@ public class MainWindow {
 		JPanel panel = new JPanel();
 
 		panel.setLayout(new BoxLayout(panel, BoxLayout.PAGE_AXIS));
-		panel.add(new PatternViewsTree("decorator", Arrays.asList(new String[]{"decorator1", "decorator2", "thing"})));
-		panel.add(new PatternViewsTree("singleton", Arrays.asList(new String[]{"Lonely", "SingleThing"})));
-		panel.add(new PatternViewsTree("adapter", Arrays.asList(new String[]{"AdapterToDecoratorAdapter"})));
+		List<List<DesignPatternInstance>> designs = getDesignPatterns();
+		for (List<DesignPatternInstance> list : designs) {
+			PatternViewsTree newTree = new PatternViewsTree(list, "<pattern>");
+			buttonTrees.add(newTree);
+			panel.add(newTree);
+		}
 		JScrollPane scrollPanel = new JScrollPane(panel,
 				 JScrollPane.VERTICAL_SCROLLBAR_ALWAYS, JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
 		scrollPanel.setPreferredSize(new Dimension(300, 1000));
 		return scrollPanel;
+	}
+	
+	private List<List<DesignPatternInstance>> getDesignPatterns() {
+		List<DesignPatternInstance> innerList = new ArrayList<>();
+		DesignPatternInstance instance = new DesignPatternInstance("decorator");
+		instance.addClass("decorator1");
+		instance.addClass("decorator2");
+		instance.addClass("decorator3");
+		innerList.add(instance);
+		
+		instance = new DesignPatternInstance("singleton");
+		instance.addClass("Lonely");
+		instance.addClass("singleThing");
+		innerList.add(instance);
+		
+		instance = new DesignPatternInstance("adapter");
+		instance.addClass("AdapterToDecoratorAdapter");
+		innerList.add(instance);
+		
+		List<List<DesignPatternInstance>> list = new ArrayList<>();
+		list.add(innerList);
+		
+		innerList = new ArrayList<>();
+		instance = new DesignPatternInstance("thingamabob-pattern");
+		instance.addClass("[class]");
+		innerList.add(instance);
+		list.add(innerList);
+		return list;
 	}
 	
 	private JPanel getReloadPanel() {
