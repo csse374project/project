@@ -7,8 +7,10 @@ import java.awt.event.ActionListener;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Properties;
+import java.util.Set;
 
 import javax.swing.BoxLayout;
 import javax.swing.ImageIcon;
@@ -18,12 +20,14 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 
+import sun.security.krb5.internal.crypto.Des;
 import umlDiagram.UMLParser;
 
 public class MainWindow {
 	
 	private JFrame frame;
 	private Properties config;
+	private JScrollPane optionPanel;
 	private List<String> classArgs, phases;
 	private String inputFolder, outputDirectory, dotPath;
 	private List<PatternViewsTree> buttonTrees;
@@ -73,13 +77,21 @@ public class MainWindow {
 		frame.setSize(1000, 1000);
 		try {
 			runUMLparser();
-			frame.add(getOptionPanel(), BorderLayout.WEST);
+			addOptionPanel();
+//			frame.add(getOptionPanel(), BorderLayout.WEST);
 			frame.add(getImagePanel(), BorderLayout.EAST);
 			frame.add(getReloadPanel(), BorderLayout.SOUTH);
 		} catch (IOException e) {
 			frame.add(getExceptionPanel());
 		}
 		frame.setVisible(true);
+	}
+	
+	private void addOptionPanel() {
+		if (optionPanel == null) {
+			optionPanel = getOptionPanel();
+		}
+		frame.add(optionPanel, BorderLayout.WEST);
 	}
 	
 	private JPanel getExceptionPanel() {
@@ -97,9 +109,11 @@ public class MainWindow {
 		JPanel panel = new JPanel();
 
 		panel.setLayout(new BoxLayout(panel, BoxLayout.PAGE_AXIS));
-		List<List<DesignPatternInstance>> designs = getDesignPatterns();
-		for (List<DesignPatternInstance> list : designs) {
-			PatternViewsTree newTree = new PatternViewsTree(list, "<pattern>");
+		List<DesignPatternInstance> allInstances = getDesignPatterns();
+		Set<String> patternsUsed = getDesignPatternNames(allInstances);
+		for (String pattern : patternsUsed) {
+			List<DesignPatternInstance> list = getInstancesOfPattern(pattern, allInstances);
+			PatternViewsTree newTree = new PatternViewsTree(list, pattern);
 			buttonTrees.add(newTree);
 			panel.add(newTree);
 		}
@@ -109,31 +123,41 @@ public class MainWindow {
 		return scrollPanel;
 	}
 	
-	private List<List<DesignPatternInstance>> getDesignPatterns() {
-		List<DesignPatternInstance> innerList = new ArrayList<>();
-		DesignPatternInstance instance = new DesignPatternInstance("nothing-instance");
+	private List<DesignPatternInstance> getInstancesOfPattern(String pattern, List<DesignPatternInstance> allInstances) {
+		List<DesignPatternInstance> instancesToUse = new ArrayList<>();
+		for (DesignPatternInstance inst : allInstances) {
+			if (inst.getDesignPattern().equals(pattern)) {
+				instancesToUse.add(inst);
+			}
+		}
+		return instancesToUse;
+	}
+	
+	private Set<String> getDesignPatternNames(List<DesignPatternInstance> instances) {
+		Set<String> set = new HashSet<String>();
+		for (DesignPatternInstance inst : instances) {
+			set.add(inst.getDesignPattern());
+		}
+		return set;
+	}
+	
+	private List<DesignPatternInstance> getDesignPatterns() {
+		List<DesignPatternInstance> list = new ArrayList<>();
+		DesignPatternInstance instance = new DesignPatternInstance("nothing-instance", "nothing");
 		instance.addClass("testingData.SampleInterface01");
 		instance.addClass("testingData.SampleInterface02");
-		innerList.add(instance);
+		list.add(instance);
 		
-		instance = new DesignPatternInstance("singleton-instance");
+		instance = new DesignPatternInstance("singleton-instance", "singleton");
 		instance.addClass("testingData.ChocolateBoilerLazy");
 		instance.addClass("testingData.ChocolateBoilerEager");
-		innerList.add(instance);
+		list.add(instance);
 		
-		instance = new DesignPatternInstance("adapter-instance");
+		instance = new DesignPatternInstance("adapter-instance", "adapter");
 		instance.addClass("testingData.AdapteeSample");
 		instance.addClass("testingData.AdapterSample");
-		innerList.add(instance);
+		list.add(instance);
 		
-		List<List<DesignPatternInstance>> list = new ArrayList<>();
-		list.add(innerList);
-		
-//		innerList = new ArrayList<>();
-//		instance = new DesignPatternInstance("thingamabob-pattern");
-//		instance.addClass("[class]");
-//		innerList.add(instance);
-//		list.add(innerList);
 		return list;
 	}
 	
