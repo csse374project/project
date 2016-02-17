@@ -34,13 +34,15 @@ public class UMLParser {
 	//and call the appropriate methods.
 	public static void main(String[] args) throws IOException {
 		setClassesToAccept(args);
+		Map<String, String[]> phaseAtt = new HashMap<String, String[]>();
+		phaseAtt.put("Singleton", new String[]{"requireGetInstance"});
 		List<String> phases = new LinkedList<String>();
 		phases.add("Decorator");
 		phases.add("Singleton");
 		phases.add("Adapter");
 		phases.add("Composite");
 		UMLParser parser = new UMLParser(Arrays.asList(args), "", "",
-				"C:\\Program Files (x86)\\Graphviz2.38\\bin\\dot.exe", phases);
+				"C:\\Program Files (x86)\\Graphviz2.38\\bin\\dot.exe", phases, phaseAtt);
 		parser.parseByteCode();
 		parser.detectPatterns();
 		parser.createGraph();
@@ -50,11 +52,12 @@ public class UMLParser {
 	@SuppressWarnings("unused") // Will be used once the UI gets farther along
 	private String inputFolder, outputDir, dotPath;
 	private Map<String, DesignPatternDetector> detectors;
+	private Map<String, String[]> phaseAttributes;
 	private List<String> inputClasses, inputPhases;
 	private Classes classes;
 
 	public UMLParser(List<String> argClasses, String inputFolder, String outputDirectory, String dotPath,
-			List<String> phases) {
+			List<String> phases, Map<String, String[]> phaseAttributes) {
 		classes = new Classes();
 		inputClasses = argClasses;
 		this.inputFolder = inputFolder;
@@ -66,6 +69,8 @@ public class UMLParser {
 		detectors.put("Decorator", new DecoratorDetector(this.classes));
 		detectors.put("Adapter", new AdapterDetector(this.classes));
 		detectors.put("Composite", new CompositeDetector(this.classes));
+		
+		this.phaseAttributes = phaseAttributes;
 	}
 
 	/**
@@ -79,6 +84,10 @@ public class UMLParser {
 		this.inputPhases.add(name);
 		this.detectors.put(name, detector);
 	}
+	
+	public void addPhaseAttribute(String phaseName, String[] att){
+		this.phaseAttributes.put(phaseName, att);
+	}
 
 	/**
 	 * Parses the provided java classes and creates the class representation objects.
@@ -91,25 +100,11 @@ public class UMLParser {
 			IClassDecorator topLevelDecorator = new TopLevelDecorator(currentClass);
 			ClassReader reader = new ClassReader(className);
 
-//<<<<<<< HEAD
-			ClassVisitor visitor = createVisitors(topLevelDecorator);
-//=======
-//			ClassVisitor declVisitor = new ClassDeclarationVisitor(Opcodes.ASM5, topLevelDecorator);
-//
-//			ClassVisitor singletonVisitor = new SingletonFieldVisitor(Opcodes.ASM5, declVisitor, topLevelDecorator);
-//			
-//			ClassVisitor fieldVisitor = new ClassFieldVisitor(Opcodes.ASM5, singletonVisitor, topLevelDecorator);
-//
-//			ClassVisitor methodVisitor = new ClassMethodVisitor(Opcodes.ASM5, fieldVisitor, topLevelDecorator);
-//>>>>>>> origin/Milestone7GUI
+			ClassVisitor visitor = VisitorFactory.generateVisitors(this.inputPhases, topLevelDecorator, this.phaseAttributes);
 
 			reader.accept(visitor, ClassReader.EXPAND_FRAMES);
 			classes.addClass(topLevelDecorator);
 		}
-	}
-
-	private ClassVisitor createVisitors(IClassDecorator topLevelDecorator) {
-		return VisitorFactory.generateVisitors(this.inputPhases, topLevelDecorator);
 	}
 
 	/**
@@ -120,7 +115,8 @@ public class UMLParser {
 		for (String pattern : inputPhases) {
 			DesignPatternDetector detector = detectors.get(pattern);
 			//Check for patterns that were not added
-			if (detector != null) detector.detectPattern();
+			String[] args = this.phaseAttributes.get(pattern); 
+			if (detector != null) detector.detectPattern(args);
 		}
 	}
 

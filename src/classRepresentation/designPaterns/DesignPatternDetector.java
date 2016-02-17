@@ -9,5 +9,5 @@ package classRepresentation.designPaterns;
  */
 public interface DesignPatternDetector {
 
-	public void detectPattern();
+	public void detectPattern(String[] args);
 }
