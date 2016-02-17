@@ -64,7 +64,7 @@ public class UnitTestAdapterDecorator {
 		classes.addClass(singleton);
 		
 		DesignPatternDetector detector = new AdapterDetector(classes);
-		detector.detectPattern();
+		detector.detectPattern(new String[]{});
 		
 	}
 

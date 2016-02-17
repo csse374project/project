@@ -44,7 +44,7 @@ public class UnitTestCompositeDetector {
 		setupHelper(classes, component, "testingData.SampleInterface01");
 		
 		DesignPatternDetector composite = new CompositeDetector(classes);
-		composite.detectPattern();
+		composite.detectPattern(new String[]{});
 		System.out.println(isLeaf(leaf));
 	}
 	

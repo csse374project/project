@@ -18,12 +18,10 @@ import javax.swing.JPanel;
 
 public class guiApp {
 	
-	protected static final HashMap<String, String[]> patternToSettings = getPatternToSettings(); 
-	
 	private static Properties config;
 	private static JFrame landingWindow, mainWindow;
 	
-	private static HashMap<String, String[]> getPatternToSettings() {
+	protected static HashMap<String, String[]> getPatternToSettings() {
 		HashMap<String, String[]> map = new HashMap<>();
 		map.put("Singleton", new String[]{});
 		map.put("Adapter", new String[]{});
