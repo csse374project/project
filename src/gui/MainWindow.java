@@ -117,21 +117,23 @@ public class MainWindow {
 		innerList.add(instance);
 		
 		instance = new DesignPatternInstance("singleton-instance");
-		instance.addClass("ChocolateBoilerLazy");
+		instance.addClass("testingData.ChocolateBoilerLazy");
+		instance.addClass("testingData.ChocolateBoilerEager");
 		innerList.add(instance);
 		
 		instance = new DesignPatternInstance("adapter-instance");
-		instance.addClass("AdapterToDecoratorAdapter");
+		instance.addClass("testingData.AdapteeSample");
+		instance.addClass("testingData.AdapterSample");
 		innerList.add(instance);
 		
 		List<List<DesignPatternInstance>> list = new ArrayList<>();
 		list.add(innerList);
 		
-		innerList = new ArrayList<>();
-		instance = new DesignPatternInstance("thingamabob-pattern");
-		instance.addClass("[class]");
-		innerList.add(instance);
-		list.add(innerList);
+//		innerList = new ArrayList<>();
+//		instance = new DesignPatternInstance("thingamabob-pattern");
+//		instance.addClass("[class]");
+//		innerList.add(instance);
+//		list.add(innerList);
 		return list;
 	}
 	
