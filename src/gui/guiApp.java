@@ -1,43 +1,43 @@
 package gui;
 
 import java.awt.BorderLayout;
-import java.awt.Dimension;
-import java.awt.Window;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.util.List;
+import java.util.HashMap;
 import java.util.Properties;
 
-import javax.swing.BoxLayout;
-import javax.swing.ImageIcon;
 import javax.swing.JButton;
-import javax.swing.JCheckBox;
 import javax.swing.JFileChooser;
 import javax.swing.JFrame;
-import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
-import javax.swing.JScrollPane;
-import javax.swing.JTree;
-import javax.swing.tree.DefaultMutableTreeNode;
 
 public class guiApp {
 	
 	private static Properties config;
 	private static JFrame landingWindow, mainWindow;
-	private static String inputDirec, outputDirec, dotPath;
-	private static String[] targetClasses, designPatterns;
-	private static String phases;
-	private static List<JCheckBox> checkBoxes;
+	
+	protected static HashMap<String, String[]> getPatternToSettings() {
+		HashMap<String, String[]> map = new HashMap<>();
+		map.put("Singleton", new String[]{});
+		map.put("Adapter", new String[]{});
+		map.put("Composite", new String[]{});
+		map.put("Decorator", new String[]{});
+		return map;
+	}
+	
+//	, outputDirec, dotPath;
+//	private static String[] targetClasses, designPatterns, phases;
+//	private static List<JCheckBox> checkBoxes;
  
 	public static void main(String[] args) {
 //		displayLandingScreen();
 		loadConfigFile(new File("input_output/config"));
-		displayLandingScreen();
+		displayMainWindow();
 	}
 	
 	private static void displayLandingScreen() {
@@ -69,6 +69,7 @@ public class guiApp {
 					System.out.println(message);
 					JOptionPane.showMessageDialog(landingWindow, message);
 				} else {
+					landingWindow.setVisible(false);
 					displayMainWindow();
 				}
 			}
@@ -109,49 +110,31 @@ public class guiApp {
 			e.printStackTrace();
 			return;
 		}
-		inputDirec = config.getProperty("inputDirec");
-		targetClasses = config.getProperty("targetClasses").split(" ");
-		designPatterns = config.getProperty("designPatterns").split(" ");
-		outputDirec = config.getProperty("outputDirec");
-		dotPath = config.getProperty("dotPath");
-		phases = config.getProperty("phases");
+//		inputDirec = config.getProperty("inputDirec");
+//		targetClasses = config.getProperty("targetClasses").split(" ");
+//		designPatterns = config.getProperty("designPatterns").split(" ");
+//		outputDirec = config.getProperty("outputDirec");
+//		dotPath = config.getProperty("dotPath");
+//		phases = config.getProperty("phases").split(" ");
+//		adapterSettings = config.getProperty("adapter").split(" ");
+//		compositeSettings = config.getProperty("composite").split(" ");
+//		decoratorSettings = config.getProperty("decorator").split(" ");
+//		singletonSettings = config.getProperty("singleton").split(" ");
 	}
 	
 	private static void displayMainWindow() {
-		mainWindow = new JFrame();
-		mainWindow.setTitle("Design Parser :: " + inputDirec);
+		System.out.println();
+		MainWindow window = new MainWindow(config);
+		mainWindow = window.get();
+		mainWindow.setTitle("Design Parser :: " + config.getProperty("inputDirec"));
 		mainWindow.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		mainWindow.setSize(1000, 1000);
-		
-		mainWindow.add(getOptionPanel(), BorderLayout.WEST);
-		mainWindow.add(getImagePanel(), BorderLayout.EAST);
+//		
+//		mainWindow.add(getOptionPanel(), BorderLayout.WEST);
+//		mainWindow.add(getImagePanel(), BorderLayout.EAST);
 		
 //		landingWindow.setVisible(false);
 		mainWindow.setVisible(true);
 //		landingWindow.dispose();
 	}
-	
-	private static JScrollPane getOptionPanel() {
-		JPanel panel = new JPanel();
-
-		panel.setLayout(new BoxLayout(panel, BoxLayout.PAGE_AXIS));
-		panel.add(new PatternViewsTree());
-		panel.add(new PatternViewsTree());
-		panel.add(new PatternViewsTree());
-		JScrollPane scrollPanel = new JScrollPane(panel,
-				 JScrollPane.VERTICAL_SCROLLBAR_ALWAYS, JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
-		scrollPanel.setPreferredSize(new Dimension(300, 1000));
-		return scrollPanel;
-	}
-	
-	private static JScrollPane getImagePanel() {
-		JPanel panel = new JPanel();
-		ImageIcon image = new ImageIcon("input_output/TolkienMiddleEarthMap2.jpg");
-		
-		
-		JScrollPane scrollPanel = new JScrollPane(new JLabel(image),
-				JScrollPane.VERTICAL_SCROLLBAR_ALWAYS, JScrollPane.HORIZONTAL_SCROLLBAR_ALWAYS);
-		scrollPanel.setPreferredSize(new Dimension(700, 1000));
-		return scrollPanel;
-	}	
 }

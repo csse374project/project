@@ -1,4 +1,4 @@
-package classRepresentation.designPaterns;
+package classRepresentation.designPatterns;
 
 import java.util.List;
 import java.util.Map;
@@ -19,7 +19,7 @@ public class AdapterDetector implements DesignPatternDetector{
 		classMap = classes.getClasses();
 	}
 
-	public void detectPattern() {
+	public void detectPattern(String[] args) {
 		for (String className : classMap.keySet()) {
 			IClassDecorator clazz = (IClassDecorator) classMap.get(className);
 			AdapterDecorator adapter = getAdapter(clazz);

@@ -1,8 +1,12 @@
 #
 #
 inputDirec=
-targetClasses=
+targetClasses=testingData.SampleSingletonClass
 designPatterns=
 outputDirec=
 dotPath=
 phases=
+adapter=
+composite=
+decorator=
+singleton=

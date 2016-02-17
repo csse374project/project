@@ -1,4 +1,4 @@
-package classRepresentation.designPaterns;
+package classRepresentation.designPatterns;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -44,7 +44,7 @@ public class CompositeDetector implements DesignPatternDetector {
 		this.classMap = classes.getClasses();
 	}
 
-	public void detectPattern() {
+	public void detectPattern(String[] args) {
 		// First, we find the "seed" composites
 		findSeedComposites();
 

@@ -1,7 +1,7 @@
 /**
  * Interface for our DesignPatternDetectors
  */
-package classRepresentation.designPaterns;
+package classRepresentation.designPatterns;
 
 /**
  * @author shellajt
@@ -9,5 +9,5 @@ package classRepresentation.designPaterns;
  */
 public interface DesignPatternDetector {
 
-	public void detectPattern();
+	public void detectPattern(String[] args);
 }

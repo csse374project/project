@@ -2,6 +2,10 @@ package gui;
 
 import java.awt.BorderLayout;
 import java.awt.GridLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.swing.JCheckBox;
 import javax.swing.JLabel;
@@ -14,26 +18,83 @@ public class PatternViewsTree extends JPanel {
 	 */
 	private static final long serialVersionUID = -9052034162028232375L;
 	
-	public PatternViewsTree() {
-		// TODO calculate this!!!
-		int arbitraryDefaultHieght = 5;
-		int height = arbitraryDefaultHieght;
+	private String patternName;
+	private List<DesignPatternInstance> designInstances;
+	private JCheckBox topButton;
+	private List<AppCheckBox> buttons;
+	
+	public PatternViewsTree(List<DesignPatternInstance> designInstances, String patternName) {
+		this.patternName = patternName;
+		int height = designInstances.size() + 1;
+		this.designInstances = designInstances;
+		buttons = new ArrayList<>(height);
+
+		addLeftSide(height);
+		addRightSide(height);
+	}
+	
+	public List<String> getClassesToParse() {
+		ArrayList<String> list = new ArrayList<>();
+		for (AppCheckBox button : buttons) {
+			if (button.isSelected()) {
+				List<String> classes = button.getDesignInstance().getClasses();
+				list.addAll(classes);
+			}
+		}
+		return list;
+	}
+	
+	private void addLeftSide(int height) {
 		JPanel leftSide = new JPanel();
 		leftSide.setLayout(new GridLayout(height, 1));
-//		for (int i = 1; i < height; i++) {
-//			leftSide.add(new JLabel(""));
-//		}
-		leftSide.add(new JCheckBox("[design pattern]"));
+		topButton = new JCheckBox(patternName);
+		topButton.setSelected(true);
+		leftSide.add(topButton);
+		topButton.addActionListener(new TopBoxActionListener());
 		this.add(leftSide, BorderLayout.WEST);
-		
+	}
+	
+	private void addRightSide(int height) {
 		JPanel rightSide = new JPanel();
 		rightSide.setLayout(new GridLayout(height, 1));
 		rightSide.add(new JLabel(""));
-		for (int i = 1; i < height; i++) {
-			rightSide.add(new JCheckBox("[an instance]"));
+		for (DesignPatternInstance instance : designInstances) {
+			AppCheckBox newButton = getCheckBox(instance);
+			rightSide.add(newButton);
+			buttons.add(newButton);
 		}
 		this.add(rightSide, BorderLayout.EAST);
 	}
 	
+	private AppCheckBox getCheckBox(DesignPatternInstance instance) {
+		AppCheckBox newButton = new AppCheckBox(instance);
+		newButton.setSelected(true);
+		newButton.addActionListener(new BodyCheckBoxActionListener());
+		return newButton;
+	}
 	
+	class TopBoxActionListener implements ActionListener {
+
+		@Override
+		public void actionPerformed(ActionEvent e) {
+			boolean selected = topButton.isSelected();
+			for (AppCheckBox button : buttons) {
+				button.setSelected(selected);
+			}
+		}
+	}
+	
+	class BodyCheckBoxActionListener implements ActionListener {
+
+		@Override
+		public void actionPerformed(ActionEvent e) {
+			for (AppCheckBox button : buttons) {
+				if(! button.isSelected()) {
+					topButton.setSelected(false);
+					return;
+				}
+			}
+			topButton.setSelected(true);
+		}
+	}
 }

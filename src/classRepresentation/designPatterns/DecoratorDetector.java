@@ -1,4 +1,4 @@
-package classRepresentation.designPaterns;
+package classRepresentation.designPatterns;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -22,7 +22,7 @@ public class DecoratorDetector implements DesignPatternDetector {
 		discoveredDecorators = new ArrayList<String>();
 	}
 
-	public void detectPattern() {
+	public void detectPattern(String[] args) {
 		for (String className : classMap.keySet()) {
 			IClass currentClass = classMap.get(className);
 			if (!isDecorator(currentClass)) {

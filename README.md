@@ -29,9 +29,9 @@ The tool expands upon the ASM class visitors discussed in class. The method visi
 This sections will describe the resposibilites of each team member during each project milestone.
 
 Milestone 7:
-Jesse Shellabarger - Updated back end code to facilitate adding of a UI and use of phases.
-Nate Briggs - Made a proxy to display a loading message (in progress).
-Thomas Bonatti - Created UI to run the projects back end.
+Jesse Shellabarger - Worked on the back end of the project. Updated back end code to facilitate adding of a UI and use of phases. Added code to allow the project to automatically generate PNGs of the graph.
+Nate Briggs - Made a proxy to display a loading message. Added support for phase-specific attributes (in progress).
+Thomas Bonatti - Created UI to run the projects back end (in progress).
 
 Milestone 6:
 Jesse Shellabarger - Designed Composite detection with Thomas. Implemented composite detection. Updated with required pictures and documentation.
