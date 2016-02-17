@@ -31,6 +31,8 @@ public class MainWindow {
 	public MainWindow(Properties config) {
 		this.config = config;
 		buttonTrees = new ArrayList<>();
+		setupConfigs();
+		loadClassArgs();
 		setupFrame();
 	}
 	
@@ -43,7 +45,9 @@ public class MainWindow {
 		this.inputFolder = config.getProperty("inputFolder");
 		this.outputDirectory = config.getProperty("outputDirectory");
 		this.dotPath = config.getProperty("dotPath");
-		
+	}
+
+	private void loadClassArgs() {
 		if (buttonTrees.size() == 0) {
 			this.classArgs = Arrays.asList(config.getProperty("targetClasses").split(" "));
 		} else {
@@ -64,7 +68,6 @@ public class MainWindow {
 	}
 	
 	private void setupFrame() {
-		setupConfigs();
 		frame = new JFrame("name");
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.setSize(1000, 1000);
@@ -144,6 +147,7 @@ public class MainWindow {
 				System.out.println("Reload button pressed");
 				frame.setVisible(false);
 				frame.dispose();
+				loadClassArgs();
 				setupFrame();
 			}
 		});
