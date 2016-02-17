@@ -49,8 +49,7 @@ public class UMLParser {
 	}
 
 	private static String[] classesToAccept = new String[0];
-	@SuppressWarnings("unused") // Will be used once the UI gets farther along
-	private String inputDir, outputDir, dotPath;
+	private String inputDir, outputDir, dotPath, outputType;
 	private Map<String, DesignPatternDetector> detectors;
 	private Map<String, String[]> phaseAttributes;
 	private List<String> inputClasses, inputPhases;
@@ -64,6 +63,7 @@ public class UMLParser {
 		this.outputDir = outputDirectory;
 		this.dotPath = dotPath;
 		this.inputPhases = phases;
+		this.outputType = "-Tpng";
 		
 		this.detectors = new HashMap<String, DesignPatternDetector>();
 		detectors.put("Decorator", new DecoratorDetector(this.classes));
@@ -87,6 +87,10 @@ public class UMLParser {
 	
 	public void addPhaseAttribute(String phaseName, String[] att){
 		this.phaseAttributes.put(phaseName, att);
+	}
+	
+	public void setOutputType(String type){
+		this.outputType = type;
 	}
 
 	/**
@@ -140,7 +144,7 @@ public class UMLParser {
 		}
 
 		String outPath = this.outputDir + "\\out.png";
-		ProcessBuilder pb = new ProcessBuilder(this.dotPath, "-Tpng", tempPath, "-o", outPath);
+		ProcessBuilder pb = new ProcessBuilder(this.dotPath, outputType, tempPath, "-o", outPath);
 
 		try {
 			String logPath = this.outputDir + "\\errorLog.txt";
