@@ -35,9 +35,9 @@ public class guiApp {
 	private static List<JCheckBox> checkBoxes;
  
 	public static void main(String[] args) {
-		displayLandingScreen();
-//		loadConfigFile(new File("input_output/config"));
-//		displayMainWindow();
+//		displayLandingScreen();
+		loadConfigFile(new File("input_output/config"));
+		displayMainWindow();
 	}
 	
 	private static void displayLandingScreen() {
@@ -123,12 +123,8 @@ public class guiApp {
 	}
 	
 	private static void displayMainWindow() {
-		System.out.print("target classes: ");
-		for (int i = 0; i < targetClasses.length; i++) {
-			System.out.print(targetClasses[i] + " ");
-		}
 		System.out.println();
-		MainWindow window = new MainWindow(Arrays.asList(targetClasses));
+		MainWindow window = new MainWindow(config);
 		mainWindow = window.get();
 		mainWindow.setTitle("Design Parser :: " + inputDirec);
 		mainWindow.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -137,8 +133,8 @@ public class guiApp {
 //		mainWindow.add(getOptionPanel(), BorderLayout.WEST);
 //		mainWindow.add(getImagePanel(), BorderLayout.EAST);
 		
-		landingWindow.setVisible(false);
+//		landingWindow.setVisible(false);
 		mainWindow.setVisible(true);
-		landingWindow.dispose();
+//		landingWindow.dispose();
 	}
 }

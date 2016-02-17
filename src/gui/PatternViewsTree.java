@@ -2,6 +2,9 @@ package gui;
 
 import java.awt.BorderLayout;
 import java.awt.GridLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.swing.JCheckBox;
@@ -17,12 +20,20 @@ public class PatternViewsTree extends JPanel {
 	
 	private String designPattern;
 	private List<String> instances;
+	private JCheckBox topButton;
+	private List<JCheckBox> buttons;
 	
-	public PatternViewsTree(String designPattern, List<String> instances) {
+	public PatternViewsTree(DesignPatternInstance designInstance) {
+		this(designInstance.getDesignPattern(), designInstance.getClasses());
+	}
+	
+	
+	protected PatternViewsTree(String designPattern, List<String> instances) {
 		this.designPattern = designPattern;
 		this.instances = instances;
 		int height = instances.size() + 1;
-	
+		this.buttons = new ArrayList<JCheckBox>(height);
+		
 		addLeftSide(height);
 		addRightSide(height);
 		
@@ -31,7 +42,10 @@ public class PatternViewsTree extends JPanel {
 	private void addLeftSide(int height) {
 		JPanel leftSide = new JPanel();
 		leftSide.setLayout(new GridLayout(height, 1));
-		leftSide.add(new JCheckBox(designPattern));
+		topButton = new JCheckBox(designPattern);
+		topButton.setSelected(true);
+		leftSide.add(topButton);
+		topButton.addActionListener(new TopBoxActionListener());
 		this.add(leftSide, BorderLayout.WEST);
 	}
 	
@@ -41,13 +55,44 @@ public class PatternViewsTree extends JPanel {
 		rightSide.add(new JLabel(""));
 		for (int i = 1; i < height; i++) {
 			String name = instances.get(i-1);
-			rightSide.add(getCheckBox(name));
+			JCheckBox newButton = getCheckBox(name);
+			newButton.setSelected(true);
+			rightSide.add(newButton);
+			newButton.addActionListener(new BodyCheckBoxActionListener());
+			buttons.add(newButton);
 		}
 		this.add(rightSide, BorderLayout.EAST);
 	}
 	
 	private JCheckBox getCheckBox(String className) {
-		return new JCheckBox(className);
+		JCheckBox newButton = new JCheckBox(className);
+		
+		return newButton;
+	}
+	
+	class TopBoxActionListener implements ActionListener {
+
+		@Override
+		public void actionPerformed(ActionEvent e) {
+			boolean selected = topButton.isSelected();
+			for (JCheckBox button : buttons) {
+				button.setSelected(selected);
+			}
+		}
+	}
+	
+	class BodyCheckBoxActionListener implements ActionListener {
+
+		@Override
+		public void actionPerformed(ActionEvent e) {
+			for (JCheckBox button : buttons) {
+				if(! button.isSelected()) {
+					topButton.setSelected(false);
+					return;
+				}
+			}
+			topButton.setSelected(true);
+		}
 	}
 	
 }

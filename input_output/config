@@ -1,7 +1,7 @@
 #
 #
 inputDirec=
-targetClasses=
+targetClasses=testingData.SampleSingletonClass
 designPatterns=
 outputDirec=
 dotPath=
