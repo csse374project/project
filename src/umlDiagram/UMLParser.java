@@ -127,7 +127,6 @@ public class UMLParser {
 		String digraph = this.classes.printGraphVizInput();
 		// Temp file to write digraph string to
 		String tempPath = this.outputDir + "\\temp.dot";
-		System.out.println(tempPath);
 		Path path = Paths.get(tempPath);
 		File f = path.toFile();
 		f.delete();
