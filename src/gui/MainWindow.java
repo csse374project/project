@@ -111,18 +111,16 @@ public class MainWindow {
 	
 	private List<List<DesignPatternInstance>> getDesignPatterns() {
 		List<DesignPatternInstance> innerList = new ArrayList<>();
-		DesignPatternInstance instance = new DesignPatternInstance("decorator");
-		instance.addClass("decorator1");
-		instance.addClass("decorator2");
-		instance.addClass("decorator3");
+		DesignPatternInstance instance = new DesignPatternInstance("nothing-instance");
+		instance.addClass("testingData.SampleInterface01");
+		instance.addClass("testingData.SampleInterface02");
 		innerList.add(instance);
 		
-		instance = new DesignPatternInstance("singleton");
-		instance.addClass("Lonely");
-		instance.addClass("singleThing");
+		instance = new DesignPatternInstance("singleton-instance");
+		instance.addClass("ChocolateBoilerLazy");
 		innerList.add(instance);
 		
-		instance = new DesignPatternInstance("adapter");
+		instance = new DesignPatternInstance("adapter-instance");
 		instance.addClass("AdapterToDecoratorAdapter");
 		innerList.add(instance);
 		

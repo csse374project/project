@@ -1,38 +1,40 @@
 package gui;
 
 import java.awt.BorderLayout;
-import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.util.Arrays;
-import java.util.List;
+import java.util.HashMap;
 import java.util.Properties;
 
-import javax.swing.BoxLayout;
-import javax.swing.Icon;
-import javax.swing.ImageIcon;
 import javax.swing.JButton;
-import javax.swing.JCheckBox;
 import javax.swing.JFileChooser;
 import javax.swing.JFrame;
-import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
-import javax.swing.JScrollPane;
 
 public class guiApp {
 	
+	protected static final HashMap<String, String[]> patternToSettings = getPatternToSettings(); 
+	
 	private static Properties config;
 	private static JFrame landingWindow, mainWindow;
-	private static String inputDirec, outputDirec, dotPath;
-	private static String[] targetClasses, designPatterns;
-	private static String[] phases;
-	private static String[] adapterSettings, compositeSettings, decoratorSettings, singletonSettings;
-	private static List<JCheckBox> checkBoxes;
+	
+	private static HashMap<String, String[]> getPatternToSettings() {
+		HashMap<String, String[]> map = new HashMap<>();
+		map.put("Singleton", new String[]{});
+		map.put("Adapter", new String[]{});
+		map.put("Composite", new String[]{});
+		map.put("Decorator", new String[]{});
+		return map;
+	}
+	
+//	, outputDirec, dotPath;
+//	private static String[] targetClasses, designPatterns, phases;
+//	private static List<JCheckBox> checkBoxes;
  
 	public static void main(String[] args) {
 //		displayLandingScreen();
@@ -110,23 +112,23 @@ public class guiApp {
 			e.printStackTrace();
 			return;
 		}
-		inputDirec = config.getProperty("inputDirec");
-		targetClasses = config.getProperty("targetClasses").split(" ");
-		designPatterns = config.getProperty("designPatterns").split(" ");
-		outputDirec = config.getProperty("outputDirec");
-		dotPath = config.getProperty("dotPath");
-		phases = config.getProperty("phases").split(" ");
-		adapterSettings = config.getProperty("adapter").split(" ");
-		compositeSettings = config.getProperty("composite").split(" ");
-		decoratorSettings = config.getProperty("decorator").split(" ");
-		singletonSettings = config.getProperty("singleton").split(" ");
+//		inputDirec = config.getProperty("inputDirec");
+//		targetClasses = config.getProperty("targetClasses").split(" ");
+//		designPatterns = config.getProperty("designPatterns").split(" ");
+//		outputDirec = config.getProperty("outputDirec");
+//		dotPath = config.getProperty("dotPath");
+//		phases = config.getProperty("phases").split(" ");
+//		adapterSettings = config.getProperty("adapter").split(" ");
+//		compositeSettings = config.getProperty("composite").split(" ");
+//		decoratorSettings = config.getProperty("decorator").split(" ");
+//		singletonSettings = config.getProperty("singleton").split(" ");
 	}
 	
 	private static void displayMainWindow() {
 		System.out.println();
 		MainWindow window = new MainWindow(config);
 		mainWindow = window.get();
-		mainWindow.setTitle("Design Parser :: " + inputDirec);
+		mainWindow.setTitle("Design Parser :: " + config.getProperty("inputDirec"));
 		mainWindow.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		mainWindow.setSize(1000, 1000);
 //		
