@@ -33,6 +33,15 @@ public class UnitTestSingletonVisitors {
 		reader.accept(vis2, ClassReader.EXPAND_FRAMES);
 	}
 	
+	public void setupWithArguments(String className, String[] arguments) throws IOException {
+		currentClass = new UMLClass();
+		topDecorator = new TopLevelDecorator(currentClass);
+		ClassReader reader = new ClassReader(className);
+		ClassVisitor vis1 = new ClassDeclarationVisitor(Opcodes.ASM5, topDecorator);
+		ClassVisitor vis2 = new SingletonFieldVisitor(Opcodes.ASM5, vis1, topDecorator, arguments);
+		reader.accept(vis2, ClassReader.EXPAND_FRAMES);
+	}
+	
 	@Test
 	public void testNegative() 
 			throws IOException, NoSuchFieldException, SecurityException,
@@ -102,6 +111,46 @@ public class UnitTestSingletonVisitors {
 		String className = "java.io.FilterInputStream";
 		setup(className);
 		assertFalse(isSingleton(topDecorator));
+	}
+	
+	@Test
+	public void testArgumentsUsingSampleTrue() throws IOException, NoSuchFieldException, SecurityException, IllegalArgumentException, IllegalAccessException {
+		String className = "testingData.SampleSingletonClass";
+		String[] arguments = new String[] {"requireGetInstance"};
+		setupWithArguments(className, arguments);
+		assertTrue(isSingleton(topDecorator));
+	}
+	
+	@Test
+	public void testArgumentsUsingSampleFalse() throws IOException, NoSuchFieldException, SecurityException, IllegalArgumentException, IllegalAccessException {
+		String className = "testingData.SampleSingletonClassWithoutGetInstance";
+		String[] arguments = new String[] {"requireGetInstance"};
+		setupWithArguments(className, arguments);
+		assertFalse(isSingleton(topDecorator));
+	}
+	
+	@Test
+	public void testArgumentsUsingJavaFalse1() throws IOException, NoSuchFieldException, SecurityException, IllegalArgumentException, IllegalAccessException {
+		String className = "java.awt.Desktop";
+		String[] arguments = new String[] {"requireGetInstance"};
+		setupWithArguments(className, arguments);
+		assertFalse(isSingleton(topDecorator));
+	}
+	
+	@Test
+	public void testArgumentsUsingJavaFalse2() throws IOException, NoSuchFieldException, SecurityException, IllegalArgumentException, IllegalAccessException {
+		String className = "java.lang.Runtime";
+		String[] arguments = new String[] {"requireGetInstance"};
+		setupWithArguments(className, arguments);
+		assertFalse(isSingleton(topDecorator));
+	}
+	
+	@Test
+	public void testArgumentsUsingBoilerTrue() throws IOException, NoSuchFieldException, SecurityException, IllegalArgumentException, IllegalAccessException {
+		String className = "testingData.ChocolateBoilerEager";
+		String[] arguments = new String[] {"requireGetInstance"};
+		setupWithArguments(className, arguments);
+		assertTrue(isSingleton(topDecorator));
 	}
 	
 	private boolean isSingleton(TopLevelDecorator clazz)

@@ -6,3 +6,5 @@ Error: dot: can't open temp.dot
 Error: dot: can't open temp.dot
 Error: dot: can't open temp.dot
 Error: dot: can't open temp.dot
+Error: temp.dot: syntax error in line 30 near '\'
+Error: temp.dot: syntax error in line 30 near '\'
