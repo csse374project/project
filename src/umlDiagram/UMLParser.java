@@ -41,7 +41,7 @@ public class UMLParser {
 		phases.add("Singleton");
 		phases.add("Adapter");
 		phases.add("Composite");
-		UMLParser parser = new UMLParser(Arrays.asList(args), "", "",
+		UMLParser parser = new UMLParser(Arrays.asList(args), "", ".\\input_output",
 				"C:\\Program Files (x86)\\Graphviz2.38\\bin\\dot.exe", phases, phaseAtt);
 		parser.parseByteCode();
 		parser.detectPatterns();
@@ -127,6 +127,7 @@ public class UMLParser {
 		String digraph = this.classes.printGraphVizInput();
 		// Temp file to write digraph string to
 		String tempPath = this.outputDir + "\\temp.dot";
+		System.out.println(tempPath);
 		Path path = Paths.get(tempPath);
 		File f = path.toFile();
 		f.delete();

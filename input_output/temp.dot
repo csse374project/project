@@ -58,7 +58,6 @@ digraph UML {
 
 	AnimationPanel [
 		label = "{problem/graphics/AnimationPanel|- serialVersionUID: long\l- sprites: java.util.List[problem/sprites/ISprite]\l- animating: boolean\l- sleepTime: long\l|+ void add(problem.sprites.ISprite)\l+ Dimension getSize()\l+ void animate()\l+ void reset()\l# void paintComponent(java.awt.Graphics)\l- void drawSprite(problem.sprites.ISprite, java.awt.Graphics2D)\l  boolean access$0(problem.graphics.AnimationPanel)\l  List access$1(problem.graphics.AnimationPanel)\l  long access$2(problem.graphics.AnimationPanel)\l|}"
->>>>>>> refs/remotes/origin/Milestone7GUI
 		
 	]
 
@@ -73,29 +72,6 @@ digraph UML {
 		arrowhead = "empty"
 	]
 
-<<<<<<< HEAD
-	AdapterDecorator -> IClassDecorator
-
-	CompositeDecorator -> IClassDecorator
-
-	TopLevelDecorator -> IClassDecorator
-
-	AdapteeDecorator -> IClassDecorator
-
-	InterfaceDecorator -> IClassDecorator
-
-	AdaptionTargetDecorator -> IClassDecorator
-
-	CompositeComponentDecorator -> IClassDecorator
-
-	DecoratorComponentDecorator -> IClassDecorator
-
-	CompositeLeafDecorator -> IClassDecorator
-
-	DecoratorDecorator -> IClassDecorator
-
-	SingletonDecorator -> IClassDecorator
-=======
 	SnowmanSprite -> AbstractCompositeSprite
 
 	RectangleSprite -> AbstractSprite
@@ -103,77 +79,19 @@ digraph UML {
 	SnowmanWithBoxSprite -> AbstractCompositeSprite
 
 	CircleSprite -> AbstractSprite
->>>>>>> refs/remotes/origin/Milestone7GUI
 
 	edge [
 		style = "dashed"
 	]
 
-<<<<<<< HEAD
-	UMLField -> IField
-
-	IClassDecorator -> IClass
-
-	UMLClass -> IClass
-
-	UMLMethod -> IMethod
-=======
 	AbstractSprite -> ISprite
 
 	AbstractCompositeSprite -> ISprite
->>>>>>> refs/remotes/origin/Milestone7GUI
 
 	edge [
 		arrowhead = "normal" style = "solid"
 	]
 
-<<<<<<< HEAD
-	UMLParser -> Classes
-
-	SingletonFieldVisitor -> IClassDecorator
-
-	IClassDecorator -> IClass
-
-	MethodCalls -> SequenceMethodCall
-
-	SingletonMethodVisitor -> IClassDecorator
-
-	ClassDeclarationVisitor -> IClassDecorator
-
-	DecoratorDetector -> IClass
-
-	Classes -> IClass
-
-	UMLClass -> IField
-
-	UMLClass -> IMethod
-
-	AdapterMethodVisitor -> MutableBoolean
-
-	AdapterDetector -> IClass
-
-	AdapterFieldVisitor -> MutableBoolean
-
-	SequenceParser -> MethodCalls
-
-	MethodCodeVisitor -> IClass
-
-	AdapterClassVisitor -> IClassDecorator
-
-	SingleMethodVisitor -> SequenceMethodCall
-
-	SequenceMethodCodeVisitor -> SequenceMethodCall
-
-	ClassFieldVisitor -> IClass
-
-	ClassFieldVisitor -> IField
-
-	ClassMethodVisitor -> IClass
-
-	MethodDeclarationVisitor -> IClassDecorator
-
-	CompositeDetector -> IClass
-=======
 	MainWindow -> AnimationPanel
 
 	SpriteFactory -> ISprite
@@ -181,127 +99,11 @@ digraph UML {
 	AnimationPanel -> ISprite
 
 	AbstractCompositeSprite -> ISprite
->>>>>>> refs/remotes/origin/Milestone7GUI
 
 	edge [
 		arrowhead = "normal" style = "dashed"
 	]
 
-<<<<<<< HEAD
-	UMLParser -> DecoratorDetector
-
-	UMLParser -> AdapterDetector
-
-	UMLParser -> CompositeDetector
-
-	UMLParser -> UMLClass
-
-	UMLParser -> TopLevelDecorator
-
-	UMLParser -> IClassDecorator
-
-	AdapterDecorator -> IClass
-
-	AdapterDecorator -> UMLParser
-
-	SingletonFieldVisitor -> UMLParser
-
-	SingletonFieldVisitor -> SingletonMethodVisitor
-
-	CompositeDecorator -> IClass
-
-	IClassDecorator -> IField
-
-	IClassDecorator -> IMethod
-
-	SingletonMethodVisitor -> UMLParser
-
-	SingletonMethodVisitor -> SingletonDecorator
-
-	TopLevelDecorator -> IClass
-
-	TopLevelDecorator -> IClassDecorator
-
-	IClass -> IField
-
-	IClass -> IMethod
-
-	ClassDeclarationVisitor -> InterfaceDecorator
-
-	AdapteeDecorator -> IClass
-
-	DecoratorDetector -> Classes
-
-	DecoratorDetector -> IField
-
-	DecoratorDetector -> DecoratorDecorator
-
-	DecoratorDetector -> IClassDecorator
-
-	DecoratorDetector -> DecoratorComponentDecorator
-
-	InterfaceDecorator -> IClass
-
-	AdaptionTargetDecorator -> IClass
-
-	CompositeComponentDecorator -> IClass
-
-	UMLClass -> UMLParser
-
-	AdapterDetector -> Classes
-
-	AdapterDetector -> AdapterDecorator
-
-	AdapterDetector -> AdapteeDecorator
-
-	AdapterDetector -> IClassDecorator
-
-	AdapterDetector -> AdaptionTargetDecorator
-
-	AdapterFieldVisitor -> AdapterMethodVisitor
-
-	DecoratorComponentDecorator -> IClass
-
-	SequenceParser -> SingleMethodVisitor
-
-	AdapterClassVisitor -> MutableBoolean
-
-	AdapterClassVisitor -> AdapterFieldVisitor
-
-	AdapterClassVisitor -> AdapterDecorator
-
-	SingleMethodVisitor -> SequenceMethodCodeVisitor
-
-	SingleMethodVisitor -> MethodCalls
-
-	SequenceMethodCodeVisitor -> SingleMethodVisitor
-
-	ClassFieldVisitor -> UMLField
-
-	ClassMethodVisitor -> UMLMethod
-
-	ClassMethodVisitor -> IMethod
-
-	CompositeLeafDecorator -> IClass
-
-	MethodDeclarationVisitor -> MethodCodeVisitor
-
-	DecoratorDecorator -> IClass
-
-	SingletonDecorator -> IClass
-
-	CompositeDetector -> Classes
-
-	CompositeDetector -> IField
-
-	CompositeDetector -> CompositeDecorator
-
-	CompositeDetector -> IClassDecorator
-
-	CompositeDetector -> CompositeLeafDecorator
-
-	CompositeDetector -> CompositeComponentDecorator
-=======
 	AbstractSprite -> ISprite
 
 	SnowmanSprite -> CircleSprite
@@ -315,6 +117,5 @@ digraph UML {
 	SnowmanWithBoxSprite -> ISprite
 
 	AnimationPanel -> AbstractCompositeSprite
->>>>>>> refs/remotes/origin/Milestone7GUI
 
 }
