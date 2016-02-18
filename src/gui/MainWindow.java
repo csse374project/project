@@ -45,8 +45,8 @@ public class MainWindow {
 	
 	private void setupConfigs() {
 		this.phases = Arrays.asList(config.getProperty("phases").split(" "));
-		this.inputFolder = config.getProperty("inputFolder");
-		this.outputDirectory = config.getProperty("outputDirectory");
+		this.inputFolder = config.getProperty("inputDirec");
+		this.outputDirectory = config.getProperty("outputDirec");
 		this.dotPath = config.getProperty("dotPath");
 	}
 
