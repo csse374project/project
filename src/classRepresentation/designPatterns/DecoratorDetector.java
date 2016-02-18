@@ -9,6 +9,7 @@ import classRepresentation.UMLClass;
 import classRepresentation.decorators.DecoratorComponentDecorator;
 import classRepresentation.decorators.DecoratorDecorator;
 import classRepresentation.decorators.IClassDecorator;
+import gui.DesignPatternInstance;
 import interfaces.IClass;
 import interfaces.IField;
 
@@ -22,7 +23,7 @@ public class DecoratorDetector implements DesignPatternDetector {
 		discoveredDecorators = new ArrayList<String>();
 	}
 
-	public void detectPattern(String[] args) {
+	public void detectPattern(String[] args, List<DesignPatternInstance> instances) {
 		for (String className : classMap.keySet()) {
 			IClass currentClass = classMap.get(className);
 			if (!isDecorator(currentClass)) {
@@ -120,5 +121,4 @@ public class DecoratorDetector implements DesignPatternDetector {
 			current = cls.getDecorates();
 		}
 	}
-
 }

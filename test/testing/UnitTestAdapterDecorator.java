@@ -4,6 +4,7 @@ import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -21,6 +22,7 @@ import classRepresentation.decorators.TopLevelDecorator;
 import classRepresentation.designPatterns.AdapterClassVisitor;
 import classRepresentation.designPatterns.AdapterDetector;
 import classRepresentation.designPatterns.DesignPatternDetector;
+import gui.DesignPatternInstance;
 import interfaces.IClass;
 import umlDiagram.ClassDeclarationVisitor;
 
@@ -64,7 +66,7 @@ public class UnitTestAdapterDecorator {
 		classes.addClass(singleton);
 		
 		DesignPatternDetector detector = new AdapterDetector(classes);
-		detector.detectPattern(new String[]{});
+		detector.detectPattern(new String[]{}, new ArrayList<DesignPatternInstance>());
 		
 	}
 

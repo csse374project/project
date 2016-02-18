@@ -13,6 +13,7 @@ import classRepresentation.decorators.CompositeComponentDecorator;
 import classRepresentation.decorators.CompositeDecorator;
 import classRepresentation.decorators.CompositeLeafDecorator;
 import classRepresentation.decorators.IClassDecorator;
+import gui.DesignPatternInstance;
 import interfaces.IClass;
 import interfaces.IField;
 
@@ -21,6 +22,7 @@ public class CompositeDetector implements DesignPatternDetector {
 	private Map<String, IClass> classMap;
 	private List<String> detectedComponents;
 	private List<String> detectedComposites;
+	DesignPatternInstance thisInstance;
 	private Set<String> classesInPattern;
 	private final static List<String> COLLECTIONS = new ArrayList<String>();
 
@@ -44,7 +46,8 @@ public class CompositeDetector implements DesignPatternDetector {
 		this.classMap = classes.getClasses();
 	}
 
-	public void detectPattern(String[] args) {
+	public void detectPattern(String[] args, List<DesignPatternInstance> instances) {
+		thisInstance = new DesignPatternInstance("Composite");
 		// First, we find the "seed" composites
 		findSeedComposites();
 
@@ -56,6 +59,7 @@ public class CompositeDetector implements DesignPatternDetector {
 
 		// Check the rest of the components
 		identifyPatternClasses();
+		instances.add(thisInstance);
 	}
 
 	private void identifyPatternClasses() {
@@ -72,8 +76,8 @@ public class CompositeDetector implements DesignPatternDetector {
 						}
 					}
 				}
-
 			}
+			
 			IClass superClass = classMap.get(cls.getSuperClass());
 			if (superClass != null && isComposite(superClass) && !isComposite(cls)) {
 				IClassDecorator decoratedClass = (IClassDecorator) cls;
@@ -93,12 +97,14 @@ public class CompositeDetector implements DesignPatternDetector {
 			if (classesInPattern.contains(cls.getName()))
 				continue;
 			if (classesInPattern.contains(cls.getSuperClass())) {
+				this.thisInstance.addClass(cls.getName());
 				classesInPattern.add(cls.getName());
 				foundSomething = true;
 			}
 			for (String interfaze : cls.getInterfaces()) {
 				if (classesInPattern.contains(interfaze)) {
 					classesInPattern.add(cls.getName());
+					this.thisInstance.addClass(cls.getName());
 					foundSomething = true;
 				}
 			}
@@ -148,7 +154,7 @@ public class CompositeDetector implements DesignPatternDetector {
 			}
 		}
 	}
-	
+
 	private void checkInterfacesArray(IClass cls, IField field) {
 		String type = field.getType();
 		type = type.substring(0, type.length() - 2);
@@ -161,7 +167,7 @@ public class CompositeDetector implements DesignPatternDetector {
 
 	private void checkSupersArray(IClass cls, IField field) {
 		List<String> supers = getSuperClasses(cls);
-		String type = field.getType().substring(0, field.getType().length()-2);
+		String type = field.getType().substring(0, field.getType().length() - 2);
 		if (supers.contains(type.replace('.', '/')) && !isComposite(cls)) {
 			IClassDecorator decoratedClass = (IClassDecorator) cls;
 			decoratedClass.decorate(new CompositeDecorator(type.replace('.', '/')));
@@ -180,7 +186,6 @@ public class CompositeDetector implements DesignPatternDetector {
 			newCls = classMap.get(zuper);
 			zuper = newCls.getSuperClass();
 		}
-
 		return supers;
 	}
 
@@ -200,6 +205,8 @@ public class CompositeDetector implements DesignPatternDetector {
 					castedComponent.decorate(new CompositeComponentDecorator());
 					detectedComponents.add(castedComponent.getName());
 					classesInPattern.add(castedComponent.getName());
+					this.thisInstance.setInstanceName(castedComponent.getName());
+					this.thisInstance.addClass(castedComponent.getName());
 				}
 			}
 		}

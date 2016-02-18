@@ -52,6 +52,7 @@ public class UMLParser {
 		//Testing purposes. Remove later. Singletons are detected!
 		for(DesignPatternInstance instance : parser.getDesignPatternInstances()){
 			System.out.println(instance.getDesignPattern());
+			System.out.println(instance.getClasses());
 		}
 	}
 
@@ -133,7 +134,7 @@ public class UMLParser {
 			DesignPatternDetector detector = detectors.get(pattern);
 			//Check for patterns that were not added
 			String[] args = this.phaseAttributes.get(pattern); 
-			if (detector != null) detector.detectPattern(args);
+			if (detector != null) detector.detectPattern(args, this.designPatternInstances);
 		}
 	}
 
