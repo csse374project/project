@@ -1,4 +1,4 @@
-package classRepresentation.designPaterns;
+package classRepresentation.designPatterns;
 
 import java.util.ArrayList;
 import java.util.HashMap;

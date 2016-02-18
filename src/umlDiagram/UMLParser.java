@@ -22,10 +22,10 @@ import classRepresentation.Classes;
 import classRepresentation.UMLClass;
 import classRepresentation.decorators.IClassDecorator;
 import classRepresentation.decorators.TopLevelDecorator;
-import classRepresentation.designPaterns.AdapterDetector;
-import classRepresentation.designPaterns.CompositeDetector;
-import classRepresentation.designPaterns.DecoratorDetector;
-import classRepresentation.designPaterns.DesignPatternDetector;
+import classRepresentation.designPatterns.AdapterDetector;
+import classRepresentation.designPatterns.CompositeDetector;
+import classRepresentation.designPatterns.DecoratorDetector;
+import classRepresentation.designPatterns.DesignPatternDetector;
 import interfaces.IClass;
 
 public class UMLParser {
@@ -41,7 +41,7 @@ public class UMLParser {
 		phases.add("Singleton");
 		phases.add("Adapter");
 		phases.add("Composite");
-		UMLParser parser = new UMLParser(Arrays.asList(args), "", "",
+		UMLParser parser = new UMLParser(Arrays.asList(args), "", ".\\input_output",
 				"C:\\Program Files (x86)\\Graphviz2.38\\bin\\dot.exe", phases, phaseAtt);
 		parser.parseByteCode();
 		parser.detectPatterns();
@@ -50,7 +50,7 @@ public class UMLParser {
 
 	private static String[] classesToAccept = new String[0];
 	@SuppressWarnings("unused") // Will be used once the UI gets farther along
-	private String inputFolder, outputDir, dotPath;
+	private String inputDir, outputDir, dotPath;
 	private Map<String, DesignPatternDetector> detectors;
 	private Map<String, String[]> phaseAttributes;
 	private List<String> inputClasses, inputPhases;
@@ -60,7 +60,7 @@ public class UMLParser {
 			List<String> phases, Map<String, String[]> phaseAttributes) {
 		classes = new Classes();
 		inputClasses = argClasses;
-		this.inputFolder = inputFolder;
+		this.inputDir = inputDir;
 		this.outputDir = outputDirectory;
 		this.dotPath = dotPath;
 		this.inputPhases = phases;
@@ -126,7 +126,8 @@ public class UMLParser {
 	public void createGraph() {
 		String digraph = this.classes.printGraphVizInput();
 		// Temp file to write digraph string to
-		Path path = Paths.get("./input_output/temp.dot");
+		String tempPath = this.outputDir + "\\temp.dot";
+		Path path = Paths.get(tempPath);
 		File f = path.toFile();
 		f.delete();
 
@@ -138,10 +139,12 @@ public class UMLParser {
 			e.printStackTrace();
 		}
 
-		ProcessBuilder pb = new ProcessBuilder(this.dotPath, "-Tpng", "temp.dot", "-o", ".\\input_output\\out.png");
+		String outPath = this.outputDir + "\\out.png";
+		ProcessBuilder pb = new ProcessBuilder(this.dotPath, "-Tpng", tempPath, "-o", outPath);
 
 		try {
-			File log = new File(".\\input_output\\errorLog.txt");
+			String logPath = this.outputDir + "\\errorLog.txt";
+			File log = new File(logPath);
 			pb.redirectErrorStream(true);
 			pb.redirectOutput(Redirect.appendTo(log));
 			pb.start();

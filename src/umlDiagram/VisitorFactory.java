@@ -7,9 +7,9 @@ import org.objectweb.asm.ClassVisitor;
 import org.objectweb.asm.Opcodes;
 
 import classRepresentation.decorators.IClassDecorator;
-import classRepresentation.designPaterns.AdapterClassVisitor;
-import classRepresentation.designPaterns.CompositeVisitor;
-import classRepresentation.designPaterns.SingletonFieldVisitor;
+import classRepresentation.designPatterns.AdapterClassVisitor;
+import classRepresentation.designPatterns.CompositeVisitor;
+import classRepresentation.designPatterns.SingletonFieldVisitor;
 
 public class VisitorFactory {
 

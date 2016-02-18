@@ -1,4 +1,4 @@
-package classRepresentation.designPaterns;
+package classRepresentation.designPatterns;
 
 import java.util.Arrays;
 import java.util.List;
@@ -35,10 +35,8 @@ public class SingletonMethodVisitor extends ClassVisitor {
 	public MethodVisitor visitMethod(int access, String name, String desc, String signature, String[] exceptions) {
 		MethodVisitor toDecorate = super.visitMethod(access, name, desc, signature, exceptions);
 		Type returnType = Type.getReturnType(desc);
-		System.out.println("Howdy!  Looks like the variable requireGetInstance is " + requireGetInstance + "!");
 		if (currentClass.getName().equals(UMLParser.replaceDotsWithSlashes(returnType.getClassName()))) {
 			if (!requireGetInstance || name.equals("getInstance")) {
-				System.out.println("You have added a class as a singleton!");
 				currentClass.decorate(new SingletonDecorator());
 				currentClass.addAssociatedClass(currentClass.getName());
 			}

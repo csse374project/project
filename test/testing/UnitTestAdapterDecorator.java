@@ -18,9 +18,9 @@ import classRepresentation.decorators.AdapterDecorator;
 import classRepresentation.decorators.AdaptionTargetDecorator;
 import classRepresentation.decorators.IClassDecorator;
 import classRepresentation.decorators.TopLevelDecorator;
-import classRepresentation.designPaterns.AdapterClassVisitor;
-import classRepresentation.designPaterns.AdapterDetector;
-import classRepresentation.designPaterns.DesignPatternDetector;
+import classRepresentation.designPatterns.AdapterClassVisitor;
+import classRepresentation.designPatterns.AdapterDetector;
+import classRepresentation.designPatterns.DesignPatternDetector;
 import interfaces.IClass;
 import umlDiagram.ClassDeclarationVisitor;
 

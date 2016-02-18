@@ -1,7 +1,7 @@
 /**
  * Interface for our DesignPatternDetectors
  */
-package classRepresentation.designPaterns;
+package classRepresentation.designPatterns;
 
 /**
  * @author shellajt
