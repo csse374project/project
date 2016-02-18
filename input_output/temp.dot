@@ -4,14 +4,27 @@ digraph UML {
 		shape = "record"
 	]
 
-	ChocolateBoilerLazy [
-		label = "{\<\<Singleton\>\>\ntestingData/ChocolateBoilerLazy|- empty: boolean\l- boiled: boolean\l- uniqueInstance: testingData.ChocolateBoilerLazy\l|+ ChocolateBoilerLazy getInstance()\l+ void fill()\l+ void drain()\l+ void boil()\l+ boolean isEmpty()\l+ boolean isBoiled()\l|}"
-		color=blue
+	AdapterSample [
+		label = "{\<\<Adapter\>\>\ntestingData/AdapterSample|- adaptee: testingData.AdapteeSample\l|+ void methodOfThings()\l+ void methodOfStuff()\l+ int testMePlease()\l|}"
+		style=filled
+		fillcolor=red
+
 	]
 
-	ChocolateBoilerEager [
-		label = "{\<\<Singleton\>\>\ntestingData/ChocolateBoilerEager|- empty: boolean\l- boiled: boolean\l- uniqueInstance: testingData.ChocolateBoilerEager\l|+ ChocolateBoilerEager getInstance()\l+ void fill()\l+ void drain()\l+ void boil()\l+ boolean isEmpty()\l+ boolean isBoiled()\l|}"
-		color=blue
+	AdapterSample -> AdapteeSample [label = "\<\<adapts\>\>"]
+
+	AdapterTargetSample [
+		label = "{\<\<Target\>\>\n\<\<Interface\>\>\ntestingData/AdapterTargetSample||+ void methodOfThings()\l+ void methodOfStuff()\l+ int testMePlease()\l|}"
+		style=filled
+		fillcolor=red
+
+	]
+
+	AdapteeSample [
+		label = "{\<\<Adaptee\>\>\ntestingData/AdapteeSample||+ String getStuff()\l+ int getNumber()\l+ void doNothing()\l|}"
+		style=filled
+		fillcolor=red
+
 	]
 
 	edge [
@@ -22,13 +35,13 @@ digraph UML {
 		style = "dashed"
 	]
 
+	AdapterSample -> AdapterTargetSample
+
 	edge [
 		arrowhead = "normal" style = "solid"
 	]
 
-	ChocolateBoilerLazy -> ChocolateBoilerLazy
-
-	ChocolateBoilerEager -> ChocolateBoilerEager
+	AdapterSample -> AdapteeSample
 
 	edge [
 		arrowhead = "normal" style = "dashed"

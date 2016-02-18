@@ -38,7 +38,7 @@ public class VisitorFactory {
 				finalVisitor = new SingletonFieldVisitor(Opcodes.ASM5, finalVisitor, topLevelDecorator,
 						phaseAttributes.get("Singleton"), designPatternInstances);
 			} else if (phase.equals("Adapter")) {
-				finalVisitor = new AdapterClassVisitor(Opcodes.ASM5, finalVisitor, topLevelDecorator);
+				finalVisitor = new AdapterClassVisitor(Opcodes.ASM5, finalVisitor, topLevelDecorator, designPatternInstances);
 			} else if (phase.equals("Composite")) {
 				finalVisitor = new CompositeVisitor(Opcodes.ASM5, finalVisitor, topLevelDecorator);
 			}

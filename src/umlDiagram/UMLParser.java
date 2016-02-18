@@ -52,6 +52,7 @@ public class UMLParser {
 		//Testing purposes. Remove later. Singletons are detected!
 		for(DesignPatternInstance instance : parser.getDesignPatternInstances()){
 			System.out.println(instance.getDesignPattern());
+			System.out.println(instance.getClasses().toString());
 		}
 	}
 
