@@ -23,6 +23,7 @@ public class CompositeDetector implements DesignPatternDetector {
 	private List<String> detectedComponents;
 	private List<String> detectedComposites;
 	DesignPatternInstance thisInstance;
+	List<DesignPatternInstance> instances;
 	private Set<String> classesInPattern;
 	private final static List<String> COLLECTIONS = new ArrayList<String>();
 
@@ -47,7 +48,7 @@ public class CompositeDetector implements DesignPatternDetector {
 	}
 
 	public void detectPattern(String[] args, List<DesignPatternInstance> instances) {
-		thisInstance = new DesignPatternInstance("Composite");
+		this.instances = instances;
 		// First, we find the "seed" composites
 		findSeedComposites();
 
@@ -59,7 +60,7 @@ public class CompositeDetector implements DesignPatternDetector {
 
 		// Check the rest of the components
 		identifyPatternClasses();
-		instances.add(thisInstance);
+		
 	}
 
 	private void identifyPatternClasses() {
@@ -205,8 +206,10 @@ public class CompositeDetector implements DesignPatternDetector {
 					castedComponent.decorate(new CompositeComponentDecorator());
 					detectedComponents.add(castedComponent.getName());
 					classesInPattern.add(castedComponent.getName());
+					thisInstance = new DesignPatternInstance("Composite");
 					this.thisInstance.setInstanceName(castedComponent.getName());
 					this.thisInstance.addClass(castedComponent.getName());
+					instances.add(thisInstance);
 				}
 			}
 		}

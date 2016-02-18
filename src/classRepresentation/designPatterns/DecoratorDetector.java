@@ -17,6 +17,8 @@ public class DecoratorDetector implements DesignPatternDetector {
 
 	private Map<String, IClass> classMap;
 	private List<String> discoveredDecorators;
+	private DesignPatternInstance thisInstance;
+	private List<DesignPatternInstance> instances;
 
 	public DecoratorDetector(Classes classes) {
 		this.classMap = classes.getClasses();
@@ -24,6 +26,7 @@ public class DecoratorDetector implements DesignPatternDetector {
 	}
 
 	public void detectPattern(String[] args, List<DesignPatternInstance> instances) {
+		this.instances = instances;
 		for (String className : classMap.keySet()) {
 			IClass currentClass = classMap.get(className);
 			if (!isDecorator(currentClass)) {
@@ -41,11 +44,15 @@ public class DecoratorDetector implements DesignPatternDetector {
 	private void checkChildDecorators(IClass clazz) {
 		List<String> interfaces = clazz.getInterfaces();
 		String superClass = clazz.getSuperClass();
-		if (discoveredDecorators.contains(superClass))
+		if (discoveredDecorators.contains(superClass)){
 			applyDecorator(clazz, null);
+			this.thisInstance.addClass(clazz.getName());
+		}
 		for (String interfaze : interfaces) {
-			if (discoveredDecorators.contains(interfaze))
+			if (discoveredDecorators.contains(interfaze)){
 				applyDecorator(clazz, null);
+				this.thisInstance.addClass(clazz.getName());
+			}
 		}
 	}
 
@@ -59,6 +66,10 @@ public class DecoratorDetector implements DesignPatternDetector {
 				if (fld.getType().replace('.', '/').equals(cls.getInterfaces().get(x))) {
 					applyDecorator(clazz, cls.getInterfaces().get(x));
 					discoveredDecorators.add(clazz.getName());
+					this.thisInstance = new DesignPatternInstance("Decorator");
+					this.thisInstance.setInstanceName(clazz.getName());
+					this.thisInstance.addClass(clazz.getName());
+					this.instances.add(thisInstance);
 					break;
 				}
 			}
@@ -72,10 +83,15 @@ public class DecoratorDetector implements DesignPatternDetector {
 			String curSuper = cls.getSuperClass();
 			for (int i = 0; i < fields.size(); i++) {
 				if ((fields.get(i).getType()).replace(".", "/").equals(curSuper)) {
-					if (!isDecorator(clazz))
+					if (!isDecorator(clazz)) {
 						applyDecorator(clazz, curSuper);
-					discoveredDecorators.add(clazz.getName());
-					break;
+						discoveredDecorators.add(clazz.getName());
+						this.thisInstance = new DesignPatternInstance("Decorator");
+						this.thisInstance.setInstanceName(clazz.getName());
+						this.thisInstance.addClass(clazz.getName());
+						this.instances.add(thisInstance);
+						break;
+					}
 				}
 			}
 			cls = classMap.get(curSuper);
@@ -86,7 +102,8 @@ public class DecoratorDetector implements DesignPatternDetector {
 		IClassDecorator decoratedClass = (IClassDecorator) clazz;
 		IClassDecorator cls = decoratedClass;
 		while (cls.getSuperClass() != component && !cls.getInterfaces().contains(component)) {
-			if(!isDecorator(cls))cls.decorate(new DecoratorDecorator(null));
+			if (!isDecorator(cls))
+				cls.decorate(new DecoratorDecorator(null));
 			cls = (IClassDecorator) classMap.get(cls.getSuperClass());
 			if (cls == null) {
 				return;
