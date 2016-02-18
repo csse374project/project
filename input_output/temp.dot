@@ -84,14 +84,19 @@ digraph UML {
 		style = "dashed"
 	]
 
+<<<<<<< HEAD
 	AbstractSprite -> ISprite
 
 	AbstractCompositeSprite -> ISprite
+=======
+	AdapterSample -> AdapterTargetSample
+>>>>>>> b9c2a4bb76c011f8fb329aa58ddf9a138ea6e8a1
 
 	edge [
 		arrowhead = "normal" style = "solid"
 	]
 
+<<<<<<< HEAD
 	MainWindow -> AnimationPanel
 
 	SpriteFactory -> ISprite
@@ -99,6 +104,9 @@ digraph UML {
 	AnimationPanel -> ISprite
 
 	AbstractCompositeSprite -> ISprite
+=======
+	AdapterSample -> AdapteeSample
+>>>>>>> b9c2a4bb76c011f8fb329aa58ddf9a138ea6e8a1
 
 	edge [
 		arrowhead = "normal" style = "dashed"
