@@ -4,42 +4,8 @@ digraph UML {
 		shape = "record"
 	]
 
-	AdapterSample [
-		label = "{\<\<Adapter\>\>\ntestingData/AdapterSample|- adaptee: testingData.AdapteeSample\l|+ void methodOfThings()\l+ void methodOfStuff()\l+ int testMePlease()\l|}"
-		style=filled
-		fillcolor=red
-
-	]
-
-	AdapterSample -> AdapteeSample [label = "\<\<adapts\>\>"]
-
-	edge [
-		arrowhead = "empty" style = "dashed"
-	]
-	AdapterSample -> AdapterTargetSample	ChocolateBoilerLazy [
-		label = "{\<\<Singleton\>\>\ntestingData/ChocolateBoilerLazy|- empty: boolean\l- boiled: boolean\l- uniqueInstance: testingData.ChocolateBoilerLazy\l|+ ChocolateBoilerLazy getInstance()\l+ void fill()\l+ void drain()\l+ void boil()\l+ boolean isEmpty()\l+ boolean isBoiled()\l|}"
-		color=blue
-	]
-
-	SampleInterface01 [
-		label = "{\<\<Interface\>\>\ntestingData/SampleInterface01|||}"
-		
-	]
-
-	AdapteeSample [
-		label = "{\<\<Adaptee\>\>\ntestingData/AdapteeSample||+ String getStuff()\l+ int getNumber()\l+ void doNothing()\l|}"
-		style=filled
-		fillcolor=red
-
-	]
-
-	SampleInterface02 [
-		label = "{\<\<Interface\>\>\ntestingData/SampleInterface02|||}"
-		
-	]
-
-	ChocolateBoilerEager [
-		label = "{\<\<Singleton\>\>\ntestingData/ChocolateBoilerEager|- empty: boolean\l- boiled: boolean\l- uniqueInstance: testingData.ChocolateBoilerEager\l|+ ChocolateBoilerEager getInstance()\l+ void fill()\l+ void drain()\l+ void boil()\l+ boolean isEmpty()\l+ boolean isBoiled()\l|}"
+	SampleSingletonClass [
+		label = "{\<\<Singleton\>\>\ntestingData/SampleSingletonClass|- instance: testingData.SampleSingletonClass\l+ useless: testingData.SampleClassForInitializing\l|+ SampleSingletonClass getInstance()\l|}"
 		color=blue
 	]
 
