@@ -13,6 +13,7 @@ import java.util.Properties;
 import java.util.Set;
 
 import javax.swing.BoxLayout;
+import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -181,8 +182,9 @@ public class MainWindow {
 	}
 	
 	private JScrollPane getImagePanel() {
-		ImageIcon image = new ImageIcon("input_output/out.png");
+//		ImageIcon image = new ImageIcon("input_output/out.png");
 //		Icon image = new LoadingProxy("input_output/TolkienMiddleEarthMap2.jpg");
+		Icon image = new ImageProxy("input_output/out.png");
 		
 		JScrollPane scrollPanel = new JScrollPane(new JLabel(image),
 				JScrollPane.VERTICAL_SCROLLBAR_ALWAYS, JScrollPane.HORIZONTAL_SCROLLBAR_ALWAYS);
