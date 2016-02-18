@@ -145,6 +145,7 @@ public class UMLParser {
 		String digraph = this.classes.printGraphVizInput();
 		// Temp file to write digraph string to
 		String tempPath = this.outputDir + "\\temp.dot";
+		System.out.println("Temp Path: " + tempPath);
 		Path path = Paths.get(tempPath);
 		File f = path.toFile();
 		f.delete();
@@ -159,9 +160,9 @@ public class UMLParser {
 
 		String outPath = this.outputDir + "\\out.png";
 		ProcessBuilder pb = new ProcessBuilder(this.dotPath, outputType, tempPath, "-o", outPath);
-
 		try {
 			String logPath = this.outputDir + "\\errorLog.txt";
+			System.out.println("outPutDir: " + logPath);
 			File log = new File(logPath);
 			pb.redirectErrorStream(true);
 			pb.redirectOutput(Redirect.appendTo(log));

@@ -4,19 +4,20 @@ import java.awt.Component;
 import java.awt.Graphics;
 import java.awt.MediaTracker;
 import java.io.File;
+import java.io.IOException;
 import java.net.URL;
 
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
 
-public class LoadingProxy implements Icon {
+public class ImageProxy implements Icon {
 
 	volatile ImageIcon imageIcon;
 	final String imagePath;
 	Thread retrievalThread;
 	boolean retrieving = false;
 
-	public LoadingProxy(String path) {
+	public ImageProxy(String path) {
 		this.imagePath = path;
 	}
 
@@ -29,7 +30,7 @@ public class LoadingProxy implements Icon {
 			g.drawString("Reticulating splines...", x, y);
 			if (!retrieving) {
 				retrieving = true;
-
+				
 				retrievalThread = new Thread(new Runnable() {
 					public void run() {
 						try {
@@ -40,22 +41,18 @@ public class LoadingProxy implements Icon {
 							}
 							if (imageURL != null) {
 								imageIcon = new ImageIcon(imageURL);
+								imageFile.delete();
 							}
 							if (imageIcon == null) {
 								retrieving = false;
 							}
-						} catch (Exception e) {
+						} catch (IOException e) {
 							e.printStackTrace();
 						}
 					}
 				});
 				retrievalThread.start();
 			}
-//			try {
-//				Thread.sleep(100);
-//			} catch (InterruptedException e) {
-//				// do nothing
-//			}
 		}
 		c.repaint();
 	}
