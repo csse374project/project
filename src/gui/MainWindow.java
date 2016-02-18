@@ -31,6 +31,7 @@ public class MainWindow {
 	private List<String> classArgs, phases;
 	private String inputFolder, outputDirectory, dotPath;
 	private List<PatternViewsTree> buttonTrees;
+	private UMLParser parser;
 
 	public MainWindow(Properties config) {
 		this.config = config;
@@ -101,7 +102,7 @@ public class MainWindow {
 	}
 	
 	private void runUMLparser() throws IOException {
-		UMLParser parser = new UMLParser(classArgs, inputFolder, outputDirectory, dotPath, phases, guiApp.getPatternToSettings());
+		parser = new UMLParser(classArgs, inputFolder, outputDirectory, dotPath, phases, guiApp.getPatternToSettings());
 		parser.parseByteCode();
 		parser.detectPatterns();
 		parser.createGraph();
