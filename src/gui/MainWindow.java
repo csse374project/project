@@ -182,9 +182,9 @@ public class MainWindow {
 	}
 	
 	private JScrollPane getImagePanel() {
-//		ImageIcon image = new ImageIcon("input_output/out.png");
-//		Icon image = new LoadingProxy("input_output/TolkienMiddleEarthMap2.jpg");
-		Icon image = new ImageProxy("input_output/out.png");
+		System.out.println("input_output/out.png");
+		System.out.println(outputDirectory + "/out.png");
+		Icon image = new ImageProxy(outputDirectory + "/out.png");
 		
 		JScrollPane scrollPanel = new JScrollPane(new JLabel(image),
 				JScrollPane.VERTICAL_SCROLLBAR_ALWAYS, JScrollPane.HORIZONTAL_SCROLLBAR_ALWAYS);

@@ -2,8 +2,8 @@
 #
 inputDirec=
 targetClasses=testingData.SampleSingletonClass
-outputDirec=.\\input_output
-dotPath=C:\\Program Files (x86)\\Graphviz2.38\\bin\\dot.exe
+outputDirec=./input_output
+dotPath=C:/Program Files (x86)/Graphviz2.38/bin/dot.exe
 phases=Adapter Decorator Composite Singleton
 adapter=
 composite=
