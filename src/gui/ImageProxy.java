@@ -25,30 +25,23 @@ public class ImageProxy implements Icon {
 	public void paintIcon(Component c, Graphics g, int x, int y) {
 		if (imageIcon != null && imageIcon.getImageLoadStatus() == MediaTracker.COMPLETE) {
 			imageIcon.paintIcon(c, g, x, y);
-			System.out.println("Testing");
 		}
 		else {
 			g.drawString("Reticulating splines...", x, y);
-			System.out.println("Wtf?");
 			if (!retrieving) {
 				retrieving = true;
-
-				System.out.println("Sup?");
 				
 				retrievalThread = new Thread(new Runnable() {
 					public void run() {
-						System.out.println("Yo!");
 						try {
 							File imageFile = new File(imagePath);
 							URL imageURL = null;
-							System.out.println("Hello!");
 							if (imageFile.exists()) {
 								imageURL = imageFile.toURI().toURL();
 							}
 							if (imageURL != null) {
 								imageIcon = new ImageIcon(imageURL);
-								System.out.println("Howdy!");
-								System.out.println("file deleted!: " + imageFile.delete());
+								imageFile.delete();
 							}
 							if (imageIcon == null) {
 								retrieving = false;
