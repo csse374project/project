@@ -6,6 +6,7 @@ import static org.junit.Assert.assertTrue;
 
 import java.io.IOException;
 import java.lang.reflect.Field;
+import java.util.ArrayList;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -24,6 +25,7 @@ import classRepresentation.decorators.TopLevelDecorator;
 import classRepresentation.designPatterns.CompositeDetector;
 import classRepresentation.designPatterns.CompositeVisitor;
 import classRepresentation.designPatterns.DesignPatternDetector;
+import gui.DesignPatternInstance;
 import interfaces.IClass;
 import umlDiagram.ClassDeclarationVisitor;
 import umlDiagram.ClassFieldVisitor;
@@ -67,7 +69,7 @@ public class UnitTestSimpleCompositeDetector {
 		setupHelper(classes, arrayComponent, "testingData.compositePattern.CompositeComponentWithArray");
 		
 		DesignPatternDetector composite = new CompositeDetector(classes);
-		composite.detectPattern(new String[]{});
+		composite.detectPattern(new String[]{}, new ArrayList<DesignPatternInstance>());
 	}
 	
 	private static void setupHelper(Classes classes, IClassDecorator top, String className) throws IOException {
