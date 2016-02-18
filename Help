@@ -1,0 +1,18 @@
+How to use this program:
+
+Create a config file for this program in the following style:
+inputDirec= *A directory to recursively scan for .class files to analyze*
+targetClasses= *Any other classes that you would like to analyze*
+outputDirec= *Directory to save the resulting image to*
+dotPath= *The installation of your dot.exe*
+phases= *The phases you would like your program to run through*
+adapter= *Any configurations for the adapter phase*
+composite= *Any configurations for the composite phase*
+decorator= *Any configurations for the decorator phase*
+singleton= *Any configurations for the singleton phase*
+
+Load your config file by clicking the "Load Config" button and selecting your config file.
+
+Click "Analyze" and wait for the program to load the resulting image.
+
+Select which detected patterns you would like to view by checking the boxes to the left.
