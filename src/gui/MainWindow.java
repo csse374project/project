@@ -11,6 +11,8 @@ import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashSet;
@@ -195,12 +197,17 @@ public class MainWindow {
 					runUMLparser();
 					JFileChooser chooser = new JFileChooser();
 					chooser.setDialogTitle("select a directory to export to");
-					chooser.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
+//					chooser.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
 					chooser.showOpenDialog(frame);
-					File fileToSaveTo = chooser.getSelectedFile();
-					System.out.println("SAVE FILE TO: " + fileToSaveTo.getAbsolutePath());
-					File fileToRead = new File("input_output/out.png");
-					exportImage(fileToSaveTo, fileToRead);
+					File saveFile = chooser.getSelectedFile();
+					String savePath = saveFile.getAbsolutePath();
+					if (saveFile.exists()) {
+						saveFile.delete();
+					}
+					Files.copy(Paths.get("input_output/out.png"), Paths.get(savePath));
+					
+//					File fileToCopy = new File("input_output/out.png");
+//					exportImage(fileToRead, fileToSaveTo);
 				} catch (IOException e1) {
 					e1.printStackTrace();
 					String message = "failed to load design on export!\n" + e1.getMessage();
@@ -214,16 +221,24 @@ public class MainWindow {
 		return panel;
 	}
 	
-	private void exportImage(File imagefile, File saveDest) throws IOException {
-		FileInputStream imageStream = new FileInputStream(imagefile);
+	private void exportImage(File imageFile, File saveDest) throws IOException {
+		System.out.println("started 'export image'");
+		if (saveDest.exists()) {
+			saveDest.delete();
+		}
+		saveDest.createNewFile();
+		
+		FileInputStream imageStream = new FileInputStream(imageFile);	
 		BufferedReader reader = new BufferedReader(new InputStreamReader(imageStream));
 		FileOutputStream exportStream = new FileOutputStream(saveDest);
 
 		String line = reader.readLine();
 		while(line != null) {
 			exportStream.write(line.getBytes());
+			exportStream.write('\n');
 			line = reader.readLine();
 		}
+		imageFile.delete();
 		imageStream.close();
 		exportStream.close();
 	}
