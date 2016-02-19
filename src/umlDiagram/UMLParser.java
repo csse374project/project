@@ -51,12 +51,6 @@ public class UMLParser {
 		parser.parseByteCode();
 		parser.detectPatterns();
 		parser.createGraph();
-		
-		//Testing purposes. Remove later. Singletons are detected!
-		for(DesignPatternInstance instance : parser.getDesignPatternInstances()){
-			System.out.println(instance.getDesignPattern());
-			System.out.println(instance.getClasses());
-		}
 	}
 
 	private static String[] classesToAccept = new String[0];
@@ -111,11 +105,9 @@ public class UMLParser {
 	
 	private void findFiles(File directory) {
 		if (!directory.exists()) {
-			System.out.println("File does not exist!");
 			return;
 		}
 		else if (!directory.isDirectory()) {
-			System.out.println("File is not a directory!");
 			return;
 		}
 		File[] files = directory.listFiles();

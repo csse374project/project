@@ -248,8 +248,6 @@ public class MainWindow {
 	}
 	
 	private JScrollPane getImagePanel() {
-		System.out.println("input_output/out.png");
-		System.out.println(outputDirectory + "/out.png");
 		Icon image = new ImageProxy(outputDirectory + "/out.png");
 		JLabel picture = new JLabel(image);
 		picture.setMaximumSize(new Dimension(5000,5000));
