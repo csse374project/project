@@ -1,9 +1,12 @@
 package testing;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
 
 import java.io.IOException;
 import java.lang.reflect.Field;
+import java.util.ArrayList;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -19,8 +22,8 @@ import classRepresentation.decorators.CompositeLeafDecorator;
 import classRepresentation.decorators.IClassDecorator;
 import classRepresentation.decorators.TopLevelDecorator;
 import classRepresentation.designPatterns.CompositeDetector;
-import classRepresentation.designPatterns.CompositeVisitor;
 import classRepresentation.designPatterns.DesignPatternDetector;
+import gui.DesignPatternInstance;
 import interfaces.IClass;
 import umlDiagram.ClassDeclarationVisitor;
 import umlDiagram.ClassFieldVisitor;
@@ -44,7 +47,7 @@ public class UnitTestCompositeDetector {
 		setupHelper(classes, component, "testingData.SampleInterface01");
 		
 		DesignPatternDetector composite = new CompositeDetector(classes);
-		composite.detectPattern(new String[]{});
+		composite.detectPattern(new String[]{}, new ArrayList<DesignPatternInstance>());
 		System.out.println(isLeaf(leaf));
 	}
 	

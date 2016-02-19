@@ -9,6 +9,7 @@ import classRepresentation.decorators.AdapteeDecorator;
 import classRepresentation.decorators.AdapterDecorator;
 import classRepresentation.decorators.AdaptionTargetDecorator;
 import classRepresentation.decorators.IClassDecorator;
+import gui.DesignPatternInstance;
 import interfaces.IClass;
 
 public class AdapterDetector implements DesignPatternDetector{
@@ -19,7 +20,7 @@ public class AdapterDetector implements DesignPatternDetector{
 		classMap = classes.getClasses();
 	}
 
-	public void detectPattern(String[] args) {
+	public void detectPattern(String[] args, List<DesignPatternInstance> instances) {
 		for (String className : classMap.keySet()) {
 			IClassDecorator clazz = (IClassDecorator) classMap.get(className);
 			AdapterDecorator adapter = getAdapter(clazz);
