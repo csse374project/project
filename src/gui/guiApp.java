@@ -53,6 +53,7 @@ public class guiApp {
 		panel.add(getLoadConfigButton(), BorderLayout.WEST);
 		panel.add(getAnalyzeButton(), BorderLayout.EAST);
 		panel.add(getAboutButton());
+		panel.add(getHelpButton());
 		landingWindow.add(panel, BorderLayout.CENTER);
 		
 		landingWindow.setVisible(true);
@@ -70,19 +71,16 @@ public class guiApp {
 					String line;
 					StringBuilder str = new StringBuilder();
 					while ((line = about.readLine()) != null) {
-						if (line.isEmpty())
-							line = "\n";
 						str.append(line);
+						str.append("\n");
 					}
 					JOptionPane.showMessageDialog(landingWindow, str);
 					about.close();
 				} catch (FileNotFoundException e1) {
 					e1.printStackTrace();
 				} catch (HeadlessException e1) {
-					// TODO Auto-generated catch block
 					e1.printStackTrace();
 				} catch (IOException e1) {
-					// TODO Auto-generated catch block
 					e1.printStackTrace();
 				}
 			}
@@ -90,6 +88,37 @@ public class guiApp {
 		});
 		
 		return aboutButt;
+	}
+	
+	private static JButton getHelpButton() {
+		JButton helpButt = new JButton("Help");
+		
+		helpButt.addActionListener(new ActionListener(){
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				try {
+					BufferedReader help = new BufferedReader(new FileReader("Help"));
+					String line;
+					StringBuilder str = new StringBuilder();
+					while ((line = help.readLine()) != null) {
+						str.append(line);
+						str.append("\n");
+					}
+					JOptionPane.showMessageDialog(landingWindow, str);
+					help.close();
+				} catch (FileNotFoundException e1) {
+					e1.printStackTrace();
+				} catch (HeadlessException e1) {
+					e1.printStackTrace();
+				} catch (IOException e1) {
+					e1.printStackTrace();
+				}
+			}
+			
+		});
+		
+		return helpButt;
 	}
 	
 	private static JButton getAnalyzeButton() {
