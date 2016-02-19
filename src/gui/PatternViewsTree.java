@@ -37,6 +37,7 @@ public class PatternViewsTree extends JPanel {
 		ArrayList<String> list = new ArrayList<>();
 		for (AppCheckBox button : buttons) {
 			if (button.isSelected()) {
+				System.out.println(button.isSelected());
 				List<String> classes = button.getDesignInstance().getClasses();
 				list.addAll(classes);
 			}
@@ -89,6 +90,7 @@ public class PatternViewsTree extends JPanel {
 		@Override
 		public void actionPerformed(ActionEvent e) {
 			for (AppCheckBox button : buttons) {
+				printButtonsSelected();
 				if(! button.isSelected()) {
 					topButton.setSelected(false);
 					return;
@@ -97,4 +99,11 @@ public class PatternViewsTree extends JPanel {
 			topButton.setSelected(true);
 		}
 	}
+	
+	private void printButtonsSelected() {
+		System.out.println(topButton.isSelected());
+		for(AppCheckBox button : buttons) {
+			System.out.println("\t" + button.isSelected());
+		}
+ 	}
 }

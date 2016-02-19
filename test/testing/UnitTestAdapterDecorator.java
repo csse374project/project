@@ -4,6 +4,8 @@ import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -21,21 +23,24 @@ import classRepresentation.decorators.TopLevelDecorator;
 import classRepresentation.designPatterns.AdapterClassVisitor;
 import classRepresentation.designPatterns.AdapterDetector;
 import classRepresentation.designPatterns.DesignPatternDetector;
+import gui.DesignPatternInstance;
 import interfaces.IClass;
 import umlDiagram.ClassDeclarationVisitor;
 
 public class UnitTestAdapterDecorator {
 	
 	private TopLevelDecorator adapter, adaptee, target, singleton;
+	private List<DesignPatternInstance> designPattern;
 	
 	@Before 
 	public void setup() throws IOException {
 		Classes classes = new Classes();
 		IClass toDecorate = new UMLClass();
 		adapter = new TopLevelDecorator(toDecorate);
+		designPattern = new ArrayList<DesignPatternInstance>();
 		ClassReader reader = new ClassReader("testingData.AdapterSample");
 		ClassVisitor declVisitor = new ClassDeclarationVisitor(Opcodes.ASM5, adapter);
-		ClassVisitor adapterVisitor = new AdapterClassVisitor(Opcodes.ASM5, declVisitor, adapter);
+		ClassVisitor adapterVisitor = new AdapterClassVisitor(Opcodes.ASM5, declVisitor, adapter, designPattern);
 		reader.accept(adapterVisitor, ClassReader.EXPAND_FRAMES);
 		classes.addClass(adapter);
 		
@@ -43,7 +48,7 @@ public class UnitTestAdapterDecorator {
 		adaptee = new TopLevelDecorator(toDecorate);
 		reader = new ClassReader("testingData.AdapteeSample");
 		declVisitor = new ClassDeclarationVisitor(Opcodes.ASM5, adaptee);
-		adapterVisitor = new AdapterClassVisitor(Opcodes.ASM5, declVisitor, adaptee);
+		adapterVisitor = new AdapterClassVisitor(Opcodes.ASM5, declVisitor, adaptee, designPattern);
 		reader.accept(adapterVisitor, ClassReader.EXPAND_FRAMES);
 		classes.addClass(adaptee);
 		
@@ -51,7 +56,7 @@ public class UnitTestAdapterDecorator {
 		target = new TopLevelDecorator(toDecorate);
 		reader = new ClassReader("testingData.AdapterTargetSample");
 		declVisitor = new ClassDeclarationVisitor(Opcodes.ASM5, target);
-		adapterVisitor = new AdapterClassVisitor(Opcodes.ASM5, declVisitor, target);
+		adapterVisitor = new AdapterClassVisitor(Opcodes.ASM5, declVisitor, target, designPattern);
 		reader.accept(adapterVisitor, ClassReader.EXPAND_FRAMES);
 		classes.addClass(target);
 		
@@ -59,12 +64,12 @@ public class UnitTestAdapterDecorator {
 		singleton = new TopLevelDecorator(toDecorate);
 		reader = new ClassReader("testingData.SampleSingletonClass");
 		declVisitor = new ClassDeclarationVisitor(Opcodes.ASM5, singleton);
-		adapterVisitor = new AdapterClassVisitor(Opcodes.ASM5, declVisitor, singleton);
+		adapterVisitor = new AdapterClassVisitor(Opcodes.ASM5, declVisitor, singleton, designPattern);
 		reader.accept(adapterVisitor, ClassReader.EXPAND_FRAMES);
 		classes.addClass(singleton);
 		
 		DesignPatternDetector detector = new AdapterDetector(classes);
-		detector.detectPattern(new String[]{});
+		detector.detectPattern(new String[]{}, new ArrayList<DesignPatternInstance>());
 		
 	}
 

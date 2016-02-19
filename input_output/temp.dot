@@ -4,118 +4,81 @@ digraph UML {
 		shape = "record"
 	]
 
-	ISprite [
-		label = "{\<\<Composite Component\>\>\n\<\<Interface\>\>\nproblem/sprites/ISprite||+ void move(java.awt.Dimension)\l+ Shape getShape()\l+ Iterator iterator()\l|}"
-		style=filled
-		fillcolor=yellow
-
+	ChocolateBoilerLazy [
+		label = "{\<\<Singleton\>\>\ntestingData/ChocolateBoilerLazy|- empty: boolean\l- boiled: boolean\l- uniqueInstance: testingData.ChocolateBoilerLazy\l|+ ChocolateBoilerLazy getInstance()\l+ void fill()\l+ void drain()\l+ void boil()\l+ boolean isEmpty()\l+ boolean isBoiled()\l|}"
+		color=blue
 	]
 
-	AbstractSprite [
-		label = "{\<\<Leaf\>\>\nproblem/sprites/AbstractSprite|# dx: double\l# dy: double\l# shape: java.awt.Shape\l|# Rectangle2D computeNewBoundsAfterMoving(java.awt.Dimension)\l+ Shape getShape()\l+ void move(java.awt.Dimension)\l+ Iterator iterator()\l|}"
-		style=filled
-		fillcolor=yellow
-
-	]
-
-	SnowmanSprite [
-		label = "{\<\<Composite\>\>\nproblem/sprites/SnowmanSprite||+ void move(java.awt.Dimension)\l|}"
-		style=filled
-		fillcolor=yellow
-
-	]
-
-	RectangleSprite [
-		label = "{\<\<Leaf\>\>\nproblem/sprites/RectangleSprite||+ void move(java.awt.Dimension)\l|}"
-		style=filled
-		fillcolor=yellow
-
-	]
-
-	SnowmanWithBoxSprite [
-		label = "{\<\<Composite\>\>\nproblem/sprites/SnowmanWithBoxSprite||+ void move(java.awt.Dimension)\l|}"
-		style=filled
-		fillcolor=yellow
-
-	]
-
-	MainWindow [
-		label = "{problem/graphics/MainWindow|- frame: javax.swing.JFrame\l- actionPanel: javax.swing.JPanel\l- animationPanel: problem.graphics.AnimationPanel\l- moveButton: javax.swing.JButton\l- createButton: javax.swing.JButton\l- resetButton: javax.swing.JButton\l|- void createWidgets(java.lang.String, long)\l- void assignActions()\l+ void show()\l  AnimationPanel access$0(problem.graphics.MainWindow)\l  JButton access$1(problem.graphics.MainWindow)\l  JButton access$2(problem.graphics.MainWindow)\l|}"
+	ClassDeclarationVisitor [
+		label = "{umlDiagram/ClassDeclarationVisitor|- currentClass: classRepresentation.decorators.IClassDecorator\l|+ void visit(int, int, java.lang.String, java.lang.String, java.lang.String, java.lang.String[])\l|}"
 		
 	]
 
-	CircleSprite [
-		label = "{\<\<Leaf\>\>\nproblem/sprites/CircleSprite||+ void move(java.awt.Dimension)\l|}"
-		style=filled
-		fillcolor=yellow
-
-	]
-
-	SpriteFactory [
-		label = "{problem/sprites/SpriteFactory|+ DX: double\l+ DY: double\l+ WIDTH: double\l+ HEIGHT: double\l- random: java.util.Random\l- sprites: java.util.List[java/lang/Class, problem/sprites/ISprite]\l|+ Point2D computeRandomLocation(java.awt.Dimension)\l+ ISprite createRandomSprite(java.awt.Dimension)\l|}"
+	UMLParser [
+		label = "{umlDiagram/UMLParser|- classesToAccept: java.lang.String[]\l- inputDir: java.lang.String\l- outputDir: java.lang.String\l- dotPath: java.lang.String\l- outputType: java.lang.String\l- detectors: java.util.Map[java/lang/String, classRepresentation/designPatterns/DesignPatternDetector]\l- phaseAttributes: java.util.Map[java/lang/String, java/lang/String]\l- inputClasses: java.util.List[java/lang/String]\l- inputPhases: java.util.List[java/lang/String]\l- directoryClasses: java.util.List[java/io/FileInputStream]\l- classes: classRepresentation.Classes\l- designPatternInstances: java.util.List[gui/DesignPatternInstance]\l- addingToAccept: java.util.List[java/lang/String]\l|+ void main(java.lang.String[])\l+ List getDesignPatternInstances()\l+ void addDetectorPhase(java.lang.String, classRepresentation.designPatterns.DesignPatternDetector)\l+ void addPhaseAttribute(java.lang.String, java.lang.String[])\l- void findFiles(java.io.File)\l+ void setOutputType(java.lang.String)\l+ void parseByteCode()\l+ void detectPatterns()\l+ void createGraph()\l- void setClassesToAccept(java.lang.String[])\l+ boolean classIsUsed(java.lang.String)\l+ String replaceDotsWithSlashes(java.lang.String)\l|}"
 		
 	]
 
-	AnimationPanel [
-		label = "{problem/graphics/AnimationPanel|- serialVersionUID: long\l- sprites: java.util.List[problem/sprites/ISprite]\l- animating: boolean\l- sleepTime: long\l|+ void add(problem.sprites.ISprite)\l+ Dimension getSize()\l+ void animate()\l+ void reset()\l# void paintComponent(java.awt.Graphics)\l- void drawSprite(problem.sprites.ISprite, java.awt.Graphics2D)\l  boolean access$0(problem.graphics.AnimationPanel)\l  List access$1(problem.graphics.AnimationPanel)\l  long access$2(problem.graphics.AnimationPanel)\l|}"
+	ClassFieldVisitor [
+		label = "{umlDiagram/ClassFieldVisitor|- currentClass: interfaces.IClass\l- field: interfaces.IField\l|+ FieldVisitor visitField(int, java.lang.String, java.lang.String, java.lang.String, java.lang.Object)\l+ void handleSignature(java.lang.String, java.lang.String)\l  IClass access$0(umlDiagram.ClassFieldVisitor)\l  IField access$1(umlDiagram.ClassFieldVisitor)\l|}"
 		
 	]
 
-	AbstractCompositeSprite [
-		label = "{\<\<Composite\>\>\nproblem/sprites/AbstractCompositeSprite|# dx: double\l# dy: double\l# shape: java.awt.Shape\l# children: java.util.List[problem/sprites/ISprite]\l|# Rectangle2D computeNewBoundsAfterMoving(java.awt.Dimension)\l+ Shape getShape()\l+ void move(java.awt.Dimension)\l+ Iterator iterator()\l|}"
-		style=filled
-		fillcolor=yellow
+	ClassMethodVisitor [
+		label = "{umlDiagram/ClassMethodVisitor|- currentClass: interfaces.IClass\l|+ MethodVisitor visitMethod(int, java.lang.String, java.lang.String, java.lang.String, java.lang.String[])\l|}"
+		
+	]
 
+	VisitorFactory [
+		label = "{umlDiagram/VisitorFactory||+ ClassVisitor generateVisitors(java.util.List, classRepresentation.decorators.IClassDecorator, java.util.Map, java.util.List)\l|}"
+		
+	]
+
+	MethodDeclarationVisitor [
+		label = "{umlDiagram/MethodDeclarationVisitor|- currentClass: classRepresentation.decorators.IClassDecorator\l|+ MethodVisitor visitMethod(int, java.lang.String, java.lang.String, java.lang.String, java.lang.String[])\l+ void handleSignature(java.lang.String)\l  IClassDecorator access$0(umlDiagram.MethodDeclarationVisitor)\l|}"
+		
+	]
+
+	ClassNameVisitor [
+		label = "{umlDiagram/ClassNameVisitor|  names: java.util.List[java/lang/String]\l|+ void visit(int, int, java.lang.String, java.lang.String, java.lang.String, java.lang.String[])\l|}"
+		
+	]
+
+	MethodCodeVisitor [
+		label = "{umlDiagram/MethodCodeVisitor|- currentClass: interfaces.IClass\l|+ void visitMethodInsn(int, java.lang.String, java.lang.String, java.lang.String, boolean)\l|}"
+		
 	]
 
 	edge [
 		arrowhead = "empty"
 	]
 
-	SnowmanSprite -> AbstractCompositeSprite
-
-	RectangleSprite -> AbstractSprite
-
-	SnowmanWithBoxSprite -> AbstractCompositeSprite
-
-	CircleSprite -> AbstractSprite
-
 	edge [
 		style = "dashed"
 	]
-
-	AbstractSprite -> ISprite
-
-	AbstractCompositeSprite -> ISprite
 
 	edge [
 		arrowhead = "normal" style = "solid"
 	]
 
-	MainWindow -> AnimationPanel
-
-	SpriteFactory -> ISprite
-
-	AnimationPanel -> ISprite
-
-	AbstractCompositeSprite -> ISprite
+	ChocolateBoilerLazy -> ChocolateBoilerLazy
 
 	edge [
 		arrowhead = "normal" style = "dashed"
 	]
 
-	AbstractSprite -> ISprite
+	UMLParser -> ClassNameVisitor
 
-	SnowmanSprite -> CircleSprite
+	UMLParser -> VisitorFactory
 
-	SnowmanSprite -> ISprite
+	VisitorFactory -> ClassDeclarationVisitor
 
-	SnowmanWithBoxSprite -> RectangleSprite
+	VisitorFactory -> ClassFieldVisitor
 
-	SnowmanWithBoxSprite -> SnowmanSprite
+	VisitorFactory -> ClassMethodVisitor
 
-	SnowmanWithBoxSprite -> ISprite
+	VisitorFactory -> MethodDeclarationVisitor
 
-	AnimationPanel -> AbstractCompositeSprite
+	MethodDeclarationVisitor -> MethodCodeVisitor
 
 }

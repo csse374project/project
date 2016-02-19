@@ -2,13 +2,17 @@ package umlDiagram;
 
 import java.io.BufferedWriter;
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.io.ObjectInputStream;
 import java.lang.ProcessBuilder.Redirect;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.StandardOpenOption;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.LinkedList;
@@ -17,6 +21,7 @@ import java.util.Map;
 
 import org.objectweb.asm.ClassReader;
 import org.objectweb.asm.ClassVisitor;
+import org.objectweb.asm.Opcodes;
 
 import classRepresentation.Classes;
 import classRepresentation.UMLClass;
@@ -26,6 +31,7 @@ import classRepresentation.designPatterns.AdapterDetector;
 import classRepresentation.designPatterns.CompositeDetector;
 import classRepresentation.designPatterns.DecoratorDetector;
 import classRepresentation.designPatterns.DesignPatternDetector;
+import gui.DesignPatternInstance;
 import interfaces.IClass;
 
 public class UMLParser {
@@ -49,21 +55,36 @@ public class UMLParser {
 	}
 
 	private static String[] classesToAccept = new String[0];
-	@SuppressWarnings("unused") // Will be used once the UI gets farther along
-	private String inputDir, outputDir, dotPath;
+	private String inputDir, outputDir, dotPath, outputType;
 	private Map<String, DesignPatternDetector> detectors;
 	private Map<String, String[]> phaseAttributes;
 	private List<String> inputClasses, inputPhases;
+	private List<FileInputStream> directoryClasses;
 	private Classes classes;
+	private List<DesignPatternInstance> designPatternInstances;
+	private List<String> addingToAccept;
 
 	public UMLParser(List<String> argClasses, String inputFolder, String outputDirectory, String dotPath,
 			List<String> phases, Map<String, String[]> phaseAttributes) {
 		classes = new Classes();
 		inputClasses = argClasses;
-		this.inputDir = inputDir;
+		if (!inputClasses.get(0).isEmpty()) {
+			addingToAccept = new ArrayList<String>(inputClasses);
+		} else {
+			addingToAccept = new ArrayList<String>();
+		}
+		this.inputDir = inputFolder;
+		this.directoryClasses = new ArrayList<FileInputStream>();
+		findFiles(new File(this.inputDir));
+		classesToAccept = new String[addingToAccept.toArray().length];
+		for (int x = 0; x < classesToAccept.length; x++) {
+			classesToAccept[x] = addingToAccept.get(x);
+		}
 		this.outputDir = outputDirectory;
 		this.dotPath = dotPath;
 		this.inputPhases = phases;
+		this.outputType = "-Tpng";
+		this.designPatternInstances = new ArrayList<DesignPatternInstance>();
 		
 		this.detectors = new HashMap<String, DesignPatternDetector>();
 		detectors.put("Decorator", new DecoratorDetector(this.classes));
@@ -71,6 +92,10 @@ public class UMLParser {
 		detectors.put("Composite", new CompositeDetector(this.classes));
 		
 		this.phaseAttributes = phaseAttributes;
+	}
+	
+	public List<DesignPatternInstance> getDesignPatternInstances() {
+		return this.designPatternInstances;
 	}
 
 	/**
@@ -88,6 +113,34 @@ public class UMLParser {
 	public void addPhaseAttribute(String phaseName, String[] att){
 		this.phaseAttributes.put(phaseName, att);
 	}
+	
+	private void findFiles(File directory) {
+		if (!directory.exists()) {
+			return;
+		}
+		else if (!directory.isDirectory()) {
+			return;
+		}
+		File[] files = directory.listFiles();
+		for (File f : files) {
+			if (f.isDirectory() && !f.getName().endsWith(".zip")) {
+				findFiles(f);
+			} else if (f.getName().endsWith(".class") && !f.getName().contains("$")) {
+				try {
+					FileInputStream fil = new FileInputStream(f);
+					directoryClasses.add(fil);
+					ClassReader reader = new ClassReader(fil);
+					ClassVisitor visit = new ClassNameVisitor(Opcodes.ASM5, this.addingToAccept);
+					reader.accept(visit, ClassReader.EXPAND_FRAMES);
+				} catch(Exception e) {
+					e.printStackTrace();
+				}
+			}
+		}
+	}
+	public void setOutputType(String type){
+		this.outputType = type;
+	}
 
 	/**
 	 * Parses the provided java classes and creates the class representation objects.
@@ -95,16 +148,30 @@ public class UMLParser {
 	 * @throws IOException
 	 */
 	public void parseByteCode() throws IOException {
-		for (String className : inputClasses) {
+		for (String className : addingToAccept) {
+			if (className.isEmpty()) {
+				continue;
+			}
+			className = className.replace("/", ".");
 			IClass currentClass = new UMLClass();
 			IClassDecorator topLevelDecorator = new TopLevelDecorator(currentClass);
 			ClassReader reader = new ClassReader(className);
 
-			ClassVisitor visitor = VisitorFactory.generateVisitors(this.inputPhases, topLevelDecorator, this.phaseAttributes);
+			ClassVisitor visitor = VisitorFactory.generateVisitors(this.inputPhases, topLevelDecorator, this.phaseAttributes, this.designPatternInstances);
 
 			reader.accept(visitor, ClassReader.EXPAND_FRAMES);
 			classes.addClass(topLevelDecorator);
 		}
+//		for (FileInputStream clazz : directoryClasses) {
+//			IClass currentClass = new UMLClass();
+//			IClassDecorator topLevelDecorator = new TopLevelDecorator(currentClass);
+//			ClassReader reader = new ClassReader(clazz);
+//
+//			ClassVisitor visitor = VisitorFactory.generateVisitors(this.inputPhases, topLevelDecorator, this.phaseAttributes, this.designPatternInstances);
+//
+//			reader.accept(visitor, ClassReader.EXPAND_FRAMES);
+//			classes.addClass(topLevelDecorator);
+//		}
 	}
 
 	/**
@@ -116,7 +183,7 @@ public class UMLParser {
 			DesignPatternDetector detector = detectors.get(pattern);
 			//Check for patterns that were not added
 			String[] args = this.phaseAttributes.get(pattern); 
-			if (detector != null) detector.detectPattern(args);
+			if (detector != null) detector.detectPattern(args, this.designPatternInstances);
 		}
 	}
 
@@ -140,8 +207,7 @@ public class UMLParser {
 		}
 
 		String outPath = this.outputDir + "\\out.png";
-		ProcessBuilder pb = new ProcessBuilder(this.dotPath, "-Tpng", tempPath, "-o", outPath);
-
+		ProcessBuilder pb = new ProcessBuilder(this.dotPath, outputType, tempPath, "-o", outPath);
 		try {
 			String logPath = this.outputDir + "\\errorLog.txt";
 			File log = new File(logPath);
