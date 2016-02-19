@@ -2,13 +2,17 @@ package umlDiagram;
 
 import java.io.BufferedWriter;
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.io.ObjectInputStream;
 import java.lang.ProcessBuilder.Redirect;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.StandardOpenOption;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.LinkedList;
@@ -53,6 +57,7 @@ public class UMLParser {
 	private Map<String, DesignPatternDetector> detectors;
 	private Map<String, String[]> phaseAttributes;
 	private List<String> inputClasses, inputPhases;
+	private List<FileInputStream> directoryClasses;
 	private Classes classes;
 
 	public UMLParser(List<String> argClasses, String inputFolder, String outputDirectory, String dotPath,
@@ -60,7 +65,8 @@ public class UMLParser {
 		classes = new Classes();
 		inputClasses = argClasses;
 		this.inputDir = inputFolder;
-		findFiles(new File(this.inputDir), "");
+		this.directoryClasses = new ArrayList<FileInputStream>();
+		findFiles(new File(this.inputDir));
 		this.outputDir = outputDirectory;
 		this.dotPath = dotPath;
 		this.inputPhases = phases;
@@ -89,7 +95,7 @@ public class UMLParser {
 		this.phaseAttributes.put(phaseName, att);
 	}
 	
-	private void findFiles(File directory, String fullPath) {
+	private void findFiles(File directory) {
 		if (!directory.exists()) {
 			System.out.println("File does not exist!");
 			return;
@@ -101,15 +107,14 @@ public class UMLParser {
 		File[] files = directory.listFiles();
 		for (File f : files) {
 			if (f.isDirectory() && !f.getName().endsWith(".zip")) {
-				if (f.getName().equals("bin")) {
-					findFiles(f, fullPath);
-				} else {
-					findFiles(f, fullPath + f.getName() + ".");
+				findFiles(f);
+			} else if (f.getName().endsWith(".class") && !f.getName().contains("$")) {
+				try {
+					FileInputStream fil = new FileInputStream(f);
+					directoryClasses.add(fil);
+				} catch(Exception e) {
+					e.printStackTrace();
 				}
-			} else if (f.getName().endsWith(".class")) {
-				int endPos = f.getName().indexOf(".class");
-				System.out.println(fullPath + f.getName().substring(0,endPos));
-				this.inputClasses.add(fullPath + f.getName().substring(0,endPos));
 			}
 		}
 	}
@@ -121,9 +126,22 @@ public class UMLParser {
 	 */
 	public void parseByteCode() throws IOException {
 		for (String className : inputClasses) {
+			if (className.isEmpty()) {
+				continue;
+			}
 			IClass currentClass = new UMLClass();
 			IClassDecorator topLevelDecorator = new TopLevelDecorator(currentClass);
 			ClassReader reader = new ClassReader(className);
+
+			ClassVisitor visitor = VisitorFactory.generateVisitors(this.inputPhases, topLevelDecorator, this.phaseAttributes);
+
+			reader.accept(visitor, ClassReader.EXPAND_FRAMES);
+			classes.addClass(topLevelDecorator);
+		}
+		for (FileInputStream clazz : directoryClasses) {
+			IClass currentClass = new UMLClass();
+			IClassDecorator topLevelDecorator = new TopLevelDecorator(currentClass);
+			ClassReader reader = new ClassReader(clazz);
 
 			ClassVisitor visitor = VisitorFactory.generateVisitors(this.inputPhases, topLevelDecorator, this.phaseAttributes);
 
