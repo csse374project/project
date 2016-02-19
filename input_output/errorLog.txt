@@ -59,3 +59,24 @@ dot: graph is too large for cairo-renderer bitmaps. Scaling by 0.801267 to fit
 dot: graph is too large for cairo-renderer bitmaps. Scaling by 0.801267 to fit
 dot: graph is too large for cairo-renderer bitmaps. Scaling by 0.801267 to fit
 dot: graph is too large for cairo-renderer bitmaps. Scaling by 0.801267 to fit
+dot: graph is too large for cairo-renderer bitmaps. Scaling by 0.801267 to fit
+dot: graph is too large for cairo-renderer bitmaps. Scaling by 0.801267 to fit
+dot: graph is too large for cairo-renderer bitmaps. Scaling by 0.801267 to fit
+dot: graph is too large for cairo-renderer bitmaps. Scaling by 0.801267 to fit
+dot: graph is too large for cairo-renderer bitmaps. Scaling by 0.801267 to fit
+dot: graph is too large for cairo-renderer bitmaps. Scaling by 0.801267 to fit
+dot: graph is too large for cairo-renderer bitmaps. Scaling by 0.787933 to fit
+dot: graph is too large for cairo-renderer bitmaps. Scaling by 0.783525 to fit
+dot: graph is too large for cairo-renderer bitmaps. Scaling by 0.787933 to fit
+dot: graph is too large for cairo-renderer bitmaps. Scaling by 0.787933 to fit
+dot: graph is too large for cairo-renderer bitmaps. Scaling by 0.787933 to fit
+dot: graph is too large for cairo-renderer bitmaps. Scaling by 0.787933 to fit
+Error: ./input_output\temp.dot: syntax error in line 1014 near '$'
+Error: ./input_output\temp.dot: syntax error in line 1014 near '$'
+Error: ./input_output\temp.dot: syntax error in line 1014 near '$'
+Error: ./input_output\temp.dot: syntax error in line 1014 near '$'
+Error: ./input_output\temp.dot: syntax error in line 1014 near '$'
+Error: ./input_output\temp.dot: syntax error in line 1014 near '$'
+Error: ./input_output\temp.dot: syntax error in line 1014 near '$'
+dot: graph is too large for cairo-renderer bitmaps. Scaling by 0.787933 to fit
+dot: graph is too large for cairo-renderer bitmaps. Scaling by 0.787933 to fit

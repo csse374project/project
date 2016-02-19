@@ -74,7 +74,7 @@ public class MainWindow {
 	private void setupFrame() {
 		frame = new JFrame("name");
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		frame.setSize(1000, 1000);
+		frame.setSize(1500, 1000);
 		try {
 			runUMLparser();
 			addOptionPanel();
@@ -199,7 +199,7 @@ public class MainWindow {
 		
 		JScrollPane scrollPanel = new JScrollPane(picture,
 				JScrollPane.VERTICAL_SCROLLBAR_ALWAYS, JScrollPane.HORIZONTAL_SCROLLBAR_ALWAYS);
-		scrollPanel.setPreferredSize(new Dimension(700, 1000));
+		scrollPanel.setPreferredSize(new Dimension(1200, 1000));
 		return scrollPanel;
 	}	
 	

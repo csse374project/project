@@ -21,6 +21,7 @@ import java.util.Map;
 
 import org.objectweb.asm.ClassReader;
 import org.objectweb.asm.ClassVisitor;
+import org.objectweb.asm.Opcodes;
 
 import classRepresentation.Classes;
 import classRepresentation.UMLClass;
@@ -61,14 +62,24 @@ public class UMLParser {
 	private List<FileInputStream> directoryClasses;
 	private Classes classes;
 	private List<DesignPatternInstance> designPatternInstances;
+	private List<String> addingToAccept;
 
 	public UMLParser(List<String> argClasses, String inputFolder, String outputDirectory, String dotPath,
 			List<String> phases, Map<String, String[]> phaseAttributes) {
 		classes = new Classes();
 		inputClasses = argClasses;
+		if (!inputClasses.get(0).isEmpty()) {
+			addingToAccept = new ArrayList<String>(inputClasses);
+		} else {
+			addingToAccept = new ArrayList<String>();
+		}
 		this.inputDir = inputFolder;
 		this.directoryClasses = new ArrayList<FileInputStream>();
 		findFiles(new File(this.inputDir));
+		classesToAccept = new String[addingToAccept.toArray().length];
+		for (int x = 0; x < classesToAccept.length; x++) {
+			classesToAccept[x] = addingToAccept.get(x);
+		}
 		this.outputDir = outputDirectory;
 		this.dotPath = dotPath;
 		this.inputPhases = phases;
@@ -118,6 +129,9 @@ public class UMLParser {
 				try {
 					FileInputStream fil = new FileInputStream(f);
 					directoryClasses.add(fil);
+					ClassReader reader = new ClassReader(fil);
+					ClassVisitor visit = new ClassNameVisitor(Opcodes.ASM5, this.addingToAccept);
+					reader.accept(visit, ClassReader.EXPAND_FRAMES);
 				} catch(Exception e) {
 					e.printStackTrace();
 				}
@@ -134,10 +148,11 @@ public class UMLParser {
 	 * @throws IOException
 	 */
 	public void parseByteCode() throws IOException {
-		for (String className : inputClasses) {
+		for (String className : addingToAccept) {
 			if (className.isEmpty()) {
 				continue;
 			}
+			className = className.replace("/", ".");
 			IClass currentClass = new UMLClass();
 			IClassDecorator topLevelDecorator = new TopLevelDecorator(currentClass);
 			ClassReader reader = new ClassReader(className);
@@ -147,16 +162,16 @@ public class UMLParser {
 			reader.accept(visitor, ClassReader.EXPAND_FRAMES);
 			classes.addClass(topLevelDecorator);
 		}
-		for (FileInputStream clazz : directoryClasses) {
-			IClass currentClass = new UMLClass();
-			IClassDecorator topLevelDecorator = new TopLevelDecorator(currentClass);
-			ClassReader reader = new ClassReader(clazz);
-
-			ClassVisitor visitor = VisitorFactory.generateVisitors(this.inputPhases, topLevelDecorator, this.phaseAttributes, this.designPatternInstances);
-
-			reader.accept(visitor, ClassReader.EXPAND_FRAMES);
-			classes.addClass(topLevelDecorator);
-		}
+//		for (FileInputStream clazz : directoryClasses) {
+//			IClass currentClass = new UMLClass();
+//			IClassDecorator topLevelDecorator = new TopLevelDecorator(currentClass);
+//			ClassReader reader = new ClassReader(clazz);
+//
+//			ClassVisitor visitor = VisitorFactory.generateVisitors(this.inputPhases, topLevelDecorator, this.phaseAttributes, this.designPatternInstances);
+//
+//			reader.accept(visitor, ClassReader.EXPAND_FRAMES);
+//			classes.addClass(topLevelDecorator);
+//		}
 	}
 
 	/**

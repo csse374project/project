@@ -4,191 +4,13 @@ digraph UML {
 		shape = "record"
 	]
 
-	UnitTestMethodVisitor [
-		label = "{testing/UnitTestMethodVisitor|- className: java.lang.String\l- currentClass: interfaces.IClass\l- topDecorator: classRepresentation.decorators.TopLevelDecorator\l|+ void setup()\l+ void testNumberOfMethods()\l+ void testCorrectMethods()\l- List getExpectedMethodNames()\l- List methodListToNameList(java.util.List)\l|}"
-		
-	]
-
-	AdapterSample [
-		label = "{\<\<Adapter\>\>\ntestingData/AdapterSample|- adaptee: testingData.AdapteeSample\l|+ void methodOfThings()\l+ void methodOfStuff()\l+ int testMePlease()\l|}"
-		style=filled
-		fillcolor=red
-
-	]
-
-	AdapterSample -> AdapteeSample [label = "\<\<adapts\>\>"]
-
-	edge [
-		arrowhead = "empty" style = "dashed"
-	]
-	AdapterSample -> AdapterTargetSample	UMLParser [
-		label = "{umlDiagram/UMLParser|- classesToAccept: java.lang.String[]\l- inputDir: java.lang.String\l- outputDir: java.lang.String\l- dotPath: java.lang.String\l- outputType: java.lang.String\l- detectors: java.util.Map[java/lang/String, classRepresentation/designPatterns/DesignPatternDetector]\l- phaseAttributes: java.util.Map[java/lang/String, java/lang/String]\l- inputClasses: java.util.List[java/lang/String]\l- inputPhases: java.util.List[java/lang/String]\l- directoryClasses: java.util.List[java/io/FileInputStream]\l- classes: classRepresentation.Classes\l- designPatternInstances: java.util.List[gui/DesignPatternInstance]\l|+ void main(java.lang.String[])\l+ List getDesignPatternInstances()\l+ void addDetectorPhase(java.lang.String, classRepresentation.designPatterns.DesignPatternDetector)\l+ void addPhaseAttribute(java.lang.String, java.lang.String[])\l- void findFiles(java.io.File)\l+ void setOutputType(java.lang.String)\l+ void parseByteCode()\l+ void detectPatterns()\l+ void createGraph()\l- void setClassesToAccept(java.lang.String[])\l+ boolean classIsUsed(java.lang.String)\l+ String replaceDotsWithSlashes(java.lang.String)\l|}"
-		
-	]
-
-	UnitTestDecoratorDetector [
-		label = "{testing/UnitTestDecoratorDetector|- classes: classRepresentation.Classes\l- comp: classRepresentation.decorators.IClassDecorator\l- decorator: classRepresentation.decorators.IClassDecorator\l- child: classRepresentation.decorators.IClassDecorator\l- singleton: classRepresentation.decorators.IClassDecorator\l|+ void setUp()\l+ void interfaceMarkedAsComponent()\l+ void decoratorMarkedAsDecorator()\l+ void childMarkedAsDecorator()\l+ void interfaceNotMarkedAsDecorator()\l+ void decoratorNotMarkedAsComponent()\l+ void childNotMarkedAsComponent()\l+ void singletonNotMarkedAsComponent()\l+ void singtonNotMarkedAsDecorator()\l+ void testMulitpleDecorators()\l- boolean containsMultipleDecorators(classRepresentation.decorators.IClassDecorator)\l- boolean isDecorator(interfaces.IClass)\l- boolean isComponent(interfaces.IClass)\l|}"
-		
-	]
-
-	UnitTestSingletonVisitors [
-		label = "{testing/UnitTestSingletonVisitors|- currentClass: interfaces.IClass\l- topDecorator: classRepresentation.decorators.TopLevelDecorator\l- instances: java.util.List[gui/DesignPatternInstance]\l|+ void setup(java.lang.String)\l+ void setupWithArguments(java.lang.String, java.lang.String[])\l+ void testNegative()\l+ void testPossitive()\l+ void testChocolateBoilerEager()\l+ void testChocolateBoilerLazy()\l+ void testRuntime()\l+ void testDesktop()\l+ void testCalendar()\l+ void testFilterInputStream()\l+ void testArgumentsUsingSampleTrue()\l+ void testArgumentsUsingSampleFalse()\l+ void testArgumentsUsingJavaFalse1()\l+ void testArgumentsUsingJavaFalse2()\l+ void testArgumentsUsingBoilerTrue()\l- boolean isSingleton(classRepresentation.decorators.TopLevelDecorator)\l|}"
-		
-	]
-
-	SampleClassForInitializingFour [
-		label = "{testingData/SampleClassForInitializingFour|||}"
-		
-	]
-
-	SampleSingletonClassWithoutGetInstance [
-		label = "{testingData/SampleSingletonClassWithoutGetInstance|- instance: testingData.SampleSingletonClassWithoutGetInstance\l+ useless: testingData.SampleClassForInitializing\l|+ SampleSingletonClassWithoutGetInstance getThingy()\l|}"
-		
-	]
-
-	UMLField [
-		label = "{classRepresentation/UMLField|- type: java.lang.String\l- name: java.lang.String\l- visibility: char\l- nonAccessModifiers: java.util.List[java/lang/String]\l- interiorTypes: java.util.List[java/lang/String]\l|+ String getType()\l+ void setType(java.lang.String)\l+ String getName()\l+ void setName(java.lang.String)\l+ char getVisibility()\l+ void setVisibility(char)\l+ List getNonAccessModifiers()\l+ void setNonAccessModifiers(java.util.List)\l+ boolean equals(java.lang.Object)\l+ List getInteriorTypes()\l+ void addInteriorType(java.lang.String)\l|}"
-		
-	]
-
-	MethodCalls [
-		label = "{classRepresentation/MethodCalls|- calls: java.util.List[classRepresentation/SequenceMethodCall]\l- usedClasses: java.util.Set[java/lang/String]\l|+ void addMethodCall(classRepresentation.SequenceMethodCall)\l+ Iterator getIterator()\l+ String toSDEdit()\l- void addClasses(java.lang.StringBuilder)\l- void addMethodCalls(java.lang.StringBuilder)\l- String removeReturnDots(java.lang.String)\l- String removeParamDots(java.util.List)\l|}"
-		
-	]
-
-	TopLevelDecorator [
-		label = "{\<\<Decorator\>\>\nclassRepresentation/decorators/TopLevelDecorator||+ void decorate(classRepresentation.decorators.IClassDecorator)\l+ void toGraphViz(java.lang.StringBuilder)\l|}"
-		style=filled
-		fillcolor=green
-	]
-
 	ClassDeclarationVisitor [
 		label = "{umlDiagram/ClassDeclarationVisitor|- currentClass: classRepresentation.decorators.IClassDecorator\l|+ void visit(int, int, java.lang.String, java.lang.String, java.lang.String, java.lang.String[])\l|}"
 		
 	]
 
-	AdapteeDecorator [
-		label = "{\<\<Decorator\>\>\nclassRepresentation/decorators/AdapteeDecorator||+ void appendGraphVizColor(java.lang.StringBuilder)\l+ void appendGraphVizStereotype(java.lang.StringBuilder)\l|}"
-		style=filled
-		fillcolor=green
-	]
-
-	DesignPatternInstance [
-		label = "{gui/DesignPatternInstance|- designPattern: java.lang.String\l- instanceName: java.lang.String\l- classNames: java.util.List[java/lang/String]\l|+ void setInstanceName(java.lang.String)\l+ String getDesignPattern()\l+ String getInstanceName()\l+ List getClasses()\l+ void addClass(java.lang.String)\l+ Iterator iterator()\l+ void forEach(java.util.function.Consumer)\l|}"
-		
-	]
-
-	UnitTestDeclarationString [
-		label = "{testing/UnitTestDeclarationString|- className: java.lang.String\l- currentClass: interfaces.IClass\l- topDecorator: classRepresentation.decorators.TopLevelDecorator\l|+ void setup()\l+ void testName()\l+ void testNumberOfInterfaces()\l+ void testInterfaces()\l+ void testSuperClass()\l|}"
-		
-	]
-
-	UnitTestMethodCodeVisitor [
-		label = "{testing/UnitTestMethodCodeVisitor|- classNames: java.util.List[java/lang/String]\l- classes: classRepresentation.Classes\l|- void createList()\l+ void setup()\l+ void hasCorrectAssociatedClasses()\l+ void hasCorrectUsedClasses()\l|}"
-		
-	]
-
-	ChocolateBoilerEager [
-		label = "{\<\<Singleton\>\>\ntestingData/ChocolateBoilerEager|- empty: boolean\l- boiled: boolean\l- uniqueInstance: testingData.ChocolateBoilerEager\l|+ ChocolateBoilerEager getInstance()\l+ void fill()\l+ void drain()\l+ void boil()\l+ boolean isEmpty()\l+ boolean isBoiled()\l|}"
-		color=blue
-	]
-
-	CompositeComponentWithArray [
-		label = "{\<\<Composite Component\>\>\ntestingData/compositePattern/CompositeComponentWithArray||+ void doNothing()\l|}"
-		style=filled
-		fillcolor=yellow
-
-	]
-
-	AdaptionTargetDecorator [
-		label = "{\<\<Decorator\>\>\nclassRepresentation/decorators/AdaptionTargetDecorator||+ void appendGraphVizColor(java.lang.StringBuilder)\l+ void appendGraphVizStereotype(java.lang.StringBuilder)\l|}"
-		style=filled
-		fillcolor=green
-	]
-
-	PatternViewsTree [
-		label = "{gui/PatternViewsTree|- serialVersionUID: long\l- patternName: java.lang.String\l- designInstances: java.util.List[gui/DesignPatternInstance]\l- topButton: javax.swing.JCheckBox\l- buttons: java.util.List[gui/AppCheckBox]\l|+ List getClassesToParse()\l- void addLeftSide(int)\l- void addRightSide(int)\l- AppCheckBox getCheckBox(gui.DesignPatternInstance)\l- void printButtonsSelected()\l  JCheckBox access$0(gui.PatternViewsTree)\l  List access$1(gui.PatternViewsTree)\l  void access$2(gui.PatternViewsTree)\l|}"
-		
-	]
-
-	CompositeComponentDecorator [
-		label = "{\<\<Decorator\>\>\nclassRepresentation/decorators/CompositeComponentDecorator||+ void appendGraphVizStereotype(java.lang.StringBuilder)\l+ void appendGraphVizColor(java.lang.StringBuilder)\l|}"
-		style=filled
-		fillcolor=green
-	]
-
-	Classes [
-		label = "{classRepresentation/Classes|- classes: java.util.Map[java/lang/String, interfaces/IClass]\l|+ Map getClasses()\l+ void setClasses(java.util.Map)\l+ void addClass(interfaces.IClass)\l+ String printGraphVizInput()\l- void appendUsedClasses(java.lang.StringBuilder, java.util.Set)\l- void appendAssociatedClasses(java.lang.StringBuilder, java.util.Set)\l- void appendClasses(java.lang.StringBuilder, java.util.Set)\l- void appendInterfaces(java.lang.StringBuilder, java.util.Set)\l- void appendSuperClass(java.lang.StringBuilder, java.util.Set)\l|}"
-		
-	]
-
-	DesignPatternDetector [
-		label = "{\<\<Interface\>\>\nclassRepresentation/designPatterns/DesignPatternDetector||+ void detectPattern(java.lang.String[], java.util.List)\l|}"
-		
-	]
-
-	SingletonFieldVisitor [
-		label = "{classRepresentation/designPatterns/SingletonFieldVisitor|- currentClass: classRepresentation.decorators.IClassDecorator\l- arguments: java.lang.String[]\l- designPatternInstances: java.util.List[gui/DesignPatternInstance]\l|+ FieldVisitor visitField(int, java.lang.String, java.lang.String, java.lang.String, java.lang.Object)\l- void lookForGetter()\l|}"
-		
-	]
-
-	SampleClassMethodSequence [
-		label = "{testingData/SampleClassMethodSequence||+ void doLotsOfThings()\l+ void doThing()\l+ void doAnotherThing()\l|}"
-		
-	]
-
-	AdapterMethodVisitor [
-		label = "{classRepresentation/designPatterns/AdapterMethodVisitor|- fieldName: java.lang.String\l- bool: classRepresentation.designPatterns.MutableBoolean\l- fieldFound: boolean\l|+ void visitCode()\l+ void visitEnd()\l+ void visitFieldInsn(int, java.lang.String, java.lang.String, java.lang.String)\l|}"
-		
-	]
-
-	DecoratorComponentDecorator [
-		label = "{\<\<Decorator\>\>\nclassRepresentation/decorators/DecoratorComponentDecorator||+ void appendGraphVizColor(java.lang.StringBuilder)\l+ void appendGraphVizStereotype(java.lang.StringBuilder)\l|}"
-		style=filled
-		fillcolor=green
-	]
-
-	CompositeSampleChild [
-		label = "{\<\<Composite\>\>\ntestingData/compositePattern/CompositeSampleChild||- void something()\l|}"
-		style=filled
-		fillcolor=yellow
-
-	]
-
-	CompositeSample [
-		label = "{\<\<Composite\>\>\ntestingData/compositePattern/CompositeSample|- stuff: java.util.List[testingData/SampleInterface01]\l|- void dontDoThings()\l|}"
-		style=filled
-		fillcolor=yellow
-
-	]
-
-	SampleClassForInitializingThree [
-		label = "{testingData/SampleClassForInitializingThree|||}"
-		
-	]
-
-	ImageProxy [
-		label = "{gui/ImageProxy|  imageIcon: javax.swing.ImageIcon\l  imagePath: java.lang.String\l  retrievalThread: java.lang.Thread\l  retrieving: boolean\l  imageTracker: java.awt.MediaTracker\l  isTracking: boolean\l  isAdded: boolean\l|+ void paintIcon(java.awt.Component, java.awt.Graphics, int, int)\l+ int getIconWidth()\l+ int getIconHeight()\l|}"
-		
-	]
-
-	SingleMethodVisitor [
-		label = "{sequenceDiagram/SingleMethodVisitor|- depth: int\l- depthLimit: int\l- fullMethodName: java.lang.String\l- method: classRepresentation.SequenceMethodCall\l|- String getMethodName()\l+ MethodVisitor visitMethod(int, java.lang.String, java.lang.String, java.lang.String, java.lang.String[])\l|}"
-		
-	]
-
-	SampleSingletonClass [
-		label = "{\<\<Singleton\>\>\ntestingData/SampleSingletonClass|- instance: testingData.SampleSingletonClass\l+ useless: testingData.SampleClassForInitializing\l|+ SampleSingletonClass getInstance()\l|}"
-		color=blue
-	]
-
-	SequenceMethodCodeVisitor [
-		label = "{sequenceDiagram/SequenceMethodCodeVisitor|- depth: int\l- depthLimit: int\l- invoker: java.lang.String\l- currentMethod: classRepresentation.SequenceMethodCall\l|+ void visitMethodInsn(int, java.lang.String, java.lang.String, java.lang.String, boolean)\l- String getParamName(org.objectweb.asm.Type)\l|}"
-		
-	]
-
-	MutableBoolean [
-		label = "{classRepresentation/designPatterns/MutableBoolean|+ value: boolean\l||}"
+	UMLParser [
+		label = "{umlDiagram/UMLParser|- classesToAccept: java.lang.String[]\l- inputDir: java.lang.String\l- outputDir: java.lang.String\l- dotPath: java.lang.String\l- outputType: java.lang.String\l- detectors: java.util.Map[java/lang/String, classRepresentation/designPatterns/DesignPatternDetector]\l- phaseAttributes: java.util.Map[java/lang/String, java/lang/String]\l- inputClasses: java.util.List[java/lang/String]\l- inputPhases: java.util.List[java/lang/String]\l- directoryClasses: java.util.List[java/io/FileInputStream]\l- classes: classRepresentation.Classes\l- designPatternInstances: java.util.List[gui/DesignPatternInstance]\l- addingToAccept: java.util.List[java/lang/String]\l|+ void main(java.lang.String[])\l+ List getDesignPatternInstances()\l+ void addDetectorPhase(java.lang.String, classRepresentation.designPatterns.DesignPatternDetector)\l+ void addPhaseAttribute(java.lang.String, java.lang.String[])\l- void findFiles(java.io.File)\l+ void setOutputType(java.lang.String)\l+ void parseByteCode()\l+ void detectPatterns()\l+ void createGraph()\l- void setClassesToAccept(java.lang.String[])\l+ boolean classIsUsed(java.lang.String)\l+ String replaceDotsWithSlashes(java.lang.String)\l|}"
 		
 	]
 
@@ -197,255 +19,23 @@ digraph UML {
 		
 	]
 
+	ClassMethodVisitor [
+		label = "{umlDiagram/ClassMethodVisitor|- currentClass: interfaces.IClass\l|+ MethodVisitor visitMethod(int, java.lang.String, java.lang.String, java.lang.String, java.lang.String[])\l|}"
+		
+	]
+
 	VisitorFactory [
 		label = "{umlDiagram/VisitorFactory||+ ClassVisitor generateVisitors(java.util.List, classRepresentation.decorators.IClassDecorator, java.util.Map, java.util.List)\l|}"
 		
 	]
 
-	CompositeVisitor [
-		label = "{classRepresentation/designPatterns/CompositeVisitor|- collections: java.util.List[java/lang/String]\l- currentClass: classRepresentation.decorators.IClassDecorator\l|+ FieldVisitor visitField(int, java.lang.String, java.lang.String, java.lang.String, java.lang.Object)\l- boolean isComposite(interfaces.IClass)\l+ void handleSignature(java.lang.String)\l|}"
+	MethodDeclarationVisitor [
+		label = "{umlDiagram/MethodDeclarationVisitor|- currentClass: classRepresentation.decorators.IClassDecorator\l|+ MethodVisitor visitMethod(int, java.lang.String, java.lang.String, java.lang.String, java.lang.String[])\l+ void handleSignature(java.lang.String)\l  IClassDecorator access$0(umlDiagram.MethodDeclarationVisitor)\l|}"
 		
 	]
 
-	AbstractCompositeLeaf [
-		label = "{\<\<Leaf\>\>\ntestingData/compositePattern/AbstractCompositeLeaf|- hatesYouAndWantsYouTooDie: boolean\l+ actsFriendlyTowardYou: boolean\l|+ boolean isPassiveAgressive()\l+ void doSomething()\l|}"
-		style=filled
-		fillcolor=yellow
-
-	]
-
-	DecoratorDecorator [
-		label = "{\<\<Decorator\>\>\nclassRepresentation/decorators/DecoratorDecorator|- component: java.lang.String\l|+ void appendGraphVizColor(java.lang.StringBuilder)\l+ void appendGraphVizStereotype(java.lang.StringBuilder)\l+ void appendGraphVizFooter(java.lang.StringBuilder)\l|}"
-		style=filled
-		fillcolor=green
-	]
-
-	SingletonDecorator [
-		label = "{\<\<Decorator\>\>\nclassRepresentation/decorators/SingletonDecorator||+ void appendGraphVizStereotype(java.lang.StringBuilder)\l+ void appendGraphVizColor(java.lang.StringBuilder)\l|}"
-		style=filled
-		fillcolor=green
-	]
-
-	UnitTestSimpleMethodCalls [
-		label = "{testing/UnitTestSimpleMethodCalls|- className: java.lang.String\l- methodName: java.lang.String\l- iterator: java.util.Iterator[classRepresentation/SequenceMethodCall]\l|+ void setup()\l+ void tearDown()\l+ void hasCorrectNumberOfMethods()\l+ void firstMethodHasCorrectName()\l+ void firstMethodHasCorrectInvoker()\l+ void firstMethodHasCorrectOwner()\l+ void firstMethodHasCorrectReturn()\l+ void innerMethodHasCorrectName()\l+ void innerMethodHasCorrectInvoker()\l+ void innerMethodHasCorrectOwner()\l+ void innerMethodHasCorrectReturn()\l|}"
-		
-	]
-
-	SampleClassForReadingInATest [
-		label = "{\<\<Leaf\>\>\ntestingData/SampleClassForReadingInATest|- SOME_CONSTANT: int\l+ SOME_WORD: java.lang.String\l+ sample: testingData.SampleClassForInitializingTwo\l- aChar: char\l+ aBool: boolean\l|- void useless()\l+ int identity(int)\l- String finalStringMaker(java.lang.String[])\l+ void mutateSomething(int[])\l+ void initializeClass()\l+ void initializeList()\l+ void initializeArray()\l+ SampleClassForInitializingThree whatever(testingData.SampleClassForInitializingThree)\l+ void something(testingData.SampleClassForInitializingFour)\l|}"
-		style=filled
-		fillcolor=yellow
-
-	]
-
-	MakeConfigFile [
-		label = "{gui/MakeConfigFile|- inputDirec: java.lang.String\l- targetClasses: java.lang.String\l- outputDirec: java.lang.String\l- dotPath: java.lang.String\l- phases: java.lang.String\l- adapter: java.lang.String\l- composite: java.lang.String\l- decorator: java.lang.String\l- singleton: java.lang.String\l|+ void main(java.lang.String[])\l|}"
-		
-	]
-
-	AdapterDecorator [
-		label = "{\<\<Decorator\>\>\nclassRepresentation/decorators/AdapterDecorator|- adaptee: java.lang.String\l- target: java.lang.String\l|+ String getAdaptee()\l+ String getTarget()\l+ void appendGraphVizColor(java.lang.StringBuilder)\l+ void appendGraphVizStereotype(java.lang.StringBuilder)\l+ void appendGraphVizFooter(java.lang.StringBuilder)\l|}"
-		style=filled
-		fillcolor=green
-	]
-
-	IMethod [
-		label = "{\<\<Interface\>\>\ninterfaces/IMethod||+ String getReturnType()\l+ void setReturnType(java.lang.String)\l+ List getParameters()\l+ void setParameters(java.util.List)\l+ String getName()\l+ void setName(java.lang.String)\l+ char getVisibility()\l+ void setVisibility(char)\l+ List getNonAccessModifiers()\l+ void setNonAccessModifiers(java.util.List)\l|}"
-		
-	]
-
-	AdapterTargetSample [
-		label = "{\<\<Target\>\>\n\<\<Interface\>\>\ntestingData/AdapterTargetSample||+ void methodOfThings()\l+ void methodOfStuff()\l+ int testMePlease()\l|}"
-		style=filled
-		fillcolor=red
-
-	]
-
-	MainWindow [
-		label = "{gui/MainWindow|- frame: javax.swing.JFrame\l- config: java.util.Properties\l- optionPanel: javax.swing.JScrollPane\l- classArgs: java.util.List[java/lang/String]\l- phases: java.util.List[java/lang/String]\l- inputFolder: java.lang.String\l- outputDirectory: java.lang.String\l- dotPath: java.lang.String\l- buttonTrees: java.util.List[gui/PatternViewsTree]\l- parser: umlDiagram.UMLParser\l|+ JFrame get()\l- void setupConfigs()\l- void loadClassArgs()\l- void loadClassArgsFromButtons()\l- void setupFrame()\l- void addOptionPanel()\l- JPanel getExceptionPanel()\l- void runUMLparser()\l- JScrollPane getOptionPanel()\l- List getInstancesOfPattern(java.lang.String, java.util.List)\l- Set getDesignPatternNames(java.util.List)\l- JPanel getCommandPanel()\l- JScrollPane getImagePanel()\l  JFrame access$0(gui.MainWindow)\l  void access$1(gui.MainWindow)\l  void access$2(gui.MainWindow)\l  void access$3(gui.MainWindow)\l|}"
-		
-	]
-
-	CompositeDecorator [
-		label = "{\<\<Decorator\>\>\nclassRepresentation/decorators/CompositeDecorator|- component: java.lang.String\l|+ String getComponent()\l+ void setComponent(java.lang.String)\l+ void appendGraphVizStereotype(java.lang.StringBuilder)\l+ void appendGraphVizColor(java.lang.StringBuilder)\l|}"
-		style=filled
-		fillcolor=green
-	]
-
-	CompositeLeafSample [
-		label = "{\<\<Leaf\>\>\ntestingData/compositePattern/CompositeLeafSample|- hatesYouAndWantsYouTooDie: boolean\l+ actsFriendlyTowardYou: boolean\l|+ boolean isPassiveAgressive()\l+ boolean doesntTalkToYou()\l|}"
-		style=filled
-		fillcolor=yellow
-
-	]
-
-	IClassDecorator [
-		label = "{\<\<Decorator\>\>\nclassRepresentation/decorators/IClassDecorator|# decorates: interfaces.IClass\l|+ void decorate(classRepresentation.decorators.IClassDecorator)\l# void setDecorates(interfaces.IClass)\l+ IClass getDecorates()\l+ void setName(java.lang.String)\l+ String getName()\l+ void setSuperClass(java.lang.String)\l+ String getSuperClass()\l+ void setInterfaces(java.util.List)\l+ List getInterfaces()\l+ void setFields(java.util.List)\l+ List getFields()\l+ void setMethods(java.util.List)\l+ List getMethods()\l+ void addMethod(interfaces.IMethod)\l+ void addField(interfaces.IField)\l+ void addAssociatedClass(java.lang.String)\l+ void addUsedClass(java.lang.String)\l+ List getAssociatedClasses()\l+ List getUsedClasses()\l+ void toGraphViz(java.lang.StringBuilder)\l+ void appendGraphVizHeader(java.lang.StringBuilder)\l+ void appendGraphVizStereotype(java.lang.StringBuilder)\l+ void appendGraphVizClassName(java.lang.StringBuilder)\l+ void appendGraphVizFields(java.lang.StringBuilder)\l+ void appendGraphVizMethods(java.lang.StringBuilder)\l+ void appendGraphVizColor(java.lang.StringBuilder)\l+ void appendGraphVizFooter(java.lang.StringBuilder)\l|}"
-		style=filled
-		fillcolor=green
-	]
-
-	IClassDecorator -> IClass [label = "\<\<decorates\>\>"]
-
-	UnitTestCompositeDetector [
-		label = "{testing/UnitTestCompositeDetector|- compositeSample: classRepresentation.decorators.IClassDecorator\l- leaf: classRepresentation.decorators.IClassDecorator\l- component: classRepresentation.decorators.IClassDecorator\l|+ void setup()\l- void setupHelper(classRepresentation.Classes, classRepresentation.decorators.IClassDecorator, java.lang.String)\l- boolean isComposite(interfaces.IClass)\l- boolean isComponent(interfaces.IClass)\l- boolean isLeaf(interfaces.IClass)\l+ void compositeDecoratorHasCorrectComponent()\l+ void compositeSampleHasCompositeDecorator()\l+ void componentHasNoCompositeDecorator()\l+ void leafHasNoCompositeDecorator()\l+ void compositeSampleHasNoLeafDecorator()\l+ void componentHasNoLeafDecorator()\l+ void leafHasLeafDecorator()\l+ void compositeSampleHasNoComponentDecorator()\l+ void componentHasComponentDecorator()\l+ void leafHasNoComponentDecorator()\l|}"
-		
-	]
-
-	IClass [
-		label = "{\<\<Decorator Component\>\>\n\<\<Interface\>\>\ninterfaces/IClass||+ void setName(java.lang.String)\l+ String getName()\l+ void setSuperClass(java.lang.String)\l+ String getSuperClass()\l+ void setInterfaces(java.util.List)\l+ List getInterfaces()\l+ void setFields(java.util.List)\l+ List getFields()\l+ void setMethods(java.util.List)\l+ List getMethods()\l+ void addMethod(interfaces.IMethod)\l+ void addField(interfaces.IField)\l+ void addAssociatedClass(java.lang.String)\l+ void addUsedClass(java.lang.String)\l+ List getAssociatedClasses()\l+ List getUsedClasses()\l+ void toGraphViz(java.lang.StringBuilder)\l+ void appendGraphVizHeader(java.lang.StringBuilder)\l+ void appendGraphVizStereotype(java.lang.StringBuilder)\l+ void appendGraphVizClassName(java.lang.StringBuilder)\l+ void appendGraphVizFields(java.lang.StringBuilder)\l+ void appendGraphVizMethods(java.lang.StringBuilder)\l+ void appendGraphVizColor(java.lang.StringBuilder)\l+ void appendGraphVizFooter(java.lang.StringBuilder)\l|}"
-		style=filled
-		fillcolor=green
-
-	]
-
-	AbstractCompositeSample [
-		label = "{\<\<Composite\>\>\ntestingData/compositePattern/AbstractCompositeSample|- stuff: java.util.ArrayList[testingData/compositePattern/AbstractCompositeComponent]\l|- void dontDoThings()\l+ void doSomething()\l|}"
-		style=filled
-		fillcolor=yellow
-
-	]
-
-	CompositeWithArray [
-		label = "{\<\<Composite\>\>\ntestingData/compositePattern/CompositeWithArray|+ array: testingData.compositePattern.CompositeComponentWithArray[]\l||}"
-		style=filled
-		fillcolor=yellow
-
-	]
-
-	SequenceMethodCall [
-		label = "{classRepresentation/SequenceMethodCall|- methodName: java.lang.String\l- invokerName: java.lang.String\l- ownerName: java.lang.String\l- returnType: java.lang.String\l- parameters: java.util.List[java/lang/String]\l- isInit: boolean\l|+ String getName()\l+ void setName(java.lang.String)\l+ String getInvoker()\l+ String getOwner()\l+ void setInvoker(java.lang.String)\l+ void setOwner(java.lang.String)\l+ String getReturnType()\l+ void setReturnType(java.lang.String)\l+ List getParameters()\l+ void setParameters(java.util.List)\l+ boolean isInit()\l+ void setInit(boolean)\l|}"
-		
-	]
-
-	UnitTestDeclarationSample [
-		label = "{testing/UnitTestDeclarationSample|- className: java.lang.String\l- currentClass: interfaces.IClass\l- topDecorator: classRepresentation.decorators.TopLevelDecorator\l|+ void setup()\l+ void testName()\l+ void testFields()\l+ void testMethods()\l+ void testInterfaces()\l+ void testSuperClass()\l|}"
-		
-	]
-
-	SampleInterface01 [
-		label = "{\<\<Composite Component\>\>\n\<\<Interface\>\>\ntestingData/SampleInterface01|||}"
-		style=filled
-		fillcolor=yellow
-
-	]
-
-	SampleInterface02 [
-		label = "{\<\<Interface\>\>\ntestingData/SampleInterface02|||}"
-		
-	]
-
-	AbstractCompositeComponent [
-		label = "{\<\<Composite Component\>\>\ntestingData/compositePattern/AbstractCompositeComponent||+ void doSomething()\l+ void doSomethingElse()\l|}"
-		style=filled
-		fillcolor=yellow
-
-	]
-
-	LeafChildSample [
-		label = "{\<\<Leaf\>\>\ntestingData/compositePattern/LeafChildSample|- dummyData: boolean\l|+ boolean getDummy()\l+ boolean getTrue()\l|}"
-		style=filled
-		fillcolor=yellow
-
-	]
-
-	AdapterFieldVisitor [
-		label = "{classRepresentation/designPatterns/AdapterFieldVisitor|- fieldName: java.lang.String\l- fieldType: java.lang.String\l- bool: classRepresentation.designPatterns.MutableBoolean\l|+ MethodVisitor visitMethod(int, java.lang.String, java.lang.String, java.lang.String, java.lang.String[])\l|}"
-		
-	]
-
-	CompositeLeafWithArray [
-		label = "{\<\<Leaf\>\>\ntestingData/compositePattern/CompositeLeafWithArray|||}"
-		style=filled
-		fillcolor=yellow
-
-	]
-
-	InterfaceDecorator [
-		label = "{\<\<Decorator\>\>\nclassRepresentation/decorators/InterfaceDecorator||+ void appendGraphVizStereotype(java.lang.StringBuilder)\l|}"
-		style=filled
-		fillcolor=green
-	]
-
-	UnitTestAdapterDecorator [
-		label = "{testing/UnitTestAdapterDecorator|- adapter: classRepresentation.decorators.TopLevelDecorator\l- adaptee: classRepresentation.decorators.TopLevelDecorator\l- target: classRepresentation.decorators.TopLevelDecorator\l- singleton: classRepresentation.decorators.TopLevelDecorator\l- designPattern: java.util.List[gui/DesignPatternInstance]\l|+ void setup()\l+ void adapterHasAdapterDecorator()\l+ void adapteeIsNotAdapter()\l+ void targetIsNotAdapter()\l+ void singletonNotAdapter()\l+ void adapterIsNotAdaptee()\l+ void adapteeHasAdapteeDecorator()\l+ void targetIsNotAdaptee()\l+ void singletonNotAdaptee()\l+ void adapterIsNotTarget()\l+ void adapteeIsNotTarget()\l+ void targetHasTargetDecorator()\l+ void singletonNotTarget()\l- boolean isAdapter(classRepresentation.decorators.IClassDecorator)\l- boolean isAdaptee(classRepresentation.decorators.IClassDecorator)\l- boolean isTarget(classRepresentation.decorators.IClassDecorator)\l|}"
-		
-	]
-
-	UnitTestFieldVisitor [
-		label = "{testing/UnitTestFieldVisitor|- className: java.lang.String\l- currentClass: interfaces.IClass\l- topDecorator: classRepresentation.decorators.TopLevelDecorator\l|+ void setup()\l+ void testNumberOfFields()\l+ void testFields()\l+ void testNonAccessModifiers()\l+ void testAccessModifiers()\l+ void testType()\l- HashMap getExpectedAccessModifiers()\l- HashMap getExpectedTypes()\l- HashMap getExpectedNonAccessModifiers()\l|}"
-		
-	]
-
-	UnitTestSimpleCompositeDetector [
-		label = "{testing/UnitTestSimpleCompositeDetector|- interfaceCompositeSample: classRepresentation.decorators.IClassDecorator\l- interfaceLeaf: classRepresentation.decorators.IClassDecorator\l- interfaceComponent: classRepresentation.decorators.IClassDecorator\l- abstractCompositeSample: classRepresentation.decorators.IClassDecorator\l- abstractLeaf: classRepresentation.decorators.IClassDecorator\l- abstractComponent: classRepresentation.decorators.IClassDecorator\l- arrayCompositeSample: classRepresentation.decorators.IClassDecorator\l- arrayLeaf: classRepresentation.decorators.IClassDecorator\l- arrayComponent: classRepresentation.decorators.IClassDecorator\l|+ void setup()\l- void setupHelper(classRepresentation.Classes, classRepresentation.decorators.IClassDecorator, java.lang.String)\l- boolean isComposite(interfaces.IClass)\l- boolean isComponent(interfaces.IClass)\l- boolean isLeaf(interfaces.IClass)\l- boolean isAdapter(interfaces.IClass)\l+ void interfaceCompositeSampleNotAdapter()\l+ void interfaceCompositeComponentNotAdapter()\l+ void interfaceLeafNotAdapter()\l+ void abstractCompositeSampleNotAdapter()\l+ void abstractCompositeComponentNotAdapter()\l+ void abstractLeafNotAdapter()\l+ void arrayCompositeSampleNotAdapter()\l+ void arrayCompositeComponentNotAdapter()\l+ void arrayLeafNotAdapter()\l+ void interfaceCompositeDecoratorHasCorrectComponent()\l+ void interfaceCompositeSampleHasCompositeDecorator()\l+ void interfaceComponentHasNoCompositeDecorator()\l+ void interfaceCeafHasNoCompositeDecorato()\l+ void interfaceCompositeSampleHasNoLeafDecorator()\l+ void interfaceComponentHasNoLeafDecorator()\l+ void interfaceCeafHasLeafDecorator()\l+ void interfaceCompositeSampleHasNoComponentDecorator()\l+ void interfaceComponentHasComponentDecorator()\l+ void interfaceCeafHasNoComponentDecorator()\l+ void abstractCompositeDecoratorHasCorrectComponent()\l+ void abstractCompositeSampleHasCompositeDecorator()\l+ void abstractComponentHasNoCompositeDecorator()\l+ void abstractLeafHasNoCompositeDecorator()\l+ void abstractCompositeSampleHasNoLeafDecorator()\l+ void abstractComponentHasNoLeafDecorator()\l+ void abstractLeafHasLeafDecorator()\l+ void abstractCompositeSampleHasNoComponentDecorator()\l+ void abstractComponentHasComponentDecorator()\l+ void abstractLeafHasNoComponentDecorator()\l+ void arrayCompositeDecoratorHasCorrectComponent()\l+ void arrayCompositeSampleHasCompositeDecorator()\l+ void arrayComponentHasNoCompositeDecorator()\l+ void arrayCeafHasNoCompositeDecorator()\l+ void arrayCompositeSampleHasNoLeafDecorator()\l+ void arrayComponentHasNoLeafDecorator()\l+ void arrayLeafHasLeafDecorator()\l+ void arrayCompositeSampleHasNoComponentDecorator()\l+ void arrayComponentHasComponentDecorator()\l+ void arrayCeafHasNoComponentDecorator()\l|}"
-		
-	]
-
-	UnitTestCompositeJavaSwing [
-		label = "{testing/UnitTestCompositeJavaSwing|- window: classRepresentation.decorators.IClassDecorator\l- comp: classRepresentation.decorators.IClassDecorator\l- panel: classRepresentation.decorators.IClassDecorator\l- button: classRepresentation.decorators.IClassDecorator\l|+ void setup()\l- void setupHelper(classRepresentation.Classes, classRepresentation.decorators.IClassDecorator, java.lang.String)\l- boolean isComposite(interfaces.IClass)\l- boolean isComponent(interfaces.IClass)\l- boolean isLeaf(interfaces.IClass)\l- boolean isDecorator(interfaces.IClass)\l- boolean isAdapter(interfaces.IClass)\l+ void buttonIsNotComposite()\l+ void buttonIsNotComponent()\l+ void buttonIstLeaf()\l+ void buttonIsNotAdapter()\l+ void buttonIsNotDecorator()\l+ void panelIsComposite()\l+ void panelIsNotComponent()\l+ void panelIsNotLeaf()\l+ void panelIsNotAdapter()\l+ void panelIsNotDecorator()\l+ void compIsNotComposite()\l+ void compIsComponent()\l+ void compIsNotLeaf()\l+ void compIsNotAdapter()\l+ void compIsNotDecorator()\l+ void windowIsComposite()\l+ void windowIsNotComponent()\l+ void windowIsNotLeaf()\l+ void windowIsNotAdapter()\l+ void windowIsNotDecorator()\l|}"
-		
-	]
-
-	ChocolateBoilerLazy [
-		label = "{\<\<Singleton\>\>\ntestingData/ChocolateBoilerLazy|- empty: boolean\l- boiled: boolean\l- uniqueInstance: testingData.ChocolateBoilerLazy\l|+ ChocolateBoilerLazy getInstance()\l+ void fill()\l+ void drain()\l+ void boil()\l+ boolean isEmpty()\l+ boolean isBoiled()\l|}"
-		color=blue
-	]
-
-	CompositeDetector [
-		label = "{classRepresentation/designPatterns/CompositeDetector|- classMap: java.util.Map[java/lang/String, interfaces/IClass]\l- detectedComponents: java.util.List[java/lang/String]\l- detectedComposites: java.util.List[java/lang/String]\l  thisInstance: gui.DesignPatternInstance\l  instances: java.util.List[gui/DesignPatternInstance]\l- classesInPattern: java.util.Set[java/lang/String]\l- COLLECTIONS: java.util.List[java/lang/String]\l|+ void detectPattern(java.lang.String[], java.util.List)\l- void identifyPatternClasses()\l- void getClassesInPattern()\l- void findSeedComposites()\l- void checkInterfaces(interfaces.IClass, interfaces.IField)\l- void checkSupers(interfaces.IClass, interfaces.IField)\l- void checkInterfacesArray(interfaces.IClass, interfaces.IField)\l- void checkSupersArray(interfaces.IClass, interfaces.IField)\l- List getSuperClasses(interfaces.IClass)\l- void decorateComponents()\l- boolean isComposite(interfaces.IClass)\l- boolean isComponent(interfaces.IClass)\l- CompositeDecorator findComposite(interfaces.IClass)\l|}"
-		
-	]
-
-	guiApp [
-		label = "{gui/guiApp|- designPatternNames: java.lang.String[]\l- config: java.util.Properties\l- landingWindow: javax.swing.JFrame\l- mainWindow: javax.swing.JFrame\l|# HashMap getPatternToSettings()\l+ void main(java.lang.String[])\l- void displayLandingScreen()\l- JButton getAboutButton()\l- JButton getHelpButton()\l- JButton getAnalyzeButton()\l- JButton getLoadConfigButton()\l- void loadConfigFile(java.io.File)\l- void displayMainWindow()\l  JFrame access$0()\l  Properties access$1()\l  void access$2()\l  void access$3(java.io.File)\l|}"
-		
-	]
-
-	UMLClass [
-		label = "{classRepresentation/UMLClass|- name: java.lang.String\l- superClass: java.lang.String\l- interfaces: java.util.List[java/lang/String]\l- associatedClasses: java.util.List[java/lang/String]\l- usedClasses: java.util.List[java/lang/String]\l- fields: java.util.List[interfaces/IField]\l- methods: java.util.List[interfaces/IMethod]\l|+ void setFields(java.util.List)\l+ List getFields()\l+ void setMethods(java.util.List)\l+ List getMethods()\l+ void setName(java.lang.String)\l+ String getName()\l+ void setSuperClass(java.lang.String)\l+ String getSuperClass()\l+ void setInterfaces(java.util.List)\l+ List getInterfaces()\l+ void addMethod(interfaces.IMethod)\l+ void addField(interfaces.IField)\l+ void addAssociatedClass(java.lang.String)\l+ void addUsedClass(java.lang.String)\l+ List getAssociatedClasses()\l+ List getUsedClasses()\l+ void appendGraphVizHeader(java.lang.StringBuilder)\l+ void appendGraphVizStereotype(java.lang.StringBuilder)\l+ void appendGraphVizClassName(java.lang.StringBuilder)\l+ void appendGraphVizFields(java.lang.StringBuilder)\l+ void appendGraphVizMethods(java.lang.StringBuilder)\l+ void appendGraphVizColor(java.lang.StringBuilder)\l+ void appendGraphVizFooter(java.lang.StringBuilder)\l+ void toGraphViz(java.lang.StringBuilder)\l|}"
-		
-	]
-
-	AdapteeSample [
-		label = "{\<\<Adaptee\>\>\ntestingData/AdapteeSample||+ String getStuff()\l+ int getNumber()\l+ void doNothing()\l|}"
-		style=filled
-		fillcolor=red
-
-	]
-
-	SampleClassForInitializingTwo [
-		label = "{testingData/SampleClassForInitializingTwo|||}"
-		
-	]
-
-	DecoratorDetector [
-		label = "{classRepresentation/designPatterns/DecoratorDetector|- classMap: java.util.Map[java/lang/String, interfaces/IClass]\l- discoveredDecorators: java.util.List[java/lang/String]\l- thisInstance: gui.DesignPatternInstance\l- instances: java.util.List[gui/DesignPatternInstance]\l|+ void detectPattern(java.lang.String[], java.util.List)\l- void checkChildDecorators(interfaces.IClass)\l- void checkForInterfaceClassDecorator(interfaces.IClass)\l- void checkForDecorator(interfaces.IClass, java.lang.String)\l- void applyDecorator(interfaces.IClass, java.lang.String)\l- void setComponentToInterface(java.lang.String)\l- boolean isDecorator(interfaces.IClass)\l|}"
-		
-	]
-
-	UnitTestMethod [
-		label = "{testing/UnitTestMethod||+ void nullMethodEqualsSelf()\l+ void doesNotEqualWithDifferentName()\l|}"
-		
-	]
-
-	AppCheckBox [
-		label = "{gui/AppCheckBox|- designInstance: gui.DesignPatternInstance\l|+ DesignPatternInstance getDesignInstance()\l|}"
-		
-	]
-
-	AdapterClassVisitor [
-		label = "{classRepresentation/designPatterns/AdapterClassVisitor|  currentClass: classRepresentation.decorators.IClassDecorator\l  designPatternInstances: java.util.List[gui/DesignPatternInstance]\l|+ FieldVisitor visitField(int, java.lang.String, java.lang.String, java.lang.String, java.lang.Object)\l|}"
-		
-	]
-
-	AdapterDetector [
-		label = "{classRepresentation/designPatterns/AdapterDetector|- classMap: java.util.Map[java/lang/String, interfaces/IClass]\l|+ void detectPattern(java.lang.String[], java.util.List)\l- void addAdaptee(classRepresentation.decorators.AdapterDecorator)\l- void removeUsesArrow(interfaces.IClass, java.lang.String)\l- void addTarget(classRepresentation.decorators.AdapterDecorator)\l- AdapterDecorator getAdapter(interfaces.IClass)\l|}"
-		
-	]
-
-	SequenceParser [
-		label = "{sequenceDiagram/SequenceParser|+ calls: classRepresentation.MethodCalls\l- DEFAULT_DEPTH_LIMIT: int\l- STARTING_DEPTH: int\l|+ void main(java.lang.String[])\l|}"
+	ClassNameVisitor [
+		label = "{umlDiagram/ClassNameVisitor|  names: java.util.List[java/lang/String]\l|+ void visit(int, int, java.lang.String, java.lang.String, java.lang.String, java.lang.String[])\l|}"
 		
 	]
 
@@ -454,143 +44,13 @@ digraph UML {
 		
 	]
 
-	AllTests [
-		label = "{testing/AllTests|||}"
-		
-	]
-
-	SampleSuperClass [
-		label = "{testingData/SampleSuperClass|||}"
-		
-	]
-
-	LeafSample [
-		label = "{\<\<Leaf\>\>\ntesting/LeafSample|||}"
-		style=filled
-		fillcolor=yellow
-
-	]
-
-	SingletonMethodVisitor [
-		label = "{classRepresentation/designPatterns/SingletonMethodVisitor|- currentClass: classRepresentation.decorators.IClassDecorator\l- requireGetInstance: boolean\l- designPatternInstances: java.util.List[gui/DesignPatternInstance]\l|+ MethodVisitor visitMethod(int, java.lang.String, java.lang.String, java.lang.String, java.lang.String[])\l|}"
-		
-	]
-
-	ClassMethodVisitor [
-		label = "{umlDiagram/ClassMethodVisitor|- currentClass: interfaces.IClass\l|+ MethodVisitor visitMethod(int, java.lang.String, java.lang.String, java.lang.String, java.lang.String[])\l|}"
-		
-	]
-
-	CompositeLeafDecorator [
-		label = "{\<\<Decorator\>\>\nclassRepresentation/decorators/CompositeLeafDecorator||+ void appendGraphVizStereotype(java.lang.StringBuilder)\l+ void appendGraphVizColor(java.lang.StringBuilder)\l|}"
-		style=filled
-		fillcolor=green
-	]
-
-	MethodDeclarationVisitor [
-		label = "{umlDiagram/MethodDeclarationVisitor|- currentClass: classRepresentation.decorators.IClassDecorator\l|+ MethodVisitor visitMethod(int, java.lang.String, java.lang.String, java.lang.String, java.lang.String[])\l+ void handleSignature(java.lang.String)\l  IClassDecorator access$0(umlDiagram.MethodDeclarationVisitor)\l|}"
-		
-	]
-
-	IField [
-		label = "{\<\<Interface\>\>\ninterfaces/IField||+ String getType()\l+ void setType(java.lang.String)\l+ String getName()\l+ void setName(java.lang.String)\l+ char getVisibility()\l+ void setVisibility(char)\l+ List getNonAccessModifiers()\l+ void setNonAccessModifiers(java.util.List)\l+ List getInteriorTypes()\l+ void addInteriorType(java.lang.String)\l|}"
-		
-	]
-
-	UnitTestDepthLimit [
-		label = "{testing/UnitTestDepthLimit|- className: java.lang.String\l- methodName: java.lang.String\l- constructorName: java.lang.String\l- iterator: java.util.Iterator[classRepresentation/SequenceMethodCall]\l- STARTING_DEPTH: int\l|+ void tearDown()\l+ void testMethodDepthStopsAtCorrectLevel5()\l+ void testMethodDepthStopsAtCorrectLevel7()\l+ void testMethodDepthStopsAtCorrectLevel3()\l+ void testConstructorDepthStopsAtCorrectLevel5()\l|}"
-		
-	]
-
-	SampleSequenceDepthClass [
-		label = "{testingData/SampleSequenceDepthClass||+ void doSomethingDeep1()\l- void doSomethingDeep2()\l- void doSomethingDeep3()\l- void doSomethingDeep4()\l- void doSomethingDeep5()\l- void doSomethingDeep6()\l- void doSomethingDeep7()\l- void doSomethingDeep8()\l+ void createSomething()\l|}"
-		
-	]
-
-	UMLMethod [
-		label = "{classRepresentation/UMLMethod|- parameters: java.util.List[java/lang/String]\l- name: java.lang.String\l- visibility: char\l- nonAccessModifiers: java.util.List[java/lang/String]\l- returnType: java.lang.String\l|+ String toString()\l+ String getReturnType()\l+ void setReturnType(java.lang.String)\l+ List getParameters()\l+ void setParameters(java.util.List)\l+ String getName()\l+ void setName(java.lang.String)\l+ char getVisibility()\l+ void setVisibility(char)\l+ List getNonAccessModifiers()\l+ void setNonAccessModifiers(java.util.List)\l+ boolean equals(java.lang.Object)\l|}"
-		
-	]
-
-	UnitTestsToGraphViz [
-		label = "{testing/UnitTestsToGraphViz|- classNames: java.util.List[java/lang/String]\l- classes: classRepresentation.Classes\l- graphViz: java.lang.String\l|- void createList()\l+ void setup()\l+ void hasRightExtensionArrows()\l+ void hasRightImplementArrows()\l+ void hasRightAssociationArrows()\l+ void hasRightUseArrows()\l|}"
-		
-	]
-
-	SampleClassForInitializing [
-		label = "{testingData/SampleClassForInitializing|||}"
-		
-	]
-
 	edge [
 		arrowhead = "empty"
 	]
 
-	TopLevelDecorator -> IClassDecorator
-
-	AdapteeDecorator -> IClassDecorator
-
-	AdaptionTargetDecorator -> IClassDecorator
-
-	CompositeComponentDecorator -> IClassDecorator
-
-	DecoratorComponentDecorator -> IClassDecorator
-
-	CompositeSampleChild -> CompositeSample
-
-	AbstractCompositeLeaf -> AbstractCompositeComponent
-
-	DecoratorDecorator -> IClassDecorator
-
-	SingletonDecorator -> IClassDecorator
-
-	SampleClassForReadingInATest -> SampleSuperClass
-
-	AdapterDecorator -> IClassDecorator
-
-	CompositeDecorator -> IClassDecorator
-
-	AbstractCompositeSample -> AbstractCompositeComponent
-
-	CompositeWithArray -> CompositeComponentWithArray
-
-	LeafChildSample -> CompositeLeafSample
-
-	CompositeLeafWithArray -> CompositeComponentWithArray
-
-	InterfaceDecorator -> IClassDecorator
-
-	CompositeLeafDecorator -> IClassDecorator
-
 	edge [
 		style = "dashed"
 	]
-
-	AdapterSample -> AdapterTargetSample
-
-	UMLField -> IField
-
-	CompositeSample -> SampleInterface01
-
-	SampleClassForReadingInATest -> SampleInterface01
-
-	SampleClassForReadingInATest -> SampleInterface02
-
-	CompositeLeafSample -> SampleInterface01
-
-	IClassDecorator -> IClass
-
-	CompositeDetector -> DesignPatternDetector
-
-	UMLClass -> IClass
-
-	DecoratorDetector -> DesignPatternDetector
-
-	AdapterDetector -> DesignPatternDetector
-
-	LeafSample -> SampleInterface01
-
-	UMLMethod -> IMethod
 
 	edge [
 		arrowhead = "normal" style = "solid"
@@ -599,5 +59,19 @@ digraph UML {
 	edge [
 		arrowhead = "normal" style = "dashed"
 	]
+
+	UMLParser -> ClassNameVisitor
+
+	UMLParser -> VisitorFactory
+
+	VisitorFactory -> ClassDeclarationVisitor
+
+	VisitorFactory -> ClassFieldVisitor
+
+	VisitorFactory -> ClassMethodVisitor
+
+	VisitorFactory -> MethodDeclarationVisitor
+
+	MethodDeclarationVisitor -> MethodCodeVisitor
 
 }
