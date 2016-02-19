@@ -203,7 +203,7 @@ public class MainWindow {
 					exportImage(fileToSaveTo, fileToRead);
 				} catch (IOException e1) {
 					e1.printStackTrace();
-					String message = "failed to load design on export!";
+					String message = "failed to load design on export!\n" + e1.getMessage();
 					System.out.println(message);
 					JOptionPane.showMessageDialog(frame, message);
 				}
