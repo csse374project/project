@@ -5,7 +5,7 @@ This tool analyzes java code and generates a UML diagram. It detects and draws a
 This section will describe how the design of the project has evolved as it progressed.
 
 Milestone 7:
-In order to facilitate parsing patterns, the UMLParser class was changed to a concrete class. It was previously a class consisting only of static methods. Now, it manages the diagram generation and stores variables relevant to its administration. This object can now be created from the UI and used to create the picture of the UML. 
+In order to facilitate parsing patterns, the UMLParser class was changed to a concrete class. It was previously a class consisting only of static methods. Now, it manages the diagram generation and stores variables relevant to its administration. This object can now be created from the UI and used to create the picture of the UML. Added a factory for ASM class visitors. Added a UI implemented in java swing.
 
 Milestone 6:
 No design changes have been made since milestone 5.
@@ -31,7 +31,7 @@ This sections will describe the resposibilites of each team member during each p
 Milestone 7:
 Jesse Shellabarger - Worked on the back end of the project. Updated back end code to facilitate adding of a UI and use of phases. Added code to allow the project to automatically generate PNGs of the graph. Added functionality to separate instances of design patterns (Composite, Decorator).
 Nate Briggs - Made a proxy to display a loading message. Added support for phase-specific attributes. Added functionality to separate instances of design patterns (Singleton, Adapter). 
-Thomas Bonatti - Created UI to run the projects back end (in progress). 
+Thomas Bonatti - Created UI to run the projects back end.
 
 Milestone 6:
 Jesse Shellabarger - Designed Composite detection with Thomas. Implemented composite detection. Updated with required pictures and documentation.
@@ -71,7 +71,7 @@ This section will provide instructions to use the project, both through the comm
 The system can be further extended by creating new classes to examine the class representation objects, after the java byte code has been analyzed. If additional information is needed, additional visitors can be added to the current implementation via the decorator pattern.
 
 User Interface:
-Once the user interface has been loaded, the user is able to select a configuration file. A default configuration file has been provided, but additional files can be created as desired. After the file is selected, the analyze button can be clicked to generate the UML. A new window will open, displaying the UML and various options for interacting with it. The checkboxes on the left can be used to toggle which classes will and will not display. 
+Once the user interface has been loaded, the user is able to select a configuration file. A default configuration file has been provided, but additional files can be created as desired. After the file is selected, the analyze button can be clicked to generate the UML. A new window will open, displaying the UML and various options for interacting with it. The checkboxes on the left can be used to toggle which classes will and will not display. The program automatically loads classes within the input directory, and also loads any classes entered in the targetClasses field of the config file.
 
 UML Generation:
 DesignParser is the class that drives the application. If running through eclipse, change the run configuration to include the desired 
