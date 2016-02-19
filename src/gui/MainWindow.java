@@ -4,7 +4,15 @@ import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.InputStreamReader;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashSet;
@@ -14,10 +22,11 @@ import java.util.Set;
 
 import javax.swing.BoxLayout;
 import javax.swing.Icon;
-import javax.swing.ImageIcon;
 import javax.swing.JButton;
+import javax.swing.JFileChooser;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 
@@ -54,7 +63,7 @@ public class MainWindow {
 
 	private void loadClassArgs() {
 		if (buttonTrees.size() == 0) {
-			this.classArgs = Arrays.asList(config.getProperty("targetClasses").split(" "));
+			this.classArgs = new ArrayList<String>(Arrays.asList(config.getProperty("targetClasses").split(" ")));
 		} else {
 			loadClassArgsFromButtons();
 		}
@@ -81,7 +90,7 @@ public class MainWindow {
 			addOptionPanel();
 //			frame.add(getOptionPanel(), BorderLayout.WEST);
 			frame.add(getImagePanel(), BorderLayout.EAST);
-			frame.add(getReloadPanel(), BorderLayout.SOUTH);
+			frame.add(getCommandPanel(), BorderLayout.SOUTH);
 		} catch (IOException e) {
 			frame.add(getExceptionPanel());
 		}
@@ -164,11 +173,10 @@ public class MainWindow {
 		return list;
 	}
 	
-	private JPanel getReloadPanel() {
+	private JPanel getCommandPanel() {
 		JPanel panel = new JPanel();
-		JButton button = new JButton("reload design");
-		button.addActionListener(new ActionListener(){
-
+		JButton reloadButton = new JButton("reload design");
+		reloadButton.addActionListener(new ActionListener(){
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				System.out.println("Reload button pressed");
@@ -178,8 +186,61 @@ public class MainWindow {
 				setupFrame();
 			}
 		});
-		panel.add(button);
+		panel.add(reloadButton);
+		
+		JButton exportButton = new JButton("export");
+		exportButton.addActionListener(new ActionListener(){
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				System.out.println("export button pressed");
+				try {
+					runUMLparser();
+					JFileChooser chooser = new JFileChooser();
+					chooser.setDialogTitle("select a directory to export to");
+//					chooser.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
+					chooser.showOpenDialog(frame);
+					File saveFile = chooser.getSelectedFile();
+					String savePath = saveFile.getAbsolutePath();
+					if (saveFile.exists()) {
+						saveFile.delete();
+					}
+					Files.copy(Paths.get("input_output/out.png"), Paths.get(savePath));
+					
+//					File fileToCopy = new File("input_output/out.png");
+//					exportImage(fileToRead, fileToSaveTo);
+				} catch (IOException e1) {
+					e1.printStackTrace();
+					String message = "failed to load design on export!\n" + e1.getMessage();
+					System.out.println(message);
+					JOptionPane.showMessageDialog(frame, message);
+				}
+			}
+		});
+		panel.add(exportButton);
+		
 		return panel;
+	}
+	
+	private void exportImage(File imageFile, File saveDest) throws IOException {
+		System.out.println("started 'export image'");
+		if (saveDest.exists()) {
+			saveDest.delete();
+		}
+		saveDest.createNewFile();
+		
+		FileInputStream imageStream = new FileInputStream(imageFile);	
+		BufferedReader reader = new BufferedReader(new InputStreamReader(imageStream));
+		FileOutputStream exportStream = new FileOutputStream(saveDest);
+
+		String line = reader.readLine();
+		while(line != null) {
+			exportStream.write(line.getBytes());
+			exportStream.write('\n');
+			line = reader.readLine();
+		}
+		imageFile.delete();
+		imageStream.close();
+		exportStream.close();
 	}
 	
 	private JScrollPane getImagePanel() {
