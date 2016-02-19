@@ -71,14 +71,9 @@ public class MainWindow {
 
 	private void loadClassArgsFromButtons() {
 		this.classArgs = new ArrayList<>();
-		System.out.print("DEBUG: ");
 		for (PatternViewsTree tree : buttonTrees) {
 			classArgs.addAll(tree.getClassesToParse());
 		}
-		
-		for (String arg : classArgs) {
-			System.out.print(arg + " ");
-		} System.out.println();
 	}
 	
 	private void setupFrame() {
@@ -154,33 +149,12 @@ public class MainWindow {
 		return set;
 	}
 	
-	private List<DesignPatternInstance> getDesignPatterns() {
-		List<DesignPatternInstance> list = new ArrayList<>();
-		DesignPatternInstance instance = new DesignPatternInstance("nothing-instance", "nothing");
-		instance.addClass("testingData.SampleInterface01");
-		instance.addClass("testingData.SampleInterface02");
-		list.add(instance);
-		
-		instance = new DesignPatternInstance("singleton-instance", "singleton");
-		instance.addClass("testingData.ChocolateBoilerLazy");
-		instance.addClass("testingData.ChocolateBoilerEager");
-		list.add(instance);
-		
-		instance = new DesignPatternInstance("adapter-instance", "adapter");
-		instance.addClass("testingData.AdapteeSample");
-		instance.addClass("testingData.AdapterSample");
-		list.add(instance);
-		
-		return list;
-	}
-	
 	private JPanel getCommandPanel() {
 		JPanel panel = new JPanel();
 		JButton reloadButton = new JButton("reload design");
 		reloadButton.addActionListener(new ActionListener(){
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				System.out.println("Reload button pressed");
 				frame.setVisible(false);
 				frame.dispose();
 				loadClassArgs();
@@ -193,7 +167,6 @@ public class MainWindow {
 		exportButton.addActionListener(new ActionListener(){
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				System.out.println("export button pressed");
 				try {
 					runUMLparser();
 					JFileChooser chooser = new JFileChooser();
