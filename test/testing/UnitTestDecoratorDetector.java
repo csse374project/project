@@ -3,6 +3,7 @@ package testing;
 import static org.junit.Assert.*;
 
 import java.lang.reflect.Field;
+import java.util.ArrayList;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -18,6 +19,7 @@ import classRepresentation.decorators.IClassDecorator;
 import classRepresentation.decorators.TopLevelDecorator;
 import classRepresentation.designPatterns.DecoratorDetector;
 import classRepresentation.designPatterns.DesignPatternDetector;
+import gui.DesignPatternInstance;
 import interfaces.IClass;
 import umlDiagram.ClassDeclarationVisitor;
 import umlDiagram.ClassFieldVisitor;
@@ -69,7 +71,7 @@ public class UnitTestDecoratorDetector {
 		classes.addClass(singleton);
 
 		DesignPatternDetector detector = new DecoratorDetector(classes);
-		detector.detectPattern(new String[]{});
+		detector.detectPattern(new String[]{}, new ArrayList<DesignPatternInstance>());
 	}
 
 	@Test

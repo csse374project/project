@@ -16,3 +16,5 @@ Load your config file by clicking the "Load Config" button and selecting your co
 Click "Analyze" and wait for the program to load the resulting image.
 
 Select which detected patterns you would like to view by checking the boxes to the left.
+
+Additional DesignPatternDetectors can be added by called the addDetectorPhase on UMLParser. If a ClassVisitor is required to find additional information, these can be added in the VisitorFactory. 

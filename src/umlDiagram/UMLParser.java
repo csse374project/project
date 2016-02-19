@@ -30,6 +30,7 @@ import classRepresentation.designPatterns.AdapterDetector;
 import classRepresentation.designPatterns.CompositeDetector;
 import classRepresentation.designPatterns.DecoratorDetector;
 import classRepresentation.designPatterns.DesignPatternDetector;
+import gui.DesignPatternInstance;
 import interfaces.IClass;
 
 public class UMLParser {
@@ -50,15 +51,22 @@ public class UMLParser {
 		parser.parseByteCode();
 		parser.detectPatterns();
 		parser.createGraph();
+		
+		//Testing purposes. Remove later. Singletons are detected!
+		for(DesignPatternInstance instance : parser.getDesignPatternInstances()){
+			System.out.println(instance.getDesignPattern());
+			System.out.println(instance.getClasses());
+		}
 	}
 
 	private static String[] classesToAccept = new String[0];
-	private String inputDir, outputDir, dotPath;
+	private String inputDir, outputDir, dotPath, outputType;
 	private Map<String, DesignPatternDetector> detectors;
 	private Map<String, String[]> phaseAttributes;
 	private List<String> inputClasses, inputPhases;
 	private List<FileInputStream> directoryClasses;
 	private Classes classes;
+	private List<DesignPatternInstance> designPatternInstances;
 
 	public UMLParser(List<String> argClasses, String inputFolder, String outputDirectory, String dotPath,
 			List<String> phases, Map<String, String[]> phaseAttributes) {
@@ -70,6 +78,8 @@ public class UMLParser {
 		this.outputDir = outputDirectory;
 		this.dotPath = dotPath;
 		this.inputPhases = phases;
+		this.outputType = "-Tpng";
+		this.designPatternInstances = new ArrayList<DesignPatternInstance>();
 		
 		this.detectors = new HashMap<String, DesignPatternDetector>();
 		detectors.put("Decorator", new DecoratorDetector(this.classes));
@@ -77,6 +87,10 @@ public class UMLParser {
 		detectors.put("Composite", new CompositeDetector(this.classes));
 		
 		this.phaseAttributes = phaseAttributes;
+	}
+	
+	public List<DesignPatternInstance> getDesignPatternInstances() {
+		return this.designPatternInstances;
 	}
 
 	/**
@@ -118,6 +132,9 @@ public class UMLParser {
 			}
 		}
 	}
+	public void setOutputType(String type){
+		this.outputType = type;
+	}
 
 	/**
 	 * Parses the provided java classes and creates the class representation objects.
@@ -133,7 +150,7 @@ public class UMLParser {
 			IClassDecorator topLevelDecorator = new TopLevelDecorator(currentClass);
 			ClassReader reader = new ClassReader(className);
 
-			ClassVisitor visitor = VisitorFactory.generateVisitors(this.inputPhases, topLevelDecorator, this.phaseAttributes);
+			ClassVisitor visitor = VisitorFactory.generateVisitors(this.inputPhases, topLevelDecorator, this.phaseAttributes, this.designPatternInstances);
 
 			reader.accept(visitor, ClassReader.EXPAND_FRAMES);
 			classes.addClass(topLevelDecorator);
@@ -159,7 +176,7 @@ public class UMLParser {
 			DesignPatternDetector detector = detectors.get(pattern);
 			//Check for patterns that were not added
 			String[] args = this.phaseAttributes.get(pattern); 
-			if (detector != null) detector.detectPattern(args);
+			if (detector != null) detector.detectPattern(args, this.designPatternInstances);
 		}
 	}
 
@@ -184,9 +201,7 @@ public class UMLParser {
 		}
 
 		String outPath = this.outputDir + "\\out.png";
-		System.out.println("outPath: " + outPath);
-		ProcessBuilder pb = new ProcessBuilder(this.dotPath, "-Tpng", tempPath, "-o", outPath);
-
+		ProcessBuilder pb = new ProcessBuilder(this.dotPath, outputType, tempPath, "-o", outPath);
 		try {
 			String logPath = this.outputDir + "\\errorLog.txt";
 			System.out.println("outPutDir: " + logPath);
