@@ -121,7 +121,7 @@ public class MainWindow {
 		JPanel panel = new JPanel();
 
 		panel.setLayout(new BoxLayout(panel, BoxLayout.PAGE_AXIS));
-		List<DesignPatternInstance> allInstances = getDesignPatterns();
+		List<DesignPatternInstance> allInstances = parser.getDesignPatternInstances();
 		Set<String> patternsUsed = getDesignPatternNames(allInstances);
 		for (String pattern : patternsUsed) {
 			List<DesignPatternInstance> list = getInstancesOfPattern(pattern, allInstances);
