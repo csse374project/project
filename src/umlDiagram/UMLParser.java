@@ -64,6 +64,17 @@ public class UMLParser {
 	private Classes classes;
 	private List<DesignPatternInstance> designPatternInstances;
 
+	/**
+	 * Constructs a UMLParser object. The UMLParser object handles parsing the java byte code, analyzing the parsed code for design
+	 * patters, and created a UML graph.
+	 * 
+	 * @param argClasses	List of classes to analyze
+	 * @param inputFolder	a directory to recursively scan for java .class files to analyze
+	 * @param outputDirectory	directory to store output in
+	 * @param dotPath	location of the dot install
+	 * @param phases	List of phases to use while detecting patterns
+	 * @param phaseAttributes	Map of attributes to use, if any, for a phase. Maps phase name to attribute,
+	 */
 	public UMLParser(List<String> argClasses, String inputFolder, String outputDirectory, String dotPath,
 			List<String> phases, Map<String, String[]> phaseAttributes) {
 		classes = new Classes();
@@ -83,6 +94,11 @@ public class UMLParser {
 		this.phaseAttributes = phaseAttributes;
 	}
 	
+	/**
+	 * Returns a list of DesignPatternInstances used in the analyzed classes
+	 * 
+	 * @return	list of DesignPatternInstances
+	 */
 	public List<DesignPatternInstance> getDesignPatternInstances() {
 		return this.designPatternInstances;
 	}
@@ -99,10 +115,21 @@ public class UMLParser {
 		this.detectors.put(name, detector);
 	}
 	
+	/**
+	 * Adds a phase attribute to use while analyzing the code
+	 * 
+	 * @param phaseName		Name of the phase to modify
+	 * @param att	the attribute(s) to use
+	 */
 	public void addPhaseAttribute(String phaseName, String[] att){
 		this.phaseAttributes.put(phaseName, att);
 	}
 	
+	/**
+	 * Changes the type of file that is output. Must be a dot accepted format, ex. -Tpng or -Tpdf
+	 * 
+	 * @param type	type of file to output
+	 */
 	public void setOutputType(String type){
 		this.outputType = type;
 	}
