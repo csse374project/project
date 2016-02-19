@@ -225,28 +225,6 @@ public class MainWindow {
 		return panel;
 	}
 	
-	private void exportImage(File imageFile, File saveDest) throws IOException {
-		System.out.println("started 'export image'");
-		if (saveDest.exists()) {
-			saveDest.delete();
-		}
-		saveDest.createNewFile();
-		
-		FileInputStream imageStream = new FileInputStream(imageFile);	
-		BufferedReader reader = new BufferedReader(new InputStreamReader(imageStream));
-		FileOutputStream exportStream = new FileOutputStream(saveDest);
-
-		String line = reader.readLine();
-		while(line != null) {
-			exportStream.write(line.getBytes());
-			exportStream.write('\n');
-			line = reader.readLine();
-		}
-		imageFile.delete();
-		imageStream.close();
-		exportStream.close();
-	}
-	
 	private JScrollPane getImagePanel() {
 		Icon image = new ImageProxy(outputDirectory + "/out.png");
 		JLabel picture = new JLabel(image);
