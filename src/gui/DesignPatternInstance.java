@@ -20,6 +20,14 @@ public class DesignPatternInstance implements Iterable<String> {
 	public DesignPatternInstance(String instanceName, String designPattern) {
 		this(instanceName, designPattern, new ArrayList<String>());
 	}
+
+	public DesignPatternInstance(String designPattern) {
+		this(designPattern, designPattern, new ArrayList<String>());
+	}
+	
+	public void setInstanceName(String name){
+		this.instanceName = name;
+	}
 	
 	public String getDesignPattern() {
 		return designPattern;
