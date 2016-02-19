@@ -1,7 +1,7 @@
 #
 #
 inputDirec=C:/Users/briggsnw/Documents/CSSE 374/project/bin/umlDiagram
-targetClasses=
+targetClasses=testingData.ChocolateBoilerLazy
 outputDirec=./input_output
 dotPath=C:/Program Files (x86)/Graphviz2.38/bin/dot.exe
 phases=Adapter Decorator Composite Singleton

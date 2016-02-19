@@ -69,6 +69,9 @@ public class MainWindow {
 		for (PatternViewsTree tree : buttonTrees) {
 			classArgs.addAll(tree.getClassesToParse());
 		}
+		if (classArgs.isEmpty()) {
+			classArgs = new ArrayList<String>(Arrays.asList(config.getProperty("targetClasses").split(" ")));
+		}
 	}
 	
 	private void setupFrame() {
@@ -102,6 +105,10 @@ public class MainWindow {
 	}
 	
 	private void runUMLparser() throws IOException {
+//		File file = new File(outputDirectory + "out.png");
+//		if (file.exists()) {
+//			file.delete();
+//		}
 		parser = new UMLParser(classArgs, inputFolder, outputDirectory, dotPath, phases, guiApp.getPatternToSettings());
 		parser.parseByteCode();
 		parser.detectPatterns();

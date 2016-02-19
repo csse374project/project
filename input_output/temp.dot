@@ -4,6 +4,11 @@ digraph UML {
 		shape = "record"
 	]
 
+	ChocolateBoilerLazy [
+		label = "{\<\<Singleton\>\>\ntestingData/ChocolateBoilerLazy|- empty: boolean\l- boiled: boolean\l- uniqueInstance: testingData.ChocolateBoilerLazy\l|+ ChocolateBoilerLazy getInstance()\l+ void fill()\l+ void drain()\l+ void boil()\l+ boolean isEmpty()\l+ boolean isBoiled()\l|}"
+		color=blue
+	]
+
 	ClassDeclarationVisitor [
 		label = "{umlDiagram/ClassDeclarationVisitor|- currentClass: classRepresentation.decorators.IClassDecorator\l|+ void visit(int, int, java.lang.String, java.lang.String, java.lang.String, java.lang.String[])\l|}"
 		
@@ -55,6 +60,8 @@ digraph UML {
 	edge [
 		arrowhead = "normal" style = "solid"
 	]
+
+	ChocolateBoilerLazy -> ChocolateBoilerLazy
 
 	edge [
 		arrowhead = "normal" style = "dashed"
