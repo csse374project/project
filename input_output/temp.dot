@@ -4,28 +4,39 @@ digraph UML {
 		shape = "record"
 	]
 
-	AdapterSample [
-		label = "{\<\<Adapter\>\>\ntestingData/AdapterSample|- adaptee: testingData.AdapteeSample\l|+ void methodOfThings()\l+ void methodOfStuff()\l+ int testMePlease()\l|}"
-		style=filled
-		fillcolor=red
-
+	ClassDeclarationVisitor [
+		label = "{umlDiagram/ClassDeclarationVisitor|- currentClass: classRepresentation.decorators.IClassDecorator\l|+ void visit(int, int, java.lang.String, java.lang.String, java.lang.String, java.lang.String[])\l|}"
+		
 	]
 
-	AdapterSample -> AdapteeSample [label = "\<\<adapts\>\>"]
-
-	edge [
-		arrowhead = "empty" style = "dashed"
-	]
-	AdapterSample -> AdapterTargetSample	SampleSingletonClass [
-		label = "{\<\<Singleton\>\>\ntestingData/SampleSingletonClass|- instance: testingData.SampleSingletonClass\l+ useless: testingData.SampleClassForInitializing\l|+ SampleSingletonClass getInstance()\l|}"
-		color=blue
+	UMLParser [
+		label = "{umlDiagram/UMLParser|- classesToAccept: java.lang.String[]\l- inputDir: java.lang.String\l- outputDir: java.lang.String\l- dotPath: java.lang.String\l- outputType: java.lang.String\l- detectors: java.util.Map[java/lang/String, classRepresentation/designPatterns/DesignPatternDetector]\l- phaseAttributes: java.util.Map[java/lang/String, java/lang/String]\l- inputClasses: java.util.List[java/lang/String]\l- inputPhases: java.util.List[java/lang/String]\l- directoryClasses: java.util.List[java/io/FileInputStream]\l- classes: classRepresentation.Classes\l- designPatternInstances: java.util.List[gui/DesignPatternInstance]\l|+ void main(java.lang.String[])\l+ List getDesignPatternInstances()\l+ void addDetectorPhase(java.lang.String, classRepresentation.designPatterns.DesignPatternDetector)\l+ void addPhaseAttribute(java.lang.String, java.lang.String[])\l- void findFiles(java.io.File)\l+ void setOutputType(java.lang.String)\l+ void parseByteCode()\l+ void detectPatterns()\l+ void createGraph()\l- void setClassesToAccept(java.lang.String[])\l+ boolean classIsUsed(java.lang.String)\l+ String replaceDotsWithSlashes(java.lang.String)\l|}"
+		
 	]
 
-	AdapteeSample [
-		label = "{\<\<Adaptee\>\>\ntestingData/AdapteeSample||+ String getStuff()\l+ int getNumber()\l+ void doNothing()\l|}"
-		style=filled
-		fillcolor=red
+	ClassFieldVisitor [
+		label = "{umlDiagram/ClassFieldVisitor|- currentClass: interfaces.IClass\l- field: interfaces.IField\l|+ FieldVisitor visitField(int, java.lang.String, java.lang.String, java.lang.String, java.lang.Object)\l+ void handleSignature(java.lang.String, java.lang.String)\l  IClass access$0(umlDiagram.ClassFieldVisitor)\l  IField access$1(umlDiagram.ClassFieldVisitor)\l|}"
+		
+	]
 
+	ClassMethodVisitor [
+		label = "{umlDiagram/ClassMethodVisitor|- currentClass: interfaces.IClass\l|+ MethodVisitor visitMethod(int, java.lang.String, java.lang.String, java.lang.String, java.lang.String[])\l|}"
+		
+	]
+
+	VisitorFactory [
+		label = "{umlDiagram/VisitorFactory||+ ClassVisitor generateVisitors(java.util.List, classRepresentation.decorators.IClassDecorator, java.util.Map, java.util.List)\l|}"
+		
+	]
+
+	MethodDeclarationVisitor [
+		label = "{umlDiagram/MethodDeclarationVisitor|- currentClass: classRepresentation.decorators.IClassDecorator\l|+ MethodVisitor visitMethod(int, java.lang.String, java.lang.String, java.lang.String, java.lang.String[])\l+ void handleSignature(java.lang.String)\l  IClassDecorator access$0(umlDiagram.MethodDeclarationVisitor)\l|}"
+		
+	]
+
+	MethodCodeVisitor [
+		label = "{umlDiagram/MethodCodeVisitor|- currentClass: interfaces.IClass\l|+ void visitMethodInsn(int, java.lang.String, java.lang.String, java.lang.String, boolean)\l|}"
+		
 	]
 
 	edge [

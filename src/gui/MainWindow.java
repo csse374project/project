@@ -93,6 +93,7 @@ public class MainWindow {
 			frame.add(getCommandPanel(), BorderLayout.SOUTH);
 		} catch (IOException e) {
 			frame.add(getExceptionPanel());
+			e.printStackTrace();
 		}
 		frame.setVisible(true);
 	}
@@ -250,8 +251,10 @@ public class MainWindow {
 		System.out.println("input_output/out.png");
 		System.out.println(outputDirectory + "/out.png");
 		Icon image = new ImageProxy(outputDirectory + "/out.png");
+		JLabel picture = new JLabel(image);
+		picture.setMaximumSize(new Dimension(5000,5000));
 		
-		JScrollPane scrollPanel = new JScrollPane(new JLabel(image),
+		JScrollPane scrollPanel = new JScrollPane(picture,
 				JScrollPane.VERTICAL_SCROLLBAR_ALWAYS, JScrollPane.HORIZONTAL_SCROLLBAR_ALWAYS);
 		scrollPanel.setPreferredSize(new Dimension(700, 1000));
 		return scrollPanel;
