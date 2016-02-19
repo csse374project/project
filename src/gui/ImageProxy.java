@@ -32,10 +32,6 @@ public class ImageProxy implements Icon {
 
 	@Override
 	public void paintIcon(Component c, Graphics g, int x, int y) {
-		if (!isTracking) {
-			isTracking = true;
-			imageTracker = new MediaTracker(c);
-		}
 		if (imageIcon != null && imageIcon.getImageLoadStatus() == MediaTracker.COMPLETE) {
 			imageIcon.paintIcon(c, g, x, y);
 		}

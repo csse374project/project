@@ -56,3 +56,6 @@ dot: graph is too large for cairo-renderer bitmaps. Scaling by 0.796708 to fit
 dot: graph is too large for cairo-renderer bitmaps. Scaling by 0.801267 to fit
 dot: graph is too large for cairo-renderer bitmaps. Scaling by 0.801267 to fit
 dot: graph is too large for cairo-renderer bitmaps. Scaling by 0.801267 to fit
+dot: graph is too large for cairo-renderer bitmaps. Scaling by 0.801267 to fit
+dot: graph is too large for cairo-renderer bitmaps. Scaling by 0.801267 to fit
+dot: graph is too large for cairo-renderer bitmaps. Scaling by 0.801267 to fit
