@@ -23,3 +23,36 @@ Error: temp.dot: syntax error in line 30 near '\'
 Error: ./input_output\temp.dot: syntax error in line 39 near '$'
 Error: ./input_output\temp.dot: syntax error in line 39 near '$'
 Error: ./input_output\temp.dot: syntax error in line 39 near '$'
+dot: graph is too large for cairo-renderer bitmaps. Scaling by 0.801267 to fit
+dot: graph is too large for cairo-renderer bitmaps. Scaling by 0.801267 to fit
+dot: graph is too large for cairo-renderer bitmaps. Scaling by 0.801267 to fit
+dot: graph is too large for cairo-renderer bitmaps. Scaling by 0.801267 to fit
+dot: graph is too large for cairo-renderer bitmaps. Scaling by 0.801267 to fit
+dot: graph is too large for cairo-renderer bitmaps. Scaling by 0.801267 to fit
+dot: graph is too large for cairo-renderer bitmaps. Scaling by 0.801267 to fit
+dot: graph is too large for cairo-renderer bitmaps. Scaling by 0.801267 to fit
+dot: graph is too large for cairo-renderer bitmaps. Scaling by 0.801267 to fit
+dot: graph is too large for cairo-renderer bitmaps. Scaling by 0.801267 to fit
+dot: graph is too large for cairo-renderer bitmaps. Scaling by 0.801267 to fit
+dot: graph is too large for cairo-renderer bitmaps. Scaling by 0.801267 to fit
+dot: graph is too large for cairo-renderer bitmaps. Scaling by 0.801267 to fit
+dot: graph is too large for cairo-renderer bitmaps. Scaling by 0.801267 to fit
+dot: graph is too large for cairo-renderer bitmaps. Scaling by 0.801267 to fit
+dot: graph is too large for cairo-renderer bitmaps. Scaling by 0.801267 to fit
+dot: graph is too large for cairo-renderer bitmaps. Scaling by 0.801267 to fit
+dot: graph is too large for cairo-renderer bitmaps. Scaling by 0.801267 to fit
+dot: graph is too large for cairo-renderer bitmaps. Scaling by 0.801267 to fit
+dot: graph is too large for cairo-renderer bitmaps. Scaling by 0.801267 to fit
+dot: graph is too large for cairo-renderer bitmaps. Scaling by 0.801267 to fit
+dot: graph is too large for cairo-renderer bitmaps. Scaling by 0.801267 to fit
+dot: graph is too large for cairo-renderer bitmaps. Scaling by 0.801267 to fit
+dot: graph is too large for cairo-renderer bitmaps. Scaling by 0.801267 to fit
+dot: graph is too large for cairo-renderer bitmaps. Scaling by 0.801267 to fit
+dot: graph is too large for cairo-renderer bitmaps. Scaling by 0.801267 to fit
+dot: graph is too large for cairo-renderer bitmaps. Scaling by 0.801267 to fit
+dot: graph is too large for cairo-renderer bitmaps. Scaling by 0.801267 to fit
+dot: graph is too large for cairo-renderer bitmaps. Scaling by 0.801267 to fit
+dot: graph is too large for cairo-renderer bitmaps. Scaling by 0.796708 to fit
+dot: graph is too large for cairo-renderer bitmaps. Scaling by 0.801267 to fit
+dot: graph is too large for cairo-renderer bitmaps. Scaling by 0.801267 to fit
+dot: graph is too large for cairo-renderer bitmaps. Scaling by 0.801267 to fit

@@ -2,10 +2,16 @@ package gui;
 
 import java.awt.Component;
 import java.awt.Graphics;
+import java.awt.Image;
 import java.awt.MediaTracker;
+import java.awt.Toolkit;
+import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 import java.net.URL;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
@@ -16,6 +22,9 @@ public class ImageProxy implements Icon {
 	final String imagePath;
 	Thread retrievalThread;
 	boolean retrieving = false;
+	MediaTracker imageTracker;
+	boolean isTracking = false;
+	boolean isAdded = false;
 
 	public ImageProxy(String path) {
 		this.imagePath = path;
@@ -23,6 +32,10 @@ public class ImageProxy implements Icon {
 
 	@Override
 	public void paintIcon(Component c, Graphics g, int x, int y) {
+		if (!isTracking) {
+			isTracking = true;
+			imageTracker = new MediaTracker(c);
+		}
 		if (imageIcon != null && imageIcon.getImageLoadStatus() == MediaTracker.COMPLETE) {
 			imageIcon.paintIcon(c, g, x, y);
 		}
@@ -35,15 +48,18 @@ public class ImageProxy implements Icon {
 					public void run() {
 						try {
 							File imageFile = new File(imagePath);
-							URL imageURL = null;
-							if (imageFile.exists()) {
-								imageURL = imageFile.toURI().toURL();
+							if (imageFile != null && imageFile.exists()) {
+								Path path = Paths.get(imageFile.toURI());
+								byte[] data = Files.readAllBytes(path);
+								imageIcon = new ImageIcon(data);
+								if (imageIcon.getImageLoadStatus() != MediaTracker.COMPLETE) {
+									imageIcon.getImage().flush();
+								}
+								else {
+									imageFile.delete();
+								}
 							}
-							if (imageURL != null) {
-								imageIcon = new ImageIcon(imageURL);
-								imageFile.delete();
-							}
-							if (imageIcon == null) {
+							if (imageIcon == null || imageIcon.getImageLoadStatus() != MediaTracker.COMPLETE) {
 								retrieving = false;
 							}
 						} catch (IOException e) {
