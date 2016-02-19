@@ -201,7 +201,6 @@ public class MainWindow {
 	private JScrollPane getImagePanel() {
 		Icon image = new ImageProxy(outputDirectory + "/out.png");
 		JLabel picture = new JLabel(image);
-		picture.setMaximumSize(new Dimension(5000,5000));
 		
 		JScrollPane scrollPanel = new JScrollPane(picture,
 				JScrollPane.VERTICAL_SCROLLBAR_ALWAYS, JScrollPane.HORIZONTAL_SCROLLBAR_ALWAYS);
