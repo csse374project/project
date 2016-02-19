@@ -200,6 +200,9 @@ public class MainWindow {
 //					chooser.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
 					chooser.showOpenDialog(frame);
 					File saveFile = chooser.getSelectedFile();
+					if (saveFile == null) {
+						return;
+					}
 					String savePath = saveFile.getAbsolutePath();
 					if (saveFile.exists()) {
 						saveFile.delete();

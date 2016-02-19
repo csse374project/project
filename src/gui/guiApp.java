@@ -21,15 +21,24 @@ import javax.swing.JPanel;
 
 public class guiApp {
 	
+	private static final String[] designPatternNames = new String[]{"Adapter", "Composite", "Decorator", "Singleton"};
+	
 	private static Properties config;
 	private static JFrame landingWindow, mainWindow;
 	
 	protected static HashMap<String, String[]> getPatternToSettings() {
 		HashMap<String, String[]> map = new HashMap<>();
-		map.put("Singleton", new String[]{});
-		map.put("Adapter", new String[]{});
-		map.put("Composite", new String[]{});
-		map.put("Decorator", new String[]{});
+		for (String pattern : designPatternNames) {
+			String[] array = config.getProperty(pattern).split(" ");
+			if (array == null) {
+				array = new String[]{};
+			}
+			map.put(pattern, array);
+		}
+//		map.put("Singleton", new String[]{});
+//		map.put("Adapter", new String[]{});
+//		map.put("Composite", new String[]{});
+//		map.put("Decorator", new String[]{});
 		return map;
 	}
 	
