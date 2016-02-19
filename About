@@ -1,7 +1,9 @@
-UML Creator Program Thingy
+UML Diagram Generator
 
-This program was written by Thomas Bonatti, Jesse Shellabarger, and Nate Briggs in 2016 for CSSE374.
+This tool analyzes java code and generates a UML diagram. It detects and draws all classes complete with their fields and methods. It also draws 
+arrows for inheritance from other classes, implementation of interfaces, other used classes, and other associated classes. The Singleton, 
+Decorator, Adapter, and Composite design patterns are also detected and notated.  
+
+This program was written by Thomas Bonatti, Jesse Shellabarger, and Nate Briggs in 2016 for CSSE374 at Rose-Hulman Institute of Technology.
 
 Version: 1.0
-
-Do not pass this off as your own but feel free to share it or whatever.

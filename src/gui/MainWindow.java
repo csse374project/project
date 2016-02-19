@@ -71,14 +71,9 @@ public class MainWindow {
 
 	private void loadClassArgsFromButtons() {
 		this.classArgs = new ArrayList<>();
-		System.out.print("DEBUG: ");
 		for (PatternViewsTree tree : buttonTrees) {
 			classArgs.addAll(tree.getClassesToParse());
 		}
-		
-		for (String arg : classArgs) {
-			System.out.print(arg + " ");
-		} System.out.println();
 	}
 	
 	private void setupFrame() {
@@ -93,6 +88,7 @@ public class MainWindow {
 			frame.add(getCommandPanel(), BorderLayout.SOUTH);
 		} catch (IOException e) {
 			frame.add(getExceptionPanel());
+			e.printStackTrace();
 		}
 		frame.setVisible(true);
 	}
@@ -121,7 +117,7 @@ public class MainWindow {
 		JPanel panel = new JPanel();
 
 		panel.setLayout(new BoxLayout(panel, BoxLayout.PAGE_AXIS));
-		List<DesignPatternInstance> allInstances = getDesignPatterns();
+		List<DesignPatternInstance> allInstances = parser.getDesignPatternInstances();
 		Set<String> patternsUsed = getDesignPatternNames(allInstances);
 		for (String pattern : patternsUsed) {
 			List<DesignPatternInstance> list = getInstancesOfPattern(pattern, allInstances);
@@ -153,33 +149,12 @@ public class MainWindow {
 		return set;
 	}
 	
-	private List<DesignPatternInstance> getDesignPatterns() {
-		List<DesignPatternInstance> list = new ArrayList<>();
-		DesignPatternInstance instance = new DesignPatternInstance("nothing-instance", "nothing");
-		instance.addClass("testingData.SampleInterface01");
-		instance.addClass("testingData.SampleInterface02");
-		list.add(instance);
-		
-		instance = new DesignPatternInstance("singleton-instance", "singleton");
-		instance.addClass("testingData.ChocolateBoilerLazy");
-		instance.addClass("testingData.ChocolateBoilerEager");
-		list.add(instance);
-		
-		instance = new DesignPatternInstance("adapter-instance", "adapter");
-		instance.addClass("testingData.AdapteeSample");
-		instance.addClass("testingData.AdapterSample");
-		list.add(instance);
-		
-		return list;
-	}
-	
 	private JPanel getCommandPanel() {
 		JPanel panel = new JPanel();
 		JButton reloadButton = new JButton("reload design");
 		reloadButton.addActionListener(new ActionListener(){
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				System.out.println("Reload button pressed");
 				frame.setVisible(false);
 				frame.dispose();
 				loadClassArgs();
@@ -192,7 +167,6 @@ public class MainWindow {
 		exportButton.addActionListener(new ActionListener(){
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				System.out.println("export button pressed");
 				try {
 					runUMLparser();
 					JFileChooser chooser = new JFileChooser();
@@ -200,6 +174,9 @@ public class MainWindow {
 //					chooser.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
 					chooser.showOpenDialog(frame);
 					File saveFile = chooser.getSelectedFile();
+					if (saveFile == null) {
+						return;
+					}
 					String savePath = saveFile.getAbsolutePath();
 					if (saveFile.exists()) {
 						saveFile.delete();
@@ -221,34 +198,12 @@ public class MainWindow {
 		return panel;
 	}
 	
-	private void exportImage(File imageFile, File saveDest) throws IOException {
-		System.out.println("started 'export image'");
-		if (saveDest.exists()) {
-			saveDest.delete();
-		}
-		saveDest.createNewFile();
-		
-		FileInputStream imageStream = new FileInputStream(imageFile);	
-		BufferedReader reader = new BufferedReader(new InputStreamReader(imageStream));
-		FileOutputStream exportStream = new FileOutputStream(saveDest);
-
-		String line = reader.readLine();
-		while(line != null) {
-			exportStream.write(line.getBytes());
-			exportStream.write('\n');
-			line = reader.readLine();
-		}
-		imageFile.delete();
-		imageStream.close();
-		exportStream.close();
-	}
-	
 	private JScrollPane getImagePanel() {
-		System.out.println("input_output/out.png");
-		System.out.println(outputDirectory + "/out.png");
 		Icon image = new ImageProxy(outputDirectory + "/out.png");
+		JLabel picture = new JLabel(image);
+		picture.setMaximumSize(new Dimension(5000,5000));
 		
-		JScrollPane scrollPanel = new JScrollPane(new JLabel(image),
+		JScrollPane scrollPanel = new JScrollPane(picture,
 				JScrollPane.VERTICAL_SCROLLBAR_ALWAYS, JScrollPane.HORIZONTAL_SCROLLBAR_ALWAYS);
 		scrollPanel.setPreferredSize(new Dimension(700, 1000));
 		return scrollPanel;

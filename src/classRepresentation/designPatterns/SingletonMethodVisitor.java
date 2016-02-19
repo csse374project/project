@@ -41,6 +41,7 @@ public class SingletonMethodVisitor extends ClassVisitor {
 				designPatternInstances.add(instance);
 				currentClass.decorate(new SingletonDecorator());
 				currentClass.addAssociatedClass(currentClass.getName());
+				System.out.println(currentClass.getAssociatedClasses());
 			}
 		}
 		return toDecorate;

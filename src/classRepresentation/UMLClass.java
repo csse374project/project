@@ -85,6 +85,8 @@ public class UMLClass implements IClass {
 	
 	@Override
 	public void addAssociatedClass(String arg) {
+		System.out.println("is used: " + UMLParser.classIsUsed(arg));
+		System.out.println("contains: " + !associatedClasses.contains(arg));
 		if (UMLParser.classIsUsed(arg) && !associatedClasses.contains(arg)) {
 			associatedClasses.add(arg);
 			if (usedClasses.contains(arg)) {
