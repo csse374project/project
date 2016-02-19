@@ -1,6 +1,6 @@
 #
 #
-inputDirec=
+inputDirec=C:/Users/briggsnw/Documents/CSSE 374/project
 targetClasses=testingData.SampleSingletonClass
 outputDirec=./input_output
 dotPath=C:/Program Files (x86)/Graphviz2.38/bin/dot.exe

@@ -61,7 +61,7 @@ public class MainWindow {
 
 	private void loadClassArgs() {
 		if (buttonTrees.size() == 0) {
-			this.classArgs = Arrays.asList(config.getProperty("targetClasses").split(" "));
+			this.classArgs = new ArrayList<String>(Arrays.asList(config.getProperty("targetClasses").split(" ")));
 		} else {
 			loadClassArgsFromButtons();
 		}

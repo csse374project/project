@@ -60,7 +60,7 @@ public class UMLParser {
 		classes = new Classes();
 		inputClasses = argClasses;
 		this.inputDir = inputFolder;
-		findFiles(new File(this.inputDir));
+		findFiles(new File(this.inputDir), "");
 		this.outputDir = outputDirectory;
 		this.dotPath = dotPath;
 		this.inputPhases = phases;
@@ -89,7 +89,7 @@ public class UMLParser {
 		this.phaseAttributes.put(phaseName, att);
 	}
 	
-	private void findFiles(File directory) {
+	private void findFiles(File directory, String fullPath) {
 		if (!directory.exists()) {
 			System.out.println("File does not exist!");
 			return;
@@ -100,10 +100,16 @@ public class UMLParser {
 		}
 		File[] files = directory.listFiles();
 		for (File f : files) {
-			if (f.isDirectory()) {
-				findFiles(f);
+			if (f.isDirectory() && !f.getName().endsWith(".zip")) {
+				if (f.getName().equals("bin")) {
+					findFiles(f, fullPath);
+				} else {
+					findFiles(f, fullPath + f.getName() + ".");
+				}
 			} else if (f.getName().endsWith(".class")) {
-				this.inputClasses.add(f.getName());
+				int endPos = f.getName().indexOf(".class");
+				System.out.println(fullPath + f.getName().substring(0,endPos));
+				this.inputClasses.add(fullPath + f.getName().substring(0,endPos));
 			}
 		}
 	}
