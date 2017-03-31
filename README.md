@@ -1,7 +1,7 @@
-#Project
+# Project
 This tool analyzes java code and generates a UML diagram. It detects and draws all classes complete with their fields and methods. It also draws arrows for inheritance from other classes, implementation of interfaces, other used classes, and other associated classes. The Singleton, Decorator, Adapter, and Composite design patterns are also detected and notated.  
 
-#Design:
+## Design:
 This section will describe how the design of the project has evolved as it progressed.
 
 Milestone 7:
@@ -25,7 +25,7 @@ The design of the project is nearly identical. We added a MethodVisitor to analy
 Milestone 1:
 The tool expands upon the ASM class visitors discussed in class. The method visitor decorates the field visitor, which decorates the declaration visitor. As each class is visited, data container objects are created to store the required information about the class, its fields, and its methods. After the method has been visited by all of the visitors, its data is stored before moving onto the next argument. After all of the arguments have been examined, each of the created data containers is parsed into a form usable by GraphViz.
 
-#Responsibilities: 
+## Responsibilities: 
 This sections will describe the resposibilites of each team member during each project milestone.
 
 Milestone 7:
@@ -65,7 +65,7 @@ Jesse Shellabarger - Pair programmed with Nate Briggs. Primarily drove when crea
 Nate Briggs - Pair programmed with Jesse Shellabarger. Primarily drove when parsing the data created into a form usable by GraphViz. 
 Thomas Bonatti - Produced automated tests that establish the correct behavior of your ASM parsing code.
 
-#Instructions:
+## Instructions:
 This section will provide instructions to use the project, both through the command line and the user interface. 
 
 The system can be further extended by creating new classes to examine the class representation objects, after the java byte code has been analyzed. If additional information is needed, additional visitors can be added to the current implementation via the decorator pattern.
